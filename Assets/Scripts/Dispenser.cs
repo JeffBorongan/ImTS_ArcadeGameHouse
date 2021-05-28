@@ -1,19 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
-public class Dispenser : XRBaseInteractable
+public class Dispenser : MonoBehaviour
 {
-    [SerializeField] private GameObject objectToDispense = null;
+    public GameObject bowlingBallPrefab;
+    private BowlingBall currentBall;
 
-    protected override void OnSelectEntering(SelectEnterEventArgs args)
+    private void Start()
     {
-        base.OnSelectEntering(args);
+        SpawnBowlingBall();
+    }
 
-        GameObject clone = Instantiate(objectToDispense, transform.position, transform.rotation);
-        XRGrabInteractable interactable = clone.GetComponent<XRGrabInteractable>();
+    private void Update()
+    {
+        if(currentBall.CurrentState == BowlingBallStates.OnRelease)
+        {
+            SpawnBowlingBall();
+        }
+    }
 
-        interactable.selectEntered.Invoke(args);
+    private void SpawnBowlingBall()
+    {
+        GameObject bowlingBallClone = Instantiate(bowlingBallPrefab, transform.position, transform.rotation);
+        currentBall = bowlingBallClone.GetComponent<BowlingBall>();
     }
 }

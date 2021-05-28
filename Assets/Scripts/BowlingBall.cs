@@ -1,49 +1,56 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class BowlingBall : MonoBehaviour
 {
+    private BowlingBallStates currentState = BowlingBallStates.OnGround;
     private XRGrabInteractable interactable;
     private Rigidbody rigidBody;
-    public BowlingBallStates currentState = BowlingBallStates.OnGround;
-    public float movementSpeed = 10;
+    private int hitCounter = 0;
+    public BowlingBallStates CurrentState { get => currentState; }
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         interactable = GetComponent<XRGrabInteractable>();
-        interactable.onSelectExited.AddListener(HandleOnExit);
+        interactable.selectEntered.AddListener(HandleSelectEntered);
+        interactable.selectExited.AddListener(HandleSelectExited);
     }
 
-    private void HandleOnExit(XRBaseInteractor arg0)
-    {
-        changeState(BowlingBallStates.OnRelease);
-    }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        if(currentState == BowlingBallStates.OnRelease)
-        {
-            AddBowlMomentum(other);
-        }
-    }
-
-    public void changeState(BowlingBallStates newState)
+    private void ChangeState(BowlingBallStates newState)
     {
         currentState = newState;
     }
 
-    public void AddBowlMomentum(Collision other)
+    private void HandleSelectEntered(SelectEnterEventArgs arg0)
     {
-        if (other.gameObject.tag == "BowlingLane")
+        ChangeState(BowlingBallStates.OnHold);
+    }
+
+    private void HandleSelectExited(SelectExitEventArgs arg0)
+    {
+        ChangeState(BowlingBallStates.OnRelease);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "EnemyAlien")
         {
-            rigidBody.AddForce(transform.forward * movementSpeed, ForceMode.Impulse);
-            Debug.Log("Add Force");
-            //rigidBody.velocity = transform.forward * 1500 * Time.fixedDeltaTime;
-            changeState(BowlingBallStates.OnGround);
+            Destroy(other.gameObject);
+            hitCounter++;
+
+            if (hitCounter == 3)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        if (currentState == BowlingBallStates.OnRelease)
+        {
+            if (other.gameObject.tag == "BowlingLane")
+            {
+                ChangeState(BowlingBallStates.OnGround);
+            }
         }
     }
 }

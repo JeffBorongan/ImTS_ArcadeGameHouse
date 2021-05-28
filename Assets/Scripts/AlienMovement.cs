@@ -5,19 +5,11 @@ using UnityEngine.AI;
 public class AlienMovement : MonoBehaviour
 {
     public List<Transform> pathPoints = new List<Transform>();
-    private NavMeshAgent agent;
+    private NavMeshAgent alienAgent;
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(pathPoints[0].position);
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "BowlingBall")
-        {
-            Destroy(gameObject);
-        }
+        alienAgent = GetComponent<NavMeshAgent>();
+        alienAgent.SetDestination(pathPoints[0].position);
     }
 }
