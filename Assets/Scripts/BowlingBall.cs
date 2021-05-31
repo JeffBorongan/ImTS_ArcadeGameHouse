@@ -6,7 +6,6 @@ public class BowlingBall : MonoBehaviour
     private BowlingBallStates currentState = BowlingBallStates.OnGround;
     private XRGrabInteractable interactable;
     private Rigidbody rigidBody;
-    private int hitCounter = 0;
     public BowlingBallStates CurrentState { get => currentState; }
 
     private void Start()
@@ -36,13 +35,7 @@ public class BowlingBall : MonoBehaviour
     {
         if (other.gameObject.tag == "EnemyAlien")
         {
-            Destroy(other.gameObject);
-            hitCounter++;
-
-            if (hitCounter == 3)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
 
         if (currentState == BowlingBallStates.OnRelease)
