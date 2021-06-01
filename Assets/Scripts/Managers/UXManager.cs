@@ -38,6 +38,8 @@ public class UXManager : MonoBehaviour
 
     private void Start()
     {
+        Display.displays[1].Activate();
+
         btnLeftLaneChecked.onClick.AddListener(() => { SetLanes(Side.Left, true); });
         btnLeftLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Left, false); });
 
