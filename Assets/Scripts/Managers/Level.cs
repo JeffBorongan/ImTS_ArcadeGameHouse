@@ -10,6 +10,8 @@ public class Level
     public List<GameObject> aliens = new List<GameObject>();
     public List<Side> lanesToSpawn = new List<Side>();
 
+    public bool isStarted = false;
+
     public Level(float p_alienSpeed, float p_alienSpawnTime, int p_pointsToEarn, List<Side> p_lanesToSpawn, List<GameObject> p_aliens)
     {
         alienSpeed = p_alienSpeed;
@@ -22,5 +24,12 @@ public class Level
     public void StartLevel()
     {
         SpawnManager.Instance.StartSpawning(this);
+        isStarted = true;
+    }
+
+    public void StopLevel()
+    {
+        SpawnManager.Instance.StopSpawning();
+        isStarted = false;
     }
 }

@@ -22,7 +22,6 @@ public class SpawnManager : MonoBehaviour
     }
 
     public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
-    [SerializeField] private GameObject alien = null;
 
     Dictionary<KeyValuePair<Side, Side>, bool> currentLanesStatus = new Dictionary<KeyValuePair<Side, Side>, bool>();
     private bool isSpawning = false;
@@ -30,18 +29,7 @@ public class SpawnManager : MonoBehaviour
     System.Random SpawnPointGenerator = new System.Random(DateTime.Now.Ticks.GetHashCode());
     List<int> spawnPointsGenerated = new List<int>();
 
-    private void Start()
-    {
-        List<Side> lanesToSpawn = new List<Side>();
-        lanesToSpawn.Add(Side.Left);
-        lanesToSpawn.Add(Side.Middle);
-        lanesToSpawn.Add(Side.Right);
-
-        List<GameObject> aliens = new List<GameObject>();
-        aliens.Add(alien);
-
-        StartSpawning(new Level(1f, 5f, 10, lanesToSpawn, aliens));
-    }
+    [SerializeField] private GameObject alienEnemy = null;
 
     public void StartSpawning(Level level)
     {
@@ -84,7 +72,7 @@ public class SpawnManager : MonoBehaviour
                 {
                     SpawnPoint newSpawnPoint = spawnPoints.Where(s => s.lane == random.Key.Key && s.side == random.Key.Value).FirstOrDefault();
 
-                    GameObject clone = Instantiate(level.aliens[0], newSpawnPoint.point.position, newSpawnPoint.point.rotation);
+                    GameObject clone = Instantiate(alienEnemy, newSpawnPoint.point.position, newSpawnPoint.point.rotation);
                     clone.name = random.Key.Key.ToString() + " : " + random.Key.Value.ToString();
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
@@ -100,6 +88,11 @@ public class SpawnManager : MonoBehaviour
 
             yield return new WaitForSeconds(level.alienSpawnTime);
         }
+    }
+
+    public void StopSpawning()
+    {
+        isSpawning = false;
     }
 
     private void OnDrawGizmosSelected()
