@@ -8,19 +8,18 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { private set; get; }
 
-
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
         }
+
         else
         {
             Destroy(this);
         }
     }
-
 
     public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
     [SerializeField] private GameObject alien = null;
@@ -35,8 +34,8 @@ public class SpawnManager : MonoBehaviour
     {
         List<Side> lanesToSpawn = new List<Side>();
         lanesToSpawn.Add(Side.Left);
-        //lanesToSpawn.Add(Side.Middle);
-        //lanesToSpawn.Add(Side.Right);
+        lanesToSpawn.Add(Side.Middle);
+        lanesToSpawn.Add(Side.Right);
 
         List<GameObject> aliens = new List<GameObject>();
         aliens.Add(alien);
@@ -88,7 +87,7 @@ public class SpawnManager : MonoBehaviour
                     GameObject clone = Instantiate(level.aliens[0], newSpawnPoint.point.position, newSpawnPoint.point.rotation);
                     clone.name = random.Key.Key.ToString() + " : " + random.Key.Value.ToString();
 
-                    SampleAlien alien = clone.GetComponent<SampleAlien>();
+                    AlienMovement alien = clone.GetComponent<AlienMovement>();
                     alien.OnDeath.AddListener(() =>
                     {
                         currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = false;
