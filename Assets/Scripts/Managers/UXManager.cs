@@ -94,6 +94,8 @@ public class UXManager : MonoBehaviour
         {
             currentLanesEnabled.Remove(side);
         }
+
+        btnUpdate.interactable = true;
     }
 
     private void HandleOnStop()

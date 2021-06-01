@@ -77,10 +77,17 @@ public class SpawnManager : MonoBehaviour
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
                     alien.SetMovementSpeed(level.alienSpeed);
+
                     alien.OnDeath.AddListener(() =>
                     {
                         currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = false;
                         spawnPointsGenerated.Remove(randomSpawnPointIndex);
+                        GameManager.Instance.AddPoint();
+                    });
+
+                    alien.OnReachDestination.AddListener(() =>
+                    {
+                        GameManager.Instance.AddAlienReachedCockpit();
                     });
 
                     currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = true;

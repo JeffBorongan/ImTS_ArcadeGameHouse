@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     }
 
     private Level currentLevel = null;
+    private int currentPoint = 0;
+    private int currentAlienInTheCockpit = 0;
     public Level CurrentLevel { get => currentLevel; }
 
     public void StartGame(Level level)
@@ -38,6 +40,26 @@ public class GameManager : MonoBehaviour
 
         currentLevel = newLevel;
         currentLevel.StartLevel();
+    }
+
+    public void AddAlienReachedCockpit()
+    {
+        currentAlienInTheCockpit++;
+
+        if(currentAlienInTheCockpit >= 1)
+        {
+            //Lose
+        }
+    }
+
+    public void AddPoint()
+    {
+        currentPoint++;
+
+        if(currentPoint >= currentLevel.pointsToEarn)
+        {
+            //Win
+        }
     }
 
 }
