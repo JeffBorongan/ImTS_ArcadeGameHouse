@@ -112,7 +112,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -135,5 +135,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  OnReachDestination:
+    m_PersistentCalls:
+      m_Calls: []
   pathPoint: {fileID: 761600342612940857, guid: 899c8d228c5bae741bc5b1a2a1f97bed, type: 3}
-  remainingDistance: 0

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class UXManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class UXManager : MonoBehaviour
     [SerializeField] private Button btnRightLaneChecked = null;
     [SerializeField] private Button btnRightLaneUnchecked = null;
 
-    private List<Side> currentLanesEnabled = new List<Side>();
+    [SerializeField] private List<Side> currentLanesEnabled = new List<Side>();
 
     [Header("Alien")]
     [SerializeField] private TMP_InputField alienMovementSpeed = null;
@@ -38,16 +39,16 @@ public class UXManager : MonoBehaviour
 
     private void Start()
     {
-        Display.displays[1].Activate();
+        XRSettings.gameViewRenderMode = GameViewRenderMode.OcclusionMesh;
 
-        btnLeftLaneChecked.onClick.AddListener(() => { SetLanes(Side.Left, true); });
-        btnLeftLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Left, false); });
+        btnLeftLaneChecked.onClick.AddListener(() => { SetLanes(Side.Left, false); });
+        btnLeftLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Left, true); });
 
-        btnMiddleLaneChecked.onClick.AddListener(() => { SetLanes(Side.Middle, true); });
-        btnMiddleLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Middle, false); });
+        btnMiddleLaneChecked.onClick.AddListener(() => { SetLanes(Side.Middle, false); });
+        btnMiddleLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Middle, true); });
 
-        btnRightLaneChecked.onClick.AddListener(() => { SetLanes(Side.Right, true); });
-        btnRightLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Right, false); });
+        btnRightLaneChecked.onClick.AddListener(() => { SetLanes(Side.Right, false); });
+        btnRightLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Right, true); });
 
         btnStart.onClick.AddListener(HandleOnStart);
         btnStop.onClick.AddListener(HandleOnStop);
@@ -63,6 +64,8 @@ public class UXManager : MonoBehaviour
 
     private void HandleOnChange(string value)
     {
+        if(GameManager.Instance.CurrentLevel == null) { return; }
+
         if(!GameManager.Instance.CurrentLevel.isStarted) { return; }
 
         btnUpdate.interactable = true;

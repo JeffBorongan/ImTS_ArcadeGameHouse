@@ -47,6 +47,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
+        StopAllCoroutines();
         StartCoroutine(SpawnCour(level));
     }
 
@@ -55,7 +56,6 @@ public class SpawnManager : MonoBehaviour
     {
         while (isSpawning)
         {
-
             if(spawnPointsGenerated.Count != currentLanesStatus.Count)
             {
                 int randomSpawnPointIndex = SpawnPointGenerator.Next(currentLanesStatus.Count);
@@ -76,6 +76,7 @@ public class SpawnManager : MonoBehaviour
                     clone.name = random.Key.Key.ToString() + " : " + random.Key.Value.ToString();
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
+                    alien.SetMovementSpeed(level.alienSpeed);
                     alien.OnDeath.AddListener(() =>
                     {
                         currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = false;

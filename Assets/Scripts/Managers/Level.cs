@@ -23,13 +23,13 @@ public class Level
 
     public void StartLevel()
     {
-        SpawnManager.Instance.StartSpawning(this);
         isStarted = true;
+        SpawnManager.Instance.StartSpawning(this);
     }
 
     public void StopLevel()
     {
-        SpawnManager.Instance.StopSpawning();
         isStarted = false;
+        SpawnManager.Instance.StopSpawning();
     }
 }
