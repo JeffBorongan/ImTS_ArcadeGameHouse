@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
+    [SerializeField] private List<Color> enemyColors = new List<Color>();
 
     Dictionary<KeyValuePair<Side, Side>, bool> currentLanesStatus = new Dictionary<KeyValuePair<Side, Side>, bool>();
     private bool isSpawning = false;
@@ -77,6 +78,7 @@ public class SpawnManager : MonoBehaviour
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
                     alien.SetMovementSpeed(level.alienSpeed);
+                    alien.SetColor(enemyColors[(int)random.Key.Key]);
 
                     alien.OnDeath.AddListener(() =>
                     {

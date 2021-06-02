@@ -9,6 +9,7 @@ public class AlienMovement : MonoBehaviour
     public Transform pathPoint;
     private NavMeshAgent alienAgent;
     private float currentSpeed = 0f;
+    private Color currentColor = Color.red;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class AlienMovement : MonoBehaviour
         Vector3 spawnPosition = new Vector3(gameObject.transform.position.x, pathPoint.position.y, pathPoint.position.z);
         alienAgent.SetDestination(spawnPosition);
         alienAgent.speed = currentSpeed;
+        GetComponent<MeshRenderer>().material.color = currentColor;
     }
 
     private void Update()
@@ -29,6 +31,11 @@ public class AlienMovement : MonoBehaviour
     public void SetMovementSpeed(float newSpeed)
     {
         currentSpeed = newSpeed;
+    }
+
+    public void SetColor(Color newColor)
+    {
+        currentColor = newColor;
     }
 
     private void OnCollisionEnter(Collision other)

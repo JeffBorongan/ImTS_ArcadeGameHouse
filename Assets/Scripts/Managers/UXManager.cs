@@ -95,6 +95,10 @@ public class UXManager : MonoBehaviour
             currentLanesEnabled.Remove(side);
         }
 
+        if (GameManager.Instance.CurrentLevel == null) { return; }
+
+        if (!GameManager.Instance.CurrentLevel.isStarted) { return; }
+
         btnUpdate.interactable = true;
     }
 
