@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
         if(currentAlienInTheCockpit >= currentLevel.aliensReachedCockpit)
         {
             ShowResult(false);
+            FloatingUIManager.Instance.StopTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
         }
     }
 
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         if(currentPoint >= currentLevel.pointsToEarn)
         {
             ShowResult(true);
+            FloatingUIManager.Instance.StopTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
         }
     }
 
