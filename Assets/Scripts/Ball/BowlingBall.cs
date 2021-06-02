@@ -6,11 +6,13 @@ public class BowlingBall : MonoBehaviour
     private BowlingBallStates currentState = BowlingBallStates.OnGround;
     private XRGrabInteractable interactable;
     private Rigidbody rigidBody;
+    private new Collider collider;
     public BowlingBallStates CurrentState { get => currentState; }
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        collider = GetComponent<Collider>();
         interactable = GetComponent<XRGrabInteractable>();
         interactable.selectEntered.AddListener(HandleSelectEntered);
         interactable.selectExited.AddListener(HandleSelectExited);
@@ -29,6 +31,7 @@ public class BowlingBall : MonoBehaviour
     private void HandleSelectExited(SelectExitEventArgs arg0)
     {
         ChangeState(BowlingBallStates.OnRelease);
+        collider.isTrigger = false;
     }
 
     private void OnCollisionEnter(Collision other)

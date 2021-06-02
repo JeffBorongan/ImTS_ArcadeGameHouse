@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
             currentLevel.StartLevel();
 
             FloatingUIManager.Instance.StartTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
-
+            ShipManager.Instance.OpenDoor();
         });
     }
 
@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
         {
             FloatingUIManager.Instance.ShowGameResult(false);
         }
+
+        ShipManager.Instance.CloseDoor();
     }
 
     public void StopGame()
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
         if(currentAlienInTheCockpit >= 1)
         {
             FloatingUIManager.Instance.ShowGameResult(false);
+            ShipManager.Instance.CloseDoor();
         }
     }
 

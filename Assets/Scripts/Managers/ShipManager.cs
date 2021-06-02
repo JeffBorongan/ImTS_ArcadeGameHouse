@@ -5,6 +5,20 @@ using UnityEngine;
 
 public class ShipManager : MonoBehaviour
 {
+    public static ShipManager Instance { private set; get; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     [SerializeField] private Transform door = null;
     private float doorPositionX = 0f;
 
@@ -15,11 +29,11 @@ public class ShipManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        door.DOLocalMoveX(0, 0.2f);
+        door.DOLocalMoveX(2, 0.2f);
     }
 
     public void CloseDoor()
     {
-        door.DOLocalMoveX(doorPositionX, 0.2f);
+        door.DOLocalMoveX(-5, 0.2f);
     }
 }
