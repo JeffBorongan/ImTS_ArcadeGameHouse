@@ -52,6 +52,7 @@ public class FloatingUIManager : MonoBehaviour
 
         txtCountDownTimer.transform.DOScale(0, 0.2f).OnComplete(() => { txtCountDownTimer.gameObject.SetActive(false); });
         OnCompleteCallback.Invoke();
+        txtPointEarned.gameObject.SetActive(true);
     }
 
 
@@ -79,6 +80,7 @@ public class FloatingUIManager : MonoBehaviour
         }
 
         OnCompleteCallback.Invoke();
+        txtPointEarned.gameObject.SetActive(false);
     }
 
     public void ShowGameResult(bool win)

@@ -19,21 +19,26 @@ public class ShipManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private Transform door = null;
-    private float doorPositionX = 0f;
+    [SerializeField] private Transform leftDoor = null;
+    [SerializeField] private Transform rightDoor = null;
+    private float leftDoorPositionX = 0f;
+    private float rightDoorPositionX = 0f;
 
     private void Start()
     {
-        doorPositionX = door.position.x;
+        leftDoorPositionX = leftDoor.position.x;
+        rightDoorPositionX = rightDoor.position.x;
     }
 
     public void OpenDoor()
     {
-        door.DOLocalMoveX(2, 0.2f);
+        leftDoor.DOLocalMoveX(7.34f, 1f);
+        rightDoor.DOLocalMoveX(-0.329f, 1f);
     }
 
     public void CloseDoor()
     {
-        door.DOLocalMoveX(-5, 0.2f);
+        leftDoor.DOLocalMoveX(3.568514f, 1f);
+        rightDoor.DOLocalMoveX(3.568514f, 1f);
     }
 }

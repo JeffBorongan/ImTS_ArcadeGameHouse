@@ -27,6 +27,7 @@ public class AlienMovement : MonoBehaviour
         {
             isArrived = true;
             OnReachDestination.Invoke();
+            Destroy(gameObject);
         }
     }
 
