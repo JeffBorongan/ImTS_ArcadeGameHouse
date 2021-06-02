@@ -28,6 +28,7 @@ public class UXManager : MonoBehaviour
 
     [Header("Goal")]
     [SerializeField] private TMP_InputField pointsToEarn = null;
+    [SerializeField] private TMP_InputField timeToBeat = null;
     [SerializeField] private TMP_InputField aliensReachedTheCockpit = null;
 
     [Header("Start")]
@@ -59,6 +60,7 @@ public class UXManager : MonoBehaviour
         alienMovementSpeed.onValueChanged.AddListener(HandleOnChange);
         pointPerAlien.onValueChanged.AddListener(HandleOnChange);
         pointsToEarn.onValueChanged.AddListener(HandleOnChange);
+        timeToBeat.onValueChanged.AddListener(HandleOnChange);
         aliensReachedTheCockpit.onValueChanged.AddListener(HandleOnChange);
     }
 
@@ -78,8 +80,9 @@ public class UXManager : MonoBehaviour
         float pointPerAlienValue = float.Parse(pointPerAlien.text);
         int pointsToEarnValue = int.Parse(pointsToEarn.text);
         float aliensReachedTheCockpitValue = float.Parse(aliensReachedTheCockpit.text);
+        int timeToBeatValue = int.Parse(timeToBeat.text);
 
-        GameManager.Instance.UpdateLevel(new Level(alienMovementSpeedValue, spawnTimeValue, pointsToEarnValue, currentLanesEnabled, new List<GameObject>()));
+        GameManager.Instance.UpdateLevel(new Level(alienMovementSpeedValue, spawnTimeValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
 
         btnUpdate.interactable = false;
     }
@@ -114,7 +117,8 @@ public class UXManager : MonoBehaviour
         float pointPerAlienValue = float.Parse(pointPerAlien.text);
         int pointsToEarnValue = int.Parse(pointsToEarn.text);
         float aliensReachedTheCockpitValue = float.Parse(aliensReachedTheCockpit.text);
+        int timeToBeatValue = int.Parse(timeToBeat.text);
 
-        GameManager.Instance.StartGame(new Level(alienMovementSpeedValue, spawnTimeValue, pointsToEarnValue, currentLanesEnabled, new List<GameObject>()));
+        GameManager.Instance.StartGame(new Level(alienMovementSpeedValue, spawnTimeValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
     }
 }

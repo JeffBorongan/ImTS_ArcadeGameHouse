@@ -10,6 +10,7 @@ public class AlienMovement : MonoBehaviour
     private NavMeshAgent alienAgent;
     private float currentSpeed = 0f;
     private Color currentColor = Color.red;
+    private bool isArrived = false;
 
     private void Start()
     {
@@ -22,8 +23,9 @@ public class AlienMovement : MonoBehaviour
 
     private void Update()
     {
-        if (alienAgent.remainingDistance <= 0.5)
+        if (alienAgent.remainingDistance <= 0.5 && !isArrived)
         {
+            isArrived = true;
             OnReachDestination.Invoke();
         }
     }

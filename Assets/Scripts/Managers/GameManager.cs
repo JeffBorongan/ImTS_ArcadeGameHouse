@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,10 +24,33 @@ public class GameManager : MonoBehaviour
     private int currentAlienInTheCockpit = 0;
     public Level CurrentLevel { get => currentLevel; }
 
+    private void Start()
+    {
+        
+    }
+
     public void StartGame(Level level)
     {
-        currentLevel = level;
-        currentLevel.StartLevel();
+        FloatingUIManager.Instance.StartCountdown(5, () =>
+        {
+            currentLevel = level;
+            currentLevel.StartLevel();
+
+            FloatingUIManager.Instance.StartTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
+
+        });
+    }
+
+    private void HandleOnTimerEnd()
+    {
+        if (currentPoint >= currentLevel.pointsToEarn)
+        {
+            FloatingUIManager.Instance.ShowGameResult(true);
+        }
+        else
+        {
+            FloatingUIManager.Instance.ShowGameResult(false);
+        }
     }
 
     public void StopGame()
@@ -37,8 +61,10 @@ public class GameManager : MonoBehaviour
     public void UpdateLevel(Level newLevel)
     {
         currentLevel.StopLevel();
+        FloatingUIManager.Instance.StopTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
 
         currentLevel = newLevel;
+        FloatingUIManager.Instance.StartTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
         currentLevel.StartLevel();
     }
 
@@ -48,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         if(currentAlienInTheCockpit >= 1)
         {
-            //Lose
+            FloatingUIManager.Instance.ShowGameResult(false);
         }
     }
 
@@ -58,7 +84,7 @@ public class GameManager : MonoBehaviour
 
         if(currentPoint >= currentLevel.pointsToEarn)
         {
-            //Win
+            FloatingUIManager.Instance.ShowGameResult(true);
         }
     }
 
