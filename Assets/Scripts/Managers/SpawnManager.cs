@@ -31,6 +31,7 @@ public class SpawnManager : MonoBehaviour
     List<int> spawnPointsGenerated = new List<int>();
 
     [SerializeField] private GameObject alienEnemy = null;
+    private List<GameObject> spawnedAliens = new List<GameObject>();
 
     public void StartSpawning(Level level)
     {
@@ -75,6 +76,7 @@ public class SpawnManager : MonoBehaviour
 
                     GameObject clone = Instantiate(alienEnemy, newSpawnPoint.point.position, newSpawnPoint.point.rotation);
                     clone.name = random.Key.Key.ToString() + " : " + random.Key.Value.ToString();
+                    spawnedAliens.Add(clone);
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
                     alien.SetMovementSpeed(level.alienSpeed);
@@ -103,6 +105,11 @@ public class SpawnManager : MonoBehaviour
     public void StopSpawning()
     {
         isSpawning = false;
+
+        foreach (var alien in spawnedAliens)
+        {
+            Destroy(alien);
+        }
     }
 
     private void OnDrawGizmosSelected()

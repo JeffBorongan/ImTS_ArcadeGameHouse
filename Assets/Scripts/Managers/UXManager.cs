@@ -77,12 +77,12 @@ public class UXManager : MonoBehaviour
     {
         float spawnTimeValue = float.Parse(spawnTime.text);
         float alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
-        float pointPerAlienValue = float.Parse(pointPerAlien.text);
+        int pointPerAlienValue = int.Parse(pointPerAlien.text);
         int pointsToEarnValue = int.Parse(pointsToEarn.text);
-        float aliensReachedTheCockpitValue = float.Parse(aliensReachedTheCockpit.text);
+        int aliensReachedTheCockpitValue = int.Parse(aliensReachedTheCockpit.text);
         int timeToBeatValue = int.Parse(timeToBeat.text);
 
-        GameManager.Instance.UpdateLevel(new Level(alienMovementSpeedValue, spawnTimeValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
+        GameManager.Instance.UpdateLevel(new Level(alienMovementSpeedValue, spawnTimeValue, aliensReachedTheCockpitValue, pointPerAlienValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
 
         btnUpdate.interactable = false;
     }
@@ -114,11 +114,11 @@ public class UXManager : MonoBehaviour
     {
         float spawnTimeValue = float.Parse(spawnTime.text);
         float alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
-        float pointPerAlienValue = float.Parse(pointPerAlien.text);
+        int pointPerAlienValue = int.Parse(pointPerAlien.text);
         int pointsToEarnValue = int.Parse(pointsToEarn.text);
-        float aliensReachedTheCockpitValue = float.Parse(aliensReachedTheCockpit.text);
+        int aliensReachedTheCockpitValue = int.Parse(aliensReachedTheCockpit.text);
         int timeToBeatValue = int.Parse(timeToBeat.text);
 
-        GameManager.Instance.StartGame(new Level(alienMovementSpeedValue, spawnTimeValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
+        GameManager.Instance.StartGame(new Level(alienMovementSpeedValue, spawnTimeValue, aliensReachedTheCockpitValue, pointPerAlienValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
     }
 }

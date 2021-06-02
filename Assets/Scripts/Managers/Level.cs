@@ -8,12 +8,14 @@ public class Level
     public float alienSpawnTime = 0f;
     public int pointsToEarn = 0;
     public int timeToBeat = 0;
+    public int aliensReachedCockpit = 0;
+    public int pointsPerAlien = 0;
     public List<GameObject> aliens = new List<GameObject>();
     public List<Side> lanesToSpawn = new List<Side>();
 
     public bool isStarted = false;
 
-    public Level(float p_alienSpeed, float p_alienSpawnTime, int p_pointsToEarn, int p_timeToBeat, List<Side> p_lanesToSpawn, List<GameObject> p_aliens)
+    public Level(float p_alienSpeed, float p_alienSpawnTime, int p_aliensReachedCockpit, int p_pointsPerAlien,  int p_pointsToEarn, int p_timeToBeat, List<Side> p_lanesToSpawn, List<GameObject> p_aliens)
     {
         alienSpeed = p_alienSpeed;
         alienSpawnTime = p_alienSpawnTime;
@@ -21,6 +23,8 @@ public class Level
         lanesToSpawn = p_lanesToSpawn;
         aliens = p_aliens;
         timeToBeat = p_timeToBeat;
+        aliensReachedCockpit = p_aliensReachedCockpit;
+        pointsPerAlien = p_pointsPerAlien;
     }
 
     public void StartLevel()

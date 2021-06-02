@@ -41,19 +41,6 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    private void HandleOnTimerEnd()
-    {
-        if (currentPoint >= currentLevel.pointsToEarn)
-        {
-            FloatingUIManager.Instance.ShowGameResult(true);
-        }
-        else
-        {
-            FloatingUIManager.Instance.ShowGameResult(false);
-        }
-
-        ShipManager.Instance.CloseDoor();
-    }
 
     public void StopGame()
     {
@@ -70,25 +57,37 @@ public class GameManager : MonoBehaviour
         currentLevel.StartLevel();
     }
 
+    private void HandleOnTimerEnd()
+    {
+        ShowResult(currentPoint >= currentLevel.pointsToEarn);
+    }
+
     public void AddAlienReachedCockpit()
     {
         currentAlienInTheCockpit++;
 
-        if(currentAlienInTheCockpit >= 1)
+        if(currentAlienInTheCockpit >= currentLevel.aliensReachedCockpit)
         {
-            FloatingUIManager.Instance.ShowGameResult(false);
-            ShipManager.Instance.CloseDoor();
+            ShowResult(false);
         }
     }
 
     public void AddPoint()
     {
-        currentPoint++;
+        currentPoint += currentLevel.pointsPerAlien;
+        FloatingUIManager.Instance.SetPointsEarned(currentPoint);
 
         if(currentPoint >= currentLevel.pointsToEarn)
         {
-            FloatingUIManager.Instance.ShowGameResult(true);
+            ShowResult(true);
         }
+    }
+
+    void ShowResult(bool win)
+    {
+        FloatingUIManager.Instance.ShowGameResult(win);
+        ShipManager.Instance.CloseDoor();
+        currentLevel.StopLevel();
     }
 
 }

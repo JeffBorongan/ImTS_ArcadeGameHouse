@@ -25,6 +25,7 @@ public class FloatingUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtCountDownTimer = null;
     [SerializeField] private TextMeshProUGUI txtTimer = null;
     [SerializeField] private TextMeshProUGUI txtGameResult = null;
+    [SerializeField] private TextMeshProUGUI txtPointEarned = null;
 
     public void StartCountdown(int countdownDuration, UnityAction OnCompleteCallback)
     {
@@ -87,6 +88,11 @@ public class FloatingUIManager : MonoBehaviour
         txtGameResult.color = win ? Color.green : Color.red;
         txtGameResult.transform.localScale = Vector3.zero;
         txtGameResult.transform.DOScale(1, 0.2f);
+    }
+
+    public void SetPointsEarned(int points)
+    {
+        txtPointEarned.text = points.ToString();
     }
 
     public void SetDefault()
