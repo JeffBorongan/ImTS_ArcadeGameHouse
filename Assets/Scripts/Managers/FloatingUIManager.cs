@@ -27,6 +27,9 @@ public class FloatingUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtGameResult = null;
     [SerializeField] private TextMeshProUGUI txtPointEarned = null;
 
+    private bool timerStarted = false;
+    private IEnumerator timerEnumerator = null;
+
     public void StartCountdown(int countdownDuration, UnityAction OnCompleteCallback)
     {
         StartCoroutine(CountdownCour(countdownDuration, OnCompleteCallback));
@@ -58,21 +61,23 @@ public class FloatingUIManager : MonoBehaviour
 
     public void StartTimer(TimeSpan timeSpan, UnityAction OnCompleteCallback)
     {
-        StartCoroutine(TimerCour(timeSpan, OnCompleteCallback));
+        timerEnumerator = TimerCour(timeSpan, OnCompleteCallback);
+        StartCoroutine(timerEnumerator);
     }
 
-    public void StopTimer(TimeSpan timeSpan, UnityAction OnCompleteCallback)
+    public void StopTimer()
     {
-        StartCoroutine(TimerCour(timeSpan, OnCompleteCallback));
+        StopCoroutine(timerEnumerator);
+        timerStarted = false;
     }
 
     IEnumerator TimerCour(TimeSpan timeSpan, UnityAction OnCompleteCallback)
     {
         txtTimer.gameObject.SetActive(true);
-
+        timerStarted = true;
         TimeSpan currentTimeSpan = timeSpan;
 
-        while (currentTimeSpan.Seconds >= 0)
+        while (currentTimeSpan.Seconds >= 0 && timerStarted)
         {
             txtTimer.text = string.Format("{0:D2}:{1:D2}", currentTimeSpan.Minutes, currentTimeSpan.Seconds);
             yield return new WaitForSeconds(1);
