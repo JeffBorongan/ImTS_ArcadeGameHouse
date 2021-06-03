@@ -56,7 +56,7 @@ public class BowlingBall : MonoBehaviour
     {
         if (other.gameObject.tag == "EnemyAlien")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         if (currentState == BowlingBallStates.OnRelease)

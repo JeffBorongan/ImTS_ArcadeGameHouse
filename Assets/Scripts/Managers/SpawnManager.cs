@@ -73,7 +73,6 @@ public class SpawnManager : MonoBehaviour
                 if (!random.Value)
                 {
                     SpawnPoint newSpawnPoint = spawnPoints.Where(s => s.lane == random.Key.Key && s.side == random.Key.Value).FirstOrDefault();
-
                     GameObject clone = Instantiate(alienEnemy, newSpawnPoint.point.position, newSpawnPoint.point.rotation);
                     clone.name = random.Key.Key.ToString() + " : " + random.Key.Value.ToString();
                     spawnedAliens.Add(clone);
