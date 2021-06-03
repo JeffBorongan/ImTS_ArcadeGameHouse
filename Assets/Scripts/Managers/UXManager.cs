@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,12 @@ using UnityEngine.XR;
 
 public class UXManager : MonoBehaviour
 {
+    [Header("Control Panel")]
+    [SerializeField] private Transform controlPanel = null;
+    [SerializeField] private Button btnCollapseControlPanel = null;
+    [SerializeField] private Button btnUncollapseControlPanel = null;
+    private Vector3 controlPanelStartPos = Vector3.zero;
+
     [Header("Spawning")]
     [SerializeField] private TMP_InputField spawnTime = null;
 
@@ -62,6 +69,29 @@ public class UXManager : MonoBehaviour
         pointsToEarn.onValueChanged.AddListener(HandleOnChange);
         timeToBeat.onValueChanged.AddListener(HandleOnChange);
         aliensReachedTheCockpit.onValueChanged.AddListener(HandleOnChange);
+
+        btnCollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(true); });
+        btnUncollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(false); });
+
+        controlPanelStartPos = controlPanel.position;
+    }
+
+    private void CollapseControlPanel(bool collapse)
+    {
+        if (collapse)
+        {
+            controlPanel.DOScale(0, 0.3f);
+            controlPanel.DOMove(btnCollapseControlPanel.transform.position, 0.3f).OnComplete(() => 
+            {
+                controlPanel.gameObject.SetActive(false);
+            });
+        }
+        else
+        {
+            controlPanel.gameObject.SetActive(true);
+            controlPanel.DOScale(1, 0.3f);
+            controlPanel.DOMove(controlPanelStartPos, 0.3f);
+        }
     }
 
     private void HandleOnChange(string value)

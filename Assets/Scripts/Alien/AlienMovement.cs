@@ -6,6 +6,9 @@ public class AlienMovement : MonoBehaviour
 {
     public UnityEvent OnDeath = new UnityEvent();
     public UnityEvent OnReachDestination = new UnityEvent();
+    public UnityEvent OnWalking = new UnityEvent();
+    public UnityEvent OnSpawn = new UnityEvent();
+
     public Transform pathPoint;
     private NavMeshAgent alienAgent;
     private float currentSpeed = 0f;
@@ -19,6 +22,8 @@ public class AlienMovement : MonoBehaviour
         alienAgent.SetDestination(spawnPosition);
         alienAgent.speed = currentSpeed;
         GetComponent<MeshRenderer>().material.color = currentColor;
+
+        OnSpawn.Invoke();
     }
 
     private void Update()
@@ -28,6 +33,11 @@ public class AlienMovement : MonoBehaviour
             isArrived = true;
             OnReachDestination.Invoke();
             Destroy(gameObject);
+        }
+
+        if (alienAgent.remainingDistance > 0 && !isArrived)
+        {
+            OnWalking.Invoke();
         }
     }
 

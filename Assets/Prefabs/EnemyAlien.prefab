@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3280280445475357302}
   - component: {fileID: 8794988516445167279}
   - component: {fileID: 3778710672392004124}
+  - component: {fileID: 5270233533616448824}
   m_Layer: 0
   m_Name: EnemyAlien
   m_TagString: EnemyAlien
@@ -138,4 +139,30 @@ MonoBehaviour:
   OnReachDestination:
     m_PersistentCalls:
       m_Calls: []
+  OnWalking:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSpawn:
+    m_PersistentCalls:
+      m_Calls: []
   pathPoint: {fileID: 761600342612940857, guid: 899c8d228c5bae741bc5b1a2a1f97bed, type: 3}
+--- !u!114 &5270233533616448824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570647001489867833}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394c457bfff701b4ba033fab45e251e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDeathSFX: {fileID: 0}
+  onWalkingSFX: {fileID: 0}
+  onSpawnSFX: {fileID: 0}
+  onReachDestinationSFX: {fileID: 0}
+  onDeathSource: {fileID: 0}
+  onWalkingSource: {fileID: 0}
+  onSpawnSource: {fileID: 0}
+  onReachDestinationSource: {fileID: 0}

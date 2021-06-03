@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2712690167084382437}
   - component: {fileID: 7292872452840143611}
   - component: {fileID: 5306819910294425622}
+  - component: {fileID: 3758035802304855435}
   m_Layer: 0
   m_Name: Ball
   m_TagString: BowlingBall
@@ -191,6 +192,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3e5e7363568564097715ccb9facf49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPickedUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSpawn:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3758035802304855435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3425588288648613981}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315d568bf7d56544880755d1b229b720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onReleaseSFX: {fileID: 0}
+  onPickedUpSFX: {fileID: 0}
+  onRollingSFX: {fileID: 0}
+  onReleaseSource: {fileID: 0}
+  onPickedUpSource: {fileID: 0}
+  onRollingSource: {fileID: 0}
 --- !u!1001 &3425588288704690697
 PrefabInstance:
   m_ObjectHideFlags: 0
