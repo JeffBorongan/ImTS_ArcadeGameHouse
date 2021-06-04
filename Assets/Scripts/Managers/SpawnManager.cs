@@ -45,6 +45,7 @@ public class SpawnManager : MonoBehaviour
     private void HandleOnGameEnd(bool win)
     {
         StopSpawning();
+        DestroyAllAliens();
     }
 
     private void HandleOnGameUpdate(Level level, UnityAction callback)
@@ -131,8 +132,11 @@ public class SpawnManager : MonoBehaviour
     public void StopSpawning()
     {
         StopCoroutine(spawningCour);
-        isSpawning = false;
+        isSpawning = false;        
+    }
 
+    void DestroyAllAliens()
+    {
         foreach (var alien in spawnedAliens)
         {
             Destroy(alien);

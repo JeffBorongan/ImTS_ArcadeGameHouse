@@ -27,7 +27,7 @@ public class UXManager : MonoBehaviour
     [SerializeField] private Button btnRightLaneChecked = null;
     [SerializeField] private Button btnRightLaneUnchecked = null;
 
-    [SerializeField] private List<Side> currentLanesEnabled = new List<Side>();
+    private List<Side> currentLanesEnabled = new List<Side>();
 
     [Header("Alien")]
     [SerializeField] private TMP_InputField alienMovementSpeed = null;
@@ -79,6 +79,71 @@ public class UXManager : MonoBehaviour
         controlPanelStartPos = controlPanel.position;
 
         GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
+
+        SetUIWithSessionData();
+    }
+
+    void SetUIWithSessionData()
+    {
+        string rawData = PlayerPrefs.GetString("SaveData");
+
+        if(rawData == "") { return; }
+
+        SessionData localData = JsonUtility.FromJson<SessionData>(rawData);
+
+        spawnTime.text = localData.spawnTimeValue.ToString();
+        alienMovementSpeed.text = localData.alienMovementSpeedValue.ToString();
+        pointPerAlien.text = localData.pointPerAlienValue.ToString();
+        pointsToEarn.text = localData.pointsToEarnValue.ToString();
+        aliensReachedTheCockpit.text = localData.aliensReachedTheCockpitValue.ToString();
+        timeToBeat.text = localData.timeToBeatValue.ToString();
+
+        string[] rawLanes = localData.lanes.Split(',');
+
+        foreach (var lane in rawLanes)
+        {
+            if(lane != "") 
+            {
+                Side newLane = (Side)int.Parse(lane);
+
+                switch (newLane)
+                {
+                    case Side.Left:
+                        btnLeftLaneUnchecked.onClick.Invoke();
+                        break;
+                    case Side.Middle:
+                        btnMiddleLaneUnchecked.onClick.Invoke();
+                        break;
+                    case Side.Right:
+                        btnRightLaneUnchecked.onClick.Invoke();
+                        break;
+                    case Side.Count:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+    }
+
+    void SaveSessionData()
+    {
+        SessionData newData = new SessionData();
+
+        newData.spawnTimeValue = float.Parse(spawnTime.text);
+        newData.alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
+        newData.pointPerAlienValue = int.Parse(pointPerAlien.text);
+        newData.pointsToEarnValue = int.Parse(pointsToEarn.text);
+        newData.aliensReachedTheCockpitValue = int.Parse(aliensReachedTheCockpit.text);
+        newData.timeToBeatValue = int.Parse(timeToBeat.text);
+
+        foreach (var lane in currentLanesEnabled)
+        {
+            newData.lanes += (int)lane + ",";
+        }
+
+        PlayerPrefs.SetString("SaveData", JsonUtility.ToJson(newData));
     }
 
     private void HandleOnGameEnd(bool win)
@@ -161,5 +226,18 @@ public class UXManager : MonoBehaviour
         int timeToBeatValue = int.Parse(timeToBeat.text);
 
         GameManager.Instance.StartGame(new Level(alienMovementSpeedValue, spawnTimeValue, aliensReachedTheCockpitValue, pointPerAlienValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
+
+        SaveSessionData();
     }
+}
+
+public class SessionData
+{
+    public float spawnTimeValue = 0f;
+    public float alienMovementSpeedValue = 0f;
+    public int pointPerAlienValue = 0;
+    public int pointsToEarnValue = 0;
+    public int aliensReachedTheCockpitValue = 0;
+    public int timeToBeatValue = 0;
+    public string lanes = "";
 }

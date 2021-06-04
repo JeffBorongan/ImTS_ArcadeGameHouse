@@ -28,8 +28,8 @@ public class ShipManager : MonoBehaviour
 
     private void Start()
     {
-        leftDoorPositionX = leftDoor.position.x;
-        rightDoorPositionX = rightDoor.position.x;
+        //leftDoorPositionX = leftDoor.position.x;
+        //rightDoorPositionX = rightDoor.position.x;
 
         GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
         GameManager.Instance.OnGameStart.AddListener(HandleOnGameStart);
