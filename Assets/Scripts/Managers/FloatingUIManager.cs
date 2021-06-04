@@ -52,8 +52,8 @@ public class FloatingUIManager : MonoBehaviour
 
     private void HandleOnGameUpdate(Level level, UnityAction callback)
     {
-        StopTimer();
-        StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
+        //StopTimer();
+        //StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
     }
 
     private void HandleOnGameStart(Level level, UnityAction callback)
