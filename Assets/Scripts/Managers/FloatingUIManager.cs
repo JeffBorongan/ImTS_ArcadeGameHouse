@@ -46,6 +46,7 @@ public class FloatingUIManager : MonoBehaviour
 
     private void HandleOnCountdownStart(int duration, UnityAction callback)
     {
+        SetDefault();
         StartCountdown(5, callback);
     }
 
@@ -57,7 +58,6 @@ public class FloatingUIManager : MonoBehaviour
 
     private void HandleOnGameStart(Level level, UnityAction callback)
     {
-        SetDefault();
         StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
     }
 
@@ -145,6 +145,7 @@ public class FloatingUIManager : MonoBehaviour
         txtTimer.gameObject.SetActive(false);
         txtCountDownTimer.gameObject.SetActive(false);
         txtGameResult.gameObject.SetActive(false);
+        txtPointEarned.gameObject.SetActive(false);
     }
 
 }

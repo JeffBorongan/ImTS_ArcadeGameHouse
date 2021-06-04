@@ -87,6 +87,12 @@ public class GameManager : MonoBehaviour
         OnGameEnd.Invoke(win);
         currentLevel.StopLevel();
     }
+
+    void SetDefault()
+    {
+        currentAlienInTheCockpit = 0;
+        currentPoint = 0;
+    }
 }
 
 public class LevelActionEvent : UnityEvent<Level, UnityAction> { }
