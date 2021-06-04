@@ -30,12 +30,10 @@ public class Level
     public void StartLevel()
     {
         isStarted = true;
-        SpawnManager.Instance.StartSpawning(this);
     }
 
     public void StopLevel()
     {
         isStarted = false;
-        SpawnManager.Instance.StopSpawning();
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,25 +23,25 @@ public class GameManager : MonoBehaviour
     private Level currentLevel = null;
     private int currentPoint = 0;
     private int currentAlienInTheCockpit = 0;
-    public Level CurrentLevel { get => currentLevel; }
 
-    private void Start()
-    {
-        
-    }
+    public IntActionEvent OnCountDownStart = new IntActionEvent();
+    public LevelActionEvent OnGameStart = new LevelActionEvent();
+    public LevelActionEvent OnGameUpdate = new LevelActionEvent();
+    public BoolEvent OnGameEnd = new BoolEvent();
+
+    public IntEvent OnPointsUpdate = new IntEvent();
+
+    public Level CurrentLevel { get => currentLevel; }
 
     public void StartGame(Level level)
     {
-        FloatingUIManager.Instance.StartCountdown(5, () =>
+        OnCountDownStart.Invoke(5, () => 
         {
             currentLevel = level;
             currentLevel.StartLevel();
-
-            FloatingUIManager.Instance.StartTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
-            ShipManager.Instance.OpenDoor();
+            OnGameStart.Invoke(currentLevel, HandleOnTimerEnd);
         });
     }
-
 
     public void StopGame()
     {
@@ -50,16 +51,14 @@ public class GameManager : MonoBehaviour
     public void UpdateLevel(Level newLevel)
     {
         currentLevel.StopLevel();
-        FloatingUIManager.Instance.StopTimer();
-
         currentLevel = newLevel;
-        FloatingUIManager.Instance.StartTimer(TimeSpan.FromSeconds(currentLevel.timeToBeat), HandleOnTimerEnd);
+        OnGameUpdate.Invoke(currentLevel, HandleOnTimerEnd);
         currentLevel.StartLevel();
     }
 
     private void HandleOnTimerEnd()
     {
-        ShowResult(currentPoint >= currentLevel.pointsToEarn);
+        GameEnd(currentPoint >= currentLevel.pointsToEarn);
     }
 
     public void AddAlienReachedCockpit()
@@ -68,28 +67,30 @@ public class GameManager : MonoBehaviour
 
         if(currentAlienInTheCockpit >= currentLevel.aliensReachedCockpit)
         {
-            ShowResult(false);
-            FloatingUIManager.Instance.StopTimer();
+            GameEnd(false);
         }
     }
 
     public void AddPoint()
     {
         currentPoint += currentLevel.pointsPerAlien;
-        FloatingUIManager.Instance.SetPointsEarned(currentPoint);
+        OnPointsUpdate.Invoke(currentPoint);
 
         if(currentPoint >= currentLevel.pointsToEarn)
         {
-            ShowResult(true);
-            FloatingUIManager.Instance.StopTimer();
+            GameEnd(true);
         }
     }
 
-    void ShowResult(bool win)
+    void GameEnd(bool win)
     {
-        FloatingUIManager.Instance.ShowGameResult(win);
-        ShipManager.Instance.CloseDoor();
+        OnGameEnd.Invoke(win);
         currentLevel.StopLevel();
     }
-
 }
+
+public class LevelActionEvent : UnityEvent<Level, UnityAction> { }
+
+public class IntActionEvent : UnityEvent<int, UnityAction> { }
+
+public class IntEvent : UnityEvent<int> { }

@@ -1,7 +1,9 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShipManager : MonoBehaviour
 {
@@ -28,6 +30,19 @@ public class ShipManager : MonoBehaviour
     {
         leftDoorPositionX = leftDoor.position.x;
         rightDoorPositionX = rightDoor.position.x;
+
+        GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
+        GameManager.Instance.OnGameStart.AddListener(HandleOnGameStart);
+    }
+
+    private void HandleOnGameStart(Level level, UnityAction callback)
+    {
+        OpenDoor();
+    }
+
+    private void HandleOnGameEnd(bool win)
+    {
+        CloseDoor();
     }
 
     public void OpenDoor()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -32,6 +33,30 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private GameObject alienEnemy = null;
     private List<GameObject> spawnedAliens = new List<GameObject>();
+    private IEnumerator spawningCour = null;
+
+    private void Start()
+    {
+        GameManager.Instance.OnGameStart.AddListener(HandleOnGameStart);
+        GameManager.Instance.OnGameUpdate.AddListener(HandleOnGameUpdate);
+        GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
+    }
+
+    private void HandleOnGameEnd(bool win)
+    {
+        StopSpawning();
+    }
+
+    private void HandleOnGameUpdate(Level level, UnityAction callback)
+    {
+        StopSpawning();
+        StartSpawning(level);
+    }
+
+    private void HandleOnGameStart(Level level, UnityAction callback)
+    {
+        StartSpawning(level);
+    }
 
     public void StartSpawning(Level level)
     {
@@ -49,8 +74,8 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        StopAllCoroutines();
-        StartCoroutine(SpawnCour(level));
+        spawningCour = SpawnCour(level);
+        StartCoroutine(spawningCour);
     }
 
 
@@ -90,6 +115,8 @@ public class SpawnManager : MonoBehaviour
 
                     alien.OnReachDestination.AddListener(() =>
                     {
+                        currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = false;
+                        spawnPointsGenerated.Remove(randomSpawnPointIndex);
                         GameManager.Instance.AddAlienReachedCockpit();
                     });
 
@@ -103,6 +130,7 @@ public class SpawnManager : MonoBehaviour
 
     public void StopSpawning()
     {
+        StopCoroutine(spawningCour);
         isSpawning = false;
 
         foreach (var alien in spawnedAliens)

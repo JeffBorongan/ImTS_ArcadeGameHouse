@@ -45,6 +45,9 @@ public class UXManager : MonoBehaviour
     [Header("Update")]
     [SerializeField] private Button btnUpdate = null;
 
+    [Header("Result")]
+    [SerializeField] private GameObject resultsPanel = null;
+
     private void Start()
     {
         XRSettings.gameViewRenderMode = GameViewRenderMode.OcclusionMesh;
@@ -74,6 +77,14 @@ public class UXManager : MonoBehaviour
         btnUncollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(false); });
 
         controlPanelStartPos = controlPanel.position;
+
+        GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
+    }
+
+    private void HandleOnGameEnd(bool win)
+    {
+        btnStart.gameObject.SetActive(true);
+        btnStop.gameObject.SetActive(false);
     }
 
     private void CollapseControlPanel(bool collapse)

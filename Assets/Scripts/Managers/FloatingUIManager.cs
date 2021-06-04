@@ -30,6 +30,43 @@ public class FloatingUIManager : MonoBehaviour
     private bool timerStarted = false;
     private IEnumerator timerEnumerator = null;
 
+    private void Start()
+    {
+        GameManager.Instance.OnPointsUpdate.AddListener(HandleOnUpdatePoints);
+        GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
+        GameManager.Instance.OnGameStart.AddListener(HandleOnGameStart);
+        GameManager.Instance.OnGameUpdate.AddListener(HandleOnGameUpdate);
+        GameManager.Instance.OnCountDownStart.AddListener(HandleOnCountdownStart);
+    }
+
+    private void HandleOnUpdatePoints(int point)
+    {
+        SetPointsEarned(point);
+    }
+
+    private void HandleOnCountdownStart(int duration, UnityAction callback)
+    {
+        StartCountdown(5, callback);
+    }
+
+    private void HandleOnGameUpdate(Level level, UnityAction callback)
+    {
+        StopTimer();
+        StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
+    }
+
+    private void HandleOnGameStart(Level level, UnityAction callback)
+    {
+        SetDefault();
+        StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
+    }
+
+    private void HandleOnGameEnd(bool win)
+    {
+        ShowGameResult(win);
+        StopTimer();
+    }
+
     public void StartCountdown(int countdownDuration, UnityAction OnCompleteCallback)
     {
         StartCoroutine(CountdownCour(countdownDuration, OnCompleteCallback));
