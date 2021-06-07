@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class LocalSavingManager : MonoBehaviour
 {
+    public static LocalSavingManager Instance { private set; get; }
 
-    private void Start()
+    private void Awake()
     {
-        GameSettingData data = new GameSettingData();
-        data.dataID = "Game Settings";
-        data.spawnTime = 10;
-        data.pointsToEarn = 20;
-
-        Debug.Log("Local Data: " + JsonUtility.ToJson(data));
-        SaveLocalData(data);
-
-        GameSettingData localData = GetLocalData<GameSettingData>("Game Settings");
-        Debug.Log("Retrieved Data: " + JsonUtility.ToJson(localData));
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     public void SaveLocalData(SaveData data)
@@ -29,6 +28,11 @@ public class LocalSavingManager : MonoBehaviour
         return JsonUtility.FromJson<T>(PlayerPrefs.GetString(id));
     }
 
+    public bool IsLocalDataStored(string id)
+    {
+        return PlayerPrefs.HasKey(id);
+    }
+
 }
 
 public class SaveData 
@@ -36,8 +40,13 @@ public class SaveData
     public string dataID = "";
 }
 
-public class GameSettingData : SaveData 
+public class SpaceBowlingSaveData : SaveData
 {
-    public int spawnTime = 0;
-    public int pointsToEarn = 0;
+    public float spawnTimeValue = 0f;
+    public float alienMovementSpeedValue = 0f;
+    public int pointPerAlienValue = 0;
+    public int pointsToEarnValue = 0;
+    public int aliensReachedTheCockpitValue = 0;
+    public int timeToBeatValue = 0;
+    public string lanes = "";
 }

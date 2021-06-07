@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class CutSceneManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static CutSceneManager Instance { private set; get; }
+
+    private void Awake()
     {
-        
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private Actor currentActor = null;
+    [SerializeField] private List<Action> listOfActions = new List<Action>();
+    private int currentActionExecuted = 0;
+
+    private void Start()
     {
-        
+        currentActor.OnEndAction.AddListener(HandleOnEndAction);
+    }
+
+    private void HandleOnEndAction()
+    {
+        StartCoroutine(CutsceneCour(listOfActions[currentActionExecuted]));
+    }
+
+    public void StartCutScene()
+    {
+        StartCoroutine(CutsceneCour(listOfActions[currentActionExecuted]));
+    }
+
+    IEnumerator CutsceneCour(Action action)
+    {
+        yield return new WaitForSeconds(action.delayTime);
+        ExecuteAction(action);
+    }
+
+    void ExecuteAction(Action action)
+    {
+        currentActor.ExecuteAction(action);
     }
 }

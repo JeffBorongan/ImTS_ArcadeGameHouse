@@ -45,8 +45,8 @@ public class UXManager : MonoBehaviour
     [Header("Update")]
     [SerializeField] private Button btnUpdate = null;
 
-    [Header("Result")]
-    [SerializeField] private GameObject resultsPanel = null;
+    //[Header("Result")]
+    //[SerializeField] private GameObject resultsPanel = null;
 
     private void Start()
     {
@@ -85,11 +85,9 @@ public class UXManager : MonoBehaviour
 
     void SetUIWithSessionData()
     {
-        string rawData = PlayerPrefs.GetString("SaveData");
+        if(!LocalSavingManager.Instance.IsLocalDataStored("Space")) { return; }
 
-        if(rawData == "") { return; }
-
-        SessionData localData = JsonUtility.FromJson<SessionData>(rawData);
+        SpaceBowlingSaveData localData = LocalSavingManager.Instance.GetLocalData<SpaceBowlingSaveData>("Space");
 
         spawnTime.text = localData.spawnTimeValue.ToString();
         alienMovementSpeed.text = localData.alienMovementSpeedValue.ToString();
@@ -129,8 +127,9 @@ public class UXManager : MonoBehaviour
 
     void SaveSessionData()
     {
-        SessionData newData = new SessionData();
+        SpaceBowlingSaveData newData = new SpaceBowlingSaveData();
 
+        newData.dataID = "Space";
         newData.spawnTimeValue = float.Parse(spawnTime.text);
         newData.alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
         newData.pointPerAlienValue = int.Parse(pointPerAlien.text);
@@ -143,7 +142,7 @@ public class UXManager : MonoBehaviour
             newData.lanes += (int)lane + ",";
         }
 
-        PlayerPrefs.SetString("SaveData", JsonUtility.ToJson(newData));
+        LocalSavingManager.Instance.SaveLocalData(newData);
     }
 
     private void HandleOnGameEnd(bool win)
@@ -191,6 +190,8 @@ public class UXManager : MonoBehaviour
         GameManager.Instance.UpdateLevel(new Level(alienMovementSpeedValue, spawnTimeValue, aliensReachedTheCockpitValue, pointPerAlienValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
 
         btnUpdate.interactable = false;
+
+        SaveSessionData();
     }
 
     private void SetLanes(Side side, bool add)
@@ -229,15 +230,4 @@ public class UXManager : MonoBehaviour
 
         SaveSessionData();
     }
-}
-
-public class SessionData
-{
-    public float spawnTimeValue = 0f;
-    public float alienMovementSpeedValue = 0f;
-    public int pointPerAlienValue = 0;
-    public int pointsToEarnValue = 0;
-    public int aliensReachedTheCockpitValue = 0;
-    public int timeToBeatValue = 0;
-    public string lanes = "";
 }
