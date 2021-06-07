@@ -6,7 +6,7 @@ public class Destroyer : MonoBehaviour
     {
         if (other.gameObject.tag == "BowlingBall")
         {
-            Destroy(other.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

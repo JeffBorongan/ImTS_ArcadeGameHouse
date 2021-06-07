@@ -20,7 +20,9 @@ public class Dispenser : MonoBehaviour
 
     private void SpawnBowlingBall()
     {
-        GameObject bowlingBallClone = Instantiate(bowlingBallPrefab, transform.position, transform.rotation);
+        GameObject bowlingBallClone = ObjectPooling.Instance.GetFromPool(TypeOfObject.BowlingBall);
+        bowlingBallClone.transform.position = transform.position;
+        bowlingBallClone.transform.rotation = transform.rotation;
         currentBall = bowlingBallClone.GetComponent<BowlingBall>();
     }
 }
