@@ -6,4 +6,9 @@ using UnityEngine;
 public class MoveAction : Action
 {
     public Transform targetPosition = null;
+
+    public override ActionType type()
+    {
+        return ActionType.Move;
+    }
 }

@@ -6,4 +6,9 @@ using UnityEngine;
 public class SpeakAction : Action
 {
     public AudioClip clip = null;
+
+    public override ActionType type()
+    {
+        return ActionType.Speak;
+    }
 }

@@ -25,10 +25,13 @@ public class CutSceneManager : MonoBehaviour
     private void Start()
     {
         currentActor.OnEndAction.AddListener(HandleOnEndAction);
+        StartCutScene();
     }
 
     private void HandleOnEndAction()
     {
+        if (currentActionExecuted + 1 < listOfActions.Count) { currentActionExecuted++; }
+        else { return; }
         StartCoroutine(CutsceneCour(listOfActions[currentActionExecuted]));
     }
 

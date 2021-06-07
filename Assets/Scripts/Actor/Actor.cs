@@ -16,7 +16,17 @@ public class Actor : MonoBehaviour
 
     public void ExecuteAction(Action action)
     {
-
+        switch (action.type())
+        {
+            case ActionType.Move:
+                MoveToLocation(((MoveAction)action).targetPosition, 3f, Ease.Linear);
+                break;
+            case ActionType.Speak:
+                Speak(((SpeakAction)action).clip);
+                break;
+            default:
+                break;
+        }
     }
 
     public void MoveToLocation(Transform targetPosition, float travelDuration, Ease easeType)
@@ -28,12 +38,16 @@ public class Actor : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.Play();
-        StartCoroutine(InvokeOnEndClip(audioSource));
+        StartCoroutine(InvokeEndAudioClipCour());
     }
 
-    IEnumerator InvokeOnEndClip(AudioSource clip)
-    { 
-        yield return new WaitUntil(() => !clip.isPlaying);
+    IEnumerator InvokeEndAudioClipCour()
+    {
+        while (audioSource.isPlaying)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         OnEndAction.Invoke();
     }
 }
