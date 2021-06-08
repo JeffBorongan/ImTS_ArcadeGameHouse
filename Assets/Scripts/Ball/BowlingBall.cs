@@ -74,6 +74,11 @@ public class BowlingBall : MonoBehaviour
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         collider.isTrigger = true;
+
+        OnRelease.RemoveAllListeners();
+        OnPickedUp.RemoveAllListeners();
+        OnRolling.RemoveAllListeners();
+        OnSpawn.RemoveAllListeners();
     }
 }
 

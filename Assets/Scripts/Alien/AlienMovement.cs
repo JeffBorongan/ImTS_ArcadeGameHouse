@@ -58,7 +58,10 @@ public class AlienMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        StopAllCoroutines();
+        OnSpawn.RemoveAllListeners();
+        OnReachDestination.RemoveAllListeners();
+        OnWalking.RemoveAllListeners();
+        OnDeath.RemoveAllListeners();
     }
 
     private void OnDrawGizmosSelected()

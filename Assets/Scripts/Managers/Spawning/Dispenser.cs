@@ -38,7 +38,6 @@ public class Dispenser : MonoBehaviour
     IEnumerator SpawnCheckCour()
     {
         yield return new WaitUntil(() => ObjectPooling.Instance.hasObjectOnPool(TypeOfObject.BowlingBall));
-        currentBall.OnRelease.RemoveAllListeners();
         SpawnBowlingBall();
     }
 }

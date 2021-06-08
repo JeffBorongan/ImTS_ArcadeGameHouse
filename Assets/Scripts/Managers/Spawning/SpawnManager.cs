@@ -112,6 +112,8 @@ public class SpawnManager : MonoBehaviour
                         currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = false;
                         spawnPointsGenerated.Remove(randomSpawnPointIndex);
                         GameManager.Instance.AddPoint();
+
+                        alien.OnDeath.RemoveAllListeners();
                     });
 
                     alien.OnReachDestination.AddListener(() =>
@@ -119,6 +121,8 @@ public class SpawnManager : MonoBehaviour
                         currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = false;
                         spawnPointsGenerated.Remove(randomSpawnPointIndex);
                         GameManager.Instance.AddAlienReachedCockpit();
+
+                        alien.OnReachDestination.RemoveAllListeners();
                     });
 
                     currentLanesStatus[new KeyValuePair<Side, Side>(random.Key.Key, random.Key.Value)] = true;
