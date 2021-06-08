@@ -20,7 +20,7 @@ public class ObjectPooling : MonoBehaviour
         }
     }
 
-    [SerializeField] private List<Pool> pool = new List<Pool>();
+    private List<Pool> pool = new List<Pool>();
 
     public void AddPool(TypeOfObject type, GameObject objectToPool, int poolCount, Transform parent)
     {
@@ -40,8 +40,6 @@ public class ObjectPooling : MonoBehaviour
     {
         Pool poolToGet = pool.Where(p => p.type == type).FirstOrDefault();
         GameObject selectedObject = poolToGet.poolOfObjects.Where(o => !o.activeSelf).FirstOrDefault();
-        selectedObject.SetActive(true);
-
         return selectedObject;
     }
 

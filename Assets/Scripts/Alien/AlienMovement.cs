@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -10,37 +11,20 @@ public class AlienMovement : MonoBehaviour
     public UnityEvent OnSpawn = new UnityEvent();
 
     public Transform pathPoint;
-    private NavMeshAgent alienAgent;
-    private float currentSpeed = 0f;
-    private Color currentColor = Color.red;
-    private bool isArrived = false;
+    [SerializeField] private NavMeshAgent alienAgent;
+    Vector3 targetDestination = Vector3.zero;
 
-    private void Start()
-    {
-        alienAgent = GetComponent<NavMeshAgent>();
-        Vector3 spawnPosition = new Vector3(gameObject.transform.position.x, pathPoint.position.y, pathPoint.position.z);
-        alienAgent.SetDestination(spawnPosition);
-        alienAgent.speed = currentSpeed;
-        OnSpawn.Invoke();
-    }
-
-    private void OnEnable()
-    {
-        Vector3 spawnPosition = new Vector3(gameObject.transform.position.x, pathPoint.position.y, pathPoint.position.z);
-        alienAgent.SetDestination(spawnPosition);
-        alienAgent.speed = currentSpeed;
-    }
 
     private void Update()
     {
-        if (alienAgent.remainingDistance <= 0.5 && !isArrived)
+        float dist = alienAgent.remainingDistance; 
+        if (dist != Mathf.Infinity && alienAgent.pathStatus == NavMeshPathStatus.PathComplete && alienAgent.remainingDistance == 0)
         {
-            isArrived = true;
             OnReachDestination.Invoke();
             gameObject.SetActive(false);
         }
 
-        if (alienAgent.remainingDistance > 0 && !isArrived)
+        if (alienAgent.remainingDistance > 0)
         {
             OnWalking.Invoke();
         }
@@ -48,12 +32,7 @@ public class AlienMovement : MonoBehaviour
 
     public void SetMovementSpeed(float newSpeed)
     {
-        currentSpeed = newSpeed;
-    }
-
-    public void SetColor(Color newColor)
-    {
-        currentColor = newColor;
+        alienAgent.speed = newSpeed;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -63,5 +42,28 @@ public class AlienMovement : MonoBehaviour
             OnDeath.Invoke();
             gameObject.SetActive(false);
         }
+    }
+
+    void GoToTheCockpit()
+    {
+        targetDestination = new Vector3(transform.position.x, pathPoint.position.y, pathPoint.position.z);
+        alienAgent.SetDestination(targetDestination);
+    }
+
+    private void OnEnable()
+    {
+        OnSpawn.Invoke();
+        GoToTheCockpit();
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(targetDestination, 1f);
     }
 }

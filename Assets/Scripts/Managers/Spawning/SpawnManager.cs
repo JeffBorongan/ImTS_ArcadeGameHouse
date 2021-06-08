@@ -23,7 +23,6 @@ public class SpawnManager : MonoBehaviour
     }
 
     public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
-    [SerializeField] private List<Color> enemyColors = new List<Color>();
 
     Dictionary<KeyValuePair<Side, Side>, bool> currentLanesStatus = new Dictionary<KeyValuePair<Side, Side>, bool>();
     private bool isSpawning = false;
@@ -102,12 +101,11 @@ public class SpawnManager : MonoBehaviour
                     GameObject clone = ObjectPooling.Instance.GetFromPool(TypeOfObject.EnemyAlien);
                     clone.transform.position = newSpawnPoint.point.position;
                     clone.transform.rotation = newSpawnPoint.point.rotation;
-                    clone.name = random.Key.Key.ToString() + " : " + random.Key.Value.ToString();
+                    clone.SetActive(true);
                     spawnedAliens.Add(clone);
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
                     alien.SetMovementSpeed(level.alienSpeed);
-                    alien.SetColor(enemyColors[(int)random.Key.Key]);
 
                     alien.OnDeath.AddListener(() =>
                     {
@@ -141,7 +139,7 @@ public class SpawnManager : MonoBehaviour
     {
         foreach (var alien in spawnedAliens)
         {
-            Destroy(alien);
+            alien.SetActive(false);
         }
     }
 
