@@ -17,7 +17,11 @@ public class AlienMovement : MonoBehaviour
 
     private void Start()
     {
-        alienAgent = GetComponent<NavMeshAgent>();       
+        alienAgent = GetComponent<NavMeshAgent>();
+        Vector3 spawnPosition = new Vector3(gameObject.transform.position.x, pathPoint.position.y, pathPoint.position.z);
+        alienAgent.SetDestination(spawnPosition);
+        alienAgent.speed = currentSpeed;
+        OnSpawn.Invoke();
     }
 
     private void OnEnable()
@@ -25,7 +29,6 @@ public class AlienMovement : MonoBehaviour
         Vector3 spawnPosition = new Vector3(gameObject.transform.position.x, pathPoint.position.y, pathPoint.position.z);
         alienAgent.SetDestination(spawnPosition);
         alienAgent.speed = currentSpeed;
-        OnSpawn.Invoke();
     }
 
     private void Update()
