@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "BowlingBall")
         {
-            gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
         }
     }
 }

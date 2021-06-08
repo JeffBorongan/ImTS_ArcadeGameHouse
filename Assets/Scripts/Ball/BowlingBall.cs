@@ -67,6 +67,14 @@ public class BowlingBall : MonoBehaviour
             }
         }
     }
+
+    private void OnDisable()
+    {
+        rigid.useGravity = false;
+        rigid.velocity = Vector3.zero;
+        rigid.angularVelocity = Vector3.zero;
+        collider.isTrigger = true;
+    }
 }
 
 public class BoolEvent : UnityEvent<bool> { }

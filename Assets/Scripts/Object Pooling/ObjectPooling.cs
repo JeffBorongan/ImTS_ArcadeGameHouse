@@ -48,7 +48,7 @@ public class ObjectPooling : MonoBehaviour
     public bool hasObjectOnPool(TypeOfObject type)
     {
         Pool poolToGet = pool.Where(p => p.type == type).FirstOrDefault();
-        return poolToGet.poolOfObjects.Where(o => !o.activeSelf).FirstOrDefault() == null;
+        return poolToGet.poolOfObjects.Where(o => !o.activeSelf).FirstOrDefault() != null;
     }
 }
 

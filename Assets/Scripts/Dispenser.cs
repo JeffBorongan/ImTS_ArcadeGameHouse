@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Dispenser : MonoBehaviour
@@ -10,19 +12,32 @@ public class Dispenser : MonoBehaviour
         SpawnBowlingBall();
     }
 
-    private void Update()
-    {
-        if(currentBall.CurrentState == BowlingBallStates.OnRelease)
-        {
-            SpawnBowlingBall();
-        }
-    }
-
     private void SpawnBowlingBall()
     {
         GameObject bowlingBallClone = ObjectPooling.Instance.GetFromPool(TypeOfObject.BowlingBall);
         bowlingBallClone.transform.position = transform.position;
         bowlingBallClone.transform.rotation = transform.rotation;
         currentBall = bowlingBallClone.GetComponent<BowlingBall>();
+        currentBall.OnRelease.AddListener(HandleOnRelease);
+    }
+
+    private void HandleOnRelease()
+    {
+        if (!ObjectPooling.Instance.hasObjectOnPool(TypeOfObject.BowlingBall)) 
+        {
+            StartCoroutine(SpawnCheckCour());
+        }
+        
+        else
+        {
+            SpawnBowlingBall();
+        }
+    }
+
+    IEnumerator SpawnCheckCour()
+    {
+        yield return new WaitUntil(() => ObjectPooling.Instance.hasObjectOnPool(TypeOfObject.BowlingBall));
+        currentBall.OnRelease.RemoveAllListeners();
+        SpawnBowlingBall();
     }
 }
