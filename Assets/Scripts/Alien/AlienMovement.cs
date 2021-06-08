@@ -17,12 +17,14 @@ public class AlienMovement : MonoBehaviour
 
     private void Start()
     {
-        alienAgent = GetComponent<NavMeshAgent>();
+        alienAgent = GetComponent<NavMeshAgent>();       
+    }
+
+    private void OnEnable()
+    {
         Vector3 spawnPosition = new Vector3(gameObject.transform.position.x, pathPoint.position.y, pathPoint.position.z);
         alienAgent.SetDestination(spawnPosition);
         alienAgent.speed = currentSpeed;
-        //GetComponent<MeshRenderer>().material.color = currentColor;
-
         OnSpawn.Invoke();
     }
 
@@ -32,7 +34,7 @@ public class AlienMovement : MonoBehaviour
         {
             isArrived = true;
             OnReachDestination.Invoke();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         if (alienAgent.remainingDistance > 0 && !isArrived)
@@ -56,7 +58,7 @@ public class AlienMovement : MonoBehaviour
         if (other.gameObject.tag == "BowlingBall")
         {
             OnDeath.Invoke();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
