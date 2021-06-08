@@ -44,6 +44,12 @@ public class ObjectPooling : MonoBehaviour
 
         return selectedObject;
     }
+
+    public bool hasObjectOnPool(TypeOfObject type)
+    {
+        Pool poolToGet = pool.Where(p => p.type == type).FirstOrDefault();
+        return poolToGet.poolOfObjects.Where(o => !o.activeSelf).FirstOrDefault() == null;
+    }
 }
 
 [System.Serializable]

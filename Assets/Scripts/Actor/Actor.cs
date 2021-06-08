@@ -6,13 +6,12 @@ using UnityEngine.Events;
 
 public class Actor : MonoBehaviour
 {
-    AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Animator animator = null;
+
     public UnityEvent OnEndAction = new UnityEvent();
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    private ActorState currentState = ActorState.Idle;
 
     public void ExecuteAction(Action action)
     {
@@ -31,11 +30,20 @@ public class Actor : MonoBehaviour
 
     public void MoveToLocation(Transform targetPosition, float travelDuration, Ease easeType)
     {
-        transform.DOMove(targetPosition.position, travelDuration).SetEase(easeType).OnComplete(OnEndAction.Invoke);
+        transform.DOLookAt(targetPosition.position, 0.2f, AxisConstraint.Y).OnComplete(() =>
+        {
+            ChangeAnimationState(ActorState.Walking);
+            transform.DOMove(targetPosition.position, travelDuration).SetEase(easeType).OnComplete(() => {
+                OnEndAction.Invoke();
+                ChangeAnimationState(ActorState.Idle);
+            });
+        });
     }
 
     public void Speak(AudioClip clip)
     {
+        ChangeAnimationState(ActorState.Talking);
+
         audioSource.clip = clip;
         audioSource.Play();
         StartCoroutine(InvokeEndAudioClipCour());
@@ -48,6 +56,24 @@ public class Actor : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        ChangeAnimationState(ActorState.Idle);
         OnEndAction.Invoke();
     }
+
+    public void ChangeAnimationState(ActorState state)
+    {
+        if(currentState != state)
+        {
+            animator.SetTrigger("ChangeState");
+            animator.SetInteger("State", (int)state);
+            currentState = state;
+        }
+    }
+}
+
+public enum ActorState
+{
+    Idle,
+    Walking,
+    Talking
 }

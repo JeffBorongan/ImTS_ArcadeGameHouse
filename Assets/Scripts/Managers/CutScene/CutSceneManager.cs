@@ -32,6 +32,7 @@ public class CutSceneManager : MonoBehaviour
     {
         if (currentActionExecuted + 1 < listOfActions.Count) { currentActionExecuted++; }
         else { return; }
+
         StartCoroutine(CutsceneCour(listOfActions[currentActionExecuted]));
     }
 
