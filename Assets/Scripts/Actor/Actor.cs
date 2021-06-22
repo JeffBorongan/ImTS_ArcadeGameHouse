@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,7 +17,7 @@ public class Actor : MonoBehaviour
         switch (action.type())
         {
             case ActionType.Move:
-                MoveToLocation(((MoveAction)action).targetPosition, 3f, Ease.Linear);
+                MoveToLocation(((MoveAction)action).targetPosition, ((MoveAction)action).travelDuration, Ease.Linear);
                 break;
             case ActionType.Speak:
                 Speak(((SpeakAction)action).clip);
@@ -42,7 +41,7 @@ public class Actor : MonoBehaviour
 
     public void Speak(AudioClip clip)
     {
-        ChangeAnimationState(ActorState.Talking);
+        ChangeAnimationState(ActorState.Speak);
 
         audioSource.clip = clip;
         audioSource.Play();
@@ -75,5 +74,6 @@ public enum ActorState
 {
     Idle,
     Walking,
-    Talking
+    Speak,
+    Communicate
 }

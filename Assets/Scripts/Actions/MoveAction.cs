@@ -6,6 +6,7 @@ using UnityEngine;
 public class MoveAction : Action
 {
     public Transform targetPosition = null;
+    public float travelDuration = 1f;
 
     public override ActionType type()
     {
