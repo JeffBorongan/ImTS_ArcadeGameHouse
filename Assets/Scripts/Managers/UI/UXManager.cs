@@ -85,9 +85,26 @@ public class UXManager : MonoBehaviour
 
     void SetUIWithSessionData()
     {
-        if(!LocalSavingManager.Instance.IsLocalDataStored("Space")) { return; }
+        SpaceBowlingSaveData localData = null;
 
-        SpaceBowlingSaveData localData = LocalSavingManager.Instance.GetLocalData<SpaceBowlingSaveData>("Space");
+        if (!LocalSavingManager.Instance.IsLocalDataStored("Space")) 
+        {
+            SpaceBowlingSaveData defaultData = new SpaceBowlingSaveData();
+            defaultData.spawnTimeValue = 5f;
+            defaultData.alienMovementSpeedValue = 1f;
+            defaultData.pointPerAlienValue = 1;
+            defaultData.pointsToEarnValue = 20;
+            defaultData.aliensReachedTheCockpitValue = 1;
+            defaultData.timeToBeatValue = 120;
+
+            defaultData.lanes = "0,1,2,";
+
+            localData = defaultData;
+        }
+        else
+        {
+            localData = LocalSavingManager.Instance.GetLocalData<SpaceBowlingSaveData>("Space");
+        }
 
         spawnTime.text = localData.spawnTimeValue.ToString();
         alienMovementSpeed.text = localData.alienMovementSpeedValue.ToString();
