@@ -5,6 +5,7 @@ using UnityEngine;
 public class VRFootIK : MonoBehaviour
 {
     private Animator animator = null;
+    [SerializeField] private LayerMask footIKMask;
     [SerializeField] private Vector3 footOffset = Vector3.zero;
     [Range(0, 1)]
     [SerializeField] private float rightFootPosWeight = 1;
@@ -25,7 +26,7 @@ public class VRFootIK : MonoBehaviour
         Vector3 rightFootPos = animator.GetIKPosition(AvatarIKGoal.RightFoot);
         RaycastHit hit;
 
-        bool hasHit = Physics.Raycast(rightFootPos + Vector3.up, Vector3.down, out hit);
+        bool hasHit = Physics.Raycast(rightFootPos + Vector3.up, Vector3.down, out hit, Mathf.Infinity, footIKMask);
 
         if (hasHit)
         {
@@ -43,7 +44,7 @@ public class VRFootIK : MonoBehaviour
 
         Vector3 leftFootPos = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
 
-        hasHit = Physics.Raycast(leftFootPos + Vector3.up, Vector3.down, out hit);
+        hasHit = Physics.Raycast(leftFootPos + Vector3.up, Vector3.down, out hit, Mathf.Infinity, footIKMask);
 
         if (hasHit)
         {
