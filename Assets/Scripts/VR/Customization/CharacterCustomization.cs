@@ -38,26 +38,27 @@ public class BodyPart
             if(currentMaterialAttached + 1 < bodyPartMaterials.Count)
             {
                 currentMaterialAttached++;
-
-                foreach (var bodyPartRender in bodyPartsRenderer)
-                {
-                    bodyPartRender.material = bodyPartMaterials[currentMaterialAttached];
-                    ui.txtLabel.color = bodyPartMaterials[currentMaterialAttached].color;
-                }
+            } else
+            {
+                currentMaterialAttached = 0;
             }
         }
         else
         {
-            if(currentMaterialAttached - 1 <= 0)
+            if(currentMaterialAttached - 1 >= 0)
             {
                 currentMaterialAttached--;
-
-                foreach (var bodyPartRender in bodyPartsRenderer)
-                {
-                    bodyPartRender.material = bodyPartMaterials[currentMaterialAttached];
-                    ui.txtLabel.color = bodyPartMaterials[currentMaterialAttached].color;
-                }
+            } else
+            {
+                currentMaterialAttached = bodyPartMaterials.Count - 1;
             }
+        }
+
+
+        foreach (var bodyPartRender in bodyPartsRenderer)
+        {
+            bodyPartRender.material = bodyPartMaterials[currentMaterialAttached];
+            ui.txtLabel.color = bodyPartMaterials[currentMaterialAttached].color;
         }
     }
 }
