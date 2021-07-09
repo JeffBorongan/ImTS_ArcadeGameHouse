@@ -19,7 +19,6 @@ public class CharacterCustomization : MonoBehaviour
         }
     }
 
-
     public void ChangeBodyPart(bool next, BodyPartID id, UIBodyPart ui)
     {
         bodyPartDictionary[id].ChangeMaterial(next, ui);
@@ -29,7 +28,7 @@ public class CharacterCustomization : MonoBehaviour
     {
         float cameraHeight = rig.head.vrTarget.localPosition.y;
         float scaleFactor = cameraHeight / maxHeight;
-        transform.localScale *= scaleFactor;
+        transform.localScale = (Vector3.one / 2) * scaleFactor;
 
         rig.ResetHeadBodyOffset();
     }
