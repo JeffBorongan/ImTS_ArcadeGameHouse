@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class CharacterCustomization : MonoBehaviour
 {
+    [SerializeField] private float maxHeight = 1f;
     public List<BodyPart> bodyParts = new List<BodyPart>();
     private Dictionary<BodyPartID, BodyPart> bodyPartDictionary = new Dictionary<BodyPartID, BodyPart>();
+    private VRRig rig = null;
 
     private void Start()
     {
+        rig = GetComponent<VRRig>();
+
         foreach (var bodyPart in bodyParts)
         {
             bodyPartDictionary.Add(bodyPart.id, bodyPart);
@@ -21,6 +25,12 @@ public class CharacterCustomization : MonoBehaviour
         bodyPartDictionary[id].ChangeMaterial(next, ui);
     }
 
+    public void SetHeight()
+    {
+        float cameraHeight = rig.head.vrTarget.localPosition.y;
+        float scaleFactor = cameraHeight / maxHeight;
+        transform.localScale = Vector3.one * scaleFactor;
+    }
 }
 
 [System.Serializable]
@@ -33,27 +43,7 @@ public class BodyPart
 
     public void ChangeMaterial(bool next, UIBodyPart ui)
     {
-        if (next)
-        {
-            if(currentMaterialAttached + 1 < bodyPartMaterials.Count)
-            {
-                currentMaterialAttached++;
-            } else
-            {
-                currentMaterialAttached = 0;
-            }
-        }
-        else
-        {
-            if(currentMaterialAttached - 1 >= 0)
-            {
-                currentMaterialAttached--;
-            } else
-            {
-                currentMaterialAttached = bodyPartMaterials.Count - 1;
-            }
-        }
-
+        currentMaterialAttached = next ? (currentMaterialAttached + 1 < bodyPartMaterials.Count ? currentMaterialAttached + 1 : 0) : (currentMaterialAttached - 1 >= 0 ? currentMaterialAttached - 1 : bodyPartMaterials.Count - 1);
 
         foreach (var bodyPartRender in bodyPartsRenderer)
         {

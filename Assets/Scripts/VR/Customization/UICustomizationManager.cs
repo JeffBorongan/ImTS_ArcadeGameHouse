@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICustomizationManager : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class UICustomizationManager : MonoBehaviour
     [SerializeField] private CharacterCustomization character = null;
     [SerializeField] private UIBodyPart bodyPartPrefab = null;
     [SerializeField] private Transform bodyPartParent = null;
+    [SerializeField] private Button btnAdjustHeight = null;
 
     private void Start()
     {
@@ -36,6 +39,13 @@ public class UICustomizationManager : MonoBehaviour
             clone.name = bodyPart.id.ToString();
             clone.SetActive(true);
         }
+
+        btnAdjustHeight.onClick.AddListener(HandleOnAdjustHeight);
+    }
+
+    private void HandleOnAdjustHeight()
+    {
+        character.SetHeight();
     }
 
     private void ChangeBodyPart(bool next, BodyPartID id, UIBodyPart ui)
