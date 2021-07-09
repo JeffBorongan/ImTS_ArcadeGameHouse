@@ -24,6 +24,11 @@ public class VRRig : MonoBehaviour
         leftHand.Map();
         rightHand.Map();
     }
+
+    public void ResetHeadBodyOffset()
+    {
+        headBodyOffset = transform.position - headConstaint.position;
+    }
 }
 
 [System.Serializable]

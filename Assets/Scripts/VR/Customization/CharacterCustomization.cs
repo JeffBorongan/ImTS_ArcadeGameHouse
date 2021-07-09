@@ -29,7 +29,9 @@ public class CharacterCustomization : MonoBehaviour
     {
         float cameraHeight = rig.head.vrTarget.localPosition.y;
         float scaleFactor = cameraHeight / maxHeight;
-        transform.localScale = Vector3.one * scaleFactor;
+        transform.localScale *= scaleFactor;
+
+        rig.ResetHeadBodyOffset();
     }
 }
 

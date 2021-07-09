@@ -130,9 +130,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 99878703, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+      propertyPath: maxHeight
+      value: 0.8071685
+      objectReference: {fileID: 0}
     - target: {fileID: 292965383810506323, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 292965383810506323, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 292965383810506323, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 292965383810506323, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 292965383810506323, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,6 +195,10 @@ PrefabInstance:
       value: Robot Kyle
       objectReference: {fileID: 0}
     - target: {fileID: 4713692902069073152, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713692902069073152, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
       propertyPath: head.vrTarget
       value: 
       objectReference: {fileID: 786546717}
@@ -190,6 +210,10 @@ PrefabInstance:
       propertyPath: rightHand.vrTarget
       value: 
       objectReference: {fileID: 786546718}
+    - target: {fileID: 4713692902069073154, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+      propertyPath: footOffset.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
 --- !u!114 &99878703 stripped
@@ -1513,6 +1537,18 @@ PrefabInstance:
     - target: {fileID: 5011460293970044750, guid: 0729faf505dbfe34592dead5fd5d1584, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5011460293970044751, guid: 0729faf505dbfe34592dead5fd5d1584, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5011460293970044751, guid: 0729faf505dbfe34592dead5fd5d1584, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5011460293970044751, guid: 0729faf505dbfe34592dead5fd5d1584, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5011460293105360174, guid: 0729faf505dbfe34592dead5fd5d1584, type: 3}

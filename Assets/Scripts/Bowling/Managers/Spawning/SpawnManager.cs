@@ -30,7 +30,6 @@ public class SpawnManager : MonoBehaviour
     System.Random SpawnPointGenerator = new System.Random(DateTime.Now.Ticks.GetHashCode());
     List<int> spawnPointsGenerated = new List<int>();
 
-    [SerializeField] private GameObject alienEnemy = null;
     private List<GameObject> spawnedAliens = new List<GameObject>();
     private IEnumerator spawningCour = null;
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class VRLowerBodyAnimator : MonoBehaviour
 {
-    [SerializeField] private float speedTreshold = 0.1f;
     [Range(0, 1)]
     [SerializeField] private float smoothing = 1f;
     private VRRig vRRig = null;

@@ -23,8 +23,6 @@ public class ShipManager : MonoBehaviour
 
     [SerializeField] private Transform leftDoor = null;
     [SerializeField] private Transform rightDoor = null;
-    private float leftDoorPositionX = 0f;
-    private float rightDoorPositionX = 0f;
 
     private void Start()
     {
