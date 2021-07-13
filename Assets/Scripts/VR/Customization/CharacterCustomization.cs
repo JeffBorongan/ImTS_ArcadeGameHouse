@@ -16,12 +16,8 @@ public class CharacterCustomization : MonoBehaviour
         foreach (var bodyPart in bodyParts)
         {
             bodyPartDictionary.Add(bodyPart.id, bodyPart);
+            bodyPart.ChangeMaterial(bodyPart.bodyPartMaterials[0]);
         }
-    }
-
-    public void ChangeBodyPart(bool next, BodyPartID id, UIBodyPart ui)
-    {
-        bodyPartDictionary[id].ChangeMaterial(next, ui);
     }
 
     public void SetHeight()
@@ -37,27 +33,26 @@ public class CharacterCustomization : MonoBehaviour
 [System.Serializable]
 public class BodyPart
 {
-    public BodyPartID id = BodyPartID.Head;
+    public BodyPartID id = BodyPartID.HELMET;
     public List<MeshRenderer> bodyPartsRenderer = new List<MeshRenderer>();
     public List<Material> bodyPartMaterials = new List<Material>();
-    public int currentMaterialAttached = 0;
 
-    public void ChangeMaterial(bool next, UIBodyPart ui)
+    public void ChangeMaterial(Material material)
     {
-        currentMaterialAttached = next ? (currentMaterialAttached + 1 < bodyPartMaterials.Count ? currentMaterialAttached + 1 : 0) : (currentMaterialAttached - 1 >= 0 ? currentMaterialAttached - 1 : bodyPartMaterials.Count - 1);
-
         foreach (var bodyPartRender in bodyPartsRenderer)
         {
-            bodyPartRender.material = bodyPartMaterials[currentMaterialAttached];
-            ui.txtLabel.color = bodyPartMaterials[currentMaterialAttached].color;
+            bodyPartRender.material = material;
         }
     }
 }
 
 public enum BodyPartID
 {
-    Head,
-    Arms,
-    Chest,
-    Legs
+    HELMET,
+    BODYSUIT,
+    JETPACK,
+    SPACEBOOTS,
+    GLOVES,
+    WRISTGRADGET,
+    Count
 }

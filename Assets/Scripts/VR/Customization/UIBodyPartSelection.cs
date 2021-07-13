@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UICustomizationManager : MonoBehaviour
+public class UIBodyPartSelection : MonoBehaviour
 {
-    public static UICustomizationManager Instance { private set; get; }
+    public static UIBodyPartSelection Instance { private set; get; }
 
     private void Awake()
     {
@@ -32,15 +32,20 @@ public class UICustomizationManager : MonoBehaviour
             GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartParent);
             UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
             uIBodyPart.txtLabel.text = bodyPart.id.ToString();
-
-            uIBodyPart.btnNext.onClick.AddListener(() => ChangeBodyPart(true, bodyPart.id, uIBodyPart));
-            uIBodyPart.btnPrevious.onClick.AddListener(() => ChangeBodyPart(false, bodyPart.id, uIBodyPart));
+            uIBodyPart.btnBodyPart.onClick.AddListener(() => HandleOnSelectBodyPart(bodyPart.id));
 
             clone.name = bodyPart.id.ToString();
             clone.SetActive(true);
         }
 
         btnAdjustHeight.onClick.AddListener(HandleOnAdjustHeight);
+
+        UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, 0);
+    }
+
+    private void HandleOnSelectBodyPart(BodyPartID id)
+    {
+        UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, id);
     }
 
     private void HandleOnAdjustHeight()
@@ -48,10 +53,7 @@ public class UICustomizationManager : MonoBehaviour
         character.SetHeight();
     }
 
-    private void ChangeBodyPart(bool next, BodyPartID id, UIBodyPart ui)
-    {
-        character.ChangeBodyPart(next, id, ui);
-    }
+
 
 }
 

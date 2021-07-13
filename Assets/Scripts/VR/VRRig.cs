@@ -5,10 +5,15 @@ using UnityEngine;
 public class VRRig : MonoBehaviour
 {
     public Transform headConstaint;
-    public Vector3 headBodyOffset;
+    public Vector3 bodyOffset = Vector3.zero;
+    private Vector3 headBodyOffset;
+    private Vector3 currentPosition;
 
+    [SerializeField] private Color headColorGizmos = Color.black;
     public VRMap head;
+    [SerializeField] private Color leftHandColorGizmos = Color.black;
     public VRMap leftHand;
+    [SerializeField] private Color rightHandColorGizmos = Color.black;
     public VRMap rightHand;
 
     private void Start()
@@ -18,7 +23,7 @@ public class VRRig : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = headConstaint.position + headBodyOffset;
+        transform.position = (headConstaint.position + headBodyOffset) + bodyOffset;
         transform.forward = Vector3.ProjectOnPlane(headConstaint.up, Vector3.up).normalized;
         head.Map();
         leftHand.Map();
@@ -28,6 +33,17 @@ public class VRRig : MonoBehaviour
     public void ResetHeadBodyOffset()
     {
         headBodyOffset = transform.position - headConstaint.position;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = headColorGizmos;
+        Gizmos.DrawSphere(head.vrTarget.TransformPoint(head.trackingPositionOffset), 0.1f);
+        Gizmos.color = leftHandColorGizmos;
+        Gizmos.DrawSphere(leftHand.vrTarget.TransformPoint(leftHand.trackingPositionOffset), 0.1f);
+        Gizmos.color = rightHandColorGizmos;
+        Gizmos.DrawSphere(rightHand.vrTarget.TransformPoint(rightHand.trackingPositionOffset), .1f);
+
     }
 }
 
