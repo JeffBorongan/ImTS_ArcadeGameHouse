@@ -22,8 +22,8 @@ public class VRRigMimic : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = (headConstaint.position + headBodyOffset) + bodyOffset;
-        transform.forward = Vector3.ProjectOnPlane(headConstaint.up, Vector3.up).normalized;
+        //transform.position = (headConstaint.position + headBodyOffset) + bodyOffset;
+        //transform.forward = Vector3.ProjectOnPlane(headConstaint.up, Vector3.up).normalized;
         head.Map();
         leftHand.Map();
         rightHand.Map();
@@ -52,11 +52,13 @@ public class VRMapMimic
     public Transform rigTarget;
     public Vector3 trackingPositionOffset;
     public Vector3 trackingRotationOffset;
+    public bool inversePosition = false;
+    public bool inverseRotation = false;
 
     public void Map()
     {
-        rigTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
-        rigTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        rigTarget.position = inversePosition ? vrTarget.TransformPoint(trackingPositionOffset) :  vrTarget.TransformPoint(trackingPositionOffset);
+        rigTarget.rotation = inversePosition ? Quaternion.Inverse(vrTarget.rotation * Quaternion.Euler(trackingRotationOffset)) : vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
     }
 
 }
