@@ -43,7 +43,6 @@ public class VRRig : MonoBehaviour
         Gizmos.DrawSphere(leftHand.vrTarget.TransformPoint(leftHand.trackingPositionOffset), 0.1f);
         Gizmos.color = rightHandColorGizmos;
         Gizmos.DrawSphere(rightHand.vrTarget.TransformPoint(rightHand.trackingPositionOffset), .1f);
-
     }
 }
 
@@ -54,11 +53,13 @@ public class VRMap
     public Transform rigTarget;
     public Vector3 trackingPositionOffset;
     public Vector3 trackingRotationOffset;
+    public bool inversePosition = false;
+    public bool inverseRotation = false;
 
     public void Map()
     {
-        rigTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
-        rigTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        rigTarget.position = inversePosition ? -vrTarget.TransformPoint(trackingPositionOffset) : vrTarget.TransformPoint(trackingPositionOffset);
+        rigTarget.rotation = inverseRotation ? Quaternion.Inverse(vrTarget.rotation * Quaternion.Euler(trackingRotationOffset)) : vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
     }
 
 }
