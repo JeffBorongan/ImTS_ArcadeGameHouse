@@ -2265,8 +2265,61 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4713692902069073152, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+--- !u!1 &602406222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3624143904826469440, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+  m_PrefabInstance: {fileID: 602406221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &602406223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602406222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48e87a2ed9192449a81bcfcb5b5bc00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headConstaint: {fileID: 602406226}
+  bodyOffset: {x: 0, y: 0, z: 0}
+  headColorGizmos: {r: 1, g: 0, b: 0, a: 1}
+  head:
+    vrTarget: {fileID: 728516376}
+    rigTarget: {fileID: 602406226}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+  leftHandColorGizmos: {r: 0, g: 0.6880622, b: 1, a: 1}
+  leftHand:
+    vrTarget: {fileID: 1645627238}
+    rigTarget: {fileID: 602406225}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+  rightHandColorGizmos: {r: 1, g: 0.85065913, b: 0, a: 1}
+  rightHand:
+    vrTarget: {fileID: 1468785420}
+    rigTarget: {fileID: 602406224}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!4 &602406224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4713692900894279962, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+  m_PrefabInstance: {fileID: 602406221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &602406225 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4713692900658605873, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+  m_PrefabInstance: {fileID: 602406221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &602406226 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4713692900580435251, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
+  m_PrefabInstance: {fileID: 602406221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &622943645
 GameObject:
   m_ObjectHideFlags: 0

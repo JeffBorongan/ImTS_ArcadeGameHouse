@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRRig : MonoBehaviour
+public class VRRigMimic : MonoBehaviour
 {
     public Transform headConstaint;
     public Vector3 bodyOffset = Vector3.zero;
     private Vector3 headBodyOffset;
-    private Vector3 currentPosition;
 
     [SerializeField] private Color headColorGizmos = Color.black;
-    public VRMap head;
+    public VRMapMimic head;
     [SerializeField] private Color leftHandColorGizmos = Color.black;
-    public VRMap leftHand;
+    public VRMapMimic leftHand;
     [SerializeField] private Color rightHandColorGizmos = Color.black;
-    public VRMap rightHand;
+    public VRMapMimic rightHand;
 
     private void Start()
     {
@@ -47,7 +46,7 @@ public class VRRig : MonoBehaviour
 }
 
 [System.Serializable]
-public class VRMap
+public class VRMapMimic
 {
     public Transform vrTarget;
     public Transform rigTarget;
