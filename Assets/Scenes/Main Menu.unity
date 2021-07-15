@@ -2263,11 +2263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4713692902069073153, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4713692902069073154, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4713692902069073154, guid: 015a85e91e4eeda4290d150898b99da8, type: 3}
       propertyPath: footOffset.y
@@ -2297,12 +2297,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headConstaint: {fileID: 602406226}
-  bodyOffset: {x: 0, y: 0, z: 0}
+  bodyOffset: {x: 0, y: 0, z: -2}
   headColorGizmos: {r: 0.40771842, g: 1, b: 0, a: 1}
   head:
     vrTarget: {fileID: 728516376}
     rigTarget: {fileID: 602406226}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingGlobalPositionOffset: {x: 0, y: 0, z: -2}
     trackingRotationOffset: {x: 0, y: 90, z: -90}
     inversePosition: 0
     inverseRotation: 1
@@ -2311,6 +2312,7 @@ MonoBehaviour:
     vrTarget: {fileID: 1645627238}
     rigTarget: {fileID: 602406225}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingGlobalPositionOffset: {x: 0, y: 0, z: -2}
     trackingRotationOffset: {x: 0, y: 0, z: 0}
     inversePosition: 0
     inverseRotation: 0
@@ -2319,6 +2321,7 @@ MonoBehaviour:
     vrTarget: {fileID: 1468785420}
     rigTarget: {fileID: 602406224}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingGlobalPositionOffset: {x: 0, y: 0, z: -2}
     trackingRotationOffset: {x: 0, y: 0, z: 0}
     inversePosition: 0
     inverseRotation: 0
