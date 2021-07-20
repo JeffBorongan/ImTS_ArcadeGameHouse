@@ -23,11 +23,12 @@ public class UIBodyPartCustomization : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtLabel = null;
     [SerializeField] private List<UIBodyPartCustom> bodyPartsCustom = new List<UIBodyPartCustom>();
 
-    public void OpenBodyPartSelections(CharacterCustomization character, BodyPartID id)
+    public void OpenBodyPartSelections(CharacterCustomization character, CharacterCustomization characterMimic, BodyPartID id)
     {
         txtLabel.text = id.ToString();
 
         BodyPart bodyPart = character.bodyParts.Where(b => b.id == id).FirstOrDefault();
+        BodyPart bodyPartMimic = characterMimic.bodyParts.Where(b => b.id == id).FirstOrDefault();
 
         foreach (var ui in bodyPartsCustom)
         {
@@ -38,7 +39,12 @@ public class UIBodyPartCustomization : MonoBehaviour
         {
             bodyPartsCustom[i].imgBodyPartCustom.color = bodyPart.bodyPartMaterials[i].color;
             bodyPartsCustom[i].btnBodyPartCustom.onClick.RemoveAllListeners();
-            bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() => bodyPart.ChangeMaterial(bodyPart.bodyPartMaterials[i]));
+            Material newMaterial = bodyPart.bodyPartMaterials[i];
+            bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() => 
+            { 
+                bodyPart.ChangeMaterial(newMaterial);
+                bodyPartMimic.ChangeMaterial(newMaterial);
+            });
             bodyPartsCustom[i].gameObject.SetActive(true);
         }
     }

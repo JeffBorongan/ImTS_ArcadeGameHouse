@@ -21,6 +21,7 @@ public class UIBodyPartSelection : MonoBehaviour
     }
 
     [SerializeField] private CharacterCustomization character = null;
+    [SerializeField] private CharacterCustomization characterMimic = null;
     [SerializeField] private UIBodyPart bodyPartPrefab = null;
     [SerializeField] private Transform bodyPartParent = null;
     [SerializeField] private Button btnAdjustHeight = null;
@@ -40,17 +41,23 @@ public class UIBodyPartSelection : MonoBehaviour
 
         btnAdjustHeight.onClick.AddListener(HandleOnAdjustHeight);
 
-        UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, 0);
+        UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, characterMimic, 0);
     }
 
     private void HandleOnSelectBodyPart(BodyPartID id)
     {
-        UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, id);
+        UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, characterMimic, id);
     }
 
     private void HandleOnAdjustHeight()
     {
         character.SetHeight();
+
+        if (!characterMimic.gameObject.activeSelf)
+        {
+            characterMimic.transform.localScale = character.transform.localScale;
+            characterMimic.gameObject.SetActive(true);
+        }
     }
 
 

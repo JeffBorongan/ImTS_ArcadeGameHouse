@@ -7,7 +7,6 @@ public class VRRig : MonoBehaviour
     public Transform headConstaint;
     public Vector3 bodyOffset = Vector3.zero;
     private Vector3 headBodyOffset;
-    private Vector3 currentPosition;
 
     [SerializeField] private Color headColorGizmos = Color.black;
     public VRMap head;
@@ -24,7 +23,7 @@ public class VRRig : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = (headConstaint.position + headBodyOffset) + bodyOffset;
-        transform.forward = Vector3.ProjectOnPlane(headConstaint.up, Vector3.up).normalized;
+        transform.forward = Vector3.ProjectOnPlane(headConstaint.forward, Vector3.up).normalized;
         head.Map();
         leftHand.Map();
         rightHand.Map();

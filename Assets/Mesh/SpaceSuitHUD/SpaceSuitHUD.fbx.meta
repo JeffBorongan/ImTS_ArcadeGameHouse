@@ -3,7 +3,17 @@ guid: 2f84323ef1067b24f8c05e0675cacfb5
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Helmet
+    second: {fileID: 2100000, guid: c305220efa9236441992db55dce68b00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HelmetGlass
+    second: {fileID: 2100000, guid: 7c786d877caf7224f94a00065f6f8a02, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

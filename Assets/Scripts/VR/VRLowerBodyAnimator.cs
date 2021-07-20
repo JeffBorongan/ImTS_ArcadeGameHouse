@@ -6,24 +6,23 @@ public class VRLowerBodyAnimator : MonoBehaviour
 {
     [Range(0, 1)]
     [SerializeField] private float smoothing = 1f;
-    private VRRig vRRig = null;
+    [SerializeField] private Transform head = null;
     private Animator animator = null;
     private Vector3 previousPos = Vector3.zero;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        vRRig = GetComponent<VRRig>();
-        previousPos = vRRig.head.vrTarget.position;
+        previousPos = head.position;
     }
 
     private void Update()
     {
-        Vector3 headsetSpeed = (vRRig.head.vrTarget.position - previousPos) / Time.deltaTime;
+        Vector3 headsetSpeed = (head.position - previousPos) / Time.deltaTime;
         headsetSpeed.y = 0f;
 
         Vector3 headsetLocalSpeed = transform.InverseTransformDirection(headsetSpeed);
-        previousPos = vRRig.head.vrTarget.position;
+        previousPos = head.position;
 
         float previousBlendX = animator.GetFloat("BlendX");
         float previousBlendY = animator.GetFloat("BlendY");
