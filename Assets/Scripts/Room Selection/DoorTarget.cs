@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DoorTarget : MonoBehaviour
 {
+    [SerializeField] private string roomName = "";
     public Transform destination = null;
+
+    public string RoomName { get => roomName; }
 
     public void EnterDoor(Transform player)
     {

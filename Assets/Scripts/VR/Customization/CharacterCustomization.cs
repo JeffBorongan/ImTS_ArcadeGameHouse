@@ -24,7 +24,7 @@ public class CharacterCustomization : MonoBehaviour
     {
         float cameraHeight = rig.head.vrTarget.localPosition.y;
         float scaleFactor = cameraHeight / maxHeight;
-        transform.localScale = (Vector3.one / 2) * scaleFactor;
+        transform.localScale = (Vector3.one * 0.8f) * scaleFactor;
 
         rig.ResetHeadBodyOffset();
     }
@@ -34,7 +34,7 @@ public class CharacterCustomization : MonoBehaviour
 public class BodyPart
 {
     public BodyPartID id = BodyPartID.HELMET;
-    public List<MeshRenderer> bodyPartsRenderer = new List<MeshRenderer>();
+    public List<SkinnedMeshRenderer> bodyPartsRenderer = new List<SkinnedMeshRenderer>();
     public List<Material> bodyPartMaterials = new List<Material>();
 
     public void ChangeMaterial(Material material)
@@ -49,10 +49,12 @@ public class BodyPart
 public enum BodyPartID
 {
     HELMET,
-    BODYSUIT,
-    JETPACK,
-    SPACEBOOTS,
+    INNER_SUIT,
+    VEST,
     GLOVES,
-    WRISTGRADGET,
+    WRIST_GADGET,
+    JOINT_PADS,
+    ROCKET_BACKPACK,
+    BOOTS,
     Count
 }
