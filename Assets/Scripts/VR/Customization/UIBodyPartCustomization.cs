@@ -37,7 +37,7 @@ public class UIBodyPartCustomization : MonoBehaviour
 
         for (int i = 0; i < bodyPart.bodyPartMaterials.Count; i++)
         {
-            bodyPartsCustom[i].imgBodyPartCustom.color = bodyPart.bodyPartMaterials[i].color;
+            bodyPartsCustom[i].imgBodyPartPreview.sprite = bodyPart.bodyPartSprites[i];
             bodyPartsCustom[i].btnBodyPartCustom.onClick.RemoveAllListeners();
             Material newMaterial = bodyPart.bodyPartMaterials[i];
             bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() => 

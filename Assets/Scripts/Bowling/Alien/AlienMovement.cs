@@ -10,10 +10,11 @@ public class AlienMovement : MonoBehaviour
     public UnityEvent OnWalking = new UnityEvent();
     public UnityEvent OnSpawn = new UnityEvent();
 
-    public Transform pathPoint;
+    private Transform pathPoint;
     [SerializeField] private NavMeshAgent alienAgent;
     Vector3 targetDestination = Vector3.zero;
 
+    public Transform PathPoint { get => pathPoint; set => pathPoint = value; }
 
     private void Update()
     {
@@ -44,16 +45,15 @@ public class AlienMovement : MonoBehaviour
         }
     }
 
-    void GoToTheCockpit()
+    public void GoToTheCockpit()
     {
-        targetDestination = new Vector3(transform.position.x, pathPoint.position.y, pathPoint.position.z);
+        targetDestination = new Vector3(pathPoint.position.x, pathPoint.position.y, transform.position.z);
         alienAgent.SetDestination(targetDestination);
     }
 
     private void OnEnable()
     {
         OnSpawn.Invoke();
-        GoToTheCockpit();
     }
 
     private void OnDisable()

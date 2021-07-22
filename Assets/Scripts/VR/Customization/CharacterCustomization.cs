@@ -36,6 +36,7 @@ public class BodyPart
     public BodyPartID id = BodyPartID.HELMET;
     public List<SkinnedMeshRenderer> bodyPartsRenderer = new List<SkinnedMeshRenderer>();
     public List<Material> bodyPartMaterials = new List<Material>();
+    public List<Sprite> bodyPartSprites = new List<Sprite>();
 
     public void ChangeMaterial(Material material)
     {
@@ -49,12 +50,12 @@ public class BodyPart
 public enum BodyPartID
 {
     HELMET,
-    INNER_SUIT,
+    SUIT,
     VEST,
     GLOVES,
-    WRIST_GADGET,
-    JOINT_PADS,
-    ROCKET_BACKPACK,
+    WRISTBAND,
+    JOINTPADS,
+    JETPACK,
     BOOTS,
     Count
 }

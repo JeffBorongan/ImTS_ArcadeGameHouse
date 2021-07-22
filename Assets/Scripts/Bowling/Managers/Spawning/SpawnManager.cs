@@ -22,6 +22,8 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private Transform playerTransform = null;
+
     public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 
     Dictionary<KeyValuePair<Side, Side>, bool> currentLanesStatus = new Dictionary<KeyValuePair<Side, Side>, bool>();
@@ -105,6 +107,8 @@ public class SpawnManager : MonoBehaviour
 
                     AlienMovement alien = clone.GetComponent<AlienMovement>();
                     alien.SetMovementSpeed(level.alienSpeed);
+                    alien.PathPoint = playerTransform;
+                    alien.GoToTheCockpit();
 
                     alien.OnDeath.AddListener(() =>
                     {
