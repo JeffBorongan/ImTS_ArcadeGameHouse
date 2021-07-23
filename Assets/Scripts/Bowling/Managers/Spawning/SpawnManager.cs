@@ -142,6 +142,33 @@ public class SpawnManager : MonoBehaviour
         isSpawning = false;        
     }
 
+    public void SpawnEnemy(Side main, Side secondary, SpawnEnemyAction action, UnityAction OnDeathSpawn, UnityAction OnReachCockpit)
+    {
+        SpawnPoint newSpawnPoint = spawnPoints.Where(s => s.lane == main && s.side == secondary).FirstOrDefault();
+        GameObject clone = ObjectPooling.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        clone.transform.position = newSpawnPoint.point.position;
+        clone.transform.rotation = newSpawnPoint.point.rotation;
+        clone.SetActive(true);
+        spawnedAliens.Add(clone);
+
+        AlienMovement alien = clone.GetComponent<AlienMovement>();
+        alien.SetMovementSpeed(action.enemySpeed);
+        alien.PathPoint = playerTransform;
+        alien.GoToTheCockpit();
+
+        alien.OnDeath.AddListener(() =>
+        {
+            OnDeathSpawn.Invoke();
+            alien.OnDeath.RemoveAllListeners();
+        });
+
+        alien.OnReachDestination.AddListener(() =>
+        {
+            OnReachCockpit.Invoke();
+            alien.OnReachDestination.RemoveAllListeners();
+        });
+    }
+
     void DestroyAllAliens()
     {
         foreach (var alien in spawnedAliens)

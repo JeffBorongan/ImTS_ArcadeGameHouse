@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Speak Action", menuName = "Action/Speak", order = 1)]
 public class SpeakAction : Action
 {
     public AudioClip clip = null;
 
-    public override ActionType type()
+    public override void ExecuteAction(TutorialActor actor, UnityAction OnEndAction)
     {
-        return ActionType.Speak;
+        actor.Speak(clip, OnEndAction);
     }
 }

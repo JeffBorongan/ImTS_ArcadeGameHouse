@@ -19,6 +19,7 @@ public class CutSceneManager : MonoBehaviour
     }
 
     [SerializeField] private Actor currentActor = null;
+    [SerializeField] private List<List<Action>> actions = new List<List<Action>>();
     [SerializeField] private List<Action> listOfActions = new List<Action>();
     private int currentActionExecuted = 0;
 
@@ -49,6 +50,6 @@ public class CutSceneManager : MonoBehaviour
 
     void ExecuteAction(Action action)
     {
-        currentActor.ExecuteAction(action);
+        //currentActor.ExecuteAction(action);
     }
 }

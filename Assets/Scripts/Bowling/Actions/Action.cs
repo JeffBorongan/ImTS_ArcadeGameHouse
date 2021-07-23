@@ -6,11 +6,7 @@ using UnityEngine.Events;
 public class Action : ScriptableObject
 {
     public float delayTime = 0;
-
-    public virtual ActionType type()
-    {
-        return ActionType.None;
-    }
+    public virtual void ExecuteAction(TutorialActor actor, UnityAction OnEndAction) { }
 
 }
 

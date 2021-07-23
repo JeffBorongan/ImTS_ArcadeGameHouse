@@ -14,17 +14,7 @@ public class Actor : MonoBehaviour
 
     public void ExecuteAction(Action action)
     {
-        switch (action.type())
-        {
-            case ActionType.Move:
-                MoveToLocation(((MoveAction)action).targetPosition, ((MoveAction)action).travelDuration, Ease.Linear);
-                break;
-            case ActionType.Speak:
-                Speak(((SpeakAction)action).clip);
-                break;
-            default:
-                break;
-        }
+
     }
 
     public void MoveToLocation(Transform targetPosition, float travelDuration, Ease easeType)
@@ -64,12 +54,4 @@ public class Actor : MonoBehaviour
             currentState = state;
         }
     }
-}
-
-public enum ActorState
-{
-    Idle,
-    Walking,
-    Speak,
-    Communicate
 }
