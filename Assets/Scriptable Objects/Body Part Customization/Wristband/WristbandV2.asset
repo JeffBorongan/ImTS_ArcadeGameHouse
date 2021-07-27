@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9078c5dc639759459468f5f3fc43456, type: 3}
-  m_Name: ControlRoomToGameLobby
+  m_Script: {fileID: 11500000, guid: 428786f15ac65b945b5c912869f31eee, type: 3}
+  m_Name: WristbandV2
   m_EditorClassIdentifier: 
-  pointsToRender: 000000000300000005000000
-  pointToGo: 7
+  bodyPartSpriteUI: {fileID: 21300000, guid: 3624b38478011064796800e9dd68653f, type: 3}
+  bodyPartMaterial: {fileID: 2100000, guid: 5a5d6fbcdb624754cbeaadb98288b320, type: 2}
+  starCost: 800

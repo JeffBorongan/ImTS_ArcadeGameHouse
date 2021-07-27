@@ -20,14 +20,12 @@ public class Environment : MonoBehaviour
 
     public List<EnvironmentPoint> environmentPoints = new List<EnvironmentPoint>();
 
-    public List<Transform> points = new List<Transform>();
-
     private void OnDrawGizmosSelected()
     {
-        foreach (var point in points)
+        foreach (var point in environmentPoints)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(point.position, 0.3f);
+            Gizmos.DrawSphere(point.point.position, 0.3f);
         }
     }
 }
@@ -62,3 +60,16 @@ public enum EnvironmentPoints
     AvatarRoomCenter,
     AvatarRoomGLDoor
 }
+
+
+public enum RoomID
+{
+    AvatarRoomMain,
+    ControlRoom,
+    GameLobby,
+    BowlingGame,
+    Game2,
+    Game3,
+    AvatarRoom
+}
+

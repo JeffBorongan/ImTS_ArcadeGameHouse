@@ -35,13 +35,17 @@ public class UIBodyPartCustomization : MonoBehaviour
             ui.gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < bodyPart.bodyPartMaterials.Count; i++)
+        BodyPartCustomization customizationBodyPart = CustomizationShopManager.Instance.BodyPartCustomization.Where(b => b.bodyPartID == id).FirstOrDefault();
+
+        for (int i = 0; i < customizationBodyPart.bodyPartProfile.Count; i++)
         {
-            bodyPartsCustom[i].imgBodyPartPreview.sprite = bodyPart.bodyPartSprites[i];
+            bodyPartsCustom[i].imgBodyPartPreview.sprite = customizationBodyPart.bodyPartProfile[i].bodyPartSpriteUI;
+            bodyPartsCustom[i].txtStarCost.text = customizationBodyPart.bodyPartProfile[i].starCost.ToString();
             bodyPartsCustom[i].btnBodyPartCustom.onClick.RemoveAllListeners();
-            Material newMaterial = bodyPart.bodyPartMaterials[i];
-            bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() => 
-            { 
+            Material newMaterial = customizationBodyPart.bodyPartProfile[i].bodyPartMaterial;
+            bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() =>
+            {
+
                 bodyPart.ChangeMaterial(newMaterial);
                 bodyPartMimic.ChangeMaterial(newMaterial);
             });

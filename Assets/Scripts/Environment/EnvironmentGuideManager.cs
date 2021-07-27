@@ -18,14 +18,12 @@ public class EnvironmentGuideManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private TutorialActor actor = null;
+    public TutorialActor Actor { get => actor; }
+
     public List<Guide> guides = new List<Guide>();
     private int currentGuideShown = 0;
     [SerializeField] private LineRenderer linesRenderer = null;
-
-    private void Start()
-    {
-        StartGuide();
-    }
 
     public void StartGuide()
     {
@@ -34,28 +32,20 @@ public class EnvironmentGuideManager : MonoBehaviour
 
     private void ExecuteGuide(Guide guide)
     {
-        guide.ShowGuide();
-        StartCoroutine(GuideCour(guide));
-    }
-
-    IEnumerator GuideCour(Guide guide)
-    {
-        while (!guide.isGuideAcomplish())
+        guide.ShowGuide(() => 
         {
-            yield return new WaitForEndOfFrame();
-        }
+            guide.UnShowGuide();
 
-        guide.UnShowGuide();
-
-        if (currentGuideShown + 1 < guides.Count)
-        {
-            currentGuideShown++;
-            ExecuteGuide(guides[currentGuideShown]);
-        }
-        else
-        {
-            Debug.Log("Guide Ends");
-        }
+            if (currentGuideShown + 1 < guides.Count)
+            {
+                currentGuideShown++;
+                ExecuteGuide(guides[currentGuideShown]);
+            }
+            else
+            {
+                Debug.Log("Guide Ends");
+            }
+        });
     }
 
     public void RenderLine(bool show, Vector3[] points = null)

@@ -21,7 +21,6 @@ public class TutorialActor : MonoBehaviour
 
     public void Speak(AudioClip clip, UnityAction OnEndAction)
     {
-        //Vector3 direction = player.position - transform.position;
         transform.DOLookAt(player.position, 0.2f, AxisConstraint.Y, Vector3.up).OnComplete(() =>
         {
             ChangeAnimationState(ActorState.Speak);
@@ -60,6 +59,14 @@ public class TutorialActor : MonoBehaviour
         }
         OnEndAction.Invoke();
     }
+
+    public void Teleport(Vector3 newPosition)
+    {
+        gameObject.SetActive(false);
+        transform.position = newPosition;
+        gameObject.SetActive(true);
+    }
+
     public void ChangeAnimationState(ActorState state)
     {
         animator.SetTrigger("ChangeState");

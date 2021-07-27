@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "New Move Action", menuName = "Action/Move", order = 2)]
+[CreateAssetMenu(fileName = "New Move Action", menuName = "Action/Move", order = 4)]
 public class MoveAction : Action
 {
-    public int environmentPointIndex = 0;
+    [SerializeField] private EnvironmentPoints point = EnvironmentPoints.Player;
 
     public override void ExecuteAction(TutorialActor actor, UnityAction OnEndAction)
     {
-        actor.Move(Environment.Instance.points[environmentPointIndex].position, OnEndAction);
+        EnvironmentPoint newPoint = Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault();
+        actor.Move(newPoint.point.position, OnEndAction);
     }
 
 }

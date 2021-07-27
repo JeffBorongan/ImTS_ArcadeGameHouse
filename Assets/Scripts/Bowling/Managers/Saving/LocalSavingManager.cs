@@ -50,3 +50,8 @@ public class SpaceBowlingSaveData : SaveData
     public int timeToBeatValue = 0;
     public string lanes = "";
 }
+
+public class UserData : SaveData
+{
+    public int currentStarsObtained = 0;
+}

@@ -25,73 +25,86 @@ public class UIBodyPartSelection : MonoBehaviour
     [SerializeField] private UIBodyPart bodyPartPrefab = null;
     [SerializeField] private Transform bodyPartVertical1 = null;
     [SerializeField] private Transform bodyPartVertical2 = null;
-    [SerializeField] private Button btnAdjustHeight = null;
 
     private void Start()
     {
-        List<BodyPart> vertical1 = new List<BodyPart>();
-        List<BodyPart> vertical2 = new List<BodyPart>();
+        //List<BodyPart> vertical1 = new List<BodyPart>();
+        //List<BodyPart> vertical2 = new List<BodyPart>();
 
-        for (int i = 0; i < character.bodyParts.Count; i++)
-        {
-            if (i < 4)
-            {
-                vertical1.Add(character.bodyParts[i]);
-            }
-            else
-            {
-                vertical2.Add(character.bodyParts[i]);
-            }
-        }
+        //for (int i = 0; i < character.bodyParts.Count; i++)
+        //{
+        //    if (i < 4)
+        //    {
+        //        vertical1.Add(character.bodyParts[i]);
+        //    }
+        //    else
+        //    {
+        //        vertical2.Add(character.bodyParts[i]);
+        //    }
+        //}
 
-        foreach (var bodyPart1 in vertical1)
-        {
-            GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartVertical1);
-            UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
-            uIBodyPart.txtLabel.text = bodyPart1.id.ToString();
-            uIBodyPart.btnBodyPart.onClick.AddListener(() => {
-                BodyPartID id = bodyPart1.id;
-                HandleOnSelectBodyPart(id);
-            });
+        //foreach (var bodyPart1 in vertical1)
+        //{
+        //    GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartVertical1);
+        //    UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
+        //    uIBodyPart.txtLabel.text = bodyPart1.id.ToString();
+        //    uIBodyPart.btnBodyPart.onClick.AddListener(() => {
+        //        BodyPartID id = bodyPart1.id;
+        //        HandleOnSelectBodyPart(id);
+        //    });
 
-            clone.name = bodyPart1.id.ToString();
-            clone.SetActive(true);
-        }
+        //    clone.name = bodyPart1.id.ToString();
+        //    clone.SetActive(true);
+        //}
 
-        foreach (var bodyPart2 in vertical2)
-        {
-            GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartVertical2);
-            UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
-            uIBodyPart.txtLabel.text = bodyPart2.id.ToString();
-            uIBodyPart.btnBodyPart.onClick.AddListener(() => {
-                BodyPartID id = bodyPart2.id;
-                HandleOnSelectBodyPart(id);
-            });
+        //foreach (var bodyPart2 in vertical2)
+        //{
+        //    GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartVertical2);
+        //    UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
+        //    uIBodyPart.txtLabel.text = bodyPart2.id.ToString();
+        //    uIBodyPart.btnBodyPart.onClick.AddListener(() => {
+        //        BodyPartID id = bodyPart2.id;
+        //        HandleOnSelectBodyPart(id);
+        //    });
 
-            clone.name = bodyPart2.id.ToString();
-            clone.SetActive(true);
-        }
+        //    clone.name = bodyPart2.id.ToString();
+        //    clone.SetActive(true);
+        //}
 
-
-        btnAdjustHeight.onClick.AddListener(HandleOnAdjustHeight);
 
         UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, characterMimic, BodyPartID.HELMET);
+    }
+
+    public void InitializeCustomization(List<BodyPartCustomization> bodyParts, bool vertical)
+    {
+        foreach (var bodyPart in bodyParts)
+        {
+            GameObject clone = Instantiate(bodyPartPrefab.gameObject, vertical ? bodyPartVertical1 : bodyPartVertical2);
+            UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
+            uIBodyPart.txtLabel.text = bodyPart.bodyPartID.ToString();
+
+            uIBodyPart.btnBodyPart.onClick.AddListener(() => {
+                List<Material> materials = new List<Material>();
+                List<Sprite> sprites = new List<Sprite>();
+
+                foreach (var profile in bodyPart.bodyPartProfile)
+                {
+                    materials.Add(profile.bodyPartMaterial);
+                }
+
+                BodyPartID id = bodyPart.bodyPartID;
+
+                HandleOnSelectBodyPart(id);
+            });
+
+            clone.name = bodyPart.bodyPartID.ToString();
+            clone.SetActive(true);
+        }
     }
 
     private void HandleOnSelectBodyPart(BodyPartID id)
     {
         UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, characterMimic, id);
-    }
-
-    private void HandleOnAdjustHeight()
-    {
-        character.SetHeight();
-
-        if (!characterMimic.gameObject.activeSelf)
-        {
-            characterMimic.transform.localScale = character.transform.localScale;
-            characterMimic.gameObject.SetActive(true);
-        }
     }
 
 

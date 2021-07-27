@@ -7,9 +7,11 @@ using UnityEngine.Events;
 public class SpeakAction : Action
 {
     public AudioClip clip = null;
+    public string subtitleMessage = "";
 
     public override void ExecuteAction(TutorialActor actor, UnityAction OnEndAction)
     {
         actor.Speak(clip, OnEndAction);
+        SubtitleManager.Instance.ShowSubtile(subtitleMessage, clip.length);
     }
 }
