@@ -18,6 +18,8 @@ public class Environment : MonoBehaviour
         }
     }
 
+    public List<EnvironmentPoint> environmentPoints = new List<EnvironmentPoint>();
+
     public List<Transform> points = new List<Transform>();
 
     private void OnDrawGizmosSelected()
@@ -28,4 +30,35 @@ public class Environment : MonoBehaviour
             Gizmos.DrawSphere(point.position, 0.3f);
         }
     }
+}
+
+[System.Serializable]
+public class EnvironmentPoint
+{
+    public EnvironmentPoints type = EnvironmentPoints.AvatarRoomMainCenter;
+    public Transform point = null;
+}
+
+public enum EnvironmentPoints
+{
+    Player,
+    AvatarRoomMainCenter,
+    AvatarRoomMainCRDoor,
+    ControlRoomCenter,
+    ControlRoomARDoor,
+    ControlRoomGLDoor,
+    GameLobbyCenter,
+    GameLobbyCRDoor,
+    GameLobbyBowlingDoor,
+    GameLobbyGame2Door,
+    GameLobbyGame3Door,
+    GameLobbyARDoor,
+    BowlingCenter,
+    BowlingGLDoor,
+    Game2Center,
+    Game2GLDoor,
+    Game3Center,
+    Game3GLDoor,
+    AvatarRoomCenter,
+    AvatarRoomGLDoor
 }

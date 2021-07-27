@@ -6,8 +6,25 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class RoomInteraction : MonoBehaviour
 {
+    public static RoomInteraction Instance { private set; get; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     [SerializeField] private XRRayInteractor leftInteractor = null;
     [SerializeField] private XRRayInteractor rightInteractor = null;
+    private EnvironmentPoints currentPoint = EnvironmentPoints.AvatarRoomMainCenter;
+
+    public EnvironmentPoints CurrentPoint { get => currentPoint; }
 
     private void Start()
     {
@@ -22,6 +39,7 @@ public class RoomInteraction : MonoBehaviour
         if(door != null)
         {
             door.EnterDoor(transform);
+            currentPoint = door.Point;
         }
     }
 }
