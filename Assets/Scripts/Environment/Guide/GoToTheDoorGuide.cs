@@ -16,7 +16,7 @@ public class GoToTheDoorGuide : Guide
         List<Vector3> points = new List<Vector3>();
         foreach (var point in pointsToRender)
         {
-            points.Add(Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault().point.position);
+            points.Add(Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault().point.position + (Vector3.up * 0.1f));
         }
 
         EnvironmentGuideManager.Instance.RenderLine(true, points.ToArray());
