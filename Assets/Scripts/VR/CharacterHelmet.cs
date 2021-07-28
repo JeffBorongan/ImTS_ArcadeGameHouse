@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -19,17 +21,16 @@ public class CharacterHelmet : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject visorUI = null;
+    [SerializeField] private TextMeshProUGUI txtVisorStarsUI = null;
 
-    public void OnSelect(ActivateEventArgs selectEvent)
+    private void Start()
     {
-        if (visorUI.activeSelf)
-        {
-            visorUI.SetActive(false);
-        }
-        else
-        {
-            visorUI.SetActive(true);
-        }
+        UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
+        HandleOnUserDataUpdate(UserDataManager.Instance.UserData);
+    }
+
+    private void HandleOnUserDataUpdate(UserData newUserData)
+    {
+        txtVisorStarsUI.text = newUserData.currentStarsObtained + " Stars";
     }
 }

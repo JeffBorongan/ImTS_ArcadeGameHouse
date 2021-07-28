@@ -9,5 +9,6 @@ public class UIBodyPartCustom : MonoBehaviour
     public Image imgBodyPartCustom = null;
     public Button btnBodyPartCustom = null;
     public Image imgBodyPartPreview = null;
+    public Image imgLocked = null;
     public TextMeshProUGUI txtStarCost = null;
 }

@@ -28,50 +28,6 @@ public class UIBodyPartSelection : MonoBehaviour
 
     private void Start()
     {
-        //List<BodyPart> vertical1 = new List<BodyPart>();
-        //List<BodyPart> vertical2 = new List<BodyPart>();
-
-        //for (int i = 0; i < character.bodyParts.Count; i++)
-        //{
-        //    if (i < 4)
-        //    {
-        //        vertical1.Add(character.bodyParts[i]);
-        //    }
-        //    else
-        //    {
-        //        vertical2.Add(character.bodyParts[i]);
-        //    }
-        //}
-
-        //foreach (var bodyPart1 in vertical1)
-        //{
-        //    GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartVertical1);
-        //    UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
-        //    uIBodyPart.txtLabel.text = bodyPart1.id.ToString();
-        //    uIBodyPart.btnBodyPart.onClick.AddListener(() => {
-        //        BodyPartID id = bodyPart1.id;
-        //        HandleOnSelectBodyPart(id);
-        //    });
-
-        //    clone.name = bodyPart1.id.ToString();
-        //    clone.SetActive(true);
-        //}
-
-        //foreach (var bodyPart2 in vertical2)
-        //{
-        //    GameObject clone = Instantiate(bodyPartPrefab.gameObject, bodyPartVertical2);
-        //    UIBodyPart uIBodyPart = clone.GetComponent<UIBodyPart>();
-        //    uIBodyPart.txtLabel.text = bodyPart2.id.ToString();
-        //    uIBodyPart.btnBodyPart.onClick.AddListener(() => {
-        //        BodyPartID id = bodyPart2.id;
-        //        HandleOnSelectBodyPart(id);
-        //    });
-
-        //    clone.name = bodyPart2.id.ToString();
-        //    clone.SetActive(true);
-        //}
-
-
         UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, characterMimic, BodyPartID.HELMET);
     }
 

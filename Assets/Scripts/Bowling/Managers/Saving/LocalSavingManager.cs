@@ -33,6 +33,11 @@ public class LocalSavingManager : MonoBehaviour
         return PlayerPrefs.HasKey(id);
     }
 
+    public void DeleteLocalData(string id)
+    {
+        PlayerPrefs.DeleteKey(id);
+    }
+
 }
 
 public class SaveData 
@@ -54,4 +59,5 @@ public class SpaceBowlingSaveData : SaveData
 public class UserData : SaveData
 {
     public int currentStarsObtained = 0;
+    public string purchasedHistory = "Boots_Blue,Gloves_Blue,Helmet_Blue,Jetpack_Blue,JointPads_Blue,Suit_Blue,Vest_Blue,Wristband_Blue,";
 }

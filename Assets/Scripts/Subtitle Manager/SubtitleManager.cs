@@ -20,15 +20,15 @@ public class SubtitleManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private TextMeshProUGUI txtSubtitles = null;
+    //[SerializeField] private TextMeshProUGUI txtSubtitles = null;
 
     public void ShowSubtile(string message, float duration)
     {
-        txtSubtitles.text = message;
-        txtSubtitles.DOFade(1f, 0.2f).OnComplete(() =>
-        {
-            txtSubtitles.DOFade(0f, 0.2f).SetDelay(duration);
-        });
+        //txtSubtitles.text = message;
+        //txtSubtitles.DOFade(1f, 0.2f).OnComplete(() =>
+        //{
+        //    txtSubtitles.DOFade(0f, 0.2f).SetDelay(duration);
+        //});
     }
 
 }
