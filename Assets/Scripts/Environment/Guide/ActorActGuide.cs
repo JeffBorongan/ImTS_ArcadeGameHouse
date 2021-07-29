@@ -11,6 +11,7 @@ public class ActorActGuide : Guide
     public override void ShowGuide(UnityAction OnEndGuide)
     {
         actorAction.ExecuteAction(EnvironmentGuideManager.Instance.Actor, OnEndGuide);
+        base.ShowGuide(OnEndGuide);
     }
 
     public override void UnShowGuide()

@@ -30,11 +30,11 @@ public class GameManagement : MonoBehaviour
     public UnityEvent OnGameStop = new UnityEvent();
     public UnityEvent OnGameReset = new UnityEvent();
 
-    public void StartTutorial()
+    public void StartTutorial(UnityAction OnEndTutorial)
     {
         ExecuteTutorial(currentActor, () => 
         {
-
+            OnEndTutorial.Invoke();
         });
     }
 
@@ -59,7 +59,7 @@ public class GameManagement : MonoBehaviour
 
     }
 
-    public virtual void StartGame() { }
+    public virtual void StartGame(UnityAction OnEndGame) { }
     public virtual void StopGame() { }
     public virtual void ResetGame() { }
 }
@@ -98,3 +98,5 @@ public class SequenceOfActions
         });
     }
 }
+
+public class SessionData { }

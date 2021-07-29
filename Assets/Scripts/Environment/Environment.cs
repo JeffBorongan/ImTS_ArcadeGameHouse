@@ -20,6 +20,27 @@ public class Environment : MonoBehaviour
 
     public List<EnvironmentPoint> environmentPoints = new List<EnvironmentPoint>();
 
+    [SerializeField] private List<DoorTarget> doors = new List<DoorTarget>();
+    private Dictionary<EnvironmentPoints, DoorTarget> doorDictionary = new Dictionary<EnvironmentPoints, DoorTarget>();
+    public Dictionary<EnvironmentPoints, DoorTarget> DoorDictionary { get => doorDictionary; }
+
+    [SerializeField] private List<Game> gameManagements = new List<Game>();
+    private Dictionary<GameID, GameManagement> gameManagers = new Dictionary<GameID, GameManagement>();
+    public Dictionary<GameID, GameManagement> GameManagers { get => gameManagers; }
+
+    private void Start()
+    {
+        foreach (var door in doors)
+        {
+            doorDictionary.Add(door.Point, door);
+        }
+
+        foreach (var manager in gameManagements)
+        {
+            gameManagers.Add(manager.id, manager.manager);
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         foreach (var point in environmentPoints)
@@ -61,7 +82,6 @@ public enum EnvironmentPoints
     AvatarRoomGLDoor
 }
 
-
 public enum RoomID
 {
     AvatarRoomMain,
@@ -73,3 +93,16 @@ public enum RoomID
     AvatarRoom
 }
 
+[System.Serializable]
+public class Game
+{
+    public GameID id = GameID.Bowling;
+    public GameManagement manager = null;
+}
+
+public enum GameID
+{
+    Bowling,
+    Game2,
+    Game3
+}

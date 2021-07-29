@@ -16,20 +16,23 @@ public class GoToTheDoorGuide : Guide
         List<Vector3> points = new List<Vector3>();
         foreach (var point in pointsToRender)
         {
-            points.Add(Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault().point.position + (Vector3.up * 0.1f));
+            points.Add(Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault().point.position);
         }
 
         EnvironmentGuideManager.Instance.RenderLine(true, points.ToArray());
-
         EnvironmentGuideManager.Instance.StartCoroutine(GuideCour(OnEndGuide));
+        Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(true);
+        base.ShowGuide(OnEndGuide);
     }
 
     private IEnumerator GuideCour(UnityAction OnEnd)
     {
-        while (RoomInteraction.Instance.CurrentPoint != pointToGo)
+        while (UserInteraction.Instance.CurrentPoint != pointToGo)
         {
             yield return new WaitForEndOfFrame();
         }
+
+        Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(false);
         OnEnd.Invoke();
     }
 
@@ -40,6 +43,6 @@ public class GoToTheDoorGuide : Guide
 
     public override bool isGuideAcomplish()
     {
-        return RoomInteraction.Instance.CurrentPoint == pointToGo;
+        return UserInteraction.Instance.CurrentPoint == pointToGo;
     }
 }

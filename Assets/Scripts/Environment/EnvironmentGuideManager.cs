@@ -48,12 +48,17 @@ public class EnvironmentGuideManager : MonoBehaviour
         });
     }
 
-    public void RenderLine(bool show, Vector3[] points = null)
+    public void RenderLine(bool show, Vector3[] newPoint = null)
     {
+        for (int i = 0; i < newPoint.Length; i++)
+        {
+            newPoint[i] = new Vector3(newPoint[i].x, linesRenderer.transform.position.y, newPoint[i].z);
+        }
+
         linesRenderer.gameObject.SetActive(show);
-        if(points == null) { return; }
-        linesRenderer.positionCount = points.Length;
-        linesRenderer.SetPositions(points);
+        if(newPoint == null) { return; }
+        linesRenderer.positionCount = newPoint.Length;
+        linesRenderer.SetPositions(newPoint);
     }
 
 }

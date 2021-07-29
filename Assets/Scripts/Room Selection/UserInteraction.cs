@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class RoomInteraction : MonoBehaviour
+public class UserInteraction : MonoBehaviour
 {
-    public static RoomInteraction Instance { private set; get; }
+    public static UserInteraction Instance { private set; get; }
 
     private void Awake()
     {
@@ -22,6 +22,7 @@ public class RoomInteraction : MonoBehaviour
 
     [SerializeField] private XRRayInteractor leftInteractor = null;
     [SerializeField] private XRRayInteractor rightInteractor = null;
+
     private EnvironmentPoints currentPoint = EnvironmentPoints.AvatarRoomMainCenter;
 
     public EnvironmentPoints CurrentPoint { get => currentPoint; }
@@ -39,7 +40,13 @@ public class RoomInteraction : MonoBehaviour
         if(door != null)
         {
             door.EnterDoor(transform);
-            currentPoint = door.Point;
+            currentPoint = door.DestinationPoint;
         }
+    }
+
+    public void SetRoomInteraction(bool enable)
+    {
+        leftInteractor.gameObject.SetActive(enable);
+        rightInteractor.gameObject.SetActive(enable);
     }
 }

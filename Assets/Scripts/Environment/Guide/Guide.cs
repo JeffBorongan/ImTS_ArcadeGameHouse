@@ -5,7 +5,12 @@ using UnityEngine.Events;
 
 public class Guide : ScriptableObject
 {
-    public virtual void ShowGuide(UnityAction OnEndGuide) { }
+    [SerializeField] private bool enableRoomInteraction = true;
+
+    public virtual void ShowGuide(UnityAction OnEndGuide) 
+    {
+        UserInteraction.Instance.SetRoomInteraction(enableRoomInteraction);
+    }
     public virtual void UnShowGuide() { }
 
     public virtual bool isGuideAcomplish() { return false; }
