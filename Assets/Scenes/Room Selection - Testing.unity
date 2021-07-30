@@ -1904,6 +1904,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environmentPoints: []
+  doors: []
+  gameManagements: []
 --- !u!1001 &72968384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8289,6 +8291,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Bowling Game
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 1371973764}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls:
@@ -8304,9 +8314,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 1371973764}
-  doorMeshRenderers: []
 --- !u!65 &329520165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10737,12 +10744,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Game Lobby
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 585668310}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 585668310}
-  doorMeshRenderers: []
 --- !u!65 &536252300
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12945,6 +12957,7 @@ MonoBehaviour:
   OnGameReset:
     m_PersistentCalls:
       m_Calls: []
+  enemySpawnPoints: []
 --- !u!1001 &679254854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13357,12 +13370,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Game 3
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 378944573}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 378944573}
-  doorMeshRenderers: []
 --- !u!65 &708292795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17198,12 +17216,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Game Lobby
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 1545980522}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 1545980522}
-  doorMeshRenderers: []
 --- !u!114 &883477872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17814,12 +17837,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Avatar Room
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 384763588}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 384763588}
-  doorMeshRenderers: []
 --- !u!65 &924902045
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19856,12 +19884,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Control Room
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 1654688338}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 1654688338}
-  doorMeshRenderers: []
 --- !u!65 &1037193689
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21656,12 +21689,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Game Lobby
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 1618763978}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 1618763978}
-  doorMeshRenderers: []
 --- !u!65 &1142062091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23039,12 +23077,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Game 2
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 602665827}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 602665827}
-  doorMeshRenderers: []
 --- !u!65 &1229041777
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31564,12 +31607,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Control Room
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 1836661995}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 1836661995}
-  doorMeshRenderers: []
 --- !u!65 &1752398439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34851,12 +34899,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Avatar Room
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 1170587947}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 1170587947}
-  doorMeshRenderers: []
 --- !u!65 &1953177620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37577,12 +37630,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Game Lobby
   point: 18
+  destinationPoint: 18
+  destination: {fileID: 983947311}
+  highlightColor: {r: 0, g: 0, b: 0, a: 1}
+  highlightInterval: 0.2
+  doorMeshRenderers: []
+  alarmColor: {r: 0, g: 0, b: 0, a: 1}
+  alarmInterval: 0.2
+  alarmMeshes: []
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
-  highlightColor: {r: 0, g: 0, b: 0, a: 1}
-  destination: {fileID: 983947311}
-  doorMeshRenderers: []
 --- !u!65 &2114975013
 BoxCollider:
   m_ObjectHideFlags: 0
