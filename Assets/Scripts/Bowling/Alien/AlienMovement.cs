@@ -18,6 +18,8 @@ public class AlienMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!gameObject.activeSelf) { return; }
+
         float dist = alienAgent.remainingDistance; 
         if (dist != Mathf.Infinity && alienAgent.pathStatus == NavMeshPathStatus.PathComplete && alienAgent.remainingDistance == 0)
         {
@@ -25,7 +27,7 @@ public class AlienMovement : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (alienAgent.remainingDistance > 0)
+        if (dist > 0)
         {
             OnWalking.Invoke();
         }

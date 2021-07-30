@@ -32,8 +32,6 @@ public class UserDataManager : MonoBehaviour
 
     private void Start()
     {
-        LocalSavingManager.Instance.DeleteLocalData("User");
-
         if (LocalSavingManager.Instance.IsLocalDataStored("User"))
         {
             userData = LocalSavingManager.Instance.GetLocalData<UserData>("User");
@@ -45,6 +43,7 @@ public class UserDataManager : MonoBehaviour
         }
 
         purchasedHistory = userData.purchasedHistory.Split(',').ToList();
+
         OnUserDataUpdate.Invoke(userData);
     }
 

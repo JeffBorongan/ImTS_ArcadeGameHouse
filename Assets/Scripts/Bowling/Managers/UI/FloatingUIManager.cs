@@ -32,11 +32,15 @@ public class FloatingUIManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnPointsUpdate.AddListener(HandleOnUpdatePoints);
-        GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
-        GameManager.Instance.OnGameStart.AddListener(HandleOnGameStart);
-        GameManager.Instance.OnGameUpdate.AddListener(HandleOnGameUpdate);
-        GameManager.Instance.OnCountDownStart.AddListener(HandleOnCountdownStart);
+        GameExecution.Instance.OnEventRegistration.AddListener(() =>
+        {
+            BowlingGameManagement.Instance.OnGameStart.AddListener(HandleOnGameStart);
+
+            GameManager.Instance.OnPointsUpdate.AddListener(HandleOnUpdatePoints);
+            GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
+            GameManager.Instance.OnGameUpdate.AddListener(HandleOnGameUpdate);
+            GameManager.Instance.OnCountDownStart.AddListener(HandleOnCountdownStart);
+        });
     }
 
     private void HandleOnUpdatePoints(int point)
@@ -56,9 +60,9 @@ public class FloatingUIManager : MonoBehaviour
         //StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
     }
 
-    private void HandleOnGameStart(Level level, UnityAction callback)
+    private void HandleOnGameStart(SessionData data)
     {
-        StartTimer(TimeSpan.FromSeconds(level.timeToBeat), callback);
+        //StartTimer(TimeSpan.FromSeconds(data), callback);
     }
 
     private void HandleOnGameEnd(bool win)

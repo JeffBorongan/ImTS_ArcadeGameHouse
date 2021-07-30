@@ -16,7 +16,7 @@ public class GameGuide : Guide
                 Environment.Instance.GameManagers[whichGame].StartTutorial(OnEndGuide);
                 break;
             case GameGuideType.Game:
-                Environment.Instance.GameManagers[whichGame].StartGame(OnEndGuide);
+                Environment.Instance.GameManagers[whichGame].StartGame(new BowlingSessionData(), OnEndGuide);
                 break;
             default:
                 break;

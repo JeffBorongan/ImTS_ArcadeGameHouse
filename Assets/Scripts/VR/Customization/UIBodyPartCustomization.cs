@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,23 @@ public class UIBodyPartCustomization : MonoBehaviour
     }
 
     [SerializeField] private TextMeshProUGUI txtLabel = null;
+    [SerializeField] private TextMeshProUGUI txtCurrency = null;
     [SerializeField] private GameObject pnlBuyOption = null;
     [SerializeField] private Button btnBuy = null;
     [SerializeField] private List<UIBodyPartCustom> bodyPartsCustom = new List<UIBodyPartCustom>();
+
+    private void Start()
+    {
+        GameExecution.Instance.OnEventRegistration.AddListener(() =>
+        {
+            UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
+        });
+    }
+
+    private void HandleOnUserDataUpdate(UserData data)
+    {
+        txtCurrency.text = data.currentStarsObtained.ToString();
+    }
 
     public void OpenBodyPartSelections(CharacterCustomization character, CharacterCustomization characterMimic, BodyPartID id)
     {
@@ -56,26 +71,29 @@ public class UIBodyPartCustomization : MonoBehaviour
             }
 
             bodyPartsCustom[i].btnBodyPartCustom.onClick.RemoveAllListeners();
-            Material newMaterial = customizationBodyPart.bodyPartProfile[i].bodyPartMaterial;
             bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() =>
             {
-                if (CustomizationShopManager.Instance.IsPurchased(customizationBodyPart.bodyPartProfile[i]))
+                int index = i;
+                Material newMaterial = customizationBodyPart.bodyPartProfile[index].bodyPartMaterial;
+
+                if (CustomizationShopManager.Instance.IsPurchased(customizationBodyPart.bodyPartProfile[index]))
                 {
                     bodyPart.ChangeMaterial(newMaterial);
                     bodyPartMimic.ChangeMaterial(newMaterial);
                 }
-                else if(CustomizationShopManager.Instance.CanBePurchased(customizationBodyPart.bodyPartProfile[i]))
+                else if(CustomizationShopManager.Instance.CanBePurchased(customizationBodyPart.bodyPartProfile[index]))
                 {
                     pnlBuyOption.SetActive(true);
 
                     btnBuy.onClick.RemoveAllListeners();
                     btnBuy.onClick.AddListener(() => 
                     {
-                        CustomizationShopManager.Instance.Buy(customizationBodyPart.bodyPartProfile[i]);
+                        CustomizationShopManager.Instance.Buy(customizationBodyPart.bodyPartProfile[index]);
                         pnlBuyOption.SetActive(false);
                     });
                 }
             });
+
             bodyPartsCustom[i].gameObject.SetActive(true);
         }
     }

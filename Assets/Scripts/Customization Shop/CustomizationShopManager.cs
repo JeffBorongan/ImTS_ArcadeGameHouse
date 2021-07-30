@@ -24,23 +24,26 @@ public class CustomizationShopManager : MonoBehaviour
 
     private void Start()
     {
-        List<BodyPartCustomization> vertical1 = new List<BodyPartCustomization>();
-        List<BodyPartCustomization> vertical2 = new List<BodyPartCustomization>();
-
-        for (int i = 0; i < bodyPartCustomization.Count; i++)
+        GameExecution.Instance.OnInitialize.AddListener(() =>
         {
-            if (i < 4)
-            {
-                vertical1.Add(bodyPartCustomization[i]);
-            }
-            else
-            {
-                vertical2.Add(bodyPartCustomization[i]);
-            }
-        }
+            List<BodyPartCustomization> vertical1 = new List<BodyPartCustomization>();
+            List<BodyPartCustomization> vertical2 = new List<BodyPartCustomization>();
 
-        UIBodyPartSelection.Instance.InitializeCustomization(vertical1, true);
-        UIBodyPartSelection.Instance.InitializeCustomization(vertical2, false);
+            for (int i = 0; i < bodyPartCustomization.Count; i++)
+            {
+                if (i < 4)
+                {
+                    vertical1.Add(bodyPartCustomization[i]);
+                }
+                else
+                {
+                    vertical2.Add(bodyPartCustomization[i]);
+                }
+            }
+
+            UIBodyPartSelection.Instance.InitializeCustomization(vertical1, true);
+            UIBodyPartSelection.Instance.InitializeCustomization(vertical2, false);
+        });
     }
 
     public bool CanBePurchased(BodyPartCustomizationProfile profile)

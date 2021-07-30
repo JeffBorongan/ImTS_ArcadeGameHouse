@@ -5,20 +5,6 @@ using UnityEngine.Events;
 
 public class GameManagement : MonoBehaviour
 {
-    public static GameManagement Instance { private set; get; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-
     [Header("Tutorial")]
     public TutorialActor currentActor = null;
     public Transform player = null;
@@ -26,9 +12,7 @@ public class GameManagement : MonoBehaviour
     private int currentTutorial = 0;
 
     [Header("Events")]
-    public UnityEvent OnGameStart = new UnityEvent();
-    public UnityEvent OnGameStop = new UnityEvent();
-    public UnityEvent OnGameReset = new UnityEvent();
+    public SessionDataEvent OnGameStart = new SessionDataEvent();
 
     public void StartTutorial(UnityAction OnEndTutorial)
     {
@@ -54,12 +38,9 @@ public class GameManagement : MonoBehaviour
         });
     }
 
-    public void StopTutorial()
-    {
+    public void StopTutorial() { }
 
-    }
-
-    public virtual void StartGame(UnityAction OnEndGame) { }
+    public virtual void StartGame(SessionData data, UnityAction OnEndGame) { }
     public virtual void StopGame() { }
     public virtual void ResetGame() { }
 }
@@ -100,3 +81,6 @@ public class SequenceOfActions
 }
 
 public class SessionData { }
+
+[System.Serializable]
+public class SessionDataEvent : UnityEvent<SessionData> { }
