@@ -12951,13 +12951,14 @@ MonoBehaviour:
   OnGameStart:
     m_PersistentCalls:
       m_Calls: []
-  OnGameStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGameReset:
-    m_PersistentCalls:
-      m_Calls: []
+  cockpitPosition: {fileID: 0}
   enemySpawnPoints: []
+  txtCountdownTimer: {fileID: 0}
+  txtTimer: {fileID: 0}
+  txtGameResult: {fileID: 0}
+  txtPoints: {fileID: 0}
+  leftGate: {fileID: 0}
+  rightGate: {fileID: 0}
 --- !u!1001 &679254854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30677,6 +30678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtLabel: {fileID: 1470685205}
+  txtCurrency: {fileID: 0}
   pnlBuyOption: {fileID: 0}
   btnBuy: {fileID: 0}
   bodyPartsCustom:
