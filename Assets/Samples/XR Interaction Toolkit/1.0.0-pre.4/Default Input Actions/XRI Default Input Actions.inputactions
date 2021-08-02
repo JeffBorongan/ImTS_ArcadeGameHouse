@@ -917,6 +917,44 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ba3f9917-0709-422b-8f0b-e132bcd6284b",
+                    "path": "<XRController>{RightHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Continuous Move",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "User Interaction",
+            "id": "e5d1fd1b-466f-4991-8170-be70b7482355",
+            "actions": [
+                {
+                    "name": "Toggle Helmet",
+                    "type": "Button",
+                    "id": "f699b426-bbbc-4ea6-88b2-0c1c09a5e6d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2ac299b8-e964-4113-be46-5bcbb0d5fe2e",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Toggle Helmet",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

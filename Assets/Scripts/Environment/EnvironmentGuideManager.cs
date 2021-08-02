@@ -24,6 +24,7 @@ public class EnvironmentGuideManager : MonoBehaviour
     public List<Guide> guides = new List<Guide>();
     private int currentGuideShown = 0;
     [SerializeField] private LineRenderer linesRenderer = null;
+    [SerializeField] private GameObject lineArrowHead = null;
 
     public void StartGuide()
     {
@@ -55,10 +56,15 @@ public class EnvironmentGuideManager : MonoBehaviour
             newPoint[i] = new Vector3(newPoint[i].x, linesRenderer.transform.position.y, newPoint[i].z);
         }
 
+        lineArrowHead.SetActive(show);
         linesRenderer.gameObject.SetActive(show);
         if(newPoint == null) { return; }
         linesRenderer.positionCount = newPoint.Length;
         linesRenderer.SetPositions(newPoint);
+
+        Vector3 direction = newPoint[newPoint.Length - 1] - newPoint[newPoint.Length - 2];
+        lineArrowHead.transform.rotation = Quaternion.LookRotation(direction);
+        lineArrowHead.transform.position = newPoint[newPoint.Length - 1];
     }
 
 }

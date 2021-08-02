@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Neon_01
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: _EMISSION _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -117,7 +117,7 @@ Material:
     - _ReceiveShadows: 1
     - _Shininess: 0.7
     - _Smoothness: 0
-    - _SmoothnessTextureChannel: 0
+    - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
@@ -127,7 +127,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 0.7208925, b: 0.36764702, a: 1}
     - _Color: {r: 1, g: 0.7208925, b: 0.36764705, a: 1}
-    - _EmissionColor: {r: 1.7207954, g: 1.306363, b: 0.98202455, a: 1}
+    - _EmissionColor: {r: 2.9960785, g: 2.27451, b: 1.7098039, a: 1}
     - _EmissionColorUI: {r: 0.97794116, g: 0.7018166, b: 0.35234642, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -41,6 +41,7 @@ public class UXCustomization : MonoBehaviour
             progressBar.gameObject.SetActive(true);
             StartCoroutine(HeightCaptureCour(() => 
             {
+                pnlCustomization.transform.position = new Vector3(pnlCustomization.transform.position.x, vrCameraPoint.transform.position.y, pnlCustomization.transform.position.z);
                 pnlCustomization.SetActive(true);
             }));
         });

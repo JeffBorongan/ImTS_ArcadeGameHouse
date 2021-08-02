@@ -71,24 +71,24 @@ public class UIBodyPartCustomization : MonoBehaviour
             }
 
             bodyPartsCustom[i].btnBodyPartCustom.onClick.RemoveAllListeners();
+            BodyPartCustomizationProfile profile = customizationBodyPart.bodyPartProfile[i];
             bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() =>
             {
-                int index = i;
-                Material newMaterial = customizationBodyPart.bodyPartProfile[index].bodyPartMaterial;
+                Material newMaterial = profile.bodyPartMaterial;
 
-                if (CustomizationShopManager.Instance.IsPurchased(customizationBodyPart.bodyPartProfile[index]))
+                if (CustomizationShopManager.Instance.IsPurchased(profile)) 
                 {
                     bodyPart.ChangeMaterial(newMaterial);
                     bodyPartMimic.ChangeMaterial(newMaterial);
                 }
-                else if(CustomizationShopManager.Instance.CanBePurchased(customizationBodyPart.bodyPartProfile[index]))
+                else if(CustomizationShopManager.Instance.CanBePurchased(profile))
                 {
                     pnlBuyOption.SetActive(true);
 
                     btnBuy.onClick.RemoveAllListeners();
                     btnBuy.onClick.AddListener(() => 
                     {
-                        CustomizationShopManager.Instance.Buy(customizationBodyPart.bodyPartProfile[index]);
+                        CustomizationShopManager.Instance.Buy(profile);
                         pnlBuyOption.SetActive(false);
                     });
                 }

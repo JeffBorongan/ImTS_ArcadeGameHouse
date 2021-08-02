@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using static UnityEngine.InputSystem.InputAction;
 
 public class UserInteraction : MonoBehaviour
 {
@@ -18,10 +20,19 @@ public class UserInteraction : MonoBehaviour
         {
             Destroy(this);
         }
+
+        toggleHelmet.action.performed += ToggleHelmetUI;
+    }
+
+    private void OnDestroy()
+    {
+        toggleHelmet.action.performed -= ToggleHelmetUI;
     }
 
     [SerializeField] private XRRayInteractor leftInteractor = null;
     [SerializeField] private XRRayInteractor rightInteractor = null;
+    [SerializeField] private InputActionReference toggleHelmet = null;
+    [SerializeField] private GameObject helmet = null;
 
     private EnvironmentPoints currentPoint = EnvironmentPoints.AvatarRoomMainCenter;
 
@@ -48,5 +59,10 @@ public class UserInteraction : MonoBehaviour
     {
         leftInteractor.gameObject.SetActive(enable);
         rightInteractor.gameObject.SetActive(enable);
+    }
+
+    private void ToggleHelmetUI(CallbackContext context)
+    {
+        helmet.SetActive(!helmet.activeSelf);
     }
 }

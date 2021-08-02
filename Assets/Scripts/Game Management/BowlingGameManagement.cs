@@ -62,14 +62,6 @@ public class BowlingGameManagement : GameManagement
 
     #endregion
 
-    private void Start()
-    {
-        StartGame(new BowlingSessionData(), () =>
-        {
-            Debug.Log("Game End");
-        });
-    }
-
     #region Game Start
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
