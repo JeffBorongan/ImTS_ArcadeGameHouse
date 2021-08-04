@@ -12,8 +12,6 @@ public class TutorialActor : MonoBehaviour
     [SerializeField] private Animator animator = null;
     private NavMeshAgent agent = null;
 
-    private ActorState currentState = ActorState.Idle;
-
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -37,9 +35,10 @@ public class TutorialActor : MonoBehaviour
         OnEndAction.Invoke();
     }
 
-    public void Move(Vector3 newPosition, UnityAction OnEndAction)
+    public void Move(Vector3 newPosition, float stopDistance, UnityAction OnEndAction)
     {
         ChangeAnimationState(ActorState.Walking);
+        agent.stoppingDistance = stopDistance;
         agent.SetDestination(newPosition);
         StartCoroutine(MoveCour(OnEndAction));
     }
@@ -71,7 +70,6 @@ public class TutorialActor : MonoBehaviour
     {
         animator.SetTrigger("ChangeState");
         animator.SetInteger("State", (int)state);
-        currentState = state;
     }
 }
 

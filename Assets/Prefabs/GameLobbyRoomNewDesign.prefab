@@ -96,8 +96,39 @@ Transform:
   - {fileID: 1599061957}
   - {fileID: 2078860008}
   - {fileID: 1046162144}
+  - {fileID: 497634094}
   m_Father: {fileID: 2741012754198472043}
   m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &497634093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 497634094}
+  m_Layer: 0
+  m_Name: Game Lobby Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &497634094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497634093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.76, y: 0, z: -10.724}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 286762972}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882209263
 GameObject:
@@ -115,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &882209264
 Transform:
   m_ObjectHideFlags: 0
@@ -527,7 +558,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6628289890741728146}
-  - component: {fileID: 5761464602756327883}
   m_Layer: 0
   m_Name: Pixel_box_01 (1)
   m_TagString: Untagged
@@ -552,25 +582,6 @@ Transform:
   m_Father: {fileID: 2741012754198472043}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5761464602756327883
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111300854642294882}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2ef14ad9fceea60478230318f53c856e, type: 3}
-  m_Controller: {fileID: 9100000, guid: c762d967edf95884891fd608692058fc, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &201435532598826505
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +740,7 @@ GameObject:
   - component: {fileID: 1199902926302318484}
   - component: {fileID: 5278287266135228117}
   - component: {fileID: 4016922488692445172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +989,7 @@ GameObject:
   - component: {fileID: 2199376091907493622}
   - component: {fileID: 8322048537296837432}
   - component: {fileID: 5012910469884218489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1446,7 +1457,7 @@ GameObject:
   - component: {fileID: 1791118190924520996}
   - component: {fileID: 7629541439506857541}
   - component: {fileID: 7372560840927756565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,7 +1650,7 @@ GameObject:
   - component: {fileID: 3886161138315793397}
   - component: {fileID: 4167434381940944297}
   - component: {fileID: 5632199413188921229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2074,7 +2085,7 @@ GameObject:
   - component: {fileID: 1483140083629709297}
   - component: {fileID: 5875033001715793508}
   - component: {fileID: 886707752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2129,8 +2140,8 @@ MonoBehaviour:
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4157197184166771970}
+  - {fileID: 9074878157901697127}
   alarmColor: {r: 1, g: 0, b: 0, a: 1}
   alarmInterval: 0.5
   alarmMeshes: []
@@ -2148,7 +2159,7 @@ GameObject:
   - component: {fileID: 2739218334693897645}
   - component: {fileID: 7114336978541094108}
   - component: {fileID: 6422889294084009628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2504,7 +2515,7 @@ GameObject:
   - component: {fileID: 3945216366325709381}
   - component: {fileID: 1581530950093654643}
   - component: {fileID: 2747884137838788611}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2666,7 +2677,7 @@ GameObject:
   - component: {fileID: 2777040438566812699}
   - component: {fileID: 491871039}
   - component: {fileID: 6359678510911378009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameLobbyDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2722,11 +2733,11 @@ MonoBehaviour:
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5632199413188921229}
   alarmColor: {r: 1, g: 0, b: 0, a: 1}
   alarmInterval: 0.5
-  alarmMeshes: []
+  alarmMeshes:
+  - {fileID: 112497194671825100}
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
@@ -3474,7 +3485,7 @@ GameObject:
   - component: {fileID: 1956046666909581424}
   - component: {fileID: 126287640351697722}
   - component: {fileID: 2849523046435694236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3779,7 +3790,7 @@ GameObject:
   - component: {fileID: 8795737389955903929}
   - component: {fileID: 542547808}
   - component: {fileID: 3942410305559992629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameLobbyDoor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3835,11 +3846,11 @@ MonoBehaviour:
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2849523046435694236}
   alarmColor: {r: 1, g: 0, b: 0, a: 1}
   alarmInterval: 0.5
-  alarmMeshes: []
+  alarmMeshes:
+  - {fileID: 220911928475485027}
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
@@ -4402,7 +4413,7 @@ GameObject:
   - component: {fileID: 5602561612854438184}
   - component: {fileID: 143089475}
   - component: {fileID: 7280079972766724296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameLobbyDoor3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4458,11 +4469,11 @@ MonoBehaviour:
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5012910469884218489}
   alarmColor: {r: 1, g: 0, b: 0, a: 1}
   alarmInterval: 0.5
-  alarmMeshes: []
+  alarmMeshes:
+  - {fileID: 8170309801401714949}
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
@@ -4477,7 +4488,7 @@ GameObject:
   - component: {fileID: 4887456208907713107}
   - component: {fileID: 4104184970580969328}
   - component: {fileID: 119425114238648518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLockInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5735,7 +5746,7 @@ GameObject:
   - component: {fileID: 4447624054749573103}
   - component: {fileID: 2481636130377258747}
   - component: {fileID: 8660651740575282145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLockInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5981,7 +5992,7 @@ GameObject:
   - component: {fileID: 8380416530524941291}
   - component: {fileID: 4157197184166771970}
   - component: {fileID: 3607522754018776078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Left_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6320,7 +6331,7 @@ GameObject:
   - component: {fileID: 1291464149501428450}
   - component: {fileID: 6393812253478780095}
   - component: {fileID: 1235773061275005337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLockInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6978,7 +6989,7 @@ GameObject:
   - component: {fileID: 8522399752983106846}
   - component: {fileID: 3160761120553582646}
   - component: {fileID: 8774093918221937261}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8254,7 +8265,7 @@ GameObject:
   - component: {fileID: 8448295502503866502}
   - component: {fileID: 9074878157901697127}
   - component: {fileID: 1362590171281155985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Left_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8962,7 +8973,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8285595913474886335}
-  - component: {fileID: 4190095797885799305}
   m_Layer: 0
   m_Name: Pixel_box_01
   m_TagString: Untagged
@@ -8986,25 +8996,6 @@ Transform:
   m_Father: {fileID: 6628289890741728146}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4190095797885799305
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7631507134273178949}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2ef14ad9fceea60478230318f53c856e, type: 3}
-  m_Controller: {fileID: 9100000, guid: c762d967edf95884891fd608692058fc, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7641124422615898939
 GameObject:
   m_ObjectHideFlags: 0
@@ -10096,7 +10087,7 @@ GameObject:
   - component: {fileID: 5826864389348866431}
   - component: {fileID: 882146923}
   - component: {fileID: 882146924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameLobbyDoor4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10155,7 +10146,8 @@ MonoBehaviour:
   - {fileID: 7372560840927756565}
   alarmColor: {r: 1, g: 0, b: 0, a: 1}
   alarmInterval: 0.5
-  alarmMeshes: []
+  alarmMeshes:
+  - {fileID: 325702475120576117}
   OnEnterRoom:
     m_PersistentCalls:
       m_Calls: []
@@ -10266,7 +10258,7 @@ GameObject:
   - component: {fileID: 2973567949619216056}
   - component: {fileID: 4361924063316500500}
   - component: {fileID: 3682718940407870072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorLockInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

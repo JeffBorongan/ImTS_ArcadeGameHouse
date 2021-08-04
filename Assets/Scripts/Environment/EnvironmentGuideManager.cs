@@ -33,6 +33,7 @@ public class EnvironmentGuideManager : MonoBehaviour
 
     private void ExecuteGuide(Guide guide)
     {
+        Debug.Log(currentGuideShown);
         guide.ShowGuide(() => 
         {
             guide.UnShowGuide();
@@ -51,6 +52,8 @@ public class EnvironmentGuideManager : MonoBehaviour
 
     public void RenderLine(bool show, Vector3[] newPoint = null)
     {
+        if (newPoint == null) { return; }
+
         for (int i = 0; i < newPoint.Length; i++)
         {
             newPoint[i] = new Vector3(newPoint[i].x, linesRenderer.transform.position.y, newPoint[i].z);
@@ -58,13 +61,12 @@ public class EnvironmentGuideManager : MonoBehaviour
 
         lineArrowHead.SetActive(show);
         linesRenderer.gameObject.SetActive(show);
-        if(newPoint == null) { return; }
         linesRenderer.positionCount = newPoint.Length;
         linesRenderer.SetPositions(newPoint);
 
         Vector3 direction = newPoint[newPoint.Length - 1] - newPoint[newPoint.Length - 2];
         lineArrowHead.transform.rotation = Quaternion.LookRotation(direction);
-        lineArrowHead.transform.position = newPoint[newPoint.Length - 1];
+        lineArrowHead.transform.position = newPoint[newPoint.Length - 1] + new Vector3(0f, linesRenderer.transform.position.y, 0f);
     }
 
 }

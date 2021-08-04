@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,10 @@ public class CharacterHelmet : MonoBehaviour
     }
 
     [SerializeField] private TextMeshProUGUI txtVisorStarsUI = null;
+    [SerializeField] private Transform topUIElement = null;
+    [SerializeField] private Transform bottomUIElement = null;
+    [SerializeField] private Ease ease = Ease.InOutQuad;
+    private bool helmetUIEnable = true;
 
     private void Start()
     {
@@ -32,5 +37,12 @@ public class CharacterHelmet : MonoBehaviour
     private void HandleOnUserDataUpdate(UserData newUserData)
     {
         txtVisorStarsUI.text = newUserData.currentStarsObtained + " Stars";
+    }
+
+    public void ToggleHelmetUI()
+    {
+        helmetUIEnable = !helmetUIEnable;
+        topUIElement.DOScale(helmetUIEnable ? 1f : 0f, 0.5f).SetEase(ease);
+        bottomUIElement.DOScale(helmetUIEnable ? 1f : 0f, 0.5f).SetEase(ease);
     }
 }

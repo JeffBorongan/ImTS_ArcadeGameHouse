@@ -31,14 +31,15 @@ public class DoorTarget : MonoBehaviour
     public EnvironmentPoints Point { get => point; }
     public EnvironmentPoints DestinationPoint { get => destinationPoint; }
 
+    #region Enter Door
     public void EnterDoor(Transform player)
     {
         ScreenFadeManager.Instance.FadeIn(() =>
         {
             player.position = destination.position;
-            ScreenFadeManager.Instance.FadeOut(() => 
+            ScreenFadeManager.Instance.FadeOut(() =>
             {
-                if(OnEnterRoom != null)
+                if (OnEnterRoom != null)
                 {
                     OnEnterRoom.Invoke();
                 }
@@ -46,17 +47,7 @@ public class DoorTarget : MonoBehaviour
         });
     }
 
-    private void Start()
-    {
-        StartAlarm(true);
-        StartCoroutine(TimeCour());
-    }
-
-    IEnumerator TimeCour()
-    {
-        yield return new WaitForSeconds(5f);
-        StartAlarm(false);
-    }
+    #endregion
 
     #region Highlight
     public void HightLightThisDoor(bool start)
@@ -65,7 +56,7 @@ public class DoorTarget : MonoBehaviour
         {
             foreach (var renderer in doorMeshRenderers)
             {
-                IEnumerator cour = PingpongMaterialColorCour(renderer.material, highlightColor, highlightInterval);
+                IEnumerator cour = PingpongMaterialColorCour(renderer.material, highlightColor, "_BaseColor", highlightInterval);
                 alarmCourRoutine.Add(cour);
                 StartCoroutine(cour);
             }
@@ -91,7 +82,7 @@ public class DoorTarget : MonoBehaviour
         {
             foreach (var renderer in alarmMeshes)
             {
-                IEnumerator cour = PingpongMaterialColorCour(renderer.material, alarmColor, alarmInterval);
+                IEnumerator cour = PingpongMaterialColorCour(renderer.material, alarmColor, "_EmissionColor", alarmInterval);
                 highlightCourRoutine.Add(cour);
                 StartCoroutine(cour);
             }
@@ -110,7 +101,7 @@ public class DoorTarget : MonoBehaviour
     #endregion
 
     #region Effects
-    private IEnumerator PingpongMaterialColorCour(Material newMaterial, Color color, float interval)
+    private IEnumerator PingpongMaterialColorCour(Material newMaterial, Color color, string propertyName, float interval)
     {
         Color defaultColor = newMaterial.color;
         bool changeColor = true;
@@ -118,7 +109,7 @@ public class DoorTarget : MonoBehaviour
 
         while (isPingPoing)
         {
-            newMaterial.DOColor(changeColor ? color : defaultColor, interval);
+            newMaterial.DOColor(changeColor ? color : defaultColor, propertyName, interval);
             yield return new WaitForSeconds(interval);
             changeColor = !changeColor;
         }

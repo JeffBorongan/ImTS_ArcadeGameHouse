@@ -62,6 +62,18 @@ public class BowlingGameManagement : GameManagement
 
     #endregion
 
+    private void Start()
+    {
+        SetGate(true);
+        StartCoroutine(CloseDoor());
+    }
+
+    IEnumerator CloseDoor()
+    {
+        yield return new WaitForSeconds(5f);
+        SetGate(false);
+    }
+
     #region Game Start
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
@@ -266,13 +278,25 @@ public class BowlingGameManagement : GameManagement
     {
         if (open)
         {
-            leftGate.DOLocalMoveX(7.34f, 1f);
-            rightGate.DOLocalMoveX(-0.329f, 1f);
+            leftGate.DOLocalMoveX(leftGate.transform.localPosition.x + 0.08f, 1f);
+            rightGate.DOLocalMoveX(rightGate.transform.localPosition.x - 0.09f, 1f);
         }
         else
         {
-            leftGate.DOLocalMoveX(3.568514f, 1f);
-            rightGate.DOLocalMoveX(3.568514f, 1f);
+            leftGate.DOLocalMoveX(leftGate.transform.localPosition.x - 0.08f, 1f);
+            rightGate.DOLocalMoveX(rightGate.transform.localPosition.x + 0.09f, 1f);
+        }
+    }
+
+    #endregion
+
+    #region Gizmos
+
+    private void OnDrawGizmosSelected()
+    {
+        foreach (var spawnPoint in enemySpawnPoints)
+        {
+            Gizmos.DrawSphere(spawnPoint.point.position, 1f);
         }
     }
 

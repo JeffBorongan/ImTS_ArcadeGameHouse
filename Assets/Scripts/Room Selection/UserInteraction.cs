@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +33,6 @@ public class UserInteraction : MonoBehaviour
     [SerializeField] private XRRayInteractor leftInteractor = null;
     [SerializeField] private XRRayInteractor rightInteractor = null;
     [SerializeField] private InputActionReference toggleHelmet = null;
-    [SerializeField] private GameObject helmet = null;
 
     private EnvironmentPoints currentPoint = EnvironmentPoints.AvatarRoomMainCenter;
 
@@ -63,6 +63,6 @@ public class UserInteraction : MonoBehaviour
 
     private void ToggleHelmetUI(CallbackContext context)
     {
-        helmet.SetActive(!helmet.activeSelf);
+        CharacterHelmet.Instance.ToggleHelmetUI();
     }
 }
