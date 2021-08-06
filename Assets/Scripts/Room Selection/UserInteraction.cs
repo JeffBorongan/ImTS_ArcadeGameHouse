@@ -50,8 +50,10 @@ public class UserInteraction : MonoBehaviour
 
         if(door != null)
         {
-            door.EnterDoor(transform);
-            currentPoint = door.DestinationPoint;
+            door.EnterDoor(transform, ()=>
+            {
+                currentPoint = door.DestinationPoint;
+            });
         }
     }
 

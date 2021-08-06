@@ -6,11 +6,14 @@ using UnityEngine.Events;
 
 public class DoorTarget : MonoBehaviour
 {
+    #region Parameters
+
     [Header("Door Properties")]
     [SerializeField] private string roomName = "";
     [SerializeField] private EnvironmentPoints point = EnvironmentPoints.AvatarRoomCenter;
     [SerializeField] private EnvironmentPoints destinationPoint = EnvironmentPoints.AvatarRoomCenter;
     public Transform destination = null;
+    [SerializeField] private AudioSource source = null;
 
     [Header("Highligt Effect")]
     [SerializeField] private Color highlightColor = Color.black;
@@ -19,6 +22,7 @@ public class DoorTarget : MonoBehaviour
     private List<IEnumerator> highlightCourRoutine = new List<IEnumerator>();
 
     [Header("Alarm")]
+    [SerializeField] private AudioClip alarmAudioClip = null;
     [SerializeField] private Color alarmColor = Color.black;
     [SerializeField] private float alarmInterval = 0.2f;
     [SerializeField] private List<MeshRenderer> alarmMeshes = new List<MeshRenderer>();
@@ -31,11 +35,14 @@ public class DoorTarget : MonoBehaviour
     public EnvironmentPoints Point { get => point; }
     public EnvironmentPoints DestinationPoint { get => destinationPoint; }
 
+    #endregion
+
     #region Enter Door
-    public void EnterDoor(Transform player)
+    public void EnterDoor(Transform player, UnityAction OnMid)
     {
         ScreenFadeManager.Instance.FadeIn(() =>
         {
+            OnMid.Invoke();
             player.position = destination.position;
             ScreenFadeManager.Instance.FadeOut(() =>
             {
@@ -86,6 +93,8 @@ public class DoorTarget : MonoBehaviour
                 highlightCourRoutine.Add(cour);
                 StartCoroutine(cour);
             }
+
+            PlayAudio(true, alarmAudioClip);
         }
         else
         {
@@ -95,6 +104,8 @@ public class DoorTarget : MonoBehaviour
             }
 
             highlightCourRoutine.Clear();
+
+            PlayAudio(false, alarmAudioClip);
         }
     }
 
@@ -115,6 +126,21 @@ public class DoorTarget : MonoBehaviour
         }
 
         newMaterial.color = defaultColor;
+    }
+
+    private void PlayAudio(bool play, AudioClip clip)
+    {
+        if(clip == null) { return; }
+
+        source.clip = clip;
+        if (play)
+        {
+            source.Play();
+        }
+        else
+        {
+            source.Stop();
+        }
     }
 
     #endregion

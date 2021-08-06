@@ -38,8 +38,8 @@ public class UserDataManager : MonoBehaviour
         }
         else
         {
-            userData = new UserData();
-            LocalSavingManager.Instance.SaveLocalData(userData);
+            userData = new UserData(); 
+            SaveUserData();
         }
 
         purchasedHistory = userData.purchasedHistory.Split(',').ToList();
@@ -66,10 +66,13 @@ public class UserDataManager : MonoBehaviour
             purchasedHistory.Add(profile.skinID);
 
             userData.purchasedHistory = "";
+
             foreach (var purchased in purchasedHistory)
             {
                 userData.purchasedHistory += purchased + ",";
             }
+
+            userData.currentStarsObtained -= profile.starCost;
         }
 
         SaveUserData();

@@ -62,9 +62,6 @@ public class UIBodyPartSelection : MonoBehaviour
     {
         UIBodyPartCustomization.Instance.OpenBodyPartSelections(character, characterMimic, id);
     }
-
-
-
 }
 
 

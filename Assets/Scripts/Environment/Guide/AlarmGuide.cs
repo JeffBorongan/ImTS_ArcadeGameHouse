@@ -20,5 +20,6 @@ public class AlarmGuide : Guide
     {
         yield return new WaitForSeconds(alarmDuration);
         Environment.Instance.DoorDictionary[doorToAlarm].StartAlarm(false);
+        OnEndTime.Invoke();
     }
 }

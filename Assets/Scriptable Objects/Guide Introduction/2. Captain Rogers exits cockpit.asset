@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71dcfda63e3474b42ad6da41e2ef60d4, type: 3}
-  m_Name: Captain Rodgers moves to the player
+  m_Script: {fileID: 11500000, guid: 7078be174d41f4142bfa3ef7fb0ecfcd, type: 3}
+  m_Name: 2. Captain Rogers exits cockpit
   m_EditorClassIdentifier: 
-  delayTime: 0
-  point: 0
-  stoppingDistance: 3
+  enableRoomInteraction: 0
+  actorAction: {fileID: 11400000, guid: 858c070a702966943896b36961eb04c1, type: 2}

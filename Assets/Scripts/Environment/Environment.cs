@@ -79,7 +79,8 @@ public enum EnvironmentPoints
     Game3Center,
     Game3GLDoor,
     AvatarRoomCenter,
-    AvatarRoomGLDoor
+    AvatarRoomGLDoor,
+    BowlingLeftPlayer
 }
 
 public enum RoomID

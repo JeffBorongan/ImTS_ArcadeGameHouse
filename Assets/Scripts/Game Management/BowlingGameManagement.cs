@@ -55,24 +55,14 @@ public class BowlingGameManagement : GameManagement
 
     private IEnumerator countdownTimerCour = null;
     private IEnumerator gameTimerCour = null;
+    private IEnumerator pointCheckingCour = null;
+    private IEnumerator enemyCheckingCour = null;
 
     [Header("Environment")]
     [SerializeField] private Transform leftGate = null;
     [SerializeField] private Transform rightGate = null;
 
     #endregion
-
-    private void Start()
-    {
-        SetGate(true);
-        StartCoroutine(CloseDoor());
-    }
-
-    IEnumerator CloseDoor()
-    {
-        yield return new WaitForSeconds(5f);
-        SetGate(false);
-    }
 
     #region Game Start
 
@@ -90,16 +80,46 @@ public class BowlingGameManagement : GameManagement
 
             gameTimerCour = TimeCour(sessionData.timeDuration, txtTimer, () =>
             {
+                StopGame();
                 SetGate(false);
                 ShowGameResult(false);
                 OnEndGame.Invoke();
             });
 
+            pointCheckingCour = PointCheckingCour(() =>
+            {
+                StopGame();
+                SetGate(false);
+                OnEndGame.Invoke();
+            });
+
+            enemyCheckingCour = EnemyCheckingCour(() =>
+            {
+                StopGame();
+                SetGate(false);
+                OnEndGame.Invoke();
+            });
+
             StartCoroutine(gameTimerCour);
+            StartCoroutine(pointCheckingCour);
+            StartCoroutine(enemyCheckingCour);
 
         });
 
         StartCoroutine(countdownTimerCour);
+    }
+
+    public override void StopGame()
+    {
+        foreach (var alien in spawnedAliens)
+        {
+            alien.SetActive(false);
+        }
+
+        StopCoroutine(gameTimerCour);
+        StopCoroutine(pointCheckingCour);
+        StopCoroutine(enemyCheckingCour);
+        StopCoroutine(spawningCour);
     }
 
     #endregion
@@ -239,17 +259,28 @@ public class BowlingGameManagement : GameManagement
 
     #region Points
 
+    IEnumerator PointCheckingCour(UnityAction OnEndGame)
+    {
+        yield return new WaitUntil(() => currentPoints >= sessionData.pointsToEarn);
+        OnEndGame.Invoke();
+    }
+
     private void AddPoint()
     {
-        if(currentPoints + 1 < sessionData.pointsToEarn)
+        if(currentPoints + sessionData.pointPerEnemy <= sessionData.pointsToEarn)
         {
-            currentPoints++;
-            txtPoints.text = currentPoints.ToString();
+            currentPoints += sessionData.pointPerEnemy;
+            txtPoints.text = currentPoints + "/" + sessionData.pointsToEarn;
             if(currentPoints == sessionData.pointsToEarn)
             {
                 ShowGameResult(true);
             }
         }
+    }
+    IEnumerator EnemyCheckingCour(UnityAction OnEndGame)
+    {
+        yield return new WaitUntil(() => currentEnemyReachedCockpit >= sessionData.enemyReachedTheCockpit);
+        OnEndGame.Invoke();
     }
 
     private void AddEnemyReachedCockpit()
@@ -268,13 +299,16 @@ public class BowlingGameManagement : GameManagement
     {
         txtGameResult.text = success ? "Success" : "Failed";
         txtGameResult.gameObject.SetActive(true);
+
+        if (!success) { return; }
+        UserDataManager.Instance.AddStars(currentPoints);
     }
 
     #endregion
 
     #region Environment
 
-    private void SetGate(bool open)
+    public void SetGate(bool open)
     {
         if (open)
         {
@@ -308,9 +342,9 @@ public class BowlingSessionData : SessionData
     public float enemySpawnTime = 5f;
     public List<Side> lanes = new List<Side>() { Side.Left, Side.Middle, Side.Right };
     public float enemySpeed = 0.5f;
-    public int pointPerEnemy = 1;
+    public int pointPerEnemy = 5;
 
-    public int pointsToEarn = 10;
+    public int pointsToEarn = 60;
     public int timeDuration = 240;
 
     public int enemyReachedTheCockpit = 1;

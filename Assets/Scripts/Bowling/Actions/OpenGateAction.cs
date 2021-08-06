@@ -9,14 +9,7 @@ public class OpenGateAction : Action
     public bool openTheGate = true;
     public override void ExecuteAction(TutorialActor actor, UnityAction OnEndAction)
     {
-        if (openTheGate)
-        {
-            ShipManager.Instance.OpenDoor();
-        }
-        else
-        {
-            ShipManager.Instance.CloseDoor();
-        }
+        BowlingGameManagement.Instance.SetGate(openTheGate);
         OnEndAction.Invoke();
     }
 }

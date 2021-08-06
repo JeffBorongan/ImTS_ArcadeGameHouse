@@ -48,7 +48,7 @@ public class CustomizationShopManager : MonoBehaviour
 
     public bool CanBePurchased(BodyPartCustomizationProfile profile)
     {
-        return UserDataManager.Instance.UserData.currentStarsObtained > profile.starCost;
+        return UserDataManager.Instance.UserData.currentStarsObtained >= profile.starCost;
     }
 
     public bool IsPurchased(BodyPartCustomizationProfile profile)
