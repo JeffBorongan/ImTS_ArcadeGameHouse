@@ -30,6 +30,7 @@ public class UserInteraction : MonoBehaviour
         toggleHelmet.action.performed -= ToggleHelmetUI;
     }
 
+    [SerializeField] private Transform cameraTransform = null;
     [SerializeField] private XRRayInteractor leftInteractor = null;
     [SerializeField] private XRRayInteractor rightInteractor = null;
     [SerializeField] private InputActionReference toggleHelmet = null;
@@ -50,11 +51,16 @@ public class UserInteraction : MonoBehaviour
 
         if(door != null)
         {
-            door.EnterDoor(transform, ()=>
+            door.EnterDoor(transform, cameraTransform, ()=>
             {
                 currentPoint = door.DestinationPoint;
             });
         }
+    }
+
+    public void SetCurrentPoint(EnvironmentPoints newPoint)
+    {
+        currentPoint = newPoint;
     }
 
     public void SetRoomInteraction(bool enable)

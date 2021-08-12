@@ -21,6 +21,7 @@ public class LocalSavingManager : MonoBehaviour
     public void SaveLocalData(SaveData data)
     {
         PlayerPrefs.SetString(data.dataID, JsonUtility.ToJson(data));
+        PlayerPrefs.Save();
     }
 
     public T GetLocalData<T>(string id)
@@ -58,6 +59,6 @@ public class SpaceBowlingSaveData : SaveData
 
 public class UserData : SaveData
 {
-    public int currentStarsObtained = 5;
+    public int currentStarsObtained = 0;
     public string purchasedHistory = "Boots_Blue,Gloves_Blue,Helmet_Blue,Jetpack_Blue,JointPads_Blue,Suit_Blue,Vest_Blue,Wristband_Blue,";
 }

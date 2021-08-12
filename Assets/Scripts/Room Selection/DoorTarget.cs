@@ -14,6 +14,8 @@ public class DoorTarget : MonoBehaviour
     [SerializeField] private EnvironmentPoints destinationPoint = EnvironmentPoints.AvatarRoomCenter;
     public Transform destination = null;
     [SerializeField] private AudioSource source = null;
+    [SerializeField] private Transform leftDoor = null;
+    [SerializeField] private Transform rightDoor = null;
 
     [Header("Highligt Effect")]
     [SerializeField] private Color highlightColor = Color.black;
@@ -37,8 +39,8 @@ public class DoorTarget : MonoBehaviour
 
     #endregion
 
-    #region Enter Door
-    public void EnterDoor(Transform player, UnityAction OnMid)
+    #region Door Function
+    public void EnterDoor(Transform player, Transform camera, UnityAction OnMid)
     {
         ScreenFadeManager.Instance.FadeIn(() =>
         {
@@ -52,6 +54,22 @@ public class DoorTarget : MonoBehaviour
                 }
             });
         });
+    }
+
+    public void OpenDoor(bool open)
+    {
+        if(leftDoor == null && rightDoor == null) { return; }
+
+        if (open)
+        {
+            leftDoor.DOLocalMoveX(leftDoor.transform.localPosition.x + 2.67f, 1f);
+            rightDoor.DOLocalMoveX(rightDoor.transform.localPosition.x - 2.67f, 1f);
+        }
+        else
+        {
+            leftDoor.DOLocalMoveX(leftDoor.transform.localPosition.x - 2.67f, 1f);
+            rightDoor.DOLocalMoveX(rightDoor.transform.localPosition.x + 2.67f, 1f);
+        }
     }
 
     #endregion
