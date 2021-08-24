@@ -12,7 +12,7 @@ public class MoveAction : Action
 
     public override void ExecuteAction(TutorialActor actor, UnityAction OnEndAction)
     {
-        EnvironmentPoint newPoint = Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault();
+        EnvironmentPoint newPoint = Environment.Instance.PointsDictionary[point];
         actor.Move(newPoint.point.position, stoppingDistance, OnEndAction);
     }
 

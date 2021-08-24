@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class VRFootIK : MonoBehaviour
 {
@@ -16,13 +17,27 @@ public class VRFootIK : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private float leftFootRotWeight = 1;
 
+    [SerializeField] private TwoBoneIKConstraint leftLegConstraint = null;
+    [SerializeField] private TwoBoneIKConstraint rightLegConstraint = null;
+    [SerializeField] private bool footPlacedOnBox = false;
+    private int legSelected = 0;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+
+        AvatarCustomizationManager.Instance.OnLegSelect.AddListener(HandleOnLegSelect);
+    }
+
+    private void HandleOnLegSelect(int leg)
+    {
+        legSelected = leg;
     }
 
     private void OnAnimatorIK(int layerIndex)
     {
+        if(footPlacedOnBox) { return; }
+
         Vector3 rightFootPos = animator.GetIKPosition(AvatarIKGoal.RightFoot);
         RaycastHit hit;
 
@@ -59,7 +74,29 @@ public class VRFootIK : MonoBehaviour
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 0);
         }
+    }
 
+    public void PlaceLegOnBox()
+    {
+        UnPlaceAllLegOnBox();
+
+        footPlacedOnBox = true;
+
+        if (legSelected == 1)
+        {
+            leftLegConstraint.weight = 1;
+        }
+        else
+        {
+            rightLegConstraint.weight = 1;
+        }
+    }
+
+    public void UnPlaceAllLegOnBox()
+    {
+        leftLegConstraint.weight = 0;
+        rightLegConstraint.weight = 0;
+        footPlacedOnBox = false;
     }
 
 }

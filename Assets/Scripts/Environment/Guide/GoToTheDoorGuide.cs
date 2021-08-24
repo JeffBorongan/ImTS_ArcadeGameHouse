@@ -13,10 +13,11 @@ public class GoToTheDoorGuide : Guide
 
     public override void ShowGuide(UnityAction OnEndGuide)
     {
+
         List<Vector3> points = new List<Vector3>();
         foreach (var point in pointsToRender)
         {
-            points.Add(Environment.Instance.environmentPoints.Where(e => e.type == point).FirstOrDefault().point.TransformPoint(Vector3.zero));
+            points.Add(Environment.Instance.PointsDictionary[point].point.TransformPoint(Vector3.zero));
         }
 
         EnvironmentGuideManager.Instance.RenderLine(true, points.ToArray());
@@ -32,7 +33,11 @@ public class GoToTheDoorGuide : Guide
             yield return new WaitForEndOfFrame();
         }
 
-        Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(false);
+        if(Environment.Instance.DoorDictionary[pointsToRender.Last()] != null)
+        {
+            Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(false);
+        }
+
         OnEnd.Invoke();
     }
 

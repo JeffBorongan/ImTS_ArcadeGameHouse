@@ -16,6 +16,7 @@ public class CharacterCustomization : MonoBehaviour
 
         rig.ResetHeadBodyOffset();
     }
+
 }
 
 [System.Serializable]

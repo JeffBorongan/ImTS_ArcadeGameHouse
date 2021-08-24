@@ -10,19 +10,22 @@ public class GameGuide : Guide
     [SerializeField] public GameGuideType typeOfGame = GameGuideType.Tutorial;
     public override void ShowGuide(UnityAction OnEndGuide)
     {
-        switch (typeOfGame)
+        EnvironmentGuideManager.Instance.StartCoroutine(DelayCour(() =>
         {
-            case GameGuideType.Tutorial:
-                Environment.Instance.GameManagers[whichGame].StartTutorial(OnEndGuide);
-                break;
-            case GameGuideType.Game:
-                Environment.Instance.GameManagers[whichGame].StartGame(new BowlingSessionData(), OnEndGuide);
-                break;
-            default:
-                break;
-        }
+            switch (typeOfGame)
+            {
+                case GameGuideType.Tutorial:
+                    GameLobbyManager.Instance.GameManagers[whichGame].StartTutorial(OnEndGuide);
+                    break;
+                case GameGuideType.Game:
+                    GameLobbyManager.Instance.GameManagers[whichGame].StartGame(new BowlingSessionData(), OnEndGuide);
+                    break;
+                default:
+                    break;
+            }
 
-        base.ShowGuide(OnEndGuide);
+            base.ShowGuide(OnEndGuide);
+        }));
     }
 }
 

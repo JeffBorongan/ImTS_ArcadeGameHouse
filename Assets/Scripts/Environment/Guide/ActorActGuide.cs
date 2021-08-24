@@ -10,13 +10,11 @@ public class ActorActGuide : Guide
 
     public override void ShowGuide(UnityAction OnEndGuide)
     {
-        actorAction.ExecuteAction(EnvironmentGuideManager.Instance.Actor, OnEndGuide);
-        base.ShowGuide(OnEndGuide);
-    }
-
-    public override void UnShowGuide()
-    {
-
+        EnvironmentGuideManager.Instance.StartCoroutine(DelayCour(() =>
+        {
+            actorAction.ExecuteAction(EnvironmentGuideManager.Instance.Actor, OnEndGuide);
+            base.ShowGuide(OnEndGuide);
+        }));
     }
 
     public override bool isGuideAcomplish()

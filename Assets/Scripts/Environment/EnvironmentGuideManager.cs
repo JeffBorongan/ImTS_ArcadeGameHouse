@@ -28,12 +28,11 @@ public class EnvironmentGuideManager : MonoBehaviour
 
     public void StartGuide()
     {
-        ExecuteGuide(guides[0]);
+        ExecuteGuide(guides[currentGuideShown]);
     }
 
     private void ExecuteGuide(Guide guide)
     {
-        Debug.Log(currentGuideShown);
         guide.ShowGuide(() => 
         {
             guide.UnShowGuide();

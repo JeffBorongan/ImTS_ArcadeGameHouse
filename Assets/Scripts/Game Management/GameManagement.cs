@@ -6,18 +6,32 @@ using UnityEngine.Events;
 public class GameManagement : MonoBehaviour
 {
     [Header("Tutorial")]
-    public TutorialActor currentActor = null;
-    public Transform player = null;
+    private TutorialActor currentActor = null;
+    protected Transform player = null;
     public List<Tutorial> tutorialActions = new List<Tutorial>();
     private int currentTutorial = 0;
 
     [Header("Events")]
     public SessionDataEvent OnGameStart = new SessionDataEvent();
+    public UnityEvent OnGameEnd = new UnityEvent();
+    public UnityEvent OnEndTutorial = new UnityEvent();
 
-    public void StartTutorial(UnityAction OnEndTutorial)
+    private void Start()
+    {
+        InitializeGame();
+    }
+
+    public virtual void InitializeGame()
+    {
+        currentActor = Environment.Instance.CaptainRogers;
+        player = Environment.Instance.PointsDictionary[EnvironmentPoints.Player].point;
+    }
+
+    public void StartTutorial(UnityAction OnEnd)
     {
         ExecuteTutorial(currentActor, () => 
         {
+            OnEnd.Invoke();
             OnEndTutorial.Invoke();
         });
     }

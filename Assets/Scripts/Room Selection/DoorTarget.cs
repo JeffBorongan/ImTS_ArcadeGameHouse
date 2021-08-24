@@ -40,12 +40,14 @@ public class DoorTarget : MonoBehaviour
     #endregion
 
     #region Door Function
-    public void EnterDoor(Transform player, Transform camera, UnityAction OnMid)
+    public void EnterDoor(UnityAction OnMid)
     {
         ScreenFadeManager.Instance.FadeIn(() =>
         {
             OnMid.Invoke();
-            player.position = destination.position;
+
+            UserInteraction.Instance.Teleport(destination.position);
+
             ScreenFadeManager.Instance.FadeOut(() =>
             {
                 if (OnEnterRoom != null)

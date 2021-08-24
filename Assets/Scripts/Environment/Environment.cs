@@ -18,27 +18,33 @@ public class Environment : MonoBehaviour
         }
     }
 
-    public List<EnvironmentPoint> environmentPoints = new List<EnvironmentPoint>();
+    [SerializeField] private List<EnvironmentPoint> environmentPoints = new List<EnvironmentPoint>();
 
-    [SerializeField] private List<DoorTarget> doors = new List<DoorTarget>();
-    private Dictionary<EnvironmentPoints, DoorTarget> doorDictionary = new Dictionary<EnvironmentPoints, DoorTarget>();
-    public Dictionary<EnvironmentPoints, DoorTarget> DoorDictionary { get => doorDictionary; }
+    [SerializeField] private TutorialActor captainRogers = null;
+    [SerializeField] private GameObject playerCustomization = null;
 
-    [SerializeField] private List<Game> gameManagements = new List<Game>();
-    private Dictionary<GameID, GameManagement> gameManagers = new Dictionary<GameID, GameManagement>();
-    public Dictionary<GameID, GameManagement> GameManagers { get => gameManagers; }
+    private Dictionary<EnvironmentPoints, EnvironmentPoint> pointsDictionary = new Dictionary<EnvironmentPoints, EnvironmentPoint>();
+
+    private Dictionary<EnvironmentPoints, Door> doorDictionary = new Dictionary<EnvironmentPoints, Door>();
+    public Dictionary<EnvironmentPoints, Door> DoorDictionary { get => doorDictionary; }
+
+    private Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
+    public Dictionary<string, Vector3> CurrentAnatomy { get => currentAnatomy; set => currentAnatomy = value; }
+    public Dictionary<EnvironmentPoints, EnvironmentPoint> PointsDictionary { get => pointsDictionary; }
+    public TutorialActor CaptainRogers { get => captainRogers; }
+    public GameObject PlayerCustomization { get => playerCustomization; }
 
     private void Start()
     {
-        foreach (var door in doors)
+        foreach (var point in environmentPoints)
         {
-            doorDictionary.Add(door.Point, door);
+            pointsDictionary.Add(point.type, point);
         }
+    }
 
-        foreach (var manager in gameManagements)
-        {
-            gameManagers.Add(manager.id, manager.manager);
-        }
+    public void AddDoor(Door door)
+    {
+        doorDictionary.Add(door.Point, door);
     }
 
     private void OnDrawGizmosSelected()
@@ -83,6 +89,7 @@ public enum EnvironmentPoints
     BowlingLeftPlayer
 }
 
+
 public enum RoomID
 {
     AvatarRoomMain,
@@ -105,5 +112,6 @@ public enum GameID
 {
     Bowling,
     Game2,
-    Game3
+    Game3,
+    AvatarRoom
 }

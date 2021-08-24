@@ -38,7 +38,8 @@ public class UserDataManager : MonoBehaviour
         }
         else
         {
-            userData = new UserData(); 
+            userData = new UserData();
+            userData.dataID = "User";
             SaveUserData();
         }
 

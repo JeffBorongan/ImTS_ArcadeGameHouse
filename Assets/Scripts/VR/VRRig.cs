@@ -15,6 +15,8 @@ public class VRRig : MonoBehaviour
     [SerializeField] private Color rightHandColorGizmos = Color.black;
     public VRMap rightHand;
 
+    public bool IsStationary = false;
+
     private void Start()
     {
         headBodyOffset = transform.position - headConstaint.position;
@@ -23,7 +25,12 @@ public class VRRig : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = (headConstaint.position + headBodyOffset) + bodyOffset;
-        transform.forward = Vector3.ProjectOnPlane(headConstaint.forward, Vector3.up).normalized;
+
+        if (!IsStationary)
+        {
+            transform.forward = Vector3.ProjectOnPlane(headConstaint.forward, Vector3.up).normalized;
+        }
+
         head.Map();
         leftHand.Map();
         rightHand.Map();

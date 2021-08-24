@@ -11,9 +11,12 @@ public class AlarmGuide : Guide
 
     public override void ShowGuide(UnityAction OnEndGuide)
     {
-        Environment.Instance.DoorDictionary[doorToAlarm].StartAlarm(true);
-        EnvironmentGuideManager.Instance.StartCoroutine(TimeCour(OnEndGuide));
-        base.ShowGuide(OnEndGuide);
+        EnvironmentGuideManager.Instance.StartCoroutine(DelayCour(() =>
+        {
+            Environment.Instance.DoorDictionary[doorToAlarm].StartAlarm(true);
+            EnvironmentGuideManager.Instance.StartCoroutine(TimeCour(OnEndGuide));
+            base.ShowGuide(OnEndGuide);
+        }));
     }
 
     IEnumerator TimeCour(UnityAction OnEndTime)

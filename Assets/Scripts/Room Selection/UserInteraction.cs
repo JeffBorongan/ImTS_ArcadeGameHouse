@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using static UnityEngine.InputSystem.InputAction;
@@ -35,6 +36,9 @@ public class UserInteraction : MonoBehaviour
     [SerializeField] private XRRayInteractor rightInteractor = null;
     [SerializeField] private InputActionReference toggleHelmet = null;
 
+    public RoomIDEvent OnChangeRoom = new RoomIDEvent();
+    private RoomID currentRoom = RoomID.AvatarRoomMain;
+
     private EnvironmentPoints currentPoint = EnvironmentPoints.AvatarRoomMainCenter;
 
     public EnvironmentPoints CurrentPoint { get => currentPoint; }
@@ -43,17 +47,19 @@ public class UserInteraction : MonoBehaviour
     {
         leftInteractor.selectEntered.AddListener(HandleOnSelect);
         rightInteractor.selectEntered.AddListener(HandleOnSelect);
+
+        OnChangeRoom.Invoke(currentRoom);
     }
 
     private void HandleOnSelect(SelectEnterEventArgs newEvent)
     {
-        DoorTarget door = newEvent.interactable.GetComponent<DoorTarget>();
+        Door door = newEvent.interactable.GetComponent<Door>();
 
         if(door != null)
         {
-            door.EnterDoor(transform, cameraTransform, ()=>
+            door.EnterRoom(null, () => 
             {
-                currentPoint = door.DestinationPoint;
+                SetCurrentPoint(door.DestinationPoint);
             });
         }
     }
@@ -73,4 +79,23 @@ public class UserInteraction : MonoBehaviour
     {
         CharacterHelmet.Instance.ToggleHelmetUI();
     }
+
+    public void Teleport(Vector3 destination)
+    {
+        transform.position = destination - new Vector3(-cameraTransform.localPosition.z, 0f, cameraTransform.localPosition.x);
+    }
+
+    public void SetCurrentRoom(RoomID id)
+    {
+        currentRoom = id;
+        OnChangeRoom.Invoke(currentRoom);
+    }
+
+    public void SetCurrentRoomInt(int roomID)
+    {
+        currentRoom = (RoomID)roomID;
+        OnChangeRoom.Invoke(currentRoom);
+    }
 }
+
+public class RoomIDEvent : UnityEvent<RoomID> { }

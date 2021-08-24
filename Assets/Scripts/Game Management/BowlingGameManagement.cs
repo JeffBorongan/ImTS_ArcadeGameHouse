@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class BowlingGameManagement : GameManagement
 {
@@ -45,10 +46,21 @@ public class BowlingGameManagement : GameManagement
     private bool isSpawning = false;
 
     [Header("UI")]
+    [Header("HUD")]
+    [SerializeField] private GameObject pnlHUD = null;
     [SerializeField] private TextMeshProUGUI txtCountdownTimer = null;
+    [SerializeField] private Image imgTimerIcon = null;
     [SerializeField] private TextMeshProUGUI txtTimer = null;
-    [SerializeField] private TextMeshProUGUI txtGameResult = null;
     [SerializeField] private TextMeshProUGUI txtPoints = null;
+
+    [Space]
+    [Header("Game Result")]
+    [SerializeField] private GameObject pnlGameResult = null;
+    [SerializeField] private TextMeshProUGUI txtEndTime = null;
+    [SerializeField] private TextMeshProUGUI txtEndPoints = null;
+    [SerializeField] private TextMeshProUGUI txtEndResult = null;
+    [SerializeField] private Color colorSuccessText = Color.blue;
+    [SerializeField] private Color colorFailedText = Color.blue;
 
     private int currentPoints = 0;
     private int currentEnemyReachedCockpit = 0;
@@ -58,9 +70,40 @@ public class BowlingGameManagement : GameManagement
     private IEnumerator pointCheckingCour = null;
     private IEnumerator enemyCheckingCour = null;
 
-    [Header("Environment")]
+    [Header("Gate")]
     [SerializeField] private Transform leftGate = null;
     [SerializeField] private Transform rightGate = null;
+
+    [Header("Dispensers")]
+    [SerializeField] private float dispenserOffset = 0.5f;
+    [SerializeField] private Transform leftBallDispenser = null;
+    [SerializeField] private Transform rightBallDispenser = null;
+
+    [Header("Player")]
+    [SerializeField] private bool isPlayerLocked = false;
+
+    #endregion
+
+    #region Initialize
+    public override void InitializeGame()
+    {
+        base.InitializeGame();
+        
+        GameLobbyManager.Instance.AddGame(GameID.Bowling, this);
+        SpawnDispensers(Environment.Instance.CurrentAnatomy);
+    }
+
+    private void SpawnDispensers(Dictionary<string, Vector3> newAnatomy)
+    {
+        Vector3 leftHandPos = newAnatomy[AnatomyPart.LeftHand.ToString()];
+        Vector3 rightHandPos = newAnatomy[AnatomyPart.RightHand.ToString()];
+
+        leftBallDispenser.transform.localPosition = new Vector3(rightHandPos.x + dispenserOffset, leftBallDispenser.transform.localPosition.y, leftBallDispenser.transform.localPosition.z);
+        rightBallDispenser.transform.localPosition = new Vector3(leftHandPos.x + -dispenserOffset, rightBallDispenser.transform.localPosition.y, rightBallDispenser.transform.localPosition.z);
+
+        leftBallDispenser.gameObject.SetActive(true);
+        rightBallDispenser.gameObject.SetActive(true);
+    }
 
     #endregion
 
@@ -72,6 +115,7 @@ public class BowlingGameManagement : GameManagement
 
         countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
         {
+            imgTimerIcon.gameObject.SetActive(true);
             SetGate(true);
             StartSpawingEnemy();
 
@@ -84,13 +128,15 @@ public class BowlingGameManagement : GameManagement
                 SetGate(false);
                 ShowGameResult(false);
                 OnEndGame.Invoke();
-            });
+                OnGameEnd.Invoke();
+            }, true);
 
             pointCheckingCour = PointCheckingCour(() =>
             {
                 StopGame();
                 SetGate(false);
                 OnEndGame.Invoke();
+                OnGameEnd.Invoke();
             });
 
             enemyCheckingCour = EnemyCheckingCour(() =>
@@ -98,6 +144,7 @@ public class BowlingGameManagement : GameManagement
                 StopGame();
                 SetGate(false);
                 OnEndGame.Invoke();
+                OnGameEnd.Invoke();
             });
 
             StartCoroutine(gameTimerCour);
@@ -240,13 +287,15 @@ public class BowlingGameManagement : GameManagement
 
     #region Timer
 
-    IEnumerator TimeCour(int timerDuration, TextMeshProUGUI txt, UnityAction OnEndTimer)
+    IEnumerator TimeCour(int timerDuration, TextMeshProUGUI txt, UnityAction OnEndTimer, bool inMinutes = false)
     {
         txt.gameObject.SetActive(true);
         int currentTime = timerDuration;
         while (currentTime >= 0)
         {
-            txt.text = currentTime.ToString();
+            int minutes = currentTime / 60;
+            int seconds = currentTime - (minutes * 60);
+            txt.text = inMinutes ? minutes + ":" + seconds :  currentTime.ToString();
             yield return new WaitForSeconds(1f);
             currentTime--;
         }
@@ -297,8 +346,14 @@ public class BowlingGameManagement : GameManagement
 
     private void ShowGameResult(bool success)
     {
-        txtGameResult.text = success ? "Success" : "Failed";
-        txtGameResult.gameObject.SetActive(true);
+        pnlHUD.SetActive(false);
+        pnlGameResult.SetActive(true);
+        txtEndPoints.text = txtPoints.text;
+        txtEndTime.text = txtTimer.text;
+        txtEndResult.text = success ? "Success" : "Failed";
+
+        txtEndPoints.color = success ? txtEndPoints.color : colorFailedText;
+        txtEndResult.color = success ? colorSuccessText : colorFailedText;
 
         if (!success) { return; }
         UserDataManager.Instance.AddStars(currentPoints);
@@ -320,6 +375,38 @@ public class BowlingGameManagement : GameManagement
             leftGate.DOLocalMoveX(leftGate.transform.localPosition.x - 0.08f, 1f);
             rightGate.DOLocalMoveX(rightGate.transform.localPosition.x + 0.09f, 1f);
         }
+    }
+
+    #endregion
+
+    #region Set Player
+
+    public void SetPlayerSettings(bool snapPlayer)
+    {
+        isPlayerLocked = snapPlayer;
+        Environment.Instance.PlayerCustomization.GetComponent<VRRig>().IsStationary = snapPlayer;
+        if (snapPlayer)
+        {
+            Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().PlaceLegOnBox();
+        }
+        else
+        {
+            Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
+        }
+    }
+
+    public void WaitUntilPlayerIsLocked(UnityAction OnReady)
+    {
+        StartCoroutine(WaitUntilPlayerIsLockedCour(OnReady));
+    }
+
+    IEnumerator WaitUntilPlayerIsLockedCour(UnityAction OnEnd)
+    {
+        while (!isPlayerLocked)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        OnEnd.Invoke();
     }
 
     #endregion

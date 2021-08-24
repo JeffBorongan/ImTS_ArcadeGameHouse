@@ -11,7 +11,7 @@ public class TeleportAction : Action
 
     public override void ExecuteAction(TutorialActor actor, UnityAction OnEndAction)
     {
-        EnvironmentPoint newPoint = Environment.Instance.environmentPoints.Where(e => e.type == teleportPoint).FirstOrDefault();
+        EnvironmentPoint newPoint = Environment.Instance.PointsDictionary[teleportPoint];
         actor.Teleport(newPoint.point.position);
         OnEndAction.Invoke();
     }
