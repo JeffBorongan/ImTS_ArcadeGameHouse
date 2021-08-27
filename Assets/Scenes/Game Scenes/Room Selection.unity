@@ -26627,7 +26627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077955486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.692, y: 0, z: 4.9938765}
+  m_LocalPosition: {x: -8, y: 0, z: 4.9938765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1476987444}
@@ -27579,6 +27579,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6310593423946980731, guid: e319f3b226d8fe04fae30efe316f26a8, type: 3}
+      propertyPath: parameters.OnEnterDoor.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310593423946980731, guid: e319f3b226d8fe04fae30efe316f26a8, type: 3}
+      propertyPath: parameters.OnEnterDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1356448146}
     - target: {fileID: 6310593423946980731, guid: e319f3b226d8fe04fae30efe316f26a8, type: 3}
       propertyPath: parameters.OnEnterDoor.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 

@@ -18,7 +18,7 @@ GameObject:
   m_TagString: EnemyAlien
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 81
   m_IsActive: 0
 --- !u!4 &6318060668207763858
 Transform:
@@ -95,7 +95,6 @@ MonoBehaviour:
   OnSpawn:
     m_PersistentCalls:
       m_Calls: []
-  pathPoint: {fileID: 761600342612940857, guid: 899c8d228c5bae741bc5b1a2a1f97bed, type: 3}
   alienAgent: {fileID: 8794988516445167279}
 --- !u!114 &5270233533616448824
 MonoBehaviour:
@@ -124,6 +123,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6318060668207763858}
     m_Modifications:
+    - target: {fileID: -8874305342301833445, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -180,9 +183,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6483921854675544006, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -6290769285996302431, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -3061373109703003768, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -2681096820961952772, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -2257256708496194338, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -2212649304552615540, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -2035506597035540773, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -1442150646330922506, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -1383146256050093752, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -190884900458514913, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
       propertyPath: m_Name
       value: AlienWithAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335171182683826383, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568449837996145712, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332809968238436118, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
       propertyPath: m_Enabled
@@ -192,6 +251,26 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4d3cf08add4384140bd4250a3cdf1ffa, type: 2}
+    - target: {fileID: 7628685394362071346, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128553372153619306, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711048398546256237, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767123429947198705, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8844861040745623619, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 81
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38c20f48116aa0a4395c241456d9e8b6, type: 3}
 --- !u!4 &9014435842638151676 stripped
