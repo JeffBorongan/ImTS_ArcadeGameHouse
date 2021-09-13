@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManagement : MonoBehaviour
 {
@@ -10,6 +11,16 @@ public class GameManagement : MonoBehaviour
     protected Transform player = null;
     public List<Tutorial> tutorialActions = new List<Tutorial>();
     private int currentTutorial = 0;
+
+
+    [Header("Start Game")]
+    [SerializeField] protected GameObject pnlStartGame = null;
+    [SerializeField] protected Button btnStartGame = null;
+
+    [Header("Start Tutorial")]
+    [SerializeField] protected GameObject pnlStartTutorial = null;
+    [SerializeField] protected Button btnStartTutorial = null;
+    [SerializeField] protected Button btnSkipTutorial = null;
 
     [Header("Events")]
     public SessionDataEvent OnGameStart = new SessionDataEvent();
@@ -29,10 +40,25 @@ public class GameManagement : MonoBehaviour
 
     public void StartTutorial(UnityAction OnEnd)
     {
-        ExecuteTutorial(currentActor, () => 
+        pnlStartTutorial.SetActive(true);
+
+        btnSkipTutorial.onClick.RemoveAllListeners();
+        btnSkipTutorial.onClick.AddListener(() =>
         {
             OnEnd.Invoke();
             OnEndTutorial.Invoke();
+        });
+
+        btnStartTutorial.onClick.RemoveAllListeners();
+        btnStartTutorial.onClick.AddListener(() =>
+        {
+            ExecuteTutorial(currentActor, () =>
+            {
+                OnEnd.Invoke();
+                OnEndTutorial.Invoke();
+            });
+
+            pnlStartTutorial.SetActive(false);
         });
     }
 

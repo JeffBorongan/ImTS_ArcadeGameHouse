@@ -982,6 +982,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd0cc456858cf5409edcf26763b92e9, type: 3}
+--- !u!1 &149902482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 149902482, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
+  m_PrefabInstance: {fileID: 720365012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &161062946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1831,6 +1836,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a9e8befc05851fc44a4dd41fb821ecf8, type: 3}
   m_PrefabInstance: {fileID: 374382213}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &380220387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 380220387, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
+  m_PrefabInstance: {fileID: 720365012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &392648726 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5407201041187941599, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
@@ -2089,6 +2105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 432188731}
   - component: {fileID: 432188732}
+  - component: {fileID: 432188733}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -2129,11 +2146,11 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 128
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 1
+    m_NormalBias: 1
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -2172,6 +2189,19 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &432188733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432188730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1001 &480781191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2720,6 +2750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 622512965}
   - component: {fileID: 622512966}
+  - component: {fileID: 622512967}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -2760,11 +2791,11 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 128
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 1
+    m_NormalBias: 1
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -2803,6 +2834,19 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &622512967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622512964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1001 &623428131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3037,6 +3081,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5407201041222004466, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
   m_PrefabInstance: {fileID: 720365012}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &651305604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 651305604, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
+  m_PrefabInstance: {fileID: 720365012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &652030525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3406,6 +3461,11 @@ MonoBehaviour:
       - {fileID: 11400000, guid: bb4906c5a4408b343977bd04a5445788, type: 2}
       - {fileID: 11400000, guid: 1d07c38944b6e5946b49f4f9d589309c, type: 2}
       currentSequenceIndex: 0
+  pnlStartGame: {fileID: 149902482}
+  btnStartGame: {fileID: 380220387}
+  pnlStartTutorial: {fileID: 909405870}
+  btnStartTutorial: {fileID: 1750180184}
+  btnSkipTutorial: {fileID: 651305604}
   OnGameStart:
     m_PersistentCalls:
       m_Calls: []
@@ -4735,6 +4795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 879169882}
   - component: {fileID: 879169883}
+  - component: {fileID: 879169884}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -4775,11 +4836,11 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 128
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 1
+    m_NormalBias: 1
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -4818,6 +4879,19 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &879169884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879169881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1 &882209691
 GameObject:
   m_ObjectHideFlags: 0
@@ -5052,6 +5126,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a9e8befc05851fc44a4dd41fb821ecf8, type: 3}
   m_PrefabInstance: {fileID: 903850950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &909405870 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 909405870, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
+  m_PrefabInstance: {fileID: 720365012}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &919362042
 PrefabInstance:
@@ -8578,6 +8657,17 @@ Transform:
   m_Father: {fileID: 1259274717}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1750180184 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1750180184, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
+  m_PrefabInstance: {fileID: 720365012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1761476659
 PrefabInstance:
   m_ObjectHideFlags: 0

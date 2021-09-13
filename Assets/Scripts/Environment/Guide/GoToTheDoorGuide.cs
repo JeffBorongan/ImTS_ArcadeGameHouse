@@ -11,9 +11,13 @@ public class GoToTheDoorGuide : Guide
     [SerializeField] private List<EnvironmentPoints> pointsToRender = new List<EnvironmentPoints>();
     [SerializeField] private EnvironmentPoints pointToGo = EnvironmentPoints.AvatarRoomMainCenter;
 
+    [Space]
+    [SerializeField] private bool showMessage = false;
+    [SerializeField] private string message = "";
+    [SerializeField] private Vector3 direction = Vector3.zero;
+
     public override void ShowGuide(UnityAction OnEndGuide)
     {
-
         List<Vector3> points = new List<Vector3>();
         foreach (var point in pointsToRender)
         {
@@ -23,6 +27,9 @@ public class GoToTheDoorGuide : Guide
         EnvironmentGuideManager.Instance.RenderLine(true, points.ToArray());
         EnvironmentGuideManager.Instance.StartCoroutine(GuideCour(OnEndGuide));
         Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(true);
+
+        PlayerHUD.Instance.ShowMessage(direction, message, showMessage);
+
         base.ShowGuide(OnEndGuide);
     }
 
@@ -37,6 +44,8 @@ public class GoToTheDoorGuide : Guide
         {
             Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(false);
         }
+
+        PlayerHUD.Instance.ShowMessage(direction, message, false);
 
         OnEnd.Invoke();
     }

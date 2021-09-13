@@ -111,49 +111,59 @@ public class BowlingGameManagement : GameManagement
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
-        sessionData = (BowlingSessionData)data;
+        pnlStartGame.SetActive(true);
 
-        countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
+        btnStartGame.onClick.RemoveAllListeners();
+        btnStartGame.onClick.AddListener(() =>
         {
-            imgTimerIcon.gameObject.SetActive(true);
-            SetGate(true);
-            StartSpawingEnemy();
+            sessionData = (BowlingSessionData)data;
 
-            txtPoints.text = currentPoints.ToString();
-            txtPoints.gameObject.SetActive(true);
-
-            gameTimerCour = TimeCour(sessionData.timeDuration, txtTimer, () =>
+            countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
-                StopGame();
-                SetGate(false);
-                ShowGameResult(false);
-                OnEndGame.Invoke();
-                OnGameEnd.Invoke();
-            }, true);
+                imgTimerIcon.gameObject.SetActive(true);
+                SetGate(true);
+                StartSpawingEnemy();
 
-            pointCheckingCour = PointCheckingCour(() =>
-            {
-                StopGame();
-                SetGate(false);
-                OnEndGame.Invoke();
-                OnGameEnd.Invoke();
+                txtPoints.text = currentPoints.ToString();
+                txtPoints.gameObject.SetActive(true);
+
+                gameTimerCour = TimeCour(sessionData.timeDuration, txtTimer, () =>
+                {
+                    StopGame();
+                    SetGate(false);
+                    ShowGameResult(false);
+                    OnEndGame.Invoke();
+                    OnGameEnd.Invoke();
+                }, true);
+
+                pointCheckingCour = PointCheckingCour(() =>
+                {
+                    StopGame();
+                    SetGate(false);
+                    OnEndGame.Invoke();
+                    OnGameEnd.Invoke();
+                });
+
+                enemyCheckingCour = EnemyCheckingCour(() =>
+                {
+                    StopGame();
+                    SetGate(false);
+                    OnEndGame.Invoke();
+                    OnGameEnd.Invoke();
+                });
+
+                StartCoroutine(gameTimerCour);
+                StartCoroutine(pointCheckingCour);
+                StartCoroutine(enemyCheckingCour);
+
             });
 
-            enemyCheckingCour = EnemyCheckingCour(() =>
-            {
-                StopGame();
-                SetGate(false);
-                OnEndGame.Invoke();
-                OnGameEnd.Invoke();
-            });
+            StartCoroutine(countdownTimerCour);
 
-            StartCoroutine(gameTimerCour);
-            StartCoroutine(pointCheckingCour);
-            StartCoroutine(enemyCheckingCour);
+            pnlStartGame.SetActive(false);
 
         });
 
-        StartCoroutine(countdownTimerCour);
     }
 
     public override void StopGame()

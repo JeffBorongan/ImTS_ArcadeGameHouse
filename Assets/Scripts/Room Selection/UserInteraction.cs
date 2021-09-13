@@ -46,6 +46,7 @@ public class UserInteraction : MonoBehaviour
     private void Start()
     {
         leftInteractor.selectEntered.AddListener(HandleOnSelect);
+
         rightInteractor.selectEntered.AddListener(HandleOnSelect);
 
         OnChangeRoom.Invoke(currentRoom);
@@ -63,6 +64,8 @@ public class UserInteraction : MonoBehaviour
             });
         }
     }
+
+
 
     public void SetCurrentPoint(EnvironmentPoints newPoint)
     {
