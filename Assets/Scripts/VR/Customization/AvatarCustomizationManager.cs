@@ -117,6 +117,8 @@ public class AvatarCustomizationManager : MonoBehaviour
 
             InitializeCustomization(vertical1, true);
             InitializeCustomization(vertical2, false);
+
+            OpenBodyPartSelections(character, characterMimic, BodyPartID.HELMET);
         });
 
         GameExecution.Instance.OnEventRegistration.AddListener(() =>
@@ -312,6 +314,7 @@ public class AvatarCustomizationManager : MonoBehaviour
 
             bodyPartsCustom[i].btnBodyPartCustom.onClick.RemoveAllListeners();
             BodyPartCustomizationProfile profile = currentSelectedBodyPart.bodyPartProfile[i];
+
             bodyPartsCustom[i].btnBodyPartCustom.onClick.AddListener(() =>
             {
                 Material newMaterial = profile.bodyPartMaterial;
@@ -319,7 +322,9 @@ public class AvatarCustomizationManager : MonoBehaviour
                 if (CustomizationShopManager.Instance.IsPurchased(profile))
                 {
                     bodyPart.ChangeMaterial(newMaterial);
+                    bodyPart.SetChangeCurrentMaterial(newMaterial);
                     bodyPartMimic.ChangeMaterial(newMaterial);
+                    bodyPartMimic.SetChangeCurrentMaterial(newMaterial);
                 }
                 else if (CustomizationShopManager.Instance.CanBePurchased(profile))
                 {
@@ -333,6 +338,19 @@ public class AvatarCustomizationManager : MonoBehaviour
                         pnlConfirmPurchase.SetActive(false);
                     });
                 }
+            });
+
+            bodyPartsCustom[i].OnHoverEnter.RemoveAllListeners();
+            bodyPartsCustom[i].OnHoverEnter.AddListener(() => 
+            {
+                Material newMaterial = profile.bodyPartMaterial;
+                bodyPartMimic.ChangeMaterial(newMaterial);
+            });
+
+            bodyPartsCustom[i].OnHoverExit.RemoveAllListeners();
+            bodyPartsCustom[i].OnHoverExit.AddListener(() =>
+            {
+                bodyPartMimic.ChangeMaterial(bodyPartMimic.CurrentMaterial);
             });
 
             bodyPartsCustom[i].gameObject.SetActive(true);

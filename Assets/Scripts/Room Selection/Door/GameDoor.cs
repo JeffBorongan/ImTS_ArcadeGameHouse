@@ -7,7 +7,6 @@ public class GameDoor : Door
 {
     [SerializeField] private GameID game = GameID.Bowling;
     [SerializeField] private bool loadGame = true;
-    private bool isLoaded = false;
 
     public override void EnterRoom(UnityAction OnMid, UnityAction OnEnd)
     {
@@ -21,26 +20,7 @@ public class GameDoor : Door
                 OnMid.Invoke();
             }
 
-            if (!isLoaded)
-            {
-                GameLobbyManager.Instance.LoadGame(game, loadGame, () =>
-                {
-                    isLoaded = true;
-                    ScreenFadeManager.Instance.FadeOut(() =>
-                    {
-                        if (parameters.OnEnterDoor != null)
-                        {
-                            parameters.OnEnterDoor.Invoke();
-                        }
-
-                        if (OnEnd != null)
-                        {
-                            OnEnd.Invoke();
-                        }
-                    });
-                });
-            }
-            else
+            GameLobbyManager.Instance.LoadGame(game, loadGame, () =>
             {
                 ScreenFadeManager.Instance.FadeOut(() =>
                 {
@@ -54,7 +34,7 @@ public class GameDoor : Door
                         OnEnd.Invoke();
                     }
                 });
-            }
+            });
 
         });
     }

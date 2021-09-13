@@ -19,6 +19,8 @@ public class Dispenser : MonoBehaviour
         bowlingBallClone.transform.position = transform.position;
         bowlingBallClone.transform.rotation = transform.rotation;
         currentBall = bowlingBallClone.GetComponent<BowlingBall>();
+
+        currentBall.OnRelease.RemoveAllListeners();
         currentBall.OnRelease.AddListener(HandleOnRelease);
     }
 

@@ -19,6 +19,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
+    public Transform cameraPosition = null;
     public Transform pnlHUDCanvas = null;
     public TextMeshProUGUI txtHUDMessage = null;
 
@@ -29,6 +30,7 @@ public class PlayerHUD : MonoBehaviour
             pnlHUDCanvas.gameObject.SetActive(true);
             pnlHUDCanvas.transform.rotation = Quaternion.LookRotation(direction);
             txtHUDMessage.text = message;
+            transform.localPosition = cameraPosition.localPosition;
         }
         else
         {
