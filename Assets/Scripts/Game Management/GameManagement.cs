@@ -47,6 +47,7 @@ public class GameManagement : MonoBehaviour
         {
             OnEnd.Invoke();
             OnEndTutorial.Invoke();
+            pnlStartTutorial.SetActive(false);
         });
 
         btnStartTutorial.onClick.RemoveAllListeners();

@@ -28,7 +28,10 @@ public class GoToTheDoorGuide : Guide
         EnvironmentGuideManager.Instance.StartCoroutine(GuideCour(OnEndGuide));
         Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(true);
 
-        PlayerHUD.Instance.ShowMessage(direction, message, showMessage);
+        //if (showMessage)
+        //{
+        //    PlayerHUD.Instance.ShowMessage(direction, message, showMessage);
+        //}
 
         base.ShowGuide(OnEndGuide);
     }
@@ -45,7 +48,10 @@ public class GoToTheDoorGuide : Guide
             Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(false);
         }
 
-        PlayerHUD.Instance.ShowMessage(direction, message, false);
+        //if (showMessage)
+        //{
+        //    PlayerHUD.Instance.ShowMessage(direction, message, false);
+        //}
 
         OnEnd.Invoke();
     }

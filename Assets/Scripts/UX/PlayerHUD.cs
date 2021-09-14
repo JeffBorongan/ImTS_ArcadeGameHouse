@@ -20,7 +20,8 @@ public class PlayerHUD : MonoBehaviour
     }
 
     public Transform cameraPosition = null;
-    public Transform pnlHUDCanvas = null;
+    public Transform HUDParent = null;
+    public GameObject pnlHUDCanvas = null;
     public TextMeshProUGUI txtHUDMessage = null;
 
     public void ShowMessage(Vector3 direction, string message, bool show)
@@ -28,9 +29,9 @@ public class PlayerHUD : MonoBehaviour
         if (show)
         {
             pnlHUDCanvas.gameObject.SetActive(true);
-            pnlHUDCanvas.transform.rotation = Quaternion.LookRotation(direction);
+            HUDParent.transform.rotation = Quaternion.LookRotation(direction);
             txtHUDMessage.text = message;
-            transform.localPosition = cameraPosition.localPosition;
+            HUDParent.localPosition = cameraPosition.localPosition;
         }
         else
         {
