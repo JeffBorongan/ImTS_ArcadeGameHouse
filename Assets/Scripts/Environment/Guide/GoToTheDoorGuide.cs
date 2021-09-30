@@ -16,24 +16,35 @@ public class GoToTheDoorGuide : Guide
     [SerializeField] private string message = "";
     [SerializeField] private Vector3 direction = Vector3.zero;
 
+    [Space]
+    [SerializeField] private AudioClip announcement = null;
+
     public override void ShowGuide(UnityAction OnEndGuide)
     {
-        List<Vector3> points = new List<Vector3>();
-        foreach (var point in pointsToRender)
+        EnvironmentGuideManager.Instance.StartCoroutine(DelayCour(() =>
         {
-            points.Add(Environment.Instance.PointsDictionary[point].point.TransformPoint(Vector3.zero));
-        }
+            List<Vector3> points = new List<Vector3>();
+            foreach (var point in pointsToRender)
+            {
+                points.Add(Environment.Instance.PointsDictionary[point].point.TransformPoint(Vector3.zero));
+            }
 
-        EnvironmentGuideManager.Instance.RenderLine(true, points.ToArray());
-        EnvironmentGuideManager.Instance.StartCoroutine(GuideCour(OnEndGuide));
-        Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(true);
+            EnvironmentGuideManager.Instance.RenderLine(true, points.ToArray());
+            EnvironmentGuideManager.Instance.StartCoroutine(GuideCour(OnEndGuide));
+            Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(true);
 
-        //if (showMessage)
-        //{
-        //    PlayerHUD.Instance.ShowMessage(direction, message, showMessage);
-        //}
+            if (showMessage)
+            {
+                PlayerHUD.Instance.ShowMessage(direction, message, showMessage);
+            }
 
-        base.ShowGuide(OnEndGuide);
+            if (announcement != null)
+            {
+                UserInteraction.Instance.AnnounceToPlayer(announcement, true);
+            }
+
+            base.ShowGuide(OnEndGuide);
+        }));
     }
 
     private IEnumerator GuideCour(UnityAction OnEnd)
@@ -48,10 +59,10 @@ public class GoToTheDoorGuide : Guide
             Environment.Instance.DoorDictionary[pointsToRender.Last()].HightLightThisDoor(false);
         }
 
-        //if (showMessage)
-        //{
-        //    PlayerHUD.Instance.ShowMessage(direction, message, false);
-        //}
+        if (showMessage)
+        {
+            PlayerHUD.Instance.ShowMessage(direction, message, false);
+        }
 
         OnEnd.Invoke();
     }
@@ -59,6 +70,11 @@ public class GoToTheDoorGuide : Guide
     public override void UnShowGuide()
     {
         EnvironmentGuideManager.Instance.RenderLine(false);
+
+        if (announcement != null)
+        {
+            UserInteraction.Instance.AnnounceToPlayer(announcement, false);
+        }
     }
 
     public override bool isGuideAcomplish()

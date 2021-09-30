@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
+    [Header("Message")]
     public Transform cameraPosition = null;
     public Transform HUDParent = null;
     public GameObject pnlHUDCanvas = null;
@@ -29,9 +32,9 @@ public class PlayerHUD : MonoBehaviour
         if (show)
         {
             pnlHUDCanvas.gameObject.SetActive(true);
-            HUDParent.transform.rotation = Quaternion.LookRotation(direction);
-            txtHUDMessage.text = message;
+            HUDParent.transform.localRotation = Quaternion.LookRotation(direction);
             HUDParent.localPosition = cameraPosition.localPosition;
+            txtHUDMessage.text = message;
         }
         else
         {

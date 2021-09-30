@@ -35,6 +35,7 @@ public class UserInteraction : MonoBehaviour
     [SerializeField] private XRRayInteractor leftInteractor = null;
     [SerializeField] private XRRayInteractor rightInteractor = null;
     [SerializeField] private InputActionReference toggleHelmet = null;
+    [SerializeField] private AudioSource audioSourceAnnouncer = null;
 
     public RoomIDEvent OnChangeRoom = new RoomIDEvent();
     private RoomID currentRoom = RoomID.AvatarRoomMain;
@@ -98,6 +99,19 @@ public class UserInteraction : MonoBehaviour
     {
         currentRoom = (RoomID)roomID;
         OnChangeRoom.Invoke(currentRoom);
+    }
+
+    public void AnnounceToPlayer(AudioClip source, bool announce)
+    {
+        if (announce)
+        {
+            audioSourceAnnouncer.clip = source;
+            audioSourceAnnouncer.Play();
+        }
+        else
+        {
+            audioSourceAnnouncer.Stop();
+        }
     }
 }
 

@@ -6,13 +6,6 @@ using UnityEngine.UI;
 
 public class GameManagement : MonoBehaviour
 {
-    [Header("Tutorial")]
-    private TutorialActor currentActor = null;
-    protected Transform player = null;
-    public List<Tutorial> tutorialActions = new List<Tutorial>();
-    private int currentTutorial = 0;
-
-
     [Header("Start Game")]
     [SerializeField] protected GameObject pnlStartGame = null;
     [SerializeField] protected Button btnStartGame = null;
@@ -21,6 +14,12 @@ public class GameManagement : MonoBehaviour
     [SerializeField] protected GameObject pnlStartTutorial = null;
     [SerializeField] protected Button btnStartTutorial = null;
     [SerializeField] protected Button btnSkipTutorial = null;
+
+    [Header("Tutorial")]
+    private TutorialActor currentActor = null;
+    protected Transform player = null;
+    public List<Tutorial> tutorialActions = new List<Tutorial>();
+    private int currentTutorial = 0;
 
     [Header("Events")]
     public SessionDataEvent OnGameStart = new SessionDataEvent();
@@ -40,15 +39,7 @@ public class GameManagement : MonoBehaviour
 
     public void StartTutorial(UnityAction OnEnd)
     {
-        pnlStartTutorial.SetActive(true);
-
-        btnSkipTutorial.onClick.RemoveAllListeners();
-        btnSkipTutorial.onClick.AddListener(() =>
-        {
-            OnEnd.Invoke();
-            OnEndTutorial.Invoke();
-            pnlStartTutorial.SetActive(false);
-        });
+        pnlStartTutorial.gameObject.SetActive(true);
 
         btnStartTutorial.onClick.RemoveAllListeners();
         btnStartTutorial.onClick.AddListener(() =>
@@ -59,7 +50,16 @@ public class GameManagement : MonoBehaviour
                 OnEndTutorial.Invoke();
             });
 
-            pnlStartTutorial.SetActive(false);
+            pnlStartTutorial.gameObject.SetActive(false);
+        });
+
+        btnSkipTutorial.onClick.RemoveAllListeners();
+        btnSkipTutorial.onClick.AddListener(() => 
+        {
+            OnEnd.Invoke();
+            OnEndTutorial.Invoke();
+
+            pnlStartTutorial.gameObject.SetActive(false);
         });
     }
 

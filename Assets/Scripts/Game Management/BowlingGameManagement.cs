@@ -111,7 +111,7 @@ public class BowlingGameManagement : GameManagement
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
-        pnlStartGame.SetActive(true);
+        pnlStartGame.gameObject.SetActive(true);
 
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
@@ -160,10 +160,8 @@ public class BowlingGameManagement : GameManagement
 
             StartCoroutine(countdownTimerCour);
 
-            pnlStartGame.SetActive(false);
-
+            pnlStartGame.gameObject.SetActive(false);
         });
-
     }
 
     public override void StopGame()

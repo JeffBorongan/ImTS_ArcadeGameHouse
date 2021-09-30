@@ -335,7 +335,6 @@ public class AvatarCustomizationManager : MonoBehaviour
                     {
                         CustomizationShopManager.Instance.Buy(profile);
                         bodyPartsCustom[i].currency.SetActive(false);
-                        pnlConfirmPurchase.SetActive(false);
                     });
                 }
             });
