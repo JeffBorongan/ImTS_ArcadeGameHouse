@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.043674428, g: 0.044857424, b: 0.059592403, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -451,7 +451,10 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 2037
+  m_InteractionLayers:
+    m_Bits: 2037
   m_AttachTransform: {fileID: 0}
+  m_KeepSelectedTargetValid: 0
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -479,6 +482,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectActionTrigger: 0
   m_HideControllerOnSelect: 0
+  m_AllowHoveredActivate: 0
   m_PlayAudioClipOnSelectEntered: 0
   m_AudioClipForOnSelectEntered: {fileID: 0}
   m_PlayAudioClipOnSelectExited: 0
@@ -512,6 +516,7 @@ MonoBehaviour:
   m_LineType: 0
   m_BlendVisualLinePoints: 1
   m_MaxRaycastDistance: 20
+  m_RayOriginTransform: {fileID: 0}
   m_ReferenceFrame: {fileID: 0}
   m_Velocity: 16
   m_Acceleration: 9.8
@@ -529,7 +534,6 @@ MonoBehaviour:
     m_Bits: 2038
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 1
-  m_KeepSelectedTargetValid: 0
   m_HoverToSelect: 0
   m_HoverTimeToSelect: 0.5
   m_EnableUIInteraction: 1
@@ -569,6 +573,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -2024308242397127297, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_RotationAction:
     m_UseReference: 1
@@ -580,7 +585,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 8248158260566104461, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_TrackingStateAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_SelectAction:
     m_UseReference: 1
     m_Action:
@@ -591,7 +609,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_SelectActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_ActivateAction:
     m_UseReference: 1
     m_Action:
@@ -602,7 +633,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_ActivateActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_UIPressAction:
     m_UseReference: 1
     m_Action:
@@ -613,7 +657,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -6395602842196007441, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_UIPressActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_HapticDeviceAction:
     m_UseReference: 1
     m_Action:
@@ -624,6 +681,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -8785819595477538065, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_RotateAnchorAction:
     m_UseReference: 1
@@ -635,6 +693,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -7363382999065477798, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_TranslateAnchorAction:
     m_UseReference: 1
@@ -646,6 +705,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
 --- !u!1001 &17641386
@@ -2123,17 +2183,17 @@ MonoBehaviour:
   - type: 5
     point: {fileID: 1836661995}
   - type: 6
-    point: {fileID: 497634094}
+    point: {fileID: 0}
   - type: 7
-    point: {fileID: 1545980522}
+    point: {fileID: 0}
   - type: 8
-    point: {fileID: 1550827420}
+    point: {fileID: 0}
   - type: 9
-    point: {fileID: 2078860008}
+    point: {fileID: 0}
   - type: 10
-    point: {fileID: 1046162144}
+    point: {fileID: 0}
   - type: 11
-    point: {fileID: 1599061957}
+    point: {fileID: 0}
   - type: 12
     point: {fileID: 244824799}
   - type: 13
@@ -2152,22 +2212,8 @@ MonoBehaviour:
     point: {fileID: 1170587947}
   - type: 20
     point: {fileID: 426021676}
-  doors:
-  - {fileID: 1037193688}
-  - {fileID: 883477871}
-  - {fileID: 2036766475}
-  - {fileID: 1142062090}
-  - {fileID: 2114975012}
-  - {fileID: 536252299}
-  - {fileID: 924902044}
-  - {fileID: 1290142319}
-  - {fileID: 2121603705}
-  - {fileID: 540217777}
-  - {fileID: 301001715}
-  - {fileID: 762784638}
-  gameManagements:
-  - id: 0
-    manager: {fileID: 676263838}
+  captainRogers: {fileID: 0}
+  playerCustomization: {fileID: 0}
 --- !u!114 &71284292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3175,7 +3221,10 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 2037
+  m_InteractionLayers:
+    m_Bits: 2037
   m_AttachTransform: {fileID: 0}
+  m_KeepSelectedTargetValid: 0
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -3203,6 +3252,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectActionTrigger: 0
   m_HideControllerOnSelect: 0
+  m_AllowHoveredActivate: 0
   m_PlayAudioClipOnSelectEntered: 0
   m_AudioClipForOnSelectEntered: {fileID: 0}
   m_PlayAudioClipOnSelectExited: 0
@@ -3236,6 +3286,7 @@ MonoBehaviour:
   m_LineType: 0
   m_BlendVisualLinePoints: 1
   m_MaxRaycastDistance: 20
+  m_RayOriginTransform: {fileID: 0}
   m_ReferenceFrame: {fileID: 0}
   m_Velocity: 16
   m_Acceleration: 9.8
@@ -3253,7 +3304,6 @@ MonoBehaviour:
     m_Bits: 2038
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 1
-  m_KeepSelectedTargetValid: 0
   m_HoverToSelect: 0
   m_HoverTimeToSelect: 0.5
   m_EnableUIInteraction: 1
@@ -3293,6 +3343,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -3326005586356538449, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_RotationAction:
     m_UseReference: 1
@@ -3304,7 +3355,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 5101698808175986029, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_TrackingStateAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_SelectAction:
     m_UseReference: 1
     m_Action:
@@ -3315,7 +3379,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_SelectActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_ActivateAction:
     m_UseReference: 1
     m_Action:
@@ -3326,7 +3403,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_ActivateActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_UIPressAction:
     m_UseReference: 1
     m_Action:
@@ -3337,7 +3427,20 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_UIPressActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_HapticDeviceAction:
     m_UseReference: 1
     m_Action:
@@ -3348,6 +3451,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -8222252007134549311, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_RotateAnchorAction:
     m_UseReference: 1
@@ -3359,6 +3463,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: -5913262927076077117, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_TranslateAnchorAction:
     m_UseReference: 1
@@ -3370,6 +3475,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
 --- !u!1001 &106837712
@@ -8315,17 +8421,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
   m_PrefabInstance: {fileID: 294820562}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &301001715 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 882146924, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a96075ef09f4894e829dc1c3afa1e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &301781730
 GameObject:
   m_ObjectHideFlags: 0
@@ -10244,6 +10339,12 @@ MonoBehaviour:
   imgLocked: {fileID: 694501146}
   currency: {fileID: 1290390498}
   txtStarCost: {fileID: 1544228855}
+  OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &410752622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12066,11 +12167,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 433114, guid: b9038ed84a1fe4aecb34086f7f42d1bf, type: 3}
   m_PrefabInstance: {fileID: 497485757}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &497634094 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 497634094, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &500660027
 GameObject:
   m_ObjectHideFlags: 0
@@ -12555,6 +12651,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -12566,6 +12665,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -12622,8 +12727,10 @@ MonoBehaviour:
   roomName: Game Lobby
   point: 17
   destinationPoint: 10
-  destination: {fileID: 1046162144}
+  destination: {fileID: 0}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -12712,17 +12819,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &540217777 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7280079972766724296, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a96075ef09f4894e829dc1c3afa1e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &541333179
 GameObject:
   m_ObjectHideFlags: 0
@@ -12775,6 +12871,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vrCameraPoint: {fileID: 572842433}
+  vrLeftHandPoint: {fileID: 0}
+  vrRightHandPoint: {fileID: 0}
   character: {fileID: 1361070758}
   characterMimic: {fileID: 782176012}
   pnlCustomization: {fileID: 1186786252}
@@ -13319,6 +13417,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 1
   m_AntialiasingQuality: 2
@@ -13343,6 +13442,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TrackingType: 0
   m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Main Camera - TPD - Position
+      m_Type: 0
+      m_ExpectedControlType: Vector3
+      m_Id: 21f90e74-c25c-4544-b2b2-731a3f2b45a8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: cb003678-dfb9-4a22-8811-ee89a9ceaed0
+        m_Path: <XRHMD>/centerEyePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Main Camera - TPD - Position
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RotationInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Main Camera - TPD - Rotation
+      m_Type: 0
+      m_ExpectedControlType: Quaternion
+      m_Id: 78f0fc21-6ea5-45b0-be57-63a84922cf7d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 49cedddc-eb5f-43ff-9621-00434e07af85
+        m_Path: <XRHMD>/centerEyeRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Main Camera - TPD - Rotation
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_PositionAction:
     m_Name: Main Camera - TPD - Position
     m_Type: 0
@@ -13359,6 +13498,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Main Camera - TPD - Position
       m_Flags: 0
+    m_Flags: 0
   m_RotationAction:
     m_Name: Main Camera - TPD - Rotation
     m_Type: 0
@@ -13375,6 +13515,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Main Camera - TPD - Rotation
       m_Flags: 0
+    m_Flags: 0
+  m_HasMigratedActions: 1
 --- !u!1001 &573310870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15788,8 +15930,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7529dbae3d685594db0a3f85682cd463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentActor: {fileID: 278395384}
-  player: {fileID: 572842433}
+  pnlStartGame: {fileID: 0}
+  btnStartGame: {fileID: 0}
+  pnlStartTutorial: {fileID: 0}
+  btnStartTutorial: {fileID: 0}
+  btnSkipTutorial: {fileID: 0}
   tutorialActions:
   - tutorialName: Introduction
     sequenceOfActions:
@@ -15803,6 +15948,12 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 1d07c38944b6e5946b49f4f9d589309c, type: 2}
       currentSequenceIndex: 0
   OnGameStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEndTutorial:
     m_PersistentCalls:
       m_Calls: []
   cockpitPosition: {fileID: 217723280}
@@ -15834,12 +15985,23 @@ MonoBehaviour:
   - lane: 2
     side: 2
     point: {fileID: 1621644058}
+  pnlHUD: {fileID: 0}
   txtCountdownTimer: {fileID: 392648726}
+  imgTimerIcon: {fileID: 0}
   txtTimer: {fileID: 27521260}
-  txtGameResult: {fileID: 1536697178}
   txtPoints: {fileID: 1066762901}
+  pnlGameResult: {fileID: 0}
+  txtEndTime: {fileID: 0}
+  txtEndPoints: {fileID: 0}
+  txtEndResult: {fileID: 0}
+  colorSuccessText: {r: 0, g: 0, b: 1, a: 1}
+  colorFailedText: {r: 0, g: 0, b: 1, a: 1}
   leftGate: {fileID: 1424989470}
   rightGate: {fileID: 1203390124}
+  dispenserOffset: 0.5
+  leftBallDispenser: {fileID: 0}
+  rightBallDispenser: {fileID: 0}
+  isPlayerLocked: 0
 --- !u!1001 &677946399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18241,6 +18403,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -18252,6 +18417,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -18308,8 +18479,10 @@ MonoBehaviour:
   roomName: Game Lobby
   point: 13
   destinationPoint: 8
-  destination: {fileID: 1550827420}
+  destination: {fileID: 0}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -18523,13 +18696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7448815bd5148434682b3d931066cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RigBaseGameObject: {fileID: 773025382}
+  m_Camera: {fileID: 0}
+  m_OriginBaseGameObject: {fileID: 773025382}
   m_CameraFloorOffsetObject: {fileID: 592012560}
-  m_CameraGameObject: {fileID: 572842430}
   m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.36144
-  m_TrackingSpace: 3
-  m_TrackingOriginMode: -2147483648
+  m_CameraGameObject: {fileID: 572842430}
 --- !u!4 &773025384
 Transform:
   m_ObjectHideFlags: 0
@@ -18573,9 +18745,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b4bfc100305b64781ef0a9c59505bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
   leftInteractor: {fileID: 10642371}
   rightInteractor: {fileID: 104422880}
   toggleHelmet: {fileID: 7210572222945924100, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  audioSourceAnnouncer: {fileID: 0}
 --- !u!208 &773025387
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -19787,6 +19961,9 @@ MonoBehaviour:
   rightFootRotWeight: 1
   leftFootPosWeight: 1
   leftFootRotWeight: 1
+  leftLegConstraint: {fileID: 0}
+  rightLegConstraint: {fileID: 0}
+  footPlacedOnBox: 0
 --- !u!114 &782176092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22144,8 +22321,10 @@ MonoBehaviour:
   roomName: Game Lobby
   point: 5
   destinationPoint: 7
-  destination: {fileID: 1545980522}
+  destination: {fileID: 0}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -22175,6 +22354,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -22186,6 +22368,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -23744,6 +23932,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -23755,6 +23946,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -23813,6 +24010,8 @@ MonoBehaviour:
   destinationPoint: 2
   destination: {fileID: 384763588}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -25415,6 +25614,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 1
   m_AntialiasingQuality: 2
@@ -26383,6 +26583,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -26394,6 +26597,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -26452,6 +26661,8 @@ MonoBehaviour:
   destinationPoint: 4
   destination: {fileID: 1654688338}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -26604,11 +26815,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69b94c5a2caf71349a7dd68b48df42f0, type: 3}
---- !u!4 &1046162144 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1046162144, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1047283431 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2355204, guid: 088b5f04d52a542ec975e88d7d9934f5, type: 3}
@@ -28209,6 +28415,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -28910,6 +29117,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -28921,6 +29131,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -28977,8 +29193,10 @@ MonoBehaviour:
   roomName: Game Lobby
   point: 15
   destinationPoint: 9
-  destination: {fileID: 2078860008}
+  destination: {fileID: 0}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -31588,6 +31806,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 1
   m_AntialiasingQuality: 2
@@ -31881,17 +32100,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
   m_PrefabInstance: {fileID: 1284800305}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1290142319 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6359678510911378009, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a96075ef09f4894e829dc1c3afa1e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1290390498
 GameObject:
   m_ObjectHideFlags: 0
@@ -32434,7 +32642,10 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 119
+  m_InteractionLayers:
+    m_Bits: 119
   m_AttachTransform: {fileID: 0}
+  m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -32462,6 +32673,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectActionTrigger: 0
   m_HideControllerOnSelect: 0
+  m_AllowHoveredActivate: 0
   m_PlayAudioClipOnSelectEntered: 0
   m_AudioClipForOnSelectEntered: {fileID: 0}
   m_PlayAudioClipOnSelectExited: 0
@@ -33459,7 +33671,10 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 119
+  m_InteractionLayers:
+    m_Bits: 119
   m_AttachTransform: {fileID: 0}
+  m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -33499,6 +33714,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectActionTrigger: 0
   m_HideControllerOnSelect: 0
+  m_AllowHoveredActivate: 0
   m_PlayAudioClipOnSelectEntered: 0
   m_AudioClipForOnSelectEntered: {fileID: 0}
   m_PlayAudioClipOnSelectExited: 0
@@ -34199,6 +34415,9 @@ MonoBehaviour:
   rightFootRotWeight: 1
   leftFootPosWeight: 1
   leftFootRotWeight: 1
+  leftLegConstraint: {fileID: 0}
+  rightLegConstraint: {fileID: 0}
+  footPlacedOnBox: 0
 --- !u!114 &1361070760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34245,6 +34464,7 @@ MonoBehaviour:
     rigTarget: {fileID: 1320253569}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: 90, y: 0, z: 0}
+  IsStationary: 0
 --- !u!114 &1361070762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34889,6 +35109,12 @@ MonoBehaviour:
   imgLocked: {fileID: 1881170337}
   currency: {fileID: 1034737244}
   txtStarCost: {fileID: 340312420}
+  OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1376549306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35485,6 +35711,12 @@ MonoBehaviour:
   imgLocked: {fileID: 52176288}
   currency: {fileID: 1966294278}
   txtStarCost: {fileID: 30595032}
+  OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1414041015
 GameObject:
   m_ObjectHideFlags: 0
@@ -36271,7 +36503,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1447141049
 PrefabInstance:
@@ -37652,17 +37884,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd0cc456858cf5409edcf26763b92e9, type: 3}
---- !u!114 &1536697178 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5407201040217119588, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
-  m_PrefabInstance: {fileID: 720365012}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1537309928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38180,11 +38401,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545118474}
   m_CullTransparentMesh: 1
---- !u!4 &1545980522 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1545980522, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1550726244
 GameObject:
   m_ObjectHideFlags: 0
@@ -38278,11 +38494,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!4 &1550827420 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1550827420, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1555327538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39053,11 +39264,6 @@ MonoBehaviour:
     m_MaintainTargetRotationOffset: 0
   m_SourceObjectsGUIToggle: 1
   m_SettingsGUIToggle: 0
---- !u!4 &1599061957 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1599061957, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1602559198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40753,6 +40959,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 1
   m_AntialiasingQuality: 2
@@ -43384,7 +43591,7 @@ Transform:
   - {fileID: 2136746468}
   - {fileID: 1523370703}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1822430982
 PrefabInstance:
@@ -47463,17 +47670,6 @@ Transform:
   m_Father: {fileID: 824814585}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2036766475 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 886707752, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a96075ef09f4894e829dc1c3afa1e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2037952835
 GameObject:
   m_ObjectHideFlags: 0
@@ -47729,6 +47925,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7932f2dc651a66043808c2b0b64cca3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pnlStartScreen: {fileID: 0}
+  btnStart: {fileID: 0}
+  pnlAnatomyCapture: {fileID: 0}
+  vrCameraPoint: {fileID: 0}
+  vrLeftHandPoint: {fileID: 0}
+  vrRightHandPoint: {fileID: 0}
+  character: {fileID: 0}
+  characterMimic: {fileID: 0}
+  captureHeightMessage: 
+  imgCaptureHeight: {fileID: 0}
+  captureSensitivity: 0.01
+  captureProgressSentivity: 10
+  progressBar: {fileID: 0}
+  pnlLegSelection: {fileID: 0}
+  btnLeftLegSelect: {fileID: 0}
+  btnRightLegSelect: {fileID: 0}
+  pnlCustomization: {fileID: 0}
+  bodyPartPrefab: {fileID: 0}
+  bodyPartVertical1: {fileID: 0}
+  bodyPartVertical2: {fileID: 0}
+  txtLabel: {fileID: 0}
+  bodyPartsCustom: []
+  pnlConfirmPurchase: {fileID: 0}
+  btnConfirmPurchase: {fileID: 0}
+  pnlOverlay: {fileID: 0}
+  txtMessage: {fileID: 0}
+  imgMessageImage: {fileID: 0}
+  transistionDuration: 0
 --- !u!1001 &2047108231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48354,11 +48578,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd0cc456858cf5409edcf26763b92e9, type: 3}
---- !u!4 &2078860008 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2078860008, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2080440415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49105,6 +49324,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -49116,6 +49338,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -49172,8 +49400,10 @@ MonoBehaviour:
   roomName: Game Lobby
   point: 19
   destinationPoint: 11
-  destination: {fileID: 1599061957}
+  destination: {fileID: 0}
   source: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0.94509804, a: 1}
   highlightInterval: 0.5
   doorMeshRenderers:
@@ -49403,17 +49633,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!114 &2121603705 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3942410305559992629, guid: 7841bb670fd2b5748ac14a0ef2f48542, type: 3}
-  m_PrefabInstance: {fileID: 886707750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a96075ef09f4894e829dc1c3afa1e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2122153792
 PrefabInstance:
   m_ObjectHideFlags: 0
