@@ -55,7 +55,7 @@ public class UserInteraction : MonoBehaviour
 
     private void HandleOnSelect(SelectEnterEventArgs newEvent)
     {
-        Door door = newEvent.interactable.GetComponent<Door>();
+        Door door = newEvent.interactableObject.transform.GetComponent<Door>();
 
         if(door != null)
         {

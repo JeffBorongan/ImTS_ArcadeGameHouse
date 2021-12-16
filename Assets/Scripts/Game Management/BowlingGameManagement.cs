@@ -89,17 +89,19 @@ public class BowlingGameManagement : GameManagement
     {
         base.InitializeGame();
         
-        GameLobbyManager.Instance.AddGame(GameID.Bowling, this);
-        SpawnDispensers(Environment.Instance.CurrentAnatomy);
+        //GameLobbyManager.Instance.AddGame(GameID.Bowling, this);
+        //SpawnDispensers(Environment.Instance.CurrentAnatomy);
+
+        StartGame(new BowlingSessionData(), () => { });
     }
 
     private void SpawnDispensers(Dictionary<string, Vector3> newAnatomy)
     {
-        Vector3 leftHandPos = newAnatomy[AnatomyPart.LeftHand.ToString()];
-        Vector3 rightHandPos = newAnatomy[AnatomyPart.RightHand.ToString()];
+        //Vector3 leftHandPos = newAnatomy[AnatomyPart.LeftHand.ToString()];
+        //Vector3 rightHandPos = newAnatomy[AnatomyPart.RightHand.ToString()];
 
-        leftBallDispenser.transform.localPosition = new Vector3(rightHandPos.x + dispenserOffset, leftBallDispenser.transform.localPosition.y, leftBallDispenser.transform.localPosition.z);
-        rightBallDispenser.transform.localPosition = new Vector3(leftHandPos.x + -dispenserOffset, rightBallDispenser.transform.localPosition.y, rightBallDispenser.transform.localPosition.z);
+        //leftBallDispenser.transform.localPosition = new Vector3(rightHandPos.x + dispenserOffset, leftBallDispenser.transform.localPosition.y, leftBallDispenser.transform.localPosition.z);
+        //rightBallDispenser.transform.localPosition = new Vector3(leftHandPos.x + -dispenserOffset, rightBallDispenser.transform.localPosition.y, rightBallDispenser.transform.localPosition.z);
 
         leftBallDispenser.gameObject.SetActive(true);
         rightBallDispenser.gameObject.SetActive(true);
@@ -391,16 +393,16 @@ public class BowlingGameManagement : GameManagement
 
     public void SetPlayerSettings(bool snapPlayer)
     {
-        isPlayerLocked = snapPlayer;
-        Environment.Instance.PlayerCustomization.GetComponent<VRRig>().IsStationary = snapPlayer;
-        if (snapPlayer)
-        {
-            Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().PlaceLegOnBox();
-        }
-        else
-        {
-            Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
-        }
+        //isPlayerLocked = snapPlayer;
+        //Environment.Instance.PlayerCustomization.GetComponent<VRRig>().IsStationary = snapPlayer;
+        //if (snapPlayer)
+        //{
+        //    Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().PlaceLegOnBox();
+        //}
+        //else
+        //{
+        //    Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
+        //}
     }
 
     public void WaitUntilPlayerIsLocked(UnityAction OnReady)

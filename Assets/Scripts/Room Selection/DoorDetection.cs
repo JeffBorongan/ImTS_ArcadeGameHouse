@@ -23,7 +23,7 @@ public class DoorDetection : MonoBehaviour
 
     private void HandleOnHoverEnter(HoverEnterEventArgs hoverEvent)
     {
-        Door target = hoverEvent.interactable.GetComponent<Door>();
+        Door target = hoverEvent.interactableObject.transform.GetComponent<Door>();
 
         if(target != null)
         {

@@ -33,8 +33,8 @@ public class GameManagement : MonoBehaviour
 
     public virtual void InitializeGame()
     {
-        currentActor = Environment.Instance.CaptainRogers;
-        player = Environment.Instance.PointsDictionary[EnvironmentPoints.Player].point;
+        //currentActor = Environment.Instance.CaptainRogers;
+        //player = Environment.Instance.PointsDictionary[EnvironmentPoints.Player].point;
     }
 
     public void StartTutorial(UnityAction OnEnd)

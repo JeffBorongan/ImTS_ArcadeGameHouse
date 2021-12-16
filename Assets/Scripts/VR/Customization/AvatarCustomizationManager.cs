@@ -82,7 +82,6 @@ public class AvatarCustomizationManager : MonoBehaviour
     [SerializeField] private Image imgMessageImage = null;
 
     [Header("Transistion")]
-    [SerializeField] private float transistionDuration = 0f;
     private PanelCustomization currentPanel = PanelCustomization.StartScreen;
     Dictionary<PanelCustomization, GameObject> panels = new Dictionary<PanelCustomization, GameObject>();
 

@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        Environment.Instance.AddDoor(this);
+        //Environment.Instance.AddDoor(this);
     }
 
     public virtual void EnterRoom(UnityAction OnMid, UnityAction OnEnd) {  }
