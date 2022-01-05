@@ -93,8 +93,6 @@ public class BowlingGameManagement : GameManagement
         //SpawnDispensers(Environment.Instance.CurrentAnatomy);
 
         StartGame(new BowlingSessionData(), () => { });
-
-        btnStartGame.onClick.Invoke();
     }
 
     private void SpawnDispensers(Dictionary<string, Vector3> newAnatomy)
