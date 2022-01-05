@@ -49,7 +49,7 @@ public class AlienMovement : MonoBehaviour
 
     public void GoToTheCockpit()
     {
-        targetDestination = new Vector3(pathPoint.position.x, pathPoint.position.y, transform.position.z);
+        targetDestination = pathPoint.position;
         alienAgent.SetDestination(targetDestination);
     }
 
