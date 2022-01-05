@@ -344,13 +344,10 @@ public class BowlingGameManagement : GameManagement
 
     private void AddEnemyReachedCockpit()
     {
-        if(currentEnemyReachedCockpit + 1 < sessionData.enemyReachedTheCockpit)
+        currentEnemyReachedCockpit++;
+        if (currentEnemyReachedCockpit == sessionData.enemyReachedTheCockpit)
         {
-            currentEnemyReachedCockpit++;
-            if(currentEnemyReachedCockpit == sessionData.enemyReachedTheCockpit)
-            {
-                ShowGameResult(false);
-            }
+            ShowGameResult(false);
         }
     }
 
