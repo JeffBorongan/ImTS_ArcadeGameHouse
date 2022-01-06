@@ -91,42 +91,55 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void Start()
     {
+        vrCameraPoint = BodyMeasurement.Instance.vrCameraPoint;
+        vrLeftHandPoint = BodyMeasurement.Instance.vrLeftHandPoint;
+        vrRightHandPoint = BodyMeasurement.Instance.vrRightHandPoint;
+        character = BodyMeasurement.Instance.character;
+
+
+
+        panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
+        panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
+        panels.Add(PanelCustomization.Overlay, pnlOverlay);
+        panels.Add(PanelCustomization.LegSelection, pnlLegSelection);
+        panels.Add(PanelCustomization.Customization, pnlCustomization);
+
+        List<BodyPartCustomization> vertical1 = new List<BodyPartCustomization>();
+        List<BodyPartCustomization> vertical2 = new List<BodyPartCustomization>();
+
+        for (int i = 0; i < CustomizationShopManager.Instance.BodyPartCustomization.Count; i++)
+        {
+            if (i < 4)
+            {
+                vertical1.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
+            }
+            else
+            {
+                vertical2.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
+            }
+        }
+
+        InitializeCustomization(vertical1, true);
+        InitializeCustomization(vertical2, false);
+
+        OpenBodyPartSelections(character, characterMimic, BodyPartID.HELMET);
+
+
+
+        btnStart.onClick.AddListener(HandleOnPressStart);
+        btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
+        btnRightLegSelect.onClick.AddListener(() => HandleOnLegSelect(1));
+
+        //UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
+
         GameExecution.Instance.OnInitialize.AddListener(() =>
         {
-            panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
-            panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
-            panels.Add(PanelCustomization.Overlay, pnlOverlay);
-            panels.Add(PanelCustomization.LegSelection, pnlLegSelection);
-            panels.Add(PanelCustomization.Customization, pnlCustomization);
-
-            List<BodyPartCustomization> vertical1 = new List<BodyPartCustomization>();
-            List<BodyPartCustomization> vertical2 = new List<BodyPartCustomization>();
-
-            for (int i = 0; i < CustomizationShopManager.Instance.BodyPartCustomization.Count; i++)
-            {
-                if (i < 4)
-                {
-                    vertical1.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
-                }
-                else
-                {
-                    vertical2.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
-                }
-            }
-
-            InitializeCustomization(vertical1, true);
-            InitializeCustomization(vertical2, false);
-
-            OpenBodyPartSelections(character, characterMimic, BodyPartID.HELMET);
+            
         });
 
         GameExecution.Instance.OnEventRegistration.AddListener(() =>
         {
-            btnStart.onClick.AddListener(HandleOnPressStart);
-            btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
-            btnRightLegSelect.onClick.AddListener(() => HandleOnLegSelect(1));
-
-            UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
+            
         });
     }
 
