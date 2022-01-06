@@ -39,7 +39,7 @@ public class AvatarCustomizationManager : MonoBehaviour
     [SerializeField] private Transform vrLeftHandPoint = null;
     [SerializeField] private Transform vrRightHandPoint = null;
     [SerializeField] private CharacterCustomization character = null;
-    [SerializeField] private CharacterCustomization characterMimic = null;
+    //[SerializeField] private CharacterCustomization characterMimic = null;
 
     [Space]
     [SerializeField] private string captureHeightMessage = "";
@@ -96,8 +96,6 @@ public class AvatarCustomizationManager : MonoBehaviour
         vrRightHandPoint = BodyMeasurement.Instance.vrRightHandPoint;
         character = BodyMeasurement.Instance.character;
 
-
-
         panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
         panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
         panels.Add(PanelCustomization.Overlay, pnlOverlay);
@@ -122,25 +120,13 @@ public class AvatarCustomizationManager : MonoBehaviour
         InitializeCustomization(vertical1, true);
         InitializeCustomization(vertical2, false);
 
-        OpenBodyPartSelections(character, characterMimic, BodyPartID.HELMET);
-
-
+        OpenBodyPartSelections(character, null, BodyPartID.HELMET);
 
         btnStart.onClick.AddListener(HandleOnPressStart);
         btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
         btnRightLegSelect.onClick.AddListener(() => HandleOnLegSelect(1));
 
-        //UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
-
-        GameExecution.Instance.OnInitialize.AddListener(() =>
-        {
-            
-        });
-
-        GameExecution.Instance.OnEventRegistration.AddListener(() =>
-        {
-            
-        });
+        UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
     }
 
 
@@ -196,11 +182,11 @@ public class AvatarCustomizationManager : MonoBehaviour
         character.gameObject.SetActive(true);
         character.SetHeight();
 
-        if (!characterMimic.gameObject.activeSelf)
-        {
-            characterMimic.transform.localScale = character.transform.localScale;
-            characterMimic.gameObject.SetActive(true);
-        }
+        //if (!characterMimic.gameObject.activeSelf)
+        //{
+        //    characterMimic.transform.localScale = character.transform.localScale;
+        //    characterMimic.gameObject.SetActive(true);
+        //}
     }
 
     #endregion
@@ -229,7 +215,7 @@ public class AvatarCustomizationManager : MonoBehaviour
                 AdjustHeight();
 
                 OnUpdateAnatomy.Invoke(currentAnatomy);
-                Environment.Instance.CurrentAnatomy = currentAnatomy;
+                //Environment.Instance.CurrentAnatomy = currentAnatomy;
 
                 Transistion(PanelCustomization.Customization);
             }));
@@ -269,7 +255,7 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void HandleOnSelectBodyPart(BodyPartID id)
     {
-        OpenBodyPartSelections(character, characterMimic, id);
+        OpenBodyPartSelections(character, null, id);
     }
 
     private void HandleOnUserDataUpdate(UserData data)
@@ -299,7 +285,7 @@ public class AvatarCustomizationManager : MonoBehaviour
         txtLabel.text = id.ToString();
 
         BodyPart bodyPart = character.bodyParts.Where(b => b.id == id).FirstOrDefault();
-        BodyPart bodyPartMimic = characterMimic.bodyParts.Where(b => b.id == id).FirstOrDefault();
+        //BodyPart bodyPartMimic = characterMimic.bodyParts.Where(b => b.id == id).FirstOrDefault();
 
         foreach (var ui in bodyPartsCustom)
         {
@@ -335,8 +321,8 @@ public class AvatarCustomizationManager : MonoBehaviour
                 {
                     bodyPart.ChangeMaterial(newMaterial);
                     bodyPart.SetChangeCurrentMaterial(newMaterial);
-                    bodyPartMimic.ChangeMaterial(newMaterial);
-                    bodyPartMimic.SetChangeCurrentMaterial(newMaterial);
+                    //bodyPartMimic.ChangeMaterial(newMaterial);
+                    //bodyPartMimic.SetChangeCurrentMaterial(newMaterial);
                 }
                 else if (CustomizationShopManager.Instance.CanBePurchased(profile))
                 {
@@ -355,13 +341,13 @@ public class AvatarCustomizationManager : MonoBehaviour
             bodyPartsCustom[i].OnHoverEnter.AddListener(() => 
             {
                 Material newMaterial = profile.bodyPartMaterial;
-                bodyPartMimic.ChangeMaterial(newMaterial);
+                //bodyPartMimic.ChangeMaterial(newMaterial);
             });
 
             bodyPartsCustom[i].OnHoverExit.RemoveAllListeners();
             bodyPartsCustom[i].OnHoverExit.AddListener(() =>
             {
-                bodyPartMimic.ChangeMaterial(bodyPartMimic.CurrentMaterial);
+                //bodyPartMimic.ChangeMaterial(bodyPartMimic.CurrentMaterial);
             });
 
             bodyPartsCustom[i].gameObject.SetActive(true);

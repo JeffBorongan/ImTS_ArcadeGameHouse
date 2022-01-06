@@ -8,6 +8,7 @@ public class VRRigMimic : MonoBehaviour
     public VRMapMimic leftHand;
     public VRMapMimic rightHand;
 
+
     private void FixedUpdate()
     {
         head.Map();
