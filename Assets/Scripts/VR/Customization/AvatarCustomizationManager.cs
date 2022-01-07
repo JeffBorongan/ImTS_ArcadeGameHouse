@@ -38,7 +38,7 @@ public class AvatarCustomizationManager : MonoBehaviour
     [SerializeField] private Transform vrCameraPoint = null;
     [SerializeField] private Transform vrLeftHandPoint = null;
     [SerializeField] private Transform vrRightHandPoint = null;
-    [SerializeField] private CharacterCustomization character = null;
+    [SerializeField] private CharacterCustomization characterCustomization = null;
     //[SerializeField] private CharacterCustomization characterMimic = null;
 
     [Space]
@@ -91,10 +91,10 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void Start()
     {
-        vrCameraPoint = BodyMeasurement.Instance.vrCameraPoint;
-        vrLeftHandPoint = BodyMeasurement.Instance.vrLeftHandPoint;
-        vrRightHandPoint = BodyMeasurement.Instance.vrRightHandPoint;
-        character = BodyMeasurement.Instance.character;
+        vrCameraPoint = BodyMeasurement.Instance.VrCameraPoint;
+        vrLeftHandPoint = BodyMeasurement.Instance.VrLeftHandPoint;
+        vrRightHandPoint = BodyMeasurement.Instance.VrRightHandPoint;
+        characterCustomization = BodyMeasurement.Instance.CharacterCustomization;
 
         panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
         panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
@@ -120,7 +120,7 @@ public class AvatarCustomizationManager : MonoBehaviour
         InitializeCustomization(vertical1, true);
         InitializeCustomization(vertical2, false);
 
-        OpenBodyPartSelections(character, null, BodyPartID.HELMET);
+        OpenBodyPartSelections(characterCustomization, null, BodyPartID.HELMET);
 
         btnStart.onClick.AddListener(HandleOnPressStart);
         btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
@@ -179,8 +179,8 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void AdjustHeight()
     {
-        character.gameObject.SetActive(true);
-        character.SetHeight();
+        characterCustomization.gameObject.SetActive(true);
+        characterCustomization.SetHeight();
 
         //if (!characterMimic.gameObject.activeSelf)
         //{
@@ -255,7 +255,7 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void HandleOnSelectBodyPart(BodyPartID id)
     {
-        OpenBodyPartSelections(character, null, id);
+        OpenBodyPartSelections(characterCustomization, null, id);
     }
 
     private void HandleOnUserDataUpdate(UserData data)

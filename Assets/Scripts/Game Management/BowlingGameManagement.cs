@@ -390,16 +390,16 @@ public class BowlingGameManagement : GameManagement
 
     public void SetPlayerSettings(bool snapPlayer)
     {
-        //isPlayerLocked = snapPlayer;
-        //Environment.Instance.PlayerCustomization.GetComponent<VRRig>().IsStationary = snapPlayer;
-        //if (snapPlayer)
-        //{
-        //    Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().PlaceLegOnBox();
-        //}
-        //else
-        //{
-        //    Environment.Instance.PlayerCustomization.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
-        //}
+        isPlayerLocked = snapPlayer;
+        BodyMeasurement.Instance.VrRig.GetComponent<VRRig>().IsStationary = snapPlayer;
+        if (snapPlayer)
+        {
+            BodyMeasurement.Instance.VrFootIK.GetComponent<VRFootIK>().PlaceLegOnBox();
+        }
+        else
+        {
+            BodyMeasurement.Instance.VrFootIK.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
+        }
     }
 
     public void WaitUntilPlayerIsLocked(UnityAction OnReady)
