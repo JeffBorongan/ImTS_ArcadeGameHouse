@@ -27,7 +27,6 @@ public class VRFootIK : MonoBehaviour
         animator = GetComponent<Animator>();
 
         HandleOnLegSelect(AvatarCustomizationManager.Instance.LegSelected);
-        PlaceLegOnBox();
     }
 
     private void HandleOnLegSelect(int leg)
