@@ -27,6 +27,7 @@ public class VRFootIK : MonoBehaviour
         animator = GetComponent<Animator>();
 
         HandleOnLegSelect(AvatarCustomizationManager.Instance.LegSelected);
+        PlaceLegOnBox();
     }
 
     private void HandleOnLegSelect(int leg)
@@ -82,7 +83,7 @@ public class VRFootIK : MonoBehaviour
 
         footPlacedOnBox = true;
 
-        if (legSelected == 1)
+        if (legSelected == 0)
         {
             leftLegConstraint.weight = 1;
         }
@@ -91,7 +92,6 @@ public class VRFootIK : MonoBehaviour
             rightLegConstraint.weight = 1;
         }
 
-        Debug.Log(legSelected);
     }
 
     public void UnPlaceAllLegOnBox()

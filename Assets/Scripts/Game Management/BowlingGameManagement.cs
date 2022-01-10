@@ -392,6 +392,7 @@ public class BowlingGameManagement : GameManagement
     {
         isPlayerLocked = snapPlayer;
         BodyMeasurement.Instance.VrRig.GetComponent<VRRig>().IsStationary = snapPlayer;
+
         if (snapPlayer)
         {
             BodyMeasurement.Instance.VrFootIK.GetComponent<VRFootIK>().PlaceLegOnBox();
