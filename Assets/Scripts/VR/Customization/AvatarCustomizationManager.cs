@@ -39,6 +39,8 @@ public class AvatarCustomizationManager : MonoBehaviour
     [SerializeField] private Transform vrLeftHandPoint = null;
     [SerializeField] private Transform vrRightHandPoint = null;
     [SerializeField] private CharacterCustomization characterCustomization = null;
+    private int legSelected = 0;
+    public int LegSelected { get => legSelected; }
     //[SerializeField] private CharacterCustomization characterMimic = null;
 
     [Space]
@@ -195,7 +197,9 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void HandleOnLegSelect(int leg)
     {
-        OnLegSelect.Invoke(leg);
+        legSelected = leg;
+
+        //OnLegSelect.Invoke(leg);
 
         Transistion(PanelCustomization.Overlay);
 
@@ -215,7 +219,7 @@ public class AvatarCustomizationManager : MonoBehaviour
                 AdjustHeight();
 
                 OnUpdateAnatomy.Invoke(currentAnatomy);
-                //Environment.Instance.CurrentAnatomy = currentAnatomy;
+                BodyMeasurement.Instance.CurrentAnatomy = currentAnatomy;
 
                 Transistion(PanelCustomization.Customization);
             }));

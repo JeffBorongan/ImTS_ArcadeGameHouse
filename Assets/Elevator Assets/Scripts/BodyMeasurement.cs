@@ -12,6 +12,7 @@ public class BodyMeasurement : MonoBehaviour
     [SerializeField] private CharacterCustomization characterCustomization = null;
     [SerializeField] private VRRig vrRig = null;
     [SerializeField] private VRFootIK vrFootIK = null;
+    [SerializeField] private Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
 
     public Transform VrCameraPoint { get => vrCameraPoint; }
     public Transform VrLeftHandPoint { get => vrLeftHandPoint; }
@@ -19,6 +20,7 @@ public class BodyMeasurement : MonoBehaviour
     public CharacterCustomization CharacterCustomization { get => characterCustomization; }
     public VRRig VrRig { get => vrRig; }
     public VRFootIK VrFootIK { get => vrFootIK; }
+    public Dictionary<string, Vector3> CurrentAnatomy { get => currentAnatomy; set => currentAnatomy = value; }
 
     private void Awake()
     {
