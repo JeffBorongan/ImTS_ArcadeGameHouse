@@ -303,11 +303,6 @@ MonoBehaviour:
   rendererData: {fileID: 11400000, guid: 71e53bc3cf512b14bb61014e276a8efa, type: 2}
   alpha: 1
   duration: 0.5
---- !u!1 &225606328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 590356979700994129, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 590356979884649193}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &246105705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,7 +1997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996288788599, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: maxHeight
-      value: 0.8
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_RootOrder
@@ -2470,7 +2465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elevatorDoor: {fileID: 254204002}
-  elevatorButtons: {fileID: 225606328}
+  elevatorButtons: {fileID: 0}
   doorOpeningDelay: 0
   doorClosingDelay: 2
   isDoorClosing: 0
