@@ -22,15 +22,15 @@ public class RayCaster : MonoBehaviour
                                           out castOnHit, transform.rotation, castDistance, detectionMask);
         if (isCastOnHit)
         {
-            ElevatorFloorManager.Instance.isDoorBlocked = true;
+            //ElevatorFloorManager.Instance.isDoorBlocked = true;
         }
         else
         {
-            if (ElevatorFloorManager.Instance.isDoorBlocked)
-            {
-                ElevatorFloorManager.Instance.isDoorBlocked = false;
-                ElevatorFloorManager.Instance.closeElevatorDoor();
-            }
+            //if (ElevatorFloorManager.Instance.isDoorBlocked)
+            //{
+            //    ElevatorFloorManager.Instance.isDoorBlocked = false;
+            //    ElevatorFloorManager.Instance.closeElevatorDoor();
+            //}
         }
         
     }

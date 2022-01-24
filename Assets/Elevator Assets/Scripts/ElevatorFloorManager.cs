@@ -5,10 +5,10 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System;
+using UnityEngine.UI;
 
 public class ElevatorFloorManager : MonoBehaviour
 {
-    
     public static ElevatorFloorManager Instance;
 
     void Awake()
@@ -24,109 +24,128 @@ public class ElevatorFloorManager : MonoBehaviour
         }
     } 
 
-    public GameObject elevatorDoor;
-    public GameObject elevatorButtons;
+    public GameObject elevatorDoorLeft;
+    public GameObject elevatorDoorRight;
+    public Button[] elevatorButtons;
     public float doorOpeningDelay;
     public float doorClosingDelay = 2f;
     public bool isDoorClosing = false;
     public bool isDoorOpen = false;
-    public bool isDoorBlocked;
 
-    private Vector3 doorLoctaion;
-    private string scene = "";
-    private bool isLoaded;
-    private bool canLoadScene;
-   
-    
+    private MeshRenderer elevatorPart;
+    private int elementNumber;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        AreaManager.Instance.OnPlayerEnterEvent.AddListener(HandleOnPlayerEnter);
-        AreaManager.Instance.OnPlayerEnterEvent.AddListener(HandleOnPlayerEnter);
-    }
-
-    private void HandleOnPlayerEnter(string AreaName)
-    {
-        if (AreaName == "Elevator")
-        {
-            closeElevatorDoor();
-        }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (AreaManager.Instance.playerLocation == "Elevator")
-        {
-            doorOpeningDelay = 10f;
-        }
-        else if (AreaManager.Instance.playerLocation == "Room")
-        {
-            doorOpeningDelay = 3f;
-        }
     }
 
     public void onPressedElevatorButton(int floor)
     {
-        if (!isDoorOpen)
-        {
+        closeElevatorDoor(() => {
             SceneManagement.Instance.LoadFloor((floor)floor, () =>
-               {
-                   openElevatorDoor();
-               });
-        }
+            {
+                Invoke("openElevatorDoor", 3f);
+            });
+        });
     }
 
     public void openElevatorDoor()
     {
+        foreach (var button in elevatorButtons)
+        {
+            button.interactable = false;
+        }
+
         if (!isDoorOpen)
         {
             isDoorOpen = true;
             isDoorClosing = false;
             openDoor(() => 
             {
-                elevatorButtons.SetActive(false);
-                   
-            });
-            
+                disableEmissive();
+            });  
+        } 
+        else
+        {
+            Invoke("disableEmissive", 2f);
         }
     }
 
     public void closeElevatorDoor()
     {
-        if (isDoorOpen && !isDoorBlocked)
+        foreach (var button in elevatorButtons)
         {
-           
+            button.interactable = false;
+        }
+
+        if (isDoorOpen)
+        {
             closeDoor(() => 
             {
-                elevatorButtons.SetActive(true);
                 isDoorClosing = false;
+                disableEmissive();
             });
             isDoorClosing = true;
             isDoorOpen = false;
+        }
+        else
+        {
+            Invoke("disableEmissive", 2f);
+        }
+    }
+    public void closeElevatorDoor(UnityAction onComplete)
+    {
+        foreach (var button in elevatorButtons)
+        {
+            button.interactable = false;
+        }
+
+        if (isDoorOpen)
+        {
+            closeDoor(() =>
+            {
+                isDoorClosing = false;
+                onComplete.Invoke();
+            });
+            isDoorClosing = true;
+            isDoorOpen = false;
+        }
+        else
+        {
+            onComplete.Invoke();
         }
     }
 
     public void openDoor(UnityAction onComplete)
     {
-        elevatorDoor.transform.DOMoveX(-1.2f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorOpeningDelay);
+        elevatorDoorLeft.transform.DOMoveX(-1.03f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorOpeningDelay);
+        elevatorDoorRight.transform.DOMoveX(0.8976f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorOpeningDelay);
     }
 
     public void closeDoor(UnityAction onComplete)
     {
-        elevatorDoor.transform.DOMoveX(0f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
+        elevatorDoorLeft.transform.DOMoveX(-0.4738946f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
+        elevatorDoorRight.transform.DOMoveX(0.3428232f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
     }
 
-
-    void LoadScene()
+    public void getElevatorPart(MeshRenderer meshRenderer)
     {
-        if (!isLoaded)
+        elevatorPart = meshRenderer;
+    }
+
+    public void enableEmissive(int number)
+    {
+        elementNumber = number;
+        elevatorPart.materials[elementNumber].EnableKeyword("_EMISSION");
+    }
+
+    private void disableEmissive()
+    {
+        elevatorPart.materials[elementNumber].DisableKeyword("_EMISSION");
+        foreach (var button in elevatorButtons)
         {
-            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            button.interactable = true;
         }
     }
 }
