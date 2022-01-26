@@ -15,6 +15,7 @@ public class AlienMovement : MonoBehaviour
     Vector3 targetDestination = Vector3.zero;
 
     public Transform PathPoint { get => pathPoint; set => pathPoint = value; }
+    public NavMeshAgent AlienAgent { get => alienAgent; set => alienAgent = value; }
 
     private void Update()
     {
