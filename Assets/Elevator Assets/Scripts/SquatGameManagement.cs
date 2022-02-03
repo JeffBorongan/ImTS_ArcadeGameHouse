@@ -209,13 +209,7 @@ public class SquatGameManagement : GameManagement
     private void UpdateLeverPulling(bool engageLever, float maximumLift, float minimumDrop)
     {
         leftLever.GetComponent<XRGrabInteractable>().enabled = engageLever;
-        //leftLever.transform.position.Set(-0.5f, leftLever.transform.position.y, 2f);
-        //leftLever.transform.Rotate(0f, leftLever.transform.rotation.y, 0f, Space.Self);
-
         rightLever.GetComponent<XRGrabInteractable>().enabled = engageLever;
-        //rightLever.transform.position.Set(0.5f, rightLever.transform.position.y, 2f);
-        //rightLever.transform.Rotate(0f, rightLever.transform.rotation.y, 0f, Space.Self);
-
 
         if (engageLever)
         {
@@ -294,7 +288,7 @@ public class SquatGameSessionData : SessionData
     public float enemySpeed = 0.5f;
 
     public float playerLeverLift = 1f;
-    public float playerLeverDrop = 0.3f;
+    public float playerLeverDrop = 0.5f;
 
     public int doorFrameLightMaterialIndex = 1;
     public float doorHalfCloseDistance = 0f;
