@@ -41,9 +41,11 @@ public class SquatGameManagement : GameManagement
 
     [Header("Doors and Lights")]
     [SerializeField] private List<GameObject> doors = new List<GameObject>();
-    [SerializeField] private List<GameObject> lights = new List<GameObject>();
-    [SerializeField] private Material redLight;
-    [SerializeField] private Material greenLight;
+    [SerializeField] private List<MeshRenderer> lights = new List<MeshRenderer>();
+    [SerializeField] private Texture2D redLightBaseMap;
+    [SerializeField] private Texture2D redLightEmissionMap;
+    [SerializeField] private Texture2D greenLightBaseMap;
+    [SerializeField] private Texture2D greenLightEmissionMap;
     private MoveStatus moveStatus = MoveStatus.None;
     private bool isDoorMovable = false;
 
@@ -87,12 +89,13 @@ public class SquatGameManagement : GameManagement
 
                 foreach (var door in doors)
                 {
-                    door.transform.DOMoveY(-1.1f, 0.5f);
+                    door.transform.DOMoveY(sessionData.doorFullOpenDistance, sessionData.doorMoveSpeed);
                 }
 
                 foreach (var light in lights)
                 {
-                    light.GetComponent<Renderer>().material = redLight;
+                    light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMap);
+                    light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMap);
                 }
 
                 isSpawning = true;
@@ -120,12 +123,13 @@ public class SquatGameManagement : GameManagement
 
         foreach (var door in doors)
         {
-            door.transform.DOMoveY(1f, 0.5f);
+            door.transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed);
         }
 
         foreach (var light in lights)
         {
-            light.GetComponent<Renderer>().material = redLight;
+            light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMap);
+            light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMap);
         }
 
         StopCoroutine(enemyCheckingCour);
@@ -164,8 +168,7 @@ public class SquatGameManagement : GameManagement
 
         alien = clone.GetComponent<AlienMovement>();
         alien.SetMovementSpeed(sessionData.enemySpeed);
-        Vector3 targetDestination = new Vector3(alien.transform.position.x, alien.transform.position.y, enemyGoal.position.z);
-        alien.AlienAgent.SetDestination(targetDestination);
+        alien.AlienAgent.SetDestination(enemyGoal.position);
 
         alien.OnDeath.AddListener(() =>
         {
@@ -206,7 +209,13 @@ public class SquatGameManagement : GameManagement
     private void UpdateLeverPulling(bool engageLever, float maximumLift, float minimumDrop)
     {
         leftLever.GetComponent<XRGrabInteractable>().enabled = engageLever;
+        //leftLever.transform.position.Set(-0.5f, leftLever.transform.position.y, 2f);
+        //leftLever.transform.Rotate(0f, leftLever.transform.rotation.y, 0f, Space.Self);
+
         rightLever.GetComponent<XRGrabInteractable>().enabled = engageLever;
+        //rightLever.transform.position.Set(0.5f, rightLever.transform.position.y, 2f);
+        //rightLever.transform.Rotate(0f, rightLever.transform.rotation.y, 0f, Space.Self);
+
 
         if (engageLever)
         {
@@ -215,14 +224,15 @@ public class SquatGameManagement : GameManagement
                 if (moveStatus == MoveStatus.Half)
                 {
                     isDoorMovable = true;
-                    doors[index].transform.DOMoveY(sessionData.doorHalfCloseDistance, sessionData.doorCloseSpeed);
+                    doors[index].transform.DOMoveY(sessionData.doorHalfCloseDistance, sessionData.doorMoveSpeed);
                 }
                 if (moveStatus == MoveStatus.Whole)
                 {
                     isDoorMovable = false;
                     doors[index].GetComponent<NavMeshObstacle>().enabled = true;
-                    lights[index].GetComponent<Renderer>().material = greenLight;
-                    doors[index].transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorCloseSpeed).OnComplete(() =>
+                    lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
+                    lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
+                    doors[index].transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed).OnComplete(() =>
                     {
                         if (isSpawning && index == 4)
                         {
@@ -280,13 +290,17 @@ public class SquatGameManagement : GameManagement
 
 public class SquatGameSessionData : SessionData
 {
-    public float enemySpeed = 0.5f;
     public int enemyReachedTheDoor = 1;
+    public float enemySpeed = 0.5f;
+
     public float playerLeverLift = 1f;
     public float playerLeverDrop = 0.3f;
+
+    public int doorFrameLightMaterialIndex = 1;
     public float doorHalfCloseDistance = 0f;
-    public float doorFullCloseDistance = 1f;
-    public float doorCloseSpeed = 0.5f;
+    public float doorFullCloseDistance = 0.955f;
+    public float doorFullOpenDistance = -0.955f;
+    public float doorMoveSpeed = 0.5f;
 }
 
 public enum MoveStatus
