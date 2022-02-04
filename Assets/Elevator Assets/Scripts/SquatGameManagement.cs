@@ -54,8 +54,12 @@ public class SquatGameManagement : GameManagement
     [SerializeField] private GameObject rightLever;
 
     [Header("UI")]
-    [SerializeField] private Image imgTimerIcon = null;
+    [SerializeField] private GameObject pnlHUD = null;
+    [SerializeField] private GameObject pnlGameResult = null;
     [SerializeField] private TextMeshProUGUI txtCountdownTimer = null;
+    [SerializeField] private TextMeshProUGUI txtEndResult = null;
+    [SerializeField] private Color colorSuccessText = Color.blue;
+    [SerializeField] private Color colorFailedText = Color.blue;
     private IEnumerator countdownTimerCour = null;
 
     private AlienMovement alien = null;
@@ -85,8 +89,6 @@ public class SquatGameManagement : GameManagement
             sessionData = (SquatGameSessionData)data;
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
-                imgTimerIcon.gameObject.SetActive(true);
-
                 foreach (var door in doors)
                 {
                     door.transform.DOMoveY(sessionData.doorFullOpenDistance, sessionData.doorMoveSpeed);
@@ -124,12 +126,6 @@ public class SquatGameManagement : GameManagement
         foreach (var door in doors)
         {
             door.transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed);
-        }
-
-        foreach (var light in lights)
-        {
-            light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMap);
-            light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMap);
         }
 
         StopCoroutine(enemyCheckingCour);
@@ -198,6 +194,15 @@ public class SquatGameManagement : GameManagement
         if (currentEnemyReachedTheDoor == sessionData.enemyReachedTheDoor)
         {
             StopGame();
+
+            for (int i = index; i < 5; i++)
+            {
+                lights[i].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMap);
+                lights[i].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMap);
+            }
+
+            ShowGameResult(false);
+
             OnGameEnd.Invoke();
         }
     }
@@ -231,6 +236,7 @@ public class SquatGameManagement : GameManagement
                         if (isSpawning && index == 4)
                         {
                             StopGame();
+                            ShowGameResult(true);
                             OnGameEnd.Invoke();
                         }
                         else
@@ -260,7 +266,7 @@ public class SquatGameManagement : GameManagement
 
     #endregion
 
-    #region Timer
+    #region UI
 
     IEnumerator TimeCour(int timerDuration, TextMeshProUGUI txt, UnityAction OnEndTimer, bool inMinutes = false)
     {
@@ -277,6 +283,14 @@ public class SquatGameManagement : GameManagement
 
         txt.gameObject.SetActive(false);
         OnEndTimer.Invoke();
+    }
+
+    private void ShowGameResult(bool success)
+    {
+        pnlHUD.SetActive(false);
+        pnlGameResult.SetActive(true);
+        txtEndResult.text = success ? "Success" : "Failed";
+        txtEndResult.color = success ? colorSuccessText : colorFailedText;
     }
 
     #endregion
