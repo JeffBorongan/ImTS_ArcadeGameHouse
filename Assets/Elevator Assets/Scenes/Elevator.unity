@@ -356,7 +356,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2185,6 +2185,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7956196996324451765, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451774, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_Name
       value: XR Origin
@@ -2314,62 +2318,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elevator
       objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 689048023465697017, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 911425524422068835, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044336842579096303, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 2105647428587746451, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 3092744641792165429, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844781749996989772, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4176130795047007011, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4214410704834426921, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165887059385448666, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8367613508737067924, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8411919875174019042, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8763518063363152934, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084273807116844471, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
 --- !u!4 &1727998051 stripped
@@ -2385,6 +2333,11 @@ GameObject:
 --- !u!23 &1727998053 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6678863094361053455, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 1727998050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1727998054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
   m_PrefabInstance: {fileID: 1727998050}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1730884657
@@ -2494,9 +2447,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1949046215}
   - component: {fileID: 1949046216}
-  m_Layer: 3
+  - component: {fileID: 1949046217}
+  m_Layer: 0
   m_Name: Detection
-  m_TagString: Player
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2526,8 +2480,24 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1949046217
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949046214}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &2023504193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,6 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809d2b2c24b3824db7056288dfdb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elevatorPrefab: {fileID: 1727998054}
   elevatorDoorLeft: {fileID: 1727998052}
   elevatorDoorRight: {fileID: 77501314}
   elevatorButtons:

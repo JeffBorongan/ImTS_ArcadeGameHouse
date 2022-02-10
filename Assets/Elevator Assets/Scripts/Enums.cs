@@ -3,13 +3,8 @@
     None = -1,
     Elevator,
     SpaceLobby,
-    BowlingRoom,
+    BowlingGame,
     ThirdFloor,
     FourthFloor,
-    RoomSelection,
-    BowlingGame,
-    Game2,
-    Game3,
-    AvatarRoom,
-    Count
+    OvalRoom,
 }

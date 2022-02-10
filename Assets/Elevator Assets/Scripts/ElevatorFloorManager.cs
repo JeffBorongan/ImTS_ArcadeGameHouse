@@ -24,6 +24,7 @@ public class ElevatorFloorManager : MonoBehaviour
         }
     } 
 
+    public GameObject elevatorPrefab;
     public GameObject elevatorDoorLeft;
     public GameObject elevatorDoorRight;
     public Button[] elevatorButtons;
