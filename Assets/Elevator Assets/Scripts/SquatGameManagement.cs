@@ -6,7 +6,6 @@ using DG.Tweening;
 using UnityEngine.AI;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
-using UnityEngine.UI;
 
 public class SquatGameManagement : GameManagement
 {

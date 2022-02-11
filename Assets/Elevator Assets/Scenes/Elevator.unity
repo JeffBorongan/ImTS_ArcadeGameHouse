@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 73dc26989879de5419517cbaf392a6ba, type: 2}
 --- !u!1 &77501314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2044336842579096303, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
@@ -2263,6 +2263,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09755924f4a819040b5ec1aa96df7bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1576820757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7956196996324451774, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+  m_PrefabInstance: {fileID: 1576820750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1727998050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2563,6 +2568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809d2b2c24b3824db7056288dfdb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 1576820757}
   elevatorPrefab: {fileID: 1727998054}
   elevatorDoorLeft: {fileID: 1727998052}
   elevatorDoorRight: {fileID: 77501314}

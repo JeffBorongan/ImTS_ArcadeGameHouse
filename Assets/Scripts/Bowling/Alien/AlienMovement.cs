@@ -41,7 +41,7 @@ public class AlienMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "BowlingBall")
+        if (other.gameObject.tag == "BowlingBall" || other.gameObject.tag == "Whacker")
         {
             OnDeath.Invoke();
             gameObject.SetActive(false);
