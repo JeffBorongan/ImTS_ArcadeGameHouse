@@ -39,7 +39,7 @@ public class ElevatorFloorManager : MonoBehaviour
 
     void Start()
     {
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        SceneManager.LoadScene(((int)floor.SpaceLobby), LoadSceneMode.Additive);
     }
 
     public void onPressedElevatorButton(int floor)
