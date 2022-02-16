@@ -2,9 +2,9 @@
 { 
     None = -1,
     Elevator,
+    InventoryRoom,
+    SquatGame,
     SpaceLobby,
     BowlingGame,
-    ThirdFloor,
-    FourthFloor,
     OvalRoom,
 }

@@ -9,6 +9,20 @@ using UnityEngine.XR;
 
 public class UXManager : MonoBehaviour
 {
+    public static UXManager Instance { private set; get; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     [Header("Control Panel")]
     [SerializeField] private Transform controlPanel = null;
     [SerializeField] private Button btnCollapseControlPanel = null;
@@ -16,7 +30,7 @@ public class UXManager : MonoBehaviour
     private Vector3 controlPanelStartPos = Vector3.zero;
 
     [Header("Spawning")]
-    [SerializeField] private TMP_InputField spawnTime = null;
+    [SerializeField] private TMP_InputField enemySpawnInterval = null;
 
     [SerializeField] private Button btnLeftLaneChecked = null;
     [SerializeField] private Button btnLeftLaneUnchecked = null;
@@ -30,23 +44,17 @@ public class UXManager : MonoBehaviour
     private List<Side> currentLanesEnabled = new List<Side>();
 
     [Header("Alien")]
-    [SerializeField] private TMP_InputField alienMovementSpeed = null;
-    [SerializeField] private TMP_InputField pointPerAlien = null;
+    [SerializeField] private TMP_InputField enemySpeed = null;
 
     [Header("Goal")]
     [SerializeField] private TMP_InputField pointsToEarn = null;
-    [SerializeField] private TMP_InputField timeToBeat = null;
-    [SerializeField] private TMP_InputField aliensReachedTheCockpit = null;
+    [SerializeField] private TMP_InputField numberOfFails = null;
 
-    [Header("Start")]
-    [SerializeField] private Button btnStart = null;
-    [SerializeField] private Button btnStop = null;
+    [Header("Player")]
+    [SerializeField] private TMP_InputField dispenserOffset = null;
 
     [Header("Update")]
     [SerializeField] private Button btnUpdate = null;
-
-    //[Header("Result")]
-    //[SerializeField] private GameObject resultsPanel = null;
 
     private void Start()
     {
@@ -61,24 +69,18 @@ public class UXManager : MonoBehaviour
         btnRightLaneChecked.onClick.AddListener(() => { SetLanes(Side.Right, false); });
         btnRightLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Right, true); });
 
-        btnStart.onClick.AddListener(HandleOnStart);
-        btnStop.onClick.AddListener(HandleOnStop);
-
         btnUpdate.onClick.AddListener(HandleOnUpdate);
 
-        spawnTime.onValueChanged.AddListener(HandleOnChange);
-        alienMovementSpeed.onValueChanged.AddListener(HandleOnChange);
-        pointPerAlien.onValueChanged.AddListener(HandleOnChange);
+        enemySpawnInterval.onValueChanged.AddListener(HandleOnChange);
+        enemySpeed.onValueChanged.AddListener(HandleOnChange);
         pointsToEarn.onValueChanged.AddListener(HandleOnChange);
-        timeToBeat.onValueChanged.AddListener(HandleOnChange);
-        aliensReachedTheCockpit.onValueChanged.AddListener(HandleOnChange);
+        numberOfFails.onValueChanged.AddListener(HandleOnChange);
+        dispenserOffset.onValueChanged.AddListener(HandleOnChange);
 
         btnCollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(true); });
         btnUncollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(false); });
 
         controlPanelStartPos = controlPanel.position;
-
-        GameManager.Instance.OnGameEnd.AddListener(HandleOnGameEnd);
 
         SetUIWithSessionData();
     }
@@ -90,12 +92,11 @@ public class UXManager : MonoBehaviour
         if (!LocalSavingManager.Instance.IsLocalDataStored("Space"))
         {
             SpaceBowlingSaveData defaultData = new SpaceBowlingSaveData();
-            defaultData.spawnTimeValue = 5f;
-            defaultData.alienMovementSpeedValue = 1f;
-            defaultData.pointPerAlienValue = 1;
-            defaultData.pointsToEarnValue = 20;
-            defaultData.aliensReachedTheCockpitValue = 1;
-            defaultData.timeToBeatValue = 120;
+            defaultData.enemySpawnIntervalValue = 3f;
+            defaultData.enemySpeedValue = 1f;
+            defaultData.pointsToEarnValue = 100;
+            defaultData.numberOfFailsValue = 2;
+            defaultData.dispenserOffsetValue = 0.5f;
 
             defaultData.lanes = "0,1,2,";
 
@@ -106,12 +107,11 @@ public class UXManager : MonoBehaviour
             localData = LocalSavingManager.Instance.GetLocalData<SpaceBowlingSaveData>("Space");
         }
 
-        spawnTime.text = localData.spawnTimeValue.ToString();
-        alienMovementSpeed.text = localData.alienMovementSpeedValue.ToString();
-        pointPerAlien.text = localData.pointPerAlienValue.ToString();
+        enemySpawnInterval.text = localData.enemySpawnIntervalValue.ToString();
+        enemySpeed.text = localData.enemySpeedValue.ToString();
         pointsToEarn.text = localData.pointsToEarnValue.ToString();
-        aliensReachedTheCockpit.text = localData.aliensReachedTheCockpitValue.ToString();
-        timeToBeat.text = localData.timeToBeatValue.ToString();
+        numberOfFails.text = localData.numberOfFailsValue.ToString();
+        dispenserOffset.text = localData.dispenserOffsetValue.ToString();
 
         string[] rawLanes = localData.lanes.Split(',');
 
@@ -147,12 +147,11 @@ public class UXManager : MonoBehaviour
         SpaceBowlingSaveData newData = new SpaceBowlingSaveData();
 
         newData.dataID = "Space";
-        newData.spawnTimeValue = float.Parse(spawnTime.text);
-        newData.alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
-        newData.pointPerAlienValue = int.Parse(pointPerAlien.text);
+        newData.enemySpawnIntervalValue = float.Parse(enemySpawnInterval.text);
+        newData.enemySpeedValue = float.Parse(enemySpeed.text);
         newData.pointsToEarnValue = int.Parse(pointsToEarn.text);
-        newData.aliensReachedTheCockpitValue = int.Parse(aliensReachedTheCockpit.text);
-        newData.timeToBeatValue = int.Parse(timeToBeat.text);
+        newData.numberOfFailsValue = int.Parse(numberOfFails.text);
+        newData.dispenserOffsetValue = float.Parse(dispenserOffset.text);
 
         foreach (var lane in currentLanesEnabled)
         {
@@ -160,12 +159,6 @@ public class UXManager : MonoBehaviour
         }
 
         LocalSavingManager.Instance.SaveLocalData(newData);
-    }
-
-    private void HandleOnGameEnd(bool win)
-    {
-        btnStart.gameObject.SetActive(true);
-        btnStop.gameObject.SetActive(false);
     }
 
     private void CollapseControlPanel(bool collapse)
@@ -188,23 +181,26 @@ public class UXManager : MonoBehaviour
 
     private void HandleOnChange(string value)
     {
-        if (GameManager.Instance.CurrentLevel == null) { return; }
-
-        if (!GameManager.Instance.CurrentLevel.isStarted) { return; }
-
         btnUpdate.interactable = true;
     }
 
     private void HandleOnUpdate()
     {
-        float spawnTimeValue = float.Parse(spawnTime.text);
-        float alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
-        int pointPerAlienValue = int.Parse(pointPerAlien.text);
+        float enemySpawnIntervalValue = float.Parse(enemySpawnInterval.text);
+        float enemySpeedValue = float.Parse(enemySpeed.text);
         int pointsToEarnValue = int.Parse(pointsToEarn.text);
-        int aliensReachedTheCockpitValue = int.Parse(aliensReachedTheCockpit.text);
-        int timeToBeatValue = int.Parse(timeToBeat.text);
+        int numberOfFailsValue = int.Parse(numberOfFails.text);
+        float dispenserOffsetValue = float.Parse(dispenserOffset.text);
 
-        GameManager.Instance.UpdateLevel(new Level(alienMovementSpeedValue, spawnTimeValue, aliensReachedTheCockpitValue, pointPerAlienValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
+        BowlingGameManagement.Instance.sessionData.enemySpawnInterval = enemySpawnIntervalValue;
+        BowlingGameManagement.Instance.sessionData.enemySpeed = enemySpeedValue;
+        BowlingGameManagement.Instance.sessionData.pointsToEarn = pointsToEarnValue;
+        BowlingGameManagement.Instance.sessionData.numberOfFails = numberOfFailsValue;
+        BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
+        BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
+
+        BowlingGameManagement.Instance.UpdateDispensers(BodyMeasurement.Instance.CurrentAnatomy);
+        BowlingGameManagement.Instance.UpdateSpawningLanes();
 
         btnUpdate.interactable = false;
 
@@ -222,28 +218,23 @@ public class UXManager : MonoBehaviour
             currentLanesEnabled.Remove(side);
         }
 
-        if (GameManager.Instance.CurrentLevel == null) { return; }
-
-        if (!GameManager.Instance.CurrentLevel.isStarted) { return; }
-
         btnUpdate.interactable = true;
     }
 
-    private void HandleOnStop()
+    public void HandleOnStart()
     {
-        GameManager.Instance.StopGame();
-    }
-
-    private void HandleOnStart()
-    {
-        float spawnTimeValue = float.Parse(spawnTime.text);
-        float alienMovementSpeedValue = float.Parse(alienMovementSpeed.text);
-        int pointPerAlienValue = int.Parse(pointPerAlien.text);
+        float enemySpawnIntervalValue = float.Parse(enemySpawnInterval.text);
+        float enemySpeedValue = float.Parse(enemySpeed.text);
         int pointsToEarnValue = int.Parse(pointsToEarn.text);
-        int aliensReachedTheCockpitValue = int.Parse(aliensReachedTheCockpit.text);
-        int timeToBeatValue = int.Parse(timeToBeat.text);
+        int numberOfFailsValue = int.Parse(numberOfFails.text);
+        float dispenserOffsetValue = float.Parse(dispenserOffset.text);
 
-        GameManager.Instance.StartGame(new Level(alienMovementSpeedValue, spawnTimeValue, aliensReachedTheCockpitValue, pointPerAlienValue, pointsToEarnValue, timeToBeatValue, currentLanesEnabled, new List<GameObject>()));
+        BowlingGameManagement.Instance.sessionData.enemySpawnInterval = enemySpawnIntervalValue;
+        BowlingGameManagement.Instance.sessionData.enemySpeed = enemySpeedValue;
+        BowlingGameManagement.Instance.sessionData.pointsToEarn = pointsToEarnValue;
+        BowlingGameManagement.Instance.sessionData.numberOfFails = numberOfFailsValue;
+        BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
+        BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
 
         SaveSessionData();
     }

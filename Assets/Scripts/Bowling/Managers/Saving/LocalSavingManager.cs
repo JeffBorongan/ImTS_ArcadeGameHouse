@@ -48,12 +48,11 @@ public class SaveData
 
 public class SpaceBowlingSaveData : SaveData
 {
-    public float spawnTimeValue = 0f;
-    public float alienMovementSpeedValue = 0f;
-    public int pointPerAlienValue = 0;
+    public float enemySpawnIntervalValue = 0f;
+    public float enemySpeedValue = 0f;
     public int pointsToEarnValue = 0;
-    public int aliensReachedTheCockpitValue = 0;
-    public int timeToBeatValue = 0;
+    public int numberOfFailsValue = 0;
+    public float dispenserOffsetValue = 0f;
     public string lanes = "";
 }
 

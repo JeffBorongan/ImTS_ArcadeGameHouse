@@ -13,7 +13,7 @@ public class BowlingGameManagement : GameManagement
     #region Singleton
 
     public static BowlingGameManagement Instance { private set; get; }
-
+  
     private void Awake()
     {
         if (Instance == null)
@@ -30,7 +30,7 @@ public class BowlingGameManagement : GameManagement
 
     #region Parameters
 
-    private BowlingSessionData sessionData = null;
+    public BowlingSessionData sessionData = null;
 
     [Header("Enemy Spawning")]
     [SerializeField] private Transform cockpitPosition = null;
@@ -107,19 +107,27 @@ public class BowlingGameManagement : GameManagement
         rightBallDispenser.gameObject.SetActive(true);
     }
 
+    public void UpdateDispensers(Dictionary<string, Vector3> newAnatomy)
+    {
+        Vector3 leftHandPos = newAnatomy[AnatomyPart.LeftHand.ToString()];
+        Vector3 rightHandPos = newAnatomy[AnatomyPart.RightHand.ToString()];
+
+        leftBallDispenser.transform.localPosition = new Vector3(rightHandPos.x + sessionData.dispenserOffset, leftBallDispenser.transform.localPosition.y, leftBallDispenser.transform.localPosition.z);
+        rightBallDispenser.transform.localPosition = new Vector3(leftHandPos.x + -sessionData.dispenserOffset, rightBallDispenser.transform.localPosition.y, rightBallDispenser.transform.localPosition.z);
+    }
+
     #endregion
 
     #region Game Start
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
+        sessionData = (BowlingSessionData)data;
         pnlStartGame.gameObject.SetActive(true);
-
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
-            sessionData = (BowlingSessionData)data;
-
+            UXManager.Instance.HandleOnStart();
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
                 imgTimerIcon.gameObject.SetActive(true);
@@ -203,6 +211,21 @@ public class BowlingGameManagement : GameManagement
         StartCoroutine(spawningCour);
     }
 
+    public void UpdateSpawningLanes()
+    {
+        SpawnPointGenerator = new System.Random(DateTime.Now.Ticks.GetHashCode());
+        spawnPointsGenerated.Clear();
+        lanesStatus.Clear();
+
+        foreach (var lane in sessionData.lanes)
+        {
+            for (int i = 0; i < (int)Side.Count; i++)
+            {
+                lanesStatus.Add(new KeyValuePair<Side, Side>(lane, (Side)i), false);
+            }
+        }
+    }
+
     IEnumerator SpawningCour()
     {
         while (isSpawning)
@@ -227,7 +250,7 @@ public class BowlingGameManagement : GameManagement
                 }
             }
 
-            yield return new WaitForSeconds(sessionData.enemySpawnTime);
+            yield return new WaitForSeconds(sessionData.enemySpawnInterval / sessionData.enemySpeed);
         }
     }
 
@@ -240,7 +263,7 @@ public class BowlingGameManagement : GameManagement
         spawnedAliens.Add(clone);
 
         AlienMovement alien = clone.GetComponent<AlienMovement>();
-        alien.SetMovementSpeed(sessionData.enemySpeed);
+        alien.SetMovementSpeed(sessionData.enemySpeed * 0.7f);
         alien.PathPoint = cockpitPosition;
         alien.GoToTheCockpit();
 
@@ -338,14 +361,14 @@ public class BowlingGameManagement : GameManagement
     }
     IEnumerator EnemyCheckingCour(UnityAction OnEndGame)
     {
-        yield return new WaitUntil(() => currentEnemyReachedCockpit >= sessionData.enemyReachedTheCockpit);
+        yield return new WaitUntil(() => currentEnemyReachedCockpit >= sessionData.numberOfFails);
         OnEndGame.Invoke();
     }
 
     private void AddEnemyReachedCockpit()
     {
         currentEnemyReachedCockpit++;
-        if (currentEnemyReachedCockpit == sessionData.enemyReachedTheCockpit)
+        if (currentEnemyReachedCockpit == sessionData.numberOfFails)
         {
             ShowGameResult(false);
         }
@@ -434,13 +457,12 @@ public class BowlingGameManagement : GameManagement
 
 public class BowlingSessionData : SessionData
 {
-    public float enemySpawnTime = 5f;
     public List<Side> lanes = new List<Side>() { Side.Left, Side.Middle, Side.Right };
-    public float enemySpeed = 0.5f;
+    public float enemySpeed = 1f;
+    public float enemySpawnInterval = 3f;
+    public int pointsToEarn = 100;
+    public int numberOfFails = 2;
     public int pointPerEnemy = 5;
-
-    public int pointsToEarn = 60;
-    public int timeDuration = 240;
-
-    public int enemyReachedTheCockpit = 1;
+    public int timeDuration = 180;
+    public float dispenserOffset = 0.5f;
 }
