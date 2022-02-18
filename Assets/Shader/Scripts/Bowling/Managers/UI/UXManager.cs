@@ -30,13 +30,21 @@ public class UXManager : MonoBehaviour
     private List<Side> currentLanesEnabled = new List<Side>();
 
     [Header("Parameters")]
-    [SerializeField] private TMP_InputField enemySpawnInterval = null;
-    [SerializeField] private TMP_InputField enemySpeed = null;
+    [SerializeField] private Slider enemySpawnInterval = null;
+    [SerializeField] private TMP_Text txtEnemySpawnInterval = null;
+    [SerializeField] private Slider enemySpeed = null;
+    [SerializeField] private TMP_Text txtEnemySpeed = null;
     [SerializeField] private TMP_InputField dispenserOffset = null;
     [SerializeField] private TMP_InputField pointsToEarn = null;
     [SerializeField] private TMP_InputField numberOfFails = null;
 
     [SerializeField] private Button btnUpdate = null;
+
+    private float enemySpawnIntervalValue = 5f;
+    private float enemySpeedValue = 0.5f;
+    private int pointsToEarnValue = 100;
+    private int numberOfFailsValue = 2;
+    private float dispenserOffsetValue = 0.5f;
 
     private void Start()
     {
@@ -53,50 +61,48 @@ public class UXManager : MonoBehaviour
 
         btnUpdate.onClick.AddListener(HandleOnUpdate);
 
-        enemySpawnInterval.onValueChanged.AddListener(HandleOnChange);
-        enemySpeed.onValueChanged.AddListener(HandleOnChange);
-        pointsToEarn.onValueChanged.AddListener(HandleOnChange);
-        numberOfFails.onValueChanged.AddListener(HandleOnChange);
-        dispenserOffset.onValueChanged.AddListener(HandleOnChange);
+        enemySpawnInterval.onValueChanged.AddListener(HandleOnChangeEnemySpawnInterval);
+        enemySpeed.onValueChanged.AddListener(HandleOnChangeEnemySpeed);
+        pointsToEarn.onValueChanged.AddListener(HandleOnChangeTextField);
+        numberOfFails.onValueChanged.AddListener(HandleOnChangeTextField);
+        dispenserOffset.onValueChanged.AddListener(HandleOnChangeTextField);
 
-        SetUIWithSessionData();
+        SetUIWithDefaultValues();
     }
 
-    void SetUIWithSessionData()
+    private void SetLanes(Side side, bool add)
     {
-        SpaceBowlingSaveData localData = null;
-
-        if (!LocalSavingManager.Instance.IsLocalDataStored("Space"))
+        if (add)
         {
-            SpaceBowlingSaveData defaultData = new SpaceBowlingSaveData();
-            defaultData.enemySpawnIntervalValue = 3f;
-            defaultData.enemySpeedValue = 1f;
-            defaultData.pointsToEarnValue = 100;
-            defaultData.numberOfFailsValue = 2;
-            defaultData.dispenserOffsetValue = 0.5f;
-
-            defaultData.lanes = "0,1,2,";
-
-            localData = defaultData;
+            currentLanesEnabled.Add(side);
         }
         else
         {
-            localData = LocalSavingManager.Instance.GetLocalData<SpaceBowlingSaveData>("Space");
+            currentLanesEnabled.Remove(side);
         }
 
-        enemySpawnInterval.text = localData.enemySpawnIntervalValue.ToString();
-        enemySpeed.text = localData.enemySpeedValue.ToString();
-        pointsToEarn.text = localData.pointsToEarnValue.ToString();
-        numberOfFails.text = localData.numberOfFailsValue.ToString();
-        dispenserOffset.text = localData.dispenserOffsetValue.ToString();
+        btnUpdate.interactable = true;
+    }
 
-        string[] rawLanes = localData.lanes.Split(',');
+    private void SetUIWithDefaultValues()
+    {
+        enemySpawnIntervalValue = Mathf.Round(enemySpawnIntervalValue * 100f) / 100f;
+        enemySpeedValue = Mathf.Round(enemySpeedValue * 100f) / 100f;
+        dispenserOffsetValue = Mathf.Round(dispenserOffsetValue * 100f) / 100f;
 
-        foreach (var lane in rawLanes)
+        enemySpawnInterval.value = enemySpawnIntervalValue;
+        enemySpeed.value = enemySpeedValue;
+        pointsToEarn.text = pointsToEarnValue.ToString();
+        numberOfFails.text = numberOfFailsValue.ToString();
+        dispenserOffset.text = dispenserOffsetValue.ToString();
+
+        List<Side> lanes = new List<Side>() { Side.Left, Side.Middle, Side.Right };
+
+        foreach (var lane in lanes)
         {
-            if (lane != "")
+            if (lane != Side.None)
             {
-                Side newLane = (Side)int.Parse(lane);
+                Side newLane = lane;
 
                 switch (newLane)
                 {
@@ -116,40 +122,58 @@ public class UXManager : MonoBehaviour
                 }
             }
         }
-
     }
 
-    void SaveSessionData()
+    private void HandleOnChangeEnemySpawnInterval(float value)
     {
-        SpaceBowlingSaveData newData = new SpaceBowlingSaveData();
-
-        newData.dataID = "Space";
-        newData.enemySpawnIntervalValue = float.Parse(enemySpawnInterval.text);
-        newData.enemySpeedValue = float.Parse(enemySpeed.text);
-        newData.pointsToEarnValue = int.Parse(pointsToEarn.text);
-        newData.numberOfFailsValue = int.Parse(numberOfFails.text);
-        newData.dispenserOffsetValue = float.Parse(dispenserOffset.text);
-
-        foreach (var lane in currentLanesEnabled)
-        {
-            newData.lanes += (int)lane + ",";
-        }
-
-        LocalSavingManager.Instance.SaveLocalData(newData);
+        value = Mathf.Round(value * 100f) / 100f;
+        txtEnemySpawnInterval.text = value.ToString();
+        btnUpdate.interactable = true;
     }
 
-    private void HandleOnChange(string value)
+    private void HandleOnChangeEnemySpeed(float value)
+    {
+        value = Mathf.Round(value * 100f) / 100f;
+        txtEnemySpeed.text = value.ToString();
+        btnUpdate.interactable = true;
+    }
+
+    private void HandleOnChangeTextField(string value)
     {
         btnUpdate.interactable = true;
     }
 
+    public void HandleOnStart()
+    {
+        enemySpawnIntervalValue = enemySpawnInterval.value;
+        enemySpeedValue = enemySpeed.value;
+        pointsToEarnValue = int.Parse(pointsToEarn.text);
+        numberOfFailsValue = int.Parse(numberOfFails.text);
+        dispenserOffsetValue = float.Parse(dispenserOffset.text);
+
+        enemySpawnIntervalValue = Mathf.Round(enemySpawnIntervalValue * 100f) / 100f;
+        enemySpeedValue = Mathf.Round(enemySpeedValue * 100f) / 100f;
+        dispenserOffsetValue = Mathf.Round(dispenserOffsetValue * 100f) / 100f;
+
+        BowlingGameManagement.Instance.sessionData.enemySpawnInterval = enemySpawnIntervalValue;
+        BowlingGameManagement.Instance.sessionData.enemySpeed = enemySpeedValue;
+        BowlingGameManagement.Instance.sessionData.pointsToEarn = pointsToEarnValue;
+        BowlingGameManagement.Instance.sessionData.numberOfFails = numberOfFailsValue;
+        BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
+        BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
+    }
+
     private void HandleOnUpdate()
     {
-        float enemySpawnIntervalValue = float.Parse(enemySpawnInterval.text);
-        float enemySpeedValue = float.Parse(enemySpeed.text);
-        int pointsToEarnValue = int.Parse(pointsToEarn.text);
-        int numberOfFailsValue = int.Parse(numberOfFails.text);
-        float dispenserOffsetValue = float.Parse(dispenserOffset.text);
+        enemySpawnIntervalValue = enemySpawnInterval.value;
+        enemySpeedValue = enemySpeed.value;
+        pointsToEarnValue = int.Parse(pointsToEarn.text);
+        numberOfFailsValue = int.Parse(numberOfFails.text);
+        dispenserOffsetValue = float.Parse(dispenserOffset.text);
+
+        enemySpawnIntervalValue = Mathf.Round(enemySpawnIntervalValue * 100f) / 100f;
+        enemySpeedValue = Mathf.Round(enemySpeedValue * 100f) / 100f;
+        dispenserOffsetValue = Mathf.Round(dispenserOffsetValue * 100f) / 100f;
 
         BowlingGameManagement.Instance.sessionData.enemySpawnInterval = enemySpawnIntervalValue;
         BowlingGameManagement.Instance.sessionData.enemySpeed = enemySpeedValue;
@@ -163,38 +187,8 @@ public class UXManager : MonoBehaviour
 
         btnUpdate.interactable = false;
 
-        SaveSessionData();
-    }
-
-    private void SetLanes(Side side, bool add)
-    {
-        if (add)
-        {
-            currentLanesEnabled.Add(side);
-        }
-        else
-        {
-            currentLanesEnabled.Remove(side);
-        }
-
-        btnUpdate.interactable = true;
-    }
-
-    public void HandleOnStart()
-    {
-        float enemySpawnIntervalValue = float.Parse(enemySpawnInterval.text);
-        float enemySpeedValue = float.Parse(enemySpeed.text);
-        int pointsToEarnValue = int.Parse(pointsToEarn.text);
-        int numberOfFailsValue = int.Parse(numberOfFails.text);
-        float dispenserOffsetValue = float.Parse(dispenserOffset.text);
-
-        BowlingGameManagement.Instance.sessionData.enemySpawnInterval = enemySpawnIntervalValue;
-        BowlingGameManagement.Instance.sessionData.enemySpeed = enemySpeedValue;
-        BowlingGameManagement.Instance.sessionData.pointsToEarn = pointsToEarnValue;
-        BowlingGameManagement.Instance.sessionData.numberOfFails = numberOfFailsValue;
-        BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
-        BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
-
-        SaveSessionData();
+        print("Interval " + enemySpawnIntervalValue);
+        print("Speed " + enemySpeedValue);
+        print("Dispenser" + dispenserOffsetValue);
     }
 }

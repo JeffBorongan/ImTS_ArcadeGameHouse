@@ -212,6 +212,7 @@ public class SpawnPoint
 
 public enum Side
 {
+    None = -1,
     Left,
     Middle,
     Right,

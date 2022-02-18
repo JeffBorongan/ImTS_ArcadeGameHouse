@@ -16,10 +16,14 @@ public class VoiceOverManager : MonoBehaviour
 
     [Header("Space Lobby")]
     [SerializeField] private Button btnWelcomeRanger = null;
+    [SerializeField] private Button btnAreYouReady = null;
     [SerializeField] private Button btnCustomizeSuit = null;
+    [SerializeField] private Button btnGoodbye = null;
 
     [SerializeField] private AudioClip welcomeRangerClip = null;
+    [SerializeField] private AudioClip areYouReadyClip = null;
     [SerializeField] private AudioClip customizeSuitClip = null;
+    [SerializeField] private AudioClip goodbyeClip = null;
 
     [Header("Bowling Game")]
     [SerializeField] private Button btnWelcomeGame1 = null;
@@ -52,7 +56,9 @@ public class VoiceOverManager : MonoBehaviour
         btnSpaceLobby.onClick.AddListener(() => HandleOnPlay(spaceLobbyClip));
 
         btnWelcomeRanger.onClick.AddListener(() => HandleOnPlay(welcomeRangerClip));
+        btnAreYouReady.onClick.AddListener(() => HandleOnPlay(areYouReadyClip));
         btnCustomizeSuit.onClick.AddListener(() => HandleOnPlay(customizeSuitClip));
+        btnGoodbye.onClick.AddListener(() => HandleOnPlay(goodbyeClip));
 
         btnWelcomeGame1.onClick.AddListener(() => HandleOnPlay(welcomeGame1Clip));
         btnGiveInstruction.onClick.AddListener(() => HandleOnPlay(giveInstructionClip));
