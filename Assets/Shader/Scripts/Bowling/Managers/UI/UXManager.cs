@@ -1,6 +1,3 @@
-using DG.Tweening;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -23,37 +20,22 @@ public class UXManager : MonoBehaviour
         }
     }
 
-    [Header("Control Panel")]
-    [SerializeField] private Transform controlPanel = null;
-    [SerializeField] private Button btnCollapseControlPanel = null;
-    [SerializeField] private Button btnUncollapseControlPanel = null;
-    private Vector3 controlPanelStartPos = Vector3.zero;
-
-    [Header("Spawning")]
-    [SerializeField] private TMP_InputField enemySpawnInterval = null;
-
+    [Header("Lanes")]
     [SerializeField] private Button btnLeftLaneChecked = null;
     [SerializeField] private Button btnLeftLaneUnchecked = null;
-
     [SerializeField] private Button btnMiddleLaneChecked = null;
     [SerializeField] private Button btnMiddleLaneUnchecked = null;
-
     [SerializeField] private Button btnRightLaneChecked = null;
     [SerializeField] private Button btnRightLaneUnchecked = null;
-
     private List<Side> currentLanesEnabled = new List<Side>();
 
-    [Header("Alien")]
+    [Header("Parameters")]
+    [SerializeField] private TMP_InputField enemySpawnInterval = null;
     [SerializeField] private TMP_InputField enemySpeed = null;
-
-    [Header("Goal")]
+    [SerializeField] private TMP_InputField dispenserOffset = null;
     [SerializeField] private TMP_InputField pointsToEarn = null;
     [SerializeField] private TMP_InputField numberOfFails = null;
 
-    [Header("Player")]
-    [SerializeField] private TMP_InputField dispenserOffset = null;
-
-    [Header("Update")]
     [SerializeField] private Button btnUpdate = null;
 
     private void Start()
@@ -76,11 +58,6 @@ public class UXManager : MonoBehaviour
         pointsToEarn.onValueChanged.AddListener(HandleOnChange);
         numberOfFails.onValueChanged.AddListener(HandleOnChange);
         dispenserOffset.onValueChanged.AddListener(HandleOnChange);
-
-        btnCollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(true); });
-        btnUncollapseControlPanel.onClick.AddListener(() => { CollapseControlPanel(false); });
-
-        controlPanelStartPos = controlPanel.position;
 
         SetUIWithSessionData();
     }
@@ -159,24 +136,6 @@ public class UXManager : MonoBehaviour
         }
 
         LocalSavingManager.Instance.SaveLocalData(newData);
-    }
-
-    private void CollapseControlPanel(bool collapse)
-    {
-        if (collapse)
-        {
-            controlPanel.DOScale(0, 0.3f);
-            controlPanel.DOMove(btnCollapseControlPanel.transform.position, 0.3f).OnComplete(() =>
-            {
-                controlPanel.gameObject.SetActive(false);
-            });
-        }
-        else
-        {
-            controlPanel.gameObject.SetActive(true);
-            controlPanel.DOScale(1, 0.3f);
-            controlPanel.DOMove(controlPanelStartPos, 0.3f);
-        }
     }
 
     private void HandleOnChange(string value)

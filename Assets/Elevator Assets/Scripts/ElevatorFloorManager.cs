@@ -25,6 +25,7 @@ public class ElevatorFloorManager : MonoBehaviour
     } 
 
     public GameObject characterPrefab;
+    public GameObject characterCamera;
     public GameObject elevatorPrefab;
     public GameObject elevatorDoorLeft;
     public GameObject elevatorDoorRight;
@@ -127,7 +128,7 @@ public class ElevatorFloorManager : MonoBehaviour
 
     public void closeDoor(UnityAction onComplete)
     {
-        elevatorDoorLeft.transform.DOMoveX(-0.4738946f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
+        elevatorDoorLeft.transform.DOMoveX(-0.48f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
         elevatorDoorRight.transform.DOMoveX(0.3428232f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
     }
 

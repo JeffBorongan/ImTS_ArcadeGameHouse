@@ -104,25 +104,25 @@ public class AvatarCustomizationManager : MonoBehaviour
         panels.Add(PanelCustomization.LegSelection, pnlLegSelection);
         panels.Add(PanelCustomization.Customization, pnlCustomization);
 
-        List<BodyPartCustomization> vertical1 = new List<BodyPartCustomization>();
-        List<BodyPartCustomization> vertical2 = new List<BodyPartCustomization>();
+        //List<BodyPartCustomization> vertical1 = new List<BodyPartCustomization>();
+        //List<BodyPartCustomization> vertical2 = new List<BodyPartCustomization>();
 
-        for (int i = 0; i < CustomizationShopManager.Instance.BodyPartCustomization.Count; i++)
-        {
-            if (i < 4)
-            {
-                vertical1.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
-            }
-            else
-            {
-                vertical2.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
-            }
-        }
+        //for (int i = 0; i < CustomizationShopManager.Instance.BodyPartCustomization.Count; i++)
+        //{
+        //    if (i < 4)
+        //    {
+        //        vertical1.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
+        //    }
+        //    else
+        //    {
+        //        vertical2.Add(CustomizationShopManager.Instance.BodyPartCustomization[i]);
+        //    }
+        //}
 
-        InitializeCustomization(vertical1, true);
-        InitializeCustomization(vertical2, false);
+        //InitializeCustomization(vertical1, true);
+        //InitializeCustomization(vertical2, false);
 
-        OpenBodyPartSelections(characterCustomization, null, BodyPartID.HELMET);
+        //OpenBodyPartSelections(characterCustomization, null, BodyPartID.HELMET);
 
         btnStart.onClick.AddListener(HandleOnPressStart);
         btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
