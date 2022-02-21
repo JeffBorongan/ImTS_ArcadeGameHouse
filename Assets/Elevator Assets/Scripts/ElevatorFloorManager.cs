@@ -25,6 +25,7 @@ public class ElevatorFloorManager : MonoBehaviour
     } 
 
     public GameObject characterPrefab;
+    public GameObject characterSuit;
     public GameObject characterCamera;
     public GameObject elevatorPrefab;
     public GameObject elevatorDoorLeft;

@@ -10,10 +10,10 @@ public class CharacterCustomization : MonoBehaviour
 
     private void Start()
     {
-        foreach (var bodypart in bodyParts)
-        {
-            bodypart.Initialize();
-        }
+        //foreach (var bodypart in bodyParts)
+        //{
+        //    bodypart.Initialize();
+        //}
     }
 
     public void SetHeight()

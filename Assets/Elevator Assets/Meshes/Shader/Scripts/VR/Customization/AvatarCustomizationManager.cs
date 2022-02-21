@@ -43,6 +43,8 @@ public class AvatarCustomizationManager : MonoBehaviour
     private int legSelected = 0;
     public int LegSelected { get => legSelected; }
 
+    private bool isHeightMeasuringDone = false;
+
     [Space]
     [SerializeField] private string captureHeightMessage = "";
     [SerializeField] private Sprite imgCaptureHeight = null;
@@ -98,7 +100,12 @@ public class AvatarCustomizationManager : MonoBehaviour
         vrRightHandPoint = BodyMeasurement.Instance.VrRightHandPoint;
         characterCustomization = BodyMeasurement.Instance.CharacterCustomization;
 
-        panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
+        if (!isHeightMeasuringDone)
+        {
+            pnlStartScreen.SetActive(true);
+            panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
+        }
+        
         panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
         panels.Add(PanelCustomization.Overlay, pnlOverlay);
         panels.Add(PanelCustomization.LegSelection, pnlLegSelection);
@@ -180,7 +187,8 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void AdjustHeight()
     {
-        characterCustomization.gameObject.SetActive(true);
+        //characterCustomization.gameObject.SetActive(true);
+        ElevatorFloorManager.Instance.characterSuit.SetActive(true);
         characterCustomization.SetHeight();
 
         //if (!characterMimic.gameObject.activeSelf)
@@ -208,6 +216,7 @@ public class AvatarCustomizationManager : MonoBehaviour
 
             StartCoroutine(BodyAnatomyCapture(() =>
             {
+                isHeightMeasuringDone = true;
                 pnlCustomization.transform.position = new Vector3(pnlCustomization.transform.position.x, vrCameraPoint.position.y, pnlCustomization.transform.position.z);
 
                 Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
@@ -258,7 +267,7 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void HandleOnSelectBodyPart(BodyPartID id)
     {
-        OpenBodyPartSelections(characterCustomization, null, id);
+        //OpenBodyPartSelections(characterCustomization, null, id);
     }
 
     private void HandleOnUserDataUpdate(UserData data)

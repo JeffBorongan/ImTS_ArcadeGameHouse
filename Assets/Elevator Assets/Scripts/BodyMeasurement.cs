@@ -14,6 +14,8 @@ public class BodyMeasurement : MonoBehaviour
     [SerializeField] private VRFootIK vrFootIK = null;
     [SerializeField] private Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
 
+    public GameObject[] customizePart = null;
+
     public Transform VrCameraPoint { get => vrCameraPoint; }
     public Transform VrLeftHandPoint { get => vrLeftHandPoint; }
     public Transform VrRightHandPoint { get => vrRightHandPoint; }
