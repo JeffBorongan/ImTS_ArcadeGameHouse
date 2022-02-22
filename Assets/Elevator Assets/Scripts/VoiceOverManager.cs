@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class VoiceOverManager : MonoBehaviour
 
     [SerializeField] private AudioClip bowlingGameClip = null;
     [SerializeField] private AudioClip lockEmUpClip = null;
-    [SerializeField] private AudioClip walkeyMoleyClip = null;
+    //[SerializeField] private AudioClip walkeyMoleyClip = null;
     [SerializeField] private AudioClip spaceLobbyClip = null;
 
     [Header("Space Lobby")]
@@ -50,30 +51,136 @@ public class VoiceOverManager : MonoBehaviour
 
     private void Start()
     {
-        btnBowlingGame.onClick.AddListener(() => HandleOnPlay(bowlingGameClip));
-        btnLockEmUp.onClick.AddListener(() => HandleOnPlay(lockEmUpClip));
-        //btnWalkeyMoley.onClick.AddListener(() => HandleOnPlay(walkeyMoleyClip));
-        btnSpaceLobby.onClick.AddListener(() => HandleOnPlay(spaceLobbyClip));
+        btnBowlingGame.onClick.AddListener(() => 
+        {
+            btnBowlingGame.interactable = false;
+            HandleOnPlay(bowlingGameClip);
+            StartCoroutine(DisableButton(bowlingGameClip.length, btnBowlingGame));
+        });
 
-        btnWelcomeRanger.onClick.AddListener(() => HandleOnPlay(welcomeRangerClip));
-        btnAreYouReady.onClick.AddListener(() => HandleOnPlay(areYouReadyClip));
-        btnCustomizeSuit.onClick.AddListener(() => HandleOnPlay(customizeSuitClip));
-        btnGoodbye.onClick.AddListener(() => HandleOnPlay(goodbyeClip));
+        btnLockEmUp.onClick.AddListener(() => 
+        {
+            btnLockEmUp.interactable = false;
+            HandleOnPlay(lockEmUpClip);
+            StartCoroutine(DisableButton(lockEmUpClip.length, btnLockEmUp));
+        });
 
-        btnWelcomeGame1.onClick.AddListener(() => HandleOnPlay(welcomeGame1Clip));
-        btnGiveInstruction.onClick.AddListener(() => HandleOnPlay(giveInstructionClip));
+        btnSpaceLobby.onClick.AddListener(() => 
+        {
+            btnSpaceLobby.interactable = false;
+            HandleOnPlay(spaceLobbyClip);
+            StartCoroutine(DisableButton(spaceLobbyClip.length, btnSpaceLobby));
+        });
 
-        btnPullUp.onClick.AddListener(() => HandleOnPlay(pullUpClip));
-        btnPushDown.onClick.AddListener(() => HandleOnPlay(pushDownClip));
-        btnWelcomeGame2.onClick.AddListener(() => HandleOnPlay(welcomeGame2Clip));
 
-        btnSpaceLobbyToElevator.onClick.AddListener(() => HandleOnPlay(goToElevatorClip));
-        btnBowlingGameToElevator.onClick.AddListener(() => HandleOnPlay(goToElevatorClip));
-        btnLockEmUpToElevator.onClick.AddListener(() => HandleOnPlay(goToElevatorClip));
+
+
+
+        btnWelcomeRanger.onClick.AddListener(() => 
+        {
+            btnWelcomeRanger.interactable = false;
+            HandleOnPlay(welcomeRangerClip);
+            StartCoroutine(DisableButton(welcomeRangerClip.length, btnWelcomeRanger));
+        });
+
+        btnAreYouReady.onClick.AddListener(() => 
+        {
+            btnAreYouReady.interactable = false;
+            HandleOnPlay(areYouReadyClip);
+            StartCoroutine(DisableButton(areYouReadyClip.length, btnAreYouReady));
+        });
+
+        btnCustomizeSuit.onClick.AddListener(() => 
+        {
+            btnCustomizeSuit.interactable = false;
+            HandleOnPlay(customizeSuitClip);
+            StartCoroutine(DisableButton(customizeSuitClip.length, btnCustomizeSuit));
+        });
+
+        btnGoodbye.onClick.AddListener(() => 
+        {
+            btnGoodbye.interactable = false;
+            HandleOnPlay(goodbyeClip);
+            StartCoroutine(DisableButton(goodbyeClip.length, btnGoodbye));
+        });
+
+
+
+
+
+        btnWelcomeGame1.onClick.AddListener(() => 
+        {
+            btnWelcomeGame1.interactable = false;
+            HandleOnPlay(welcomeGame1Clip);
+            StartCoroutine(DisableButton(welcomeGame1Clip.length, btnWelcomeGame1));
+        });
+
+        btnGiveInstruction.onClick.AddListener(() => 
+        {
+            btnGiveInstruction.interactable = false;
+            HandleOnPlay(giveInstructionClip);
+            StartCoroutine(DisableButton(giveInstructionClip.length, btnGiveInstruction));
+        });
+
+
+
+
+
+        btnPullUp.onClick.AddListener(() => 
+        {
+            btnPullUp.interactable = false;
+            HandleOnPlay(pullUpClip);
+            StartCoroutine(DisableButton(pullUpClip.length, btnPullUp));
+        });
+
+        btnPushDown.onClick.AddListener(() => 
+        {
+            btnPushDown.interactable = false;
+            HandleOnPlay(pushDownClip);
+            StartCoroutine(DisableButton(pushDownClip.length, btnPushDown));
+        });
+
+        btnWelcomeGame2.onClick.AddListener(() => 
+        {
+            btnWelcomeGame2.interactable = false;
+            HandleOnPlay(welcomeGame2Clip);
+            StartCoroutine(DisableButton(welcomeGame2Clip.length, btnWelcomeGame2));
+        });
+
+
+
+
+
+        btnSpaceLobbyToElevator.onClick.AddListener(() => 
+        {
+            btnSpaceLobbyToElevator.interactable = false;
+            HandleOnPlay(goToElevatorClip);
+            StartCoroutine(DisableButton(goToElevatorClip.length, btnSpaceLobbyToElevator));
+        });
+
+        btnBowlingGameToElevator.onClick.AddListener(() => 
+        {
+            btnBowlingGameToElevator.interactable = false;
+            HandleOnPlay(goToElevatorClip);
+            StartCoroutine(DisableButton(goToElevatorClip.length, btnBowlingGameToElevator));
+        });
+
+        btnLockEmUpToElevator.onClick.AddListener(() => 
+        {
+            btnLockEmUpToElevator.interactable = false;
+            HandleOnPlay(goToElevatorClip);
+            StartCoroutine(DisableButton(goToElevatorClip.length, btnLockEmUpToElevator));
+        });
     }
 
     private void HandleOnPlay(AudioClip clip)
     {
         AssistantBehavior.Instance.Speak(clip);
+    }
+
+    IEnumerator DisableButton(float time, Button button)
+    {
+        yield return new WaitForSeconds(time);
+        button.interactable = true;
     }
 }
