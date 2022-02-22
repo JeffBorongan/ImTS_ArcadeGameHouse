@@ -84,6 +84,9 @@ public class AvatarCustomizationManager : MonoBehaviour
     [SerializeField] private GameObject pnlOverlay = null;
     [SerializeField] private TextMeshProUGUI txtMessage = null;
     [SerializeField] private Image imgMessageImage = null;
+    [SerializeField] private AudioClip tPoseInstructionClip = null;
+    [SerializeField] private AudioClip tPoseScanningProgressClip = null;
+    [SerializeField] private AudioClip tPoseScanningCompleteClip = null;
 
     [Header("Transistion")]
     private PanelCustomization currentPanel = PanelCustomization.StartScreen;
@@ -159,6 +162,7 @@ public class AvatarCustomizationManager : MonoBehaviour
         Vector3 leftHandPos = vrLeftHandPoint.position;
         Vector3 rightHandPos = vrRightHandPoint.position;
         float progress = 0f;
+        AssistantBehavior.Instance.Speak(tPoseScanningProgressClip);
 
         while (progress < 100f)
         {
@@ -217,6 +221,7 @@ public class AvatarCustomizationManager : MonoBehaviour
             StartCoroutine(BodyAnatomyCapture(() =>
             {
                 isHeightMeasuringDone = true;
+                AssistantBehavior.Instance.Speak(tPoseScanningCompleteClip);
                 pnlCustomization.transform.position = new Vector3(pnlCustomization.transform.position.x, vrCameraPoint.position.y, pnlCustomization.transform.position.z);
 
                 Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
@@ -380,6 +385,7 @@ public class AvatarCustomizationManager : MonoBehaviour
             imgMessageImage.DOFade(0f, 0.5f).SetDelay(duration + 0.5f);
         }
 
+        AssistantBehavior.Instance.Speak(tPoseInstructionClip);
         txtMessage.gameObject.SetActive(true);
         txtMessage.text = message;
         txtMessage.DOFade(1f, 0.5f).OnComplete(() =>
