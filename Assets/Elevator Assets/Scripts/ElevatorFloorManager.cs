@@ -30,6 +30,9 @@ public class ElevatorFloorManager : MonoBehaviour
     public GameObject elevatorPrefab;
     public GameObject elevatorDoorLeft;
     public GameObject elevatorDoorRight;
+    public AudioSource elevatorSFX;
+    public AudioClip elevatorSFXOpen;
+    public AudioClip elevatorSFXClose;
     public Button[] elevatorButtons;
     public float doorOpeningDelay;
     public float doorClosingDelay = 2f;
@@ -123,12 +126,14 @@ public class ElevatorFloorManager : MonoBehaviour
 
     public void openDoor(UnityAction onComplete)
     {
+        elevatorSFX.PlayOneShot(elevatorSFXOpen, 1f);
         elevatorDoorLeft.transform.DOMoveX(-1.03f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorOpeningDelay);
         elevatorDoorRight.transform.DOMoveX(0.8976f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorOpeningDelay);
     }
 
     public void closeDoor(UnityAction onComplete)
     {
+        elevatorSFX.PlayOneShot(elevatorSFXClose, 1f);
         elevatorDoorLeft.transform.DOMoveX(-0.48f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
         elevatorDoorRight.transform.DOMoveX(0.3428232f, 2f).OnComplete(onComplete.Invoke).SetDelay(doorClosingDelay);
     }
