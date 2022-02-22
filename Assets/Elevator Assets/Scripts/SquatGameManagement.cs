@@ -40,6 +40,7 @@ public class SquatGameManagement : GameManagement
 
     [Header("Doors and Lights")]
     [SerializeField] private List<GameObject> doors = new List<GameObject>();
+    [SerializeField] private List<GameObject> blockers = new List<GameObject>();
     [SerializeField] private List<MeshRenderer> lights = new List<MeshRenderer>();
     [SerializeField] private Texture2D redLightBaseMap;
     [SerializeField] private Texture2D redLightEmissionMap;
@@ -65,6 +66,7 @@ public class SquatGameManagement : GameManagement
     private IEnumerator enemyCheckingCour = null;
     private int currentEnemyReachedTheDoor = 0;
     private int index = 0;
+    private int blockerIndex = 0;
 
     #endregion
 
@@ -88,17 +90,6 @@ public class SquatGameManagement : GameManagement
             sessionData = (SquatGameSessionData)data;
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
-                foreach (var door in doors)
-                {
-                    door.transform.DOMoveY(sessionData.doorFullOpenDistance, sessionData.doorMoveSpeed);
-                }
-
-                foreach (var light in lights)
-                {
-                    light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMap);
-                    light.materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMap);
-                }
-
                 isSpawning = true;
                 spawningCour = SpawningCour();
                 StartCoroutine(spawningCour);
@@ -137,7 +128,10 @@ public class SquatGameManagement : GameManagement
 
     private void Update()
     {
-        UpdateLeverPulling(isSpawning, sessionData.playerLeverLift, sessionData.playerLeverDrop);
+        if (sessionData != null)
+        {
+            UpdateLeverPulling(isSpawning, sessionData.playerLeverLift, sessionData.playerLeverDrop);
+        }
     }
 
     #endregion
@@ -172,7 +166,6 @@ public class SquatGameManagement : GameManagement
 
         alien.OnReachDestination.AddListener(() =>
         {
-            AddEnemyReachedTheDoor();
             alien.OnReachDestination.RemoveAllListeners();
         });
     }
@@ -223,11 +216,13 @@ public class SquatGameManagement : GameManagement
                 {
                     isDoorMovable = true;
                     doors[index].transform.DOMoveY(sessionData.doorHalfCloseDistance, sessionData.doorMoveSpeed);
+                    blockers[blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
                 }
                 if (moveStatus == MoveStatus.Whole)
                 {
                     isDoorMovable = false;
                     doors[index].GetComponent<NavMeshObstacle>().enabled = true;
+                    blockers[++blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
                     lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
                     lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
                     doors[index].transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed).OnComplete(() =>
@@ -241,6 +236,7 @@ public class SquatGameManagement : GameManagement
                         else
                         {
                             index++;
+                            blockerIndex++;
                         }
 
                         proceedToNextSpawn = true;
@@ -298,7 +294,7 @@ public class SquatGameManagement : GameManagement
 public class SquatGameSessionData : SessionData
 {
     public int enemyReachedTheDoor = 1;
-    public float enemySpeed = 0.5f;
+    public float enemySpeed = 1f;
 
     public float playerLeverLift = 1f;
     public float playerLeverDrop = 0.5f;
