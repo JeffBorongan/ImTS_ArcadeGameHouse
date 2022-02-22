@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SpaceLobbyManager : MonoBehaviour
 {
+    [SerializeField] private GameObject spaceshipHologram = null;
+
+    private void Update()
+    {
+        spaceshipHologram.transform.Rotate(0, 0, 10 * Time.deltaTime);
+    }
+
     public void openElevatorDoor()
     {
         ElevatorFloorManager.Instance.openElevatorDoor();
