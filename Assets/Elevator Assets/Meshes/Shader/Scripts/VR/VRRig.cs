@@ -9,11 +9,11 @@ public class VRRig : MonoBehaviour
     private Vector3 headBodyOffset;
 
     [SerializeField] private Color headColorGizmos = Color.black;
-    public VRMap head;
+    public VRMap head = new VRMap();
     [SerializeField] private Color leftHandColorGizmos = Color.black;
-    public VRMap leftHand;
+    public VRMap leftHand = new VRMap();
     [SerializeField] private Color rightHandColorGizmos = Color.black;
-    public VRMap rightHand;
+    public VRMap rightHand = new VRMap();
 
     public bool IsStationary = false;
 
