@@ -62,6 +62,7 @@ public class SquatGameManagement : GameManagement
     [SerializeField] private Color colorFailedText = Color.blue;
     private IEnumerator countdownTimerCour = null;
 
+    [SerializeField] private AudioClip gameSuccessClip = null;
     private AlienMovement alien = null;
     private IEnumerator enemyCheckingCour = null;
     private int currentEnemyReachedTheDoor = 0;
@@ -231,6 +232,7 @@ public class SquatGameManagement : GameManagement
                         {
                             StopGame();
                             ShowGameResult(true);
+                            AssistantBehavior.Instance.Speak(gameSuccessClip);
                             OnGameEnd.Invoke();
                         }
                         else

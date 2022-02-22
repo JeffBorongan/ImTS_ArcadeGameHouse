@@ -44,6 +44,8 @@ public class BowlingGameManagement : GameManagement
 
     private IEnumerator spawningCour = null;
     private bool isSpawning = false;
+    [SerializeField] private AudioClip gameSuccessClip = null;
+    [SerializeField] private AudioClip gameFailClip = null;
 
     [Header("UI")]
     [Header("HUD")]
@@ -384,6 +386,15 @@ public class BowlingGameManagement : GameManagement
 
         txtEndPoints.color = success ? txtEndPoints.color : colorFailedText;
         txtEndResult.color = success ? colorSuccessText : colorFailedText;
+
+        if (success)
+        {
+            AssistantBehavior.Instance.Speak(gameSuccessClip);
+        }
+        else
+        {
+            AssistantBehavior.Instance.Speak(gameFailClip);
+        }
 
         if (!success) { return; }
         UserDataManager.Instance.AddStars(currentPoints);

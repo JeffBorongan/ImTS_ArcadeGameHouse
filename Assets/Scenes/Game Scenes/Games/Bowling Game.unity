@@ -2027,7 +2027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e15938ad4b07a004ca01336ddee50f2a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e15938ad4b07a004ca01336ddee50f2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2035,7 +2035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e15938ad4b07a004ca01336ddee50f2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.216
+      value: 0.1486
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e15938ad4b07a004ca01336ddee50f2a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3926,6 +3926,8 @@ MonoBehaviour:
   - lane: 2
     side: 2
     point: {fileID: 1621644058}
+  gameSuccessClip: {fileID: 8300000, guid: a42573d595690c94f94dae1c2efb7731, type: 3}
+  gameFailClip: {fileID: 8300000, guid: 5c704f4edf7aad040bdf1e33ea196c6c, type: 3}
   pnlHUD: {fileID: 535203834}
   txtCountdownTimer: {fileID: 392648726}
   imgTimerIcon: {fileID: 703230462}
