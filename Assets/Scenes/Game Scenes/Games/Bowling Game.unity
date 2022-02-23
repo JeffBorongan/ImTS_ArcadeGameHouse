@@ -4601,119 +4601,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 168cfa819ae0f174d9a2afc2794047e8, type: 3}
   m_PrefabInstance: {fileID: 826250187}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &762784637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762784636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
-  m_Colliders: []
-  m_InteractionLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_InteractionLayers:
-    m_Bits: 4294967295
-  m_SelectMode: 0
-  m_CustomReticle: {fileID: 0}
-  m_FirstHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_LastHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FirstSelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_LastSelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_SelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_SelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Activated:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Deactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnFirstHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnLastHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectCanceled:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnActivate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnDeactivate:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &762784638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762784636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72eedef87796b04895311f29215dd1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameters:
-    roomName: Game Lobby
-    room: 2
-    point: 13
-    destinationPoint: 8
-    leftDoor: {fileID: 1761476661}
-    rightDoor: {fileID: 1058140736}
-    doorCollider: {fileID: 762784639}
-    highlightColor: {r: 0.45882353, g: 0.99607843, b: 0.99607843, a: 1}
-    highlightInterval: 0.5
-    doorMeshRenderers:
-    - {fileID: 1761476660}
-    - {fileID: 1058140735}
-    alarmAudioClip: {fileID: 0}
-    alarmColor: {r: 1, g: 0, b: 0, a: 1}
-    alarmInterval: 0.5
-    alarmMeshes: []
-    source: {fileID: 0}
-    OnEnterDoor:
-      m_PersistentCalls:
-        m_Calls: []
-  game: 0
-  loadGame: 0
 --- !u!65 &762784639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6226,16 +6113,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9907b1bffc8b9fd43bfa9d7e5dc21f58, type: 3}
---- !u!23 &1058140735 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 9907b1bffc8b9fd43bfa9d7e5dc21f58, type: 3}
-  m_PrefabInstance: {fileID: 1058140734}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1058140736 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9907b1bffc8b9fd43bfa9d7e5dc21f58, type: 3}
-  m_PrefabInstance: {fileID: 1058140734}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1066762901 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7560930676611687777, guid: 5bea790b3b3152f4bad2fe761f006a97, type: 3}
@@ -9086,16 +8963,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c81a3438e47aebe4b9508669ae045e31, type: 3}
---- !u!23 &1761476660 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: c81a3438e47aebe4b9508669ae045e31, type: 3}
-  m_PrefabInstance: {fileID: 1761476659}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1761476661 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c81a3438e47aebe4b9508669ae045e31, type: 3}
-  m_PrefabInstance: {fileID: 1761476659}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1765363888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2068493211402420027, guid: 0d1e69c2b6f688741a648d21189b3ff6, type: 3}
