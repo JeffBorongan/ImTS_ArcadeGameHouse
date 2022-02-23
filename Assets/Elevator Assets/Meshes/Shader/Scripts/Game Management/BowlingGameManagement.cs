@@ -483,7 +483,7 @@ public class BowlingGameManagement : GameManagement
 public class BowlingSessionData : SessionData
 {
     public List<Side> lanes = new List<Side>() { Side.Left, Side.Middle, Side.Right };
-    public float enemySpeed = 0.5f;
+    public float enemySpeed = 1f;
     public float enemySpawnInterval = 5f;
     public int pointsToEarn = 100;
     public int numberOfFails = 2;

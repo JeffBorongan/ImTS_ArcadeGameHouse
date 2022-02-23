@@ -41,7 +41,7 @@ public class UXManager : MonoBehaviour
     [SerializeField] private Button btnUpdate = null;
 
     private float enemySpawnIntervalValue = 5f;
-    private float enemySpeedValue = 0.5f;
+    private float enemySpeedValue = 1f;
     private int pointsToEarnValue = 100;
     private int numberOfFailsValue = 2;
     private float dispenserOffsetValue = 0.5f;

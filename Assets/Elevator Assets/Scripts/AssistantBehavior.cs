@@ -57,6 +57,5 @@ public class AssistantBehavior : MonoBehaviour
         isReadyToLoop = false;
         transform.DOMoveY(maxUpLocation, 3f).SetEase(Ease.Linear).OnComplete(() => transform.DOMoveY(maxDownLocation, 6f).SetEase(Ease.Linear).OnComplete(() => transform.DOMoveY(originalLocation, 3f).SetEase(Ease.Linear).OnComplete(() => isReadyToLoop = true)));
         yield return new WaitUntil(() => isReadyToLoop);
-        print("COMPLETED");
     }
 }

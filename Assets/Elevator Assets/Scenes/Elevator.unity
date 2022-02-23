@@ -708,6 +708,7 @@ RectTransform:
   - {fileID: 1508892383}
   - {fileID: 1907930635}
   - {fileID: 1962419385}
+  - {fileID: 1781132541}
   m_Father: {fileID: 2090711806}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2201,10 +2202,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Therapist View
       objectReference: {fileID: 0}
-    - target: {fileID: 5741369601615251837, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
-      propertyPath: welcomeGame1Clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3e3921f53f04766498fa13b16a9878db, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
 --- !u!1 &1037616580 stripped
@@ -4793,6 +4790,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8532969, y: 2.3306954, z: 1.8093264}
   m_Center: {x: -0.063979566, y: 0.6653477, z: -0.006290078}
+--- !u!1 &1781132540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1781132541}
+  - component: {fileID: 1781132543}
+  - component: {fileID: 1781132542}
+  m_Layer: 0
+  m_Name: Dementia
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1781132541
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781132540}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0.258}
+  m_LocalScale: {x: 0.00025871166, y: 0.00025871166, z: 0.00025871166}
+  m_Children: []
+  m_Father: {fileID: 321000071}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.856, y: 1.337}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1781132542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781132540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9dbafd63d4bc2464a95da87427e393c6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1781132543
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781132540}
+  m_CullTransparentMesh: 1
 --- !u!1 &1795055211
 GameObject:
   m_ObjectHideFlags: 0
@@ -5502,7 +5574,7 @@ MonoBehaviour:
   elevatorDoorLeft: {fileID: 1727998052}
   elevatorDoorRight: {fileID: 77501314}
   elevatorSFX: {fileID: 1196978156}
-  elevatorSFXOpen: {fileID: 8300000, guid: 0d3ba6fdcb9271c4abb47436c35d9d3c, type: 3}
+  elevatorSFXOpen: {fileID: 8300000, guid: 321bdce83eeffcb44876b56cbf7d2c87, type: 3}
   elevatorSFXClose: {fileID: 8300000, guid: 3d5462cf38c12b14db54489b7befd5a5, type: 3}
   elevatorButtons:
   - {fileID: 508598378}
