@@ -23,12 +23,12 @@ public class UserInteraction : MonoBehaviour
             Destroy(this);
         }
 
-        toggleHelmet.action.performed += ToggleHelmetUI;
+        //toggleHelmet.action.performed += ToggleHelmetUI;
     }
 
     private void OnDestroy()
     {
-        toggleHelmet.action.performed -= ToggleHelmetUI;
+        //toggleHelmet.action.performed -= ToggleHelmetUI;
     }
 
     [SerializeField] private Transform cameraTransform = null;
@@ -81,7 +81,7 @@ public class UserInteraction : MonoBehaviour
 
     private void ToggleHelmetUI(CallbackContext context)
     {
-        CharacterHelmet.Instance.ToggleHelmetUI();
+        //CharacterHelmet.Instance.ToggleHelmetUI();
     }
 
     public void Teleport(Vector3 destination)

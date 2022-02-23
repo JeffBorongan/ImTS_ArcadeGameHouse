@@ -43,8 +43,6 @@ public class AvatarCustomizationManager : MonoBehaviour
     private int legSelected = 0;
     public int LegSelected { get => legSelected; }
 
-    private bool isHeightMeasuringDone = false;
-
     [Space]
     [SerializeField] private string captureHeightMessage = "";
     [SerializeField] private Sprite imgCaptureHeight = null;
@@ -103,12 +101,7 @@ public class AvatarCustomizationManager : MonoBehaviour
         vrRightHandPoint = BodyMeasurement.Instance.VrRightHandPoint;
         characterCustomization = BodyMeasurement.Instance.CharacterCustomization;
 
-        if (!isHeightMeasuringDone)
-        {
-            pnlStartScreen.SetActive(true);
-            panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
-        }
-
+        panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
         panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
         panels.Add(PanelCustomization.Overlay, pnlOverlay);
         panels.Add(PanelCustomization.LegSelection, pnlLegSelection);
@@ -220,7 +213,6 @@ public class AvatarCustomizationManager : MonoBehaviour
 
             StartCoroutine(BodyAnatomyCapture(() =>
             {
-                isHeightMeasuringDone = true;
                 AssistantBehavior.Instance.Speak(tPoseScanningCompleteClip);
                 pnlCustomization.transform.position = new Vector3(pnlCustomization.transform.position.x, vrCameraPoint.position.y, pnlCustomization.transform.position.z);
 
@@ -418,6 +410,15 @@ public class AvatarCustomizationManager : MonoBehaviour
     {
         transform.position = Environment.Instance.PointsDictionary[EnvironmentPoints.AvatarRoomCenter].point.position;
         transform.rotation = Environment.Instance.PointsDictionary[EnvironmentPoints.AvatarRoomCenter].point.rotation;
+    }
+
+    #endregion
+
+    #region Enable Start Button
+
+    public void EnableStartButton()
+    {
+        pnlStartScreen.SetActive(true);
     }
 
     #endregion

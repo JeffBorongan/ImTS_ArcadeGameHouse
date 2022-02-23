@@ -182,5 +182,23 @@ public class VoiceOverManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         button.interactable = true;
+
+        if (button == btnWelcomeRanger)
+        {
+            AvatarCustomizationManager.Instance.EnableStartButton();
+            button.interactable = false;
+        }
+
+        if (button == btnGiveInstruction)
+        {
+            BowlingGameManagement.Instance.EnableStartButton();
+            BowlingGameManagement.Instance.isBowlingGameInstructionDone = true;
+        }
+
+        if (button == btnWelcomeGame2)
+        {
+            SquatGameManagement.Instance.EnableStartButton();
+            SquatGameManagement.Instance.isSquatGameInstructionDone = true;
+        }
     }
 }

@@ -84,6 +84,8 @@ public class BowlingGameManagement : GameManagement
     [Header("Player")]
     [SerializeField] private bool isPlayerLocked = false;
 
+    [HideInInspector] public bool isBowlingGameInstructionDone = false;
+
     #endregion
 
     #region Initialize
@@ -125,7 +127,6 @@ public class BowlingGameManagement : GameManagement
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
         sessionData = (BowlingSessionData)data;
-        pnlStartGame.gameObject.SetActive(true);
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
@@ -460,6 +461,18 @@ public class BowlingGameManagement : GameManagement
         foreach (var spawnPoint in enemySpawnPoints)
         {
             Gizmos.DrawSphere(spawnPoint.point.position, 1f);
+        }
+    }
+
+    #endregion
+
+    #region Enable Start Button
+
+    public void EnableStartButton()
+    {
+        if (!isBowlingGameInstructionDone)
+        {
+            pnlStartGame.gameObject.SetActive(true);
         }
     }
 

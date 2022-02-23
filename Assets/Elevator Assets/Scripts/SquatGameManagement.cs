@@ -68,6 +68,7 @@ public class SquatGameManagement : GameManagement
     private int currentEnemyReachedTheDoor = 0;
     private int index = 0;
     private int blockerIndex = 0;
+    [HideInInspector] public bool isSquatGameInstructionDone = false;
 
     #endregion
 
@@ -84,7 +85,6 @@ public class SquatGameManagement : GameManagement
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
-        pnlStartGame.gameObject.SetActive(true);
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
@@ -288,6 +288,18 @@ public class SquatGameManagement : GameManagement
         pnlGameResult.SetActive(true);
         txtEndResult.text = success ? "Success" : "Failed";
         txtEndResult.color = success ? colorSuccessText : colorFailedText;
+    }
+
+    #endregion
+
+    #region Enable Start Button
+
+    public void EnableStartButton()
+    {
+        if (!isSquatGameInstructionDone)
+        {
+            pnlStartGame.gameObject.SetActive(true);
+        }
     }
 
     #endregion

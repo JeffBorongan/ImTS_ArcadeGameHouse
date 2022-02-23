@@ -186,9 +186,5 @@ public class UXManager : MonoBehaviour
         BowlingGameManagement.Instance.UpdateSpawningLanes();
 
         btnUpdate.interactable = false;
-
-        print("Interval " + enemySpawnIntervalValue);
-        print("Speed " + enemySpeedValue);
-        print("Dispenser" + dispenserOffsetValue);
     }
 }
