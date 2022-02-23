@@ -391,6 +391,7 @@ public class BowlingGameManagement : GameManagement
         if (success)
         {
             AssistantBehavior.Instance.Speak(gameSuccessClip);
+            TrophyManager.Instance.isGame1Accomplished = true;
         }
         else
         {

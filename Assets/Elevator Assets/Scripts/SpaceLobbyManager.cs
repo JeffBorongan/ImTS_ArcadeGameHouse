@@ -5,6 +5,27 @@ using UnityEngine;
 public class SpaceLobbyManager : MonoBehaviour
 {
     [SerializeField] private GameObject spaceshipHologram = null;
+    [SerializeField] private GameObject game1Trophy = null;
+    [SerializeField] private GameObject game2Trophy = null;
+    [SerializeField] private GameObject game3Trophy = null;
+
+    private void Start()
+    {
+        if (TrophyManager.Instance.isGame1Accomplished)
+        {
+            game1Trophy.SetActive(true);
+        }
+
+        if (TrophyManager.Instance.isGame2Accomplished)
+        {
+            game2Trophy.SetActive(true);
+        }
+
+        if (TrophyManager.Instance.isGame3Accomplished)
+        {
+            game3Trophy.SetActive(true);
+        }
+    }
 
     private void Update()
     {

@@ -232,7 +232,6 @@ public class SquatGameManagement : GameManagement
                         {
                             StopGame();
                             ShowGameResult(true);
-                            AssistantBehavior.Instance.Speak(gameSuccessClip);
                             OnGameEnd.Invoke();
                         }
                         else
@@ -288,6 +287,12 @@ public class SquatGameManagement : GameManagement
         pnlGameResult.SetActive(true);
         txtEndResult.text = success ? "Success" : "Failed";
         txtEndResult.color = success ? colorSuccessText : colorFailedText;
+
+        if (success)
+        {
+            AssistantBehavior.Instance.Speak(gameSuccessClip);
+            TrophyManager.Instance.isGame2Accomplished = true;
+        }
     }
 
     #endregion
