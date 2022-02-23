@@ -14,7 +14,6 @@ public class AssistantBehavior : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -24,12 +23,24 @@ public class AssistantBehavior : MonoBehaviour
 
     [SerializeField] private Transform player = null;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float maxUpLocation;
+    [SerializeField] private float maxDownLocation;
+    [SerializeField] private float originalLocation;
+    private bool isReadyToLoop = true;
     private NavMeshAgent agent = null;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = ElevatorFloorManager.Instance.characterCamera.transform;
+    }
+
+    private void Update()
+    {
+        if (isReadyToLoop)
+        {
+            StartCoroutine(FloatingMovement());
+        }
     }
 
     public void Speak(AudioClip clip)
@@ -39,5 +50,13 @@ public class AssistantBehavior : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
         });
+    }
+
+    IEnumerator FloatingMovement()
+    {
+        isReadyToLoop = false;
+        transform.DOMoveY(maxUpLocation, 3f).SetEase(Ease.Linear).OnComplete(() => transform.DOMoveY(maxDownLocation, 6f).SetEase(Ease.Linear).OnComplete(() => transform.DOMoveY(originalLocation, 3f).SetEase(Ease.Linear).OnComplete(() => isReadyToLoop = true)));
+        yield return new WaitUntil(() => isReadyToLoop);
+        print("COMPLETED");
     }
 }

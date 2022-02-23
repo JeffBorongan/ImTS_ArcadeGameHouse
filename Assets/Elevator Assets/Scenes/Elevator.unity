@@ -1550,99 +1550,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651779214}
   m_CullTransparentMesh: 1
---- !u!1001 &718013146
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 11454208501414164, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.7922262
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.778
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.38394347
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.56041753
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.82821023
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 111.831
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555390, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_Name
-      value: CaptainRodgers
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555390, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454208512555390, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 646647734531134859, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 930512685505465522, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303271096947978831, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360770139915504422, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8171870392318930951, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956768195848340943, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
 --- !u!1 &842283755
 GameObject:
   m_ObjectHideFlags: 0
@@ -5112,7 +5019,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 08c5dbbbbaf7b45428a30ff75dac2500, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -3888,6 +3888,7 @@ MonoBehaviour:
   leftBallDispenser: {fileID: 173229927}
   rightBallDispenser: {fileID: 37522673}
   isPlayerLocked: 0
+  isBowlingGameInstructionDone: 0
 --- !u!1001 &677946399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5964,7 +5965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.059
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5997,6 +5998,18 @@ PrefabInstance:
     - target: {fileID: 11454208512555388, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454208512555389, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
+      propertyPath: maxUpLocation
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454208512555389, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
+      propertyPath: maxDownLocation
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454208512555389, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
+      propertyPath: originalLocation
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 11454208512555390, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
       propertyPath: m_Name
