@@ -130,7 +130,7 @@ public class BowlingGameManagement : GameManagement
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
-            UXManager.Instance.HandleOnStart();
+            BowlingGameUXManager.Instance.HandleOnStart();
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
                 imgTimerIcon.gameObject.SetActive(true);
@@ -486,7 +486,7 @@ public class BowlingSessionData : SessionData
     public float enemySpeed = 1f;
     public float enemySpawnInterval = 5f;
     public int pointsToEarn = 100;
-    public int numberOfFails = 2;
+    public int numberOfFails = 10;
     public int pointPerEnemy = 5;
     public int timeDuration = 180;
     public float dispenserOffset = 0.5f;

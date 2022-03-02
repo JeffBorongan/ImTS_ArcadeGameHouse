@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
-public class UXManager : MonoBehaviour
+public class BowlingGameUXManager : MonoBehaviour
 {
-    public static UXManager Instance { private set; get; }
+    public static BowlingGameUXManager Instance { private set; get; }
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class UXManager : MonoBehaviour
     private float enemySpawnIntervalValue = 5f;
     private float enemySpeedValue = 1f;
     private int pointsToEarnValue = 100;
-    private int numberOfFailsValue = 2;
+    private int numberOfFailsValue = 10;
     private float dispenserOffsetValue = 0.5f;
 
     private void Start()

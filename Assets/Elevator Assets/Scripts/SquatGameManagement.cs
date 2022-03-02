@@ -29,7 +29,7 @@ public class SquatGameManagement : GameManagement
 
     #region Parameters
 
-    private SquatGameSessionData sessionData = null;
+    public SquatGameSessionData sessionData = null;
 
     [Header("Enemy Spawning")]
     [SerializeField] private List<Transform> enemySpawnPoints = new List<Transform>();
@@ -85,10 +85,11 @@ public class SquatGameManagement : GameManagement
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
+        sessionData = (SquatGameSessionData)data;
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
-            sessionData = (SquatGameSessionData)data;
+            SquatGameUXManager.Instance.HandleOnStart();
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
                 isSpawning = true;
@@ -131,7 +132,7 @@ public class SquatGameManagement : GameManagement
     {
         if (sessionData != null)
         {
-            UpdateLeverPulling(isSpawning, sessionData.playerLeverLift, sessionData.playerLeverDrop);
+            UpdateLeverPulling(isSpawning, sessionData.pullUpHeight, sessionData.pushDownHeight);
         }
     }
 
@@ -204,14 +205,11 @@ public class SquatGameManagement : GameManagement
 
     #region Lever Pulling
 
-    private void UpdateLeverPulling(bool engageLever, float maximumLift, float minimumDrop)
+    private void UpdateLeverPulling(bool engageLever, float pullUpHeight, float pushDownHeight)
     {
-        leftLever.GetComponent<XRGrabInteractable>().enabled = engageLever;
-        rightLever.GetComponent<XRGrabInteractable>().enabled = engageLever;
-
         if (engageLever)
         {
-            if (leftLever.transform.position.y <= minimumDrop && rightLever.transform.position.y <= minimumDrop)
+            if (leftLever.transform.position.y <= pushDownHeight && rightLever.transform.position.y <= pushDownHeight)
             {
                 if (moveStatus == MoveStatus.Half)
                 {
@@ -246,7 +244,7 @@ public class SquatGameManagement : GameManagement
                 }
             }
 
-            if (leftLever.transform.position.y >= maximumLift && rightLever.transform.position.y >= maximumLift)
+            if (leftLever.transform.position.y >= pullUpHeight && rightLever.transform.position.y >= pullUpHeight)
             {
                 if (!isDoorMovable)
                 {
@@ -315,8 +313,8 @@ public class SquatGameSessionData : SessionData
     public int enemyReachedTheDoor = 1;
     public float enemySpeed = 1f;
 
-    public float playerLeverLift = 1f;
-    public float playerLeverDrop = 0.5f;
+    public float pullUpHeight = 1f;
+    public float pushDownHeight = 0.5f;
 
     public int doorFrameLightMaterialIndex = 1;
     public float doorHalfCloseDistance = 0f;
