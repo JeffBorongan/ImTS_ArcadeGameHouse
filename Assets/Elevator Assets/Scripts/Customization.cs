@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Customization : MonoBehaviour
 {
-    [SerializeField] private GameObject pnlTryCustomize = null;
+    [SerializeField] private GameObject pnlCustomize = null;
     [SerializeField] private GameObject pnlCategorySelection = null;
     [SerializeField] private GameObject pnlHelmetCustomization = null;
     [SerializeField] private GameObject pnlTorsoCustomization = null;
     [SerializeField] private GameObject pnlArmsCustomization = null;
-    [SerializeField] private GameObject pnlShoesCustomization = null;
+    [SerializeField] private GameObject pnlBootsCustomization = null;
     [SerializeField] private GameObject pnlConfirmCustomization = null;
 
     [SerializeField] private Button btnCustomize = null;
@@ -18,14 +16,14 @@ public class Customization : MonoBehaviour
     [SerializeField] private Button btnHelmetCategory = null;
     [SerializeField] private Button btnTorsoCategory = null;
     [SerializeField] private Button btnArmsCategory = null;
-    [SerializeField] private Button btnShoesCategory = null;
+    [SerializeField] private Button btnBootsCategory = null;
 
     [SerializeField] private Button btnConfirm = null;
 
     private int enableHelmet = 6;
     private int enableTorso = 9;
-    private int enableArm = 0;
-    private int enableShoe = 3;
+    private int enableArms = 0;
+    private int enableBoots = 3;
 
     private void Start()
     {
@@ -33,7 +31,7 @@ public class Customization : MonoBehaviour
         {
             pnlCategorySelection.SetActive(true);
             pnlConfirmCustomization.SetActive(true);
-            pnlTryCustomize.SetActive(false);
+            pnlCustomize.SetActive(false);
         });
 
         btnHelmetCategory.onClick.AddListener(() => 
@@ -41,7 +39,7 @@ public class Customization : MonoBehaviour
             pnlHelmetCustomization.SetActive(true);
             pnlTorsoCustomization.SetActive(false);
             pnlArmsCustomization.SetActive(false);
-            pnlShoesCustomization.SetActive(false);
+            pnlBootsCustomization.SetActive(false);
         });
 
         btnTorsoCategory.onClick.AddListener(() =>
@@ -49,7 +47,7 @@ public class Customization : MonoBehaviour
             pnlTorsoCustomization.SetActive(true);
             pnlHelmetCustomization.SetActive(false);
             pnlArmsCustomization.SetActive(false);
-            pnlShoesCustomization.SetActive(false);
+            pnlBootsCustomization.SetActive(false);
         });
 
         btnArmsCategory.onClick.AddListener(() =>
@@ -57,12 +55,12 @@ public class Customization : MonoBehaviour
             pnlArmsCustomization.SetActive(true);
             pnlTorsoCustomization.SetActive(false);
             pnlHelmetCustomization.SetActive(false);
-            pnlShoesCustomization.SetActive(false);
+            pnlBootsCustomization.SetActive(false);
         });
 
-        btnShoesCategory.onClick.AddListener(() =>
+        btnBootsCategory.onClick.AddListener(() =>
         {
-            pnlShoesCustomization.SetActive(true);
+            pnlBootsCustomization.SetActive(true);
             pnlArmsCustomization.SetActive(false);
             pnlTorsoCustomization.SetActive(false);
             pnlHelmetCustomization.SetActive(false);
@@ -70,43 +68,43 @@ public class Customization : MonoBehaviour
 
         btnConfirm.onClick.AddListener(() =>
         {
-            for (int index = 0; index < BodyMeasurement.Instance.customizePart.Length; index++)
+            for (int index = 0; index < CharacterManager.Instance.SuitCustomization.SuitParts.Count; index++)
             {
-                BodyMeasurement.Instance.customizePart[index].SetActive(false);
+                CharacterManager.Instance.SuitCustomization.SuitParts[index].SetActive(false);
             }
 
-            BodyMeasurement.Instance.customizePart[enableHelmet].SetActive(true);
-            BodyMeasurement.Instance.customizePart[enableTorso].SetActive(true);
-            BodyMeasurement.Instance.customizePart[enableArm].SetActive(true);
-            BodyMeasurement.Instance.customizePart[enableShoe].SetActive(true);
+            CharacterManager.Instance.SuitCustomization.SuitParts[enableHelmet].SetActive(true);
+            CharacterManager.Instance.SuitCustomization.SuitParts[enableTorso].SetActive(true);
+            CharacterManager.Instance.SuitCustomization.SuitParts[enableArms].SetActive(true);
+            CharacterManager.Instance.SuitCustomization.SuitParts[enableBoots].SetActive(true);
 
-            pnlTryCustomize.SetActive(true);
+            pnlCustomize.SetActive(true);
             pnlCategorySelection.SetActive(false);
             pnlHelmetCustomization.SetActive(false);
             pnlTorsoCustomization.SetActive(false);
             pnlArmsCustomization.SetActive(false);
-            pnlShoesCustomization.SetActive(false);
+            pnlBootsCustomization.SetActive(false);
             pnlConfirmCustomization.SetActive(false);
         });
     }
 
-    public void AddHelmetPart(int enable)
+    public void ChooseHelmetPart(int enable)
     {
         enableHelmet = enable;
     }
 
-    public void AddTorsoPart(int enable)
+    public void ChooseTorsoPart(int enable)
     {
         enableTorso = enable;
     }
 
-    public void AddArmPart(int enable)
+    public void ChooseArmsPart(int enable)
     {
-        enableArm = enable;
+        enableArms = enable;
     }
 
-    public void AddShoePart(int enable)
+    public void ChooseBootsPart(int enable)
     {
-        enableShoe = enable;
+        enableBoots = enable;
     }
 }

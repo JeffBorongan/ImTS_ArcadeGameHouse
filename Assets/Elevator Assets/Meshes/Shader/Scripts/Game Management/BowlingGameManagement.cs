@@ -94,7 +94,7 @@ public class BowlingGameManagement : GameManagement
         base.InitializeGame();
         
         //GameLobbyManager.Instance.AddGame(GameID.Bowling, this);
-        SpawnDispensers(BodyMeasurement.Instance.CurrentAnatomy);
+        SpawnDispensers(CharacterManager.Instance.CurrentAnatomy);
 
         StartGame(new BowlingSessionData(), () => { });
     }
@@ -427,15 +427,15 @@ public class BowlingGameManagement : GameManagement
     public void SetPlayerSettings(bool snapPlayer)
     {
         isPlayerLocked = snapPlayer;
-        BodyMeasurement.Instance.VrRig.GetComponent<VRRig>().IsStationary = snapPlayer;
+        CharacterManager.Instance.VRRig.GetComponent<VRRig>().IsStationary = snapPlayer;
 
         if (snapPlayer)
         {
-            BodyMeasurement.Instance.VrFootIK.GetComponent<VRFootIK>().PlaceLegOnBox();
+            CharacterManager.Instance.VRFootIK.GetComponent<VRFootIK>().PlaceLegOnBox();
         }
         else
         {
-            BodyMeasurement.Instance.VrFootIK.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
+            CharacterManager.Instance.VRFootIK.GetComponent<VRFootIK>().UnPlaceAllLegOnBox();
         }
     }
 

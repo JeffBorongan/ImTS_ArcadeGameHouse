@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
-using System;
 using UnityEngine.UI;
 
-public class ElevatorFloorManager : MonoBehaviour
+public class ElevatorManager : MonoBehaviour
 {
-    public static ElevatorFloorManager Instance;
+    #region Singleton
 
-    void Awake()
+    public static ElevatorManager Instance { private set; get; }
+
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -22,15 +21,13 @@ public class ElevatorFloorManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    } 
+    }
 
-    public GameObject characterPrefab;
-    public GameObject characterSuit;
-    public GameObject characterCamera;
+    #endregion
 
-    public GameObject elevatorPrefab;
-    public GameObject elevatorDoorLeft;
-    public GameObject elevatorDoorRight;
+    [SerializeField] private GameObject elevatorPrefab = null;
+    [SerializeField] private GameObject elevatorDoorLeft = null;
+    [SerializeField] private GameObject elevatorDoorRight = null;
     public AudioSource elevatorSFX;
     public AudioClip elevatorSFXOpen;
     public AudioClip elevatorSFXClose;
@@ -42,6 +39,8 @@ public class ElevatorFloorManager : MonoBehaviour
 
     private MeshRenderer elevatorPart;
     private int elementNumber;
+
+    public GameObject ElevatorPrefab { get => elevatorPrefab; }
 
     void Start()
     {

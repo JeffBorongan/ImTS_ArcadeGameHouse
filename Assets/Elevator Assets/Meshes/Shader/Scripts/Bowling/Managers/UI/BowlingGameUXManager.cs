@@ -182,7 +182,7 @@ public class BowlingGameUXManager : MonoBehaviour
         BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
         BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
 
-        BowlingGameManagement.Instance.UpdateDispensers(BodyMeasurement.Instance.CurrentAnatomy);
+        BowlingGameManagement.Instance.UpdateDispensers(CharacterManager.Instance.CurrentAnatomy);
         BowlingGameManagement.Instance.UpdateSpawningLanes();
 
         btnUpdate.interactable = false;

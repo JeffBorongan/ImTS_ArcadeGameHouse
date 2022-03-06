@@ -32,7 +32,7 @@ public class AssistantBehavior : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = ElevatorFloorManager.Instance.characterCamera.transform;
+        player = CharacterManager.Instance.VRCamera.transform;
     }
 
     private void Update()

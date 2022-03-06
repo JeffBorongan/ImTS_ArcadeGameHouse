@@ -1141,7 +1141,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddArmPart
+        m_MethodName: ChooseArmsPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1561,7 +1561,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddHelmetPart
+        m_MethodName: ChooseHelmetPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1838,7 +1838,7 @@ GameObject:
   - component: {fileID: 201792214}
   - component: {fileID: 201792213}
   m_Layer: 5
-  m_Name: btnShoes1
+  m_Name: btnBoots1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2017,7 +2017,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddShoePart
+        m_MethodName: ChooseBootsPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3430,7 +3430,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddArmPart
+        m_MethodName: ChooseArmsPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6710,7 +6710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855828034}
   m_Layer: 5
-  m_Name: pnlShoesCustomization
+  m_Name: pnlBootsCustomization
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7403,7 +7403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 992563034}
   m_Layer: 5
-  m_Name: pnlTryCustomize
+  m_Name: pnlCustomize
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7760,7 +7760,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddHelmetPart
+        m_MethodName: ChooseHelmetPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8486,7 +8486,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddTorsoPart
+        m_MethodName: ChooseTorsoPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11291,7 +11291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: shoes
+  m_text: boots
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16250deb5dcd52844a74c209ca40d06d, type: 2}
   m_sharedMaterial: {fileID: -6423622118735431957, guid: 16250deb5dcd52844a74c209ca40d06d, type: 2}
@@ -11547,18 +11547,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af7cd71c6cbccf42a21c673b4ab0ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pnlTryCustomize: {fileID: 992563033}
+  pnlCustomize: {fileID: 992563033}
   pnlCategorySelection: {fileID: 1728600448}
   pnlHelmetCustomization: {fileID: 1625735260}
   pnlTorsoCustomization: {fileID: 164122762}
   pnlArmsCustomization: {fileID: 1387626847}
-  pnlShoesCustomization: {fileID: 855828033}
+  pnlBootsCustomization: {fileID: 855828033}
   pnlConfirmCustomization: {fileID: 1258135042}
   btnCustomize: {fileID: 747980897}
   btnHelmetCategory: {fileID: 632841350}
   btnTorsoCategory: {fileID: 20366249}
   btnArmsCategory: {fileID: 1473965397}
-  btnShoesCategory: {fileID: 1854641958}
+  btnBootsCategory: {fileID: 1854641958}
   btnConfirm: {fileID: 1825372264}
 --- !u!1 &1449503117
 GameObject:
@@ -12298,7 +12298,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddTorsoPart
+        m_MethodName: ChooseTorsoPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13230,7 +13230,7 @@ GameObject:
   - component: {fileID: 1647110460}
   - component: {fileID: 1647110459}
   m_Layer: 5
-  m_Name: btnShoes2
+  m_Name: btnBoots2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13409,7 +13409,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddShoePart
+        m_MethodName: ChooseBootsPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14418,7 +14418,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddTorsoPart
+        m_MethodName: ChooseTorsoPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15004,7 +15004,7 @@ GameObject:
   - component: {fileID: 1854641959}
   - component: {fileID: 1854641958}
   m_Layer: 5
-  m_Name: btnShoes
+  m_Name: btnBoots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15306,7 +15306,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddHelmetPart
+        m_MethodName: ChooseHelmetPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16158,7 +16158,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddArmPart
+        m_MethodName: ChooseArmsPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16355,7 +16355,7 @@ GameObject:
   - component: {fileID: 1992142035}
   - component: {fileID: 1992142034}
   m_Layer: 5
-  m_Name: btnShoes3
+  m_Name: btnBoots3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16534,7 +16534,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1438210434}
         m_TargetAssemblyTypeName: Customization, Assembly-CSharp
-        m_MethodName: AddShoePart
+        m_MethodName: ChooseBootsPart
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

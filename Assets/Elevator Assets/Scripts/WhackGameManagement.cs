@@ -72,7 +72,7 @@ public class WhackGameManagement : GameManagement
             sessionData = (WhackGameSessionData)data;
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
-                ElevatorFloorManager.Instance.characterPrefab.GetComponent<NavMeshObstacle>().enabled = false;
+                CharacterManager.Instance.CharacterPrefab.GetComponent<NavMeshObstacle>().enabled = false;
                 isSpawning = true;
                 spawningCour = SpawningCour(sessionData.enemySpawnInterval);
                 StartCoroutine(spawningCour);
@@ -94,7 +94,7 @@ public class WhackGameManagement : GameManagement
 
     public override void StopGame()
     {
-        ElevatorFloorManager.Instance.characterPrefab.GetComponent<NavMeshObstacle>().enabled = true;
+        CharacterManager.Instance.CharacterPrefab.GetComponent<NavMeshObstacle>().enabled = true;
         isSpawning = false;
         StopCoroutine(enemyCheckingCour);
         StopCoroutine(spawningCour);

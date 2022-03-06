@@ -38,7 +38,8 @@ public class AvatarCustomizationManager : MonoBehaviour
     [SerializeField] private Transform vrCameraPoint = null;
     [SerializeField] private Transform vrLeftHandPoint = null;
     [SerializeField] private Transform vrRightHandPoint = null;
-    [SerializeField] private CharacterCustomization characterCustomization = null;
+    [SerializeField] private SuitCustomization suitCustomization = null;
+    //[SerializeField] private CharacterCustomization characterCustomization = null;
     //[SerializeField] private CharacterCustomization characterMimic = null;
     private int legSelected = 0;
     public int LegSelected { get => legSelected; }
@@ -96,10 +97,10 @@ public class AvatarCustomizationManager : MonoBehaviour
 
     private void Start()
     {
-        vrCameraPoint = BodyMeasurement.Instance.VrCameraPoint;
-        vrLeftHandPoint = BodyMeasurement.Instance.VrLeftHandPoint;
-        vrRightHandPoint = BodyMeasurement.Instance.VrRightHandPoint;
-        characterCustomization = BodyMeasurement.Instance.CharacterCustomization;
+        vrCameraPoint = CharacterManager.Instance.VRCamera;
+        vrLeftHandPoint = CharacterManager.Instance.VRLeftHand;
+        vrRightHandPoint = CharacterManager.Instance.VRRightHand;
+        suitCustomization = CharacterManager.Instance.SuitCustomization;
 
         panels.Add(PanelCustomization.StartScreen, pnlStartScreen);
         panels.Add(PanelCustomization.AnatomyCapture, pnlAnatomyCapture);
@@ -185,8 +186,8 @@ public class AvatarCustomizationManager : MonoBehaviour
     private void AdjustHeight()
     {
         //characterCustomization.gameObject.SetActive(true);
-        ElevatorFloorManager.Instance.characterSuit.SetActive(true);
-        characterCustomization.SetHeight();
+        CharacterManager.Instance.CharacterSuit.SetActive(true);
+        suitCustomization.SetHeight();
 
         //if (!characterMimic.gameObject.activeSelf)
         //{
@@ -224,7 +225,7 @@ public class AvatarCustomizationManager : MonoBehaviour
                 AdjustHeight();
 
                 OnUpdateAnatomy.Invoke(currentAnatomy);
-                BodyMeasurement.Instance.CurrentAnatomy = currentAnatomy;
+                CharacterManager.Instance.CurrentAnatomy = currentAnatomy;
 
                 Transistion(PanelCustomization.Customization);
             }));

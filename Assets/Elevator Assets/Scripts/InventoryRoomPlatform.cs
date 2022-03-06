@@ -19,7 +19,7 @@ public class InventoryRoomPlatform : MonoBehaviour
         {
             SceneManagement.Instance.LoadFloor((floor)floor, () =>
             {
-                ElevatorFloorManager.Instance.elevatorPrefab.SetActive(false);
+                ElevatorManager.Instance.ElevatorPrefab.SetActive(false);
                 ScreenFadeManager.Instance.FadeOut(() =>
                 {
 
