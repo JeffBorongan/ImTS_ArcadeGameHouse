@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VRLowerBodyAnimator : MonoBehaviour
@@ -20,16 +18,11 @@ public class VRLowerBodyAnimator : MonoBehaviour
     {
         Vector3 headsetSpeed = (head.position - previousPos) / Time.deltaTime;
         headsetSpeed.y = 0f;
-
         Vector3 headsetLocalSpeed = transform.InverseTransformDirection(headsetSpeed);
         previousPos = head.position;
-
         float previousBlendX = animator.GetFloat("BlendX");
         float previousBlendY = animator.GetFloat("BlendY");
-
         animator.SetFloat("BlendX", Mathf.Lerp(previousBlendX, Mathf.Clamp(headsetLocalSpeed.x, -1f, 1f), smoothing));
         animator.SetFloat("BlendY", Mathf.Lerp(previousBlendY, Mathf.Clamp(headsetLocalSpeed.z, -1f, 1f), smoothing));
     }
-
-
 }

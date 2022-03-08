@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class VoiceOverManager : MonoBehaviour
 {
+    #region Parameters
+
     [Header("Elevator")]
     [SerializeField] private Button btnBowlingGame = null;
     [SerializeField] private Button btnLockEmUp = null;
-    [SerializeField] private Button btnWalkeyMoley = null;
     [SerializeField] private Button btnSpaceLobby = null;
 
     [SerializeField] private AudioClip bowlingGameClip = null;
     [SerializeField] private AudioClip lockEmUpClip = null;
-    //[SerializeField] private AudioClip walkeyMoleyClip = null;
     [SerializeField] private AudioClip spaceLobbyClip = null;
 
     [Header("Space Lobby")]
@@ -48,6 +48,10 @@ public class VoiceOverManager : MonoBehaviour
     [SerializeField] private Button btnLockEmUpToElevator = null;
 
     [SerializeField] private AudioClip goToElevatorClip = null;
+
+    #endregion
+
+    #region Button Setup
 
     private void Start()
     {
@@ -173,14 +177,18 @@ public class VoiceOverManager : MonoBehaviour
         });
     }
 
+    #endregion
+
+    #region Button Functions
+
     private void HandleOnPlay(AudioClip clip)
     {
         AssistantBehavior.Instance.Speak(clip);
     }
 
-    IEnumerator DisableButton(float time, Button button)
+    private IEnumerator DisableButton(float waitTime, Button button)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(waitTime);
         button.interactable = true;
 
         if (button == btnWelcomeRanger)
@@ -201,4 +209,6 @@ public class VoiceOverManager : MonoBehaviour
             SquatGameManagement.Instance.isSquatGameInstructionDone = true;
         }
     }
+
+    #endregion
 }

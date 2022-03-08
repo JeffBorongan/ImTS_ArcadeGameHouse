@@ -289,7 +289,7 @@ public class SquatGameManagement : GameManagement
         if (success)
         {
             AssistantBehavior.Instance.Speak(gameSuccessClip);
-            TrophyManager.Instance.isGame2Accomplished = true;
+            TrophyManager.Instance.IsGame2Accomplished = true;
         }
     }
 

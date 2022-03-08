@@ -9957,6 +9957,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 349544352, guid: b7f17ecad920bb74aa21e7ff3c8a5299, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenElevatorDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 349544352, guid: b7f17ecad920bb74aa21e7ff3c8a5299, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GetElevatorPart
+      objectReference: {fileID: 0}
+    - target: {fileID: 349544352, guid: b7f17ecad920bb74aa21e7ff3c8a5299, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: EnableEmissive
+      objectReference: {fileID: 0}
     - target: {fileID: 1289837667, guid: b7f17ecad920bb74aa21e7ff3c8a5299, type: 3}
       propertyPath: game1Trophy
       value: 

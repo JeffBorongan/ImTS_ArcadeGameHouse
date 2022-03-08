@@ -391,7 +391,7 @@ public class BowlingGameManagement : GameManagement
         if (success)
         {
             AssistantBehavior.Instance.Speak(gameSuccessClip);
-            TrophyManager.Instance.isGame1Accomplished = true;
+            TrophyManager.Instance.IsGame1Accomplished = true;
         }
         else
         {
@@ -399,7 +399,7 @@ public class BowlingGameManagement : GameManagement
         }
 
         if (!success) { return; }
-        UserDataManager.Instance.AddStars(currentPoints);
+        //UserDataManager.Instance.AddStars(currentPoints);
     }
 
     #endregion

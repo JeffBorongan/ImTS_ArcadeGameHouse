@@ -11,7 +11,7 @@ public class SuitCustomization : MonoBehaviour
 
     public void SetHeight()
     {
-        float cameraHeight = rig.head.vrTarget.localPosition.y;
+        float cameraHeight = rig.Head.VRTarget.localPosition.y;
         float scaleFactor = cameraHeight / maxHeight;
         transform.localScale = Vector3.one * scaleFactor;
         rig.ResetHeadBodyOffset();

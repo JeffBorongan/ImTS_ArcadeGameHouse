@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpaceLobbyManager : MonoBehaviour
@@ -11,17 +9,17 @@ public class SpaceLobbyManager : MonoBehaviour
 
     private void Start()
     {
-        if (TrophyManager.Instance.isGame1Accomplished)
+        if (TrophyManager.Instance.IsGame1Accomplished)
         {
             game1Trophy.SetActive(true);
         }
 
-        if (TrophyManager.Instance.isGame2Accomplished)
+        if (TrophyManager.Instance.IsGame2Accomplished)
         {
             game2Trophy.SetActive(true);
         }
 
-        if (TrophyManager.Instance.isGame3Accomplished)
+        if (TrophyManager.Instance.IsGame3Accomplished)
         {
             game3Trophy.SetActive(true);
         }
@@ -32,18 +30,18 @@ public class SpaceLobbyManager : MonoBehaviour
         spaceshipHologram.transform.Rotate(0, 0, 10 * Time.deltaTime);
     }
 
-    public void openElevatorDoor()
+    public void OpenElevatorDoor()
     {
-        ElevatorManager.Instance.openElevatorDoor();
+        ElevatorManager.Instance.OpenElevatorDoor();
     }
 
-    public void getElevatorPart(MeshRenderer meshRenderer)
+    public void GetElevatorPart(MeshRenderer meshRenderer)
     {
-        ElevatorManager.Instance.getElevatorPart(meshRenderer);
+        ElevatorManager.Instance.GetElevatorPart(meshRenderer);
     }
 
-    public void enableEmissive(int number)
+    public void EnableEmissive(int number)
     {
-        ElevatorManager.Instance.enableEmissive(number);
+        ElevatorManager.Instance.EnableEmissive(number);
     }
 }

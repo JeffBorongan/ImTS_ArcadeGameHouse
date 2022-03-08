@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameExecution : MonoBehaviour
+public class GameExecutionManager : MonoBehaviour
 {
-    public static GameExecution Instance { private set; get; }
+    #region Singleton
+
+    public static GameExecutionManager Instance { private set; get; }
 
     private void Awake()
     {
@@ -19,15 +20,23 @@ public class GameExecution : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Parameters
+
     public UnityEvent OnInitialize = new UnityEvent();
     public UnityEvent OnEventRegistration = new UnityEvent();
+
+    #endregion
+
+    #region Execution
 
     private void Start()
     {
         StartCoroutine(ExecuteCour());
     }
 
-    IEnumerator ExecuteCour()
+    private IEnumerator ExecuteCour()
     {
         yield return new WaitForEndOfFrame();
         OnEventRegistration.Invoke();
@@ -35,4 +44,5 @@ public class GameExecution : MonoBehaviour
         OnInitialize.Invoke();
     }
 
+    #endregion
 }

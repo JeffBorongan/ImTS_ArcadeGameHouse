@@ -32,7 +32,7 @@ public class FloatingUIManager : MonoBehaviour
 
     private void Start()
     {
-        GameExecution.Instance.OnEventRegistration.AddListener(() =>
+        GameExecutionManager.Instance.OnEventRegistration.AddListener(() =>
         {
             BowlingGameManagement.Instance.OnGameStart.AddListener(HandleOnGameStart);
 

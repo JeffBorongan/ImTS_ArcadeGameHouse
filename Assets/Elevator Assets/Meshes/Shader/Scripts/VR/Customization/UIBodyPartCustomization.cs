@@ -28,7 +28,7 @@ public class UIBodyPartCustomization : MonoBehaviour
 
     private void Start()
     {
-        GameExecution.Instance.OnEventRegistration.AddListener(() =>
+        GameExecutionManager.Instance.OnEventRegistration.AddListener(() =>
         {
             UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
         });

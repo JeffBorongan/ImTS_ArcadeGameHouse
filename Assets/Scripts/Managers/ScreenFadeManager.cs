@@ -1,12 +1,12 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
 public class ScreenFadeManager : MonoBehaviour
 {
+    #region Singleton
+
     public static ScreenFadeManager Instance { private set; get; }
 
     private void Awake()
@@ -21,12 +21,18 @@ public class ScreenFadeManager : MonoBehaviour
         }
     }
 
-    public ForwardRendererData rendererData = null;
+    #endregion
 
-    [Range(0, 1)] public float alpha = 1.0f;
-    [Range(0, 5)] public float duration = 0.5f;
+    #region Parameters
 
+    [SerializeField] private ForwardRendererData rendererData = null;
+    [Range(0, 5)]
+    [SerializeField] private float duration = 0.5f;
     private Material fadeMaterial = null;
+
+    #endregion
+
+    #region Setup
 
     private void Start()
     {
@@ -36,14 +42,16 @@ public class ScreenFadeManager : MonoBehaviour
     private void SetupFadeFeature()
     {
         ScriptableRendererFeature feature = rendererData.rendererFeatures.Find(item => item is ScreenFadeFeature);
-
         if(feature is ScreenFadeFeature screenFade)
         {
             fadeMaterial = Instantiate(screenFade.settings.material);
             screenFade.settings.runtimeMaterial = fadeMaterial;
         }
-
     }
+
+    #endregion
+
+    #region Fade Functions
 
     public void FadeIn(UnityAction onComplete) 
     {
@@ -67,4 +75,5 @@ public class ScreenFadeManager : MonoBehaviour
         });
     }
 
+    #endregion
 }

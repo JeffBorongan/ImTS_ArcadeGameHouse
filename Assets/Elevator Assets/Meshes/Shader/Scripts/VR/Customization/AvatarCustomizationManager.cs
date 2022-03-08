@@ -132,7 +132,7 @@ public class AvatarCustomizationManager : MonoBehaviour
         btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
         btnRightLegSelect.onClick.AddListener(() => HandleOnLegSelect(1));
 
-        UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
+        //UserDataManager.Instance.OnUserDataUpdate.AddListener(HandleOnUserDataUpdate);
     }
 
     #endregion

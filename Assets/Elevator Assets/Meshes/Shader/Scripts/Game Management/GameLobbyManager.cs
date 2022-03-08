@@ -33,11 +33,11 @@ public class GameLobbyManager : MonoBehaviour
     {
         if (load)
         {
-            StartCoroutine(LoadGameCour(SceneManager.LoadSceneAsync((int)id + 1, LoadSceneMode.Additive), OnEnd));
+            StartCoroutine(LoadGameCour(UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)id + 1, LoadSceneMode.Additive), OnEnd));
         }
         else
         {
-            StartCoroutine(LoadGameCour(SceneManager.UnloadSceneAsync((int)id + 1), OnEnd));
+            StartCoroutine(LoadGameCour(UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync((int)id + 1), OnEnd));
         }
     }
 

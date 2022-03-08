@@ -17,7 +17,7 @@ public class InventoryRoomPlatform : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         ScreenFadeManager.Instance.FadeIn(() =>
         {
-            SceneManagement.Instance.LoadFloor((floor)floor, () =>
+            SceneManager.Instance.LoadFloor((floor)floor, () =>
             {
                 ElevatorManager.Instance.ElevatorPrefab.SetActive(false);
                 ScreenFadeManager.Instance.FadeOut(() =>
