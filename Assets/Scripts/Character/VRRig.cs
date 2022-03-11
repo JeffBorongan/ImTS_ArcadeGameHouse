@@ -31,10 +31,12 @@ public class VRRig : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = (headConstraint.position + headBodyOffset) + bodyOffset;
+
         if (!IsStationary)
         {
             transform.forward = Vector3.ProjectOnPlane(headConstraint.forward, Vector3.up).normalized;
         }
+
         Head.Map();
         leftHand.Map();
         rightHand.Map();

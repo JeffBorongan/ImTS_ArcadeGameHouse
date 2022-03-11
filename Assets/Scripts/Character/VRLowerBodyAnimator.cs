@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class VRLowerBodyAnimator : MonoBehaviour
 {
+    #region Parameters
+
     [Range(0, 1)]
     [SerializeField] private float smoothing = 1f;
     [SerializeField] private Transform head = null;
     private Animator animator = null;
     private Vector3 previousPos = Vector3.zero;
+
+    #endregion
+
+    #region Animation
 
     private void Start()
     {
@@ -25,4 +31,6 @@ public class VRLowerBodyAnimator : MonoBehaviour
         animator.SetFloat("BlendX", Mathf.Lerp(previousBlendX, Mathf.Clamp(headsetLocalSpeed.x, -1f, 1f), smoothing));
         animator.SetFloat("BlendY", Mathf.Lerp(previousBlendY, Mathf.Clamp(headsetLocalSpeed.z, -1f, 1f), smoothing));
     }
+
+    #endregion
 }

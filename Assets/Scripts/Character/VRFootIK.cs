@@ -28,12 +28,7 @@ public class VRFootIK : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        HandleOnLegSelect(AvatarCustomizationManager.Instance.LegSelected);
-    }
-
-    private void HandleOnLegSelect(int leg)
-    {
-        legSelected = leg;
+        legSelected = AnatomyCaptureManager.Instance.LegSelected;
     }
 
     private void OnAnimatorIK(int layerIndex)

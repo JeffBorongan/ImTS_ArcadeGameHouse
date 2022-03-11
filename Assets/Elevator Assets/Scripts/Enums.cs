@@ -6,5 +6,5 @@
     SquatGame,
     SpaceLobby,
     BowlingGame,
-    OvalRoom,
+    Game3,
 }

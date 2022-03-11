@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class HeadDetection : MonoBehaviour
 {
+    #region Parameters
+
     [SerializeField] private GameObject elevatorTherapistView;
     [SerializeField] private GameObject spaceLobbyTherapistView;
     [SerializeField] private GameObject bowlingGameTherapistView;
     [SerializeField] private GameObject lockEmUpTherapistView;
+
+    #endregion
+
+    #region Trigger Detections
 
     private void OnTriggerEnter(Collider other)
     {
@@ -41,4 +47,6 @@ public class HeadDetection : MonoBehaviour
             elevatorTherapistView.SetActive(false);
         }
     }
+
+    #endregion
 }
