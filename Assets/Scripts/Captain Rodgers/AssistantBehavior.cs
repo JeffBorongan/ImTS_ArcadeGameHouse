@@ -24,12 +24,14 @@ public class AssistantBehavior : MonoBehaviour
 
     #region Parameters
 
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private float maxUpLocation;
-    [SerializeField] private float maxDownLocation;
-    [SerializeField] private float originalLocation;
+    [SerializeField] private Animator animator = null;
+    [SerializeField] private AudioSource audioSource = null;
     private Transform player = null;
-    private bool isReadyToLoop = true;
+    private float celebratingAnimationLength = 3f;
+    private float pointingLeftAnimationLength = 3f;
+    private float givingTrophyAnimationLength = 3f;
+    private float pointingRightAnimationLength = 3f;
+    private float greetingAnimationLength = 3f;
 
     #endregion
 
@@ -40,24 +42,9 @@ public class AssistantBehavior : MonoBehaviour
         player = CharacterManager.Instance.VRCamera.transform;
     }
 
-    private void Update()
-    {
-        if (isReadyToLoop)
-        {
-            StartCoroutine(FloatingMovement());
-        }
-    }
-
     #endregion
 
-    #region Rodgers Actions
-
-    private IEnumerator FloatingMovement()
-    {
-        isReadyToLoop = false;
-        transform.DOMoveY(maxUpLocation, 3f).SetEase(Ease.Linear).OnComplete(() => transform.DOMoveY(maxDownLocation, 6f).SetEase(Ease.Linear).OnComplete(() => transform.DOMoveY(originalLocation, 3f).SetEase(Ease.Linear).OnComplete(() => isReadyToLoop = true)));
-        yield return new WaitUntil(() => isReadyToLoop);
-    }
+    #region Assistant Actions
 
     public void Speak(AudioClip clip)
     {
@@ -66,6 +53,66 @@ public class AssistantBehavior : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
         });
+    }
+
+    public void PlayCelebratingAnimation()
+    {
+        animator.SetBool("isCelebrating", true);
+        StartCoroutine(Celebrating(celebratingAnimationLength));
+    }
+
+    public void PlayPointingLeftAnimation()
+    {
+        animator.SetBool("isPointingLeft", true);
+        StartCoroutine(PointingLeft(pointingLeftAnimationLength));
+    }
+
+    public void PlayGivingTrophyAnimation()
+    {
+        animator.SetBool("isGivingTrophy", true);
+        StartCoroutine(GivingTrophy(givingTrophyAnimationLength));
+    }
+
+    public void PlayPointingRightAnimation()
+    {
+        animator.SetBool("isPointingRight", true);
+        StartCoroutine(PointingRight(pointingRightAnimationLength));
+    }
+
+    public void PlayGreetingAnimation()
+    {
+        animator.SetBool("isGreeting", true);
+        StartCoroutine(Greeting(greetingAnimationLength));
+    }
+
+    private IEnumerator Celebrating(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("isCelebrating", false);
+    }
+
+    private IEnumerator PointingLeft(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("isPointingLeft", false);
+    }
+
+    private IEnumerator GivingTrophy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("isGivingTrophy", false);
+    }
+
+    private IEnumerator PointingRight(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("isPointingRight", false);
+    }
+
+    private IEnumerator Greeting(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("isGreeting", false);
     }
 
     #endregion
