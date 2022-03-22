@@ -598,6 +598,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2697582865372666099, guid: 768bce649690ed44a93c2240e629dbab, type: 3}
   m_PrefabInstance: {fileID: 3003571661440521322}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &259072207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259072208}
+  m_Layer: 0
+  m_Name: MoveAndPointElevator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &259072208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259072207}
+  m_LocalRotation: {x: 0, y: 0.9396927, z: 0, w: 0.34202018}
+  m_LocalPosition: {x: -0.904, y: 0.7, z: 1.553}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 140, z: 0}
 --- !u!1001 &267054965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -665,6 +695,10 @@ PrefabInstance:
       propertyPath: originalLocation
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 11454208512555389, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
+      propertyPath: moveAndPointElevator
+      value: 
+      objectReference: {fileID: 259072208}
     - target: {fileID: 11454208512555390, guid: ca8973032be9a6e43b42a1233f4210f6, type: 3}
       propertyPath: m_Name
       value: CaptainRodgers
@@ -1094,7 +1128,7 @@ SpriteRenderer:
   m_Size: {x: 19.85, y: 19.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &817033076 stripped
@@ -1122,6 +1156,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2697582865694067210, guid: 768bce649690ed44a93c2240e629dbab, type: 3}
   m_PrefabInstance: {fileID: 3003571661440521322}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &973060171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973060172}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &973060172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973060171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1570231746}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1025484909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2697582865604215120, guid: 768bce649690ed44a93c2240e629dbab, type: 3}
@@ -1447,7 +1512,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139683815}
-  - component: {fileID: 1139683816}
   m_Layer: 0
   m_Name: Squat Game
   m_TagString: Untagged
@@ -1471,82 +1535,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1139683816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139683814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64ede42e2d5c9894ba1a6f4488d62a51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pnlStartGame: {fileID: 2015704288}
-  btnStartGame: {fileID: 2015704287}
-  pnlStartTutorial: {fileID: 0}
-  btnStartTutorial: {fileID: 0}
-  btnSkipTutorial: {fileID: 0}
-  tutorialActions: []
-  OnGameStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGameEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  OnEndTutorial:
-    m_PersistentCalls:
-      m_Calls: []
-  enemySpawnPoints:
-  - {fileID: 1054851051}
-  - {fileID: 340755738}
-  - {fileID: 1889503980}
-  - {fileID: 1984698772}
-  - {fileID: 391962308}
-  enemyDestinationPoints:
-  - {fileID: 1285183694}
-  - {fileID: 1621057813}
-  - {fileID: 15420389}
-  - {fileID: 2125851193}
-  - {fileID: 1345733046}
-  doors:
-  - {fileID: 174676864}
-  - {fileID: 254636490}
-  - {fileID: 1025484909}
-  - {fileID: 947561267}
-  - {fileID: 1172616712}
-  blockers:
-  - {fileID: 533645364}
-  - {fileID: 1479166508}
-  - {fileID: 1047357624}
-  - {fileID: 1292886666}
-  - {fileID: 1251272131}
-  - {fileID: 2095462712}
-  - {fileID: 343624343}
-  - {fileID: 86763895}
-  - {fileID: 817033076}
-  - {fileID: 878237930}
-  lights:
-  - {fileID: 947258683}
-  - {fileID: 1163901029}
-  - {fileID: 2090645065}
-  - {fileID: 453285640}
-  - {fileID: 1974478801}
-  redLightBaseMap: {fileID: 2800000, guid: e6315713c4189ac43aa853b51bae0fc3, type: 3}
-  redLightEmissionMap: {fileID: 2800000, guid: b5c44058394a9354aaf1b85565b3da1c, type: 3}
-  greenLightBaseMap: {fileID: 2800000, guid: f42da909eec28904ebb6f7d5b8cbcaa8, type: 3}
-  greenLightEmissionMap: {fileID: 2800000, guid: 6a4d4bd42c854a347afb453906115ad9, type: 3}
-  leftLever: {fileID: 87281191}
-  rightLever: {fileID: 1076658892}
-  pnlHUD: {fileID: 1184359897}
-  pnlGameResult: {fileID: 1184359896}
-  txtCountdownTimer: {fileID: 1184359892}
-  txtEndResult: {fileID: 1184359895}
-  colorSuccessText: {r: 0.5254902, g: 1, b: 0.65882355, a: 1}
-  colorFailedText: {r: 0.8784314, g: 0.3372549, b: 0.2627451, a: 1}
-  gameSuccessClip: {fileID: 8300000, guid: a42573d595690c94f94dae1c2efb7731, type: 3}
-  isSquatGameInstructionDone: 0
 --- !u!1 &1161901578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,6 +2034,187 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1479166508, guid: 768bce649690ed44a93c2240e629dbab, type: 3}
   m_PrefabInstance: {fileID: 3003571661440521322}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1570231745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570231746}
+  - component: {fileID: 1570231747}
+  m_Layer: 0
+  m_Name: SquatGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1570231746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570231745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 973060172}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1570231747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570231745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7467462d73142ad4c8f93b6ecab2d75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pnlStartGame: {fileID: 2015704288}
+  btnStartGame: {fileID: 2015704287}
+  pnlStartTutorial: {fileID: 0}
+  btnStartTutorial: {fileID: 0}
+  btnSkipTutorial: {fileID: 0}
+  tutorialActions: []
+  OnGameStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEndTutorial:
+    m_PersistentCalls:
+      m_Calls: []
+  enemySpawnPoints:
+  - {fileID: 1054851051}
+  - {fileID: 340755738}
+  - {fileID: 1889503980}
+  - {fileID: 1984698772}
+  - {fileID: 391962308}
+  enemyDestinationPoints:
+  - {fileID: 1285183694}
+  - {fileID: 1621057813}
+  - {fileID: 15420389}
+  - {fileID: 2125851193}
+  - {fileID: 1345733046}
+  doors:
+  - {fileID: 174676864}
+  - {fileID: 254636490}
+  - {fileID: 1025484909}
+  - {fileID: 947561267}
+  - {fileID: 1172616712}
+  blockers:
+  - {fileID: 533645364}
+  - {fileID: 1479166508}
+  - {fileID: 1047357624}
+  - {fileID: 1292886666}
+  - {fileID: 1251272131}
+  - {fileID: 2095462712}
+  - {fileID: 343624343}
+  - {fileID: 86763895}
+  - {fileID: 817033076}
+  - {fileID: 878237930}
+  lights:
+  - {fileID: 947258683}
+  - {fileID: 1163901029}
+  - {fileID: 2090645065}
+  - {fileID: 453285640}
+  - {fileID: 1974478801}
+  redLightBaseMap: {fileID: 2800000, guid: e6315713c4189ac43aa853b51bae0fc3, type: 3}
+  redLightEmissionMap: {fileID: 2800000, guid: b5c44058394a9354aaf1b85565b3da1c, type: 3}
+  greenLightBaseMap: {fileID: 2800000, guid: f42da909eec28904ebb6f7d5b8cbcaa8, type: 3}
+  greenLightEmissionMap: {fileID: 2800000, guid: 6a4d4bd42c854a347afb453906115ad9, type: 3}
+  leftLever: {fileID: 87281191}
+  rightLever: {fileID: 1076658892}
+  pnlHUD: {fileID: 1184359897}
+  pnlGameResult: {fileID: 1184359896}
+  txtCountdownTimer: {fileID: 1184359892}
+  txtEndResult: {fileID: 1184359895}
+  colorSuccessText: {r: 0.5254902, g: 1, b: 0.65882355, a: 1}
+  colorFailedText: {r: 0.8784314, g: 0.3372549, b: 0.2627451, a: 1}
+  gameSuccessClip: {fileID: 8300000, guid: a42573d595690c94f94dae1c2efb7731, type: 3}
+  closeDoorDetection: {fileID: 1571442843}
+--- !u!1 &1571442843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571442846}
+  - component: {fileID: 1571442845}
+  - component: {fileID: 1571442844}
+  - component: {fileID: 1571442847}
+  m_Layer: 0
+  m_Name: SquatGameCloseDoorDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &1571442844
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571442843}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &1571442845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571442843}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1571442846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571442843}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1571442847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571442843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52202cbc617b7374faaf9d03cb00cc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1621057812
 GameObject:
   m_ObjectHideFlags: 0

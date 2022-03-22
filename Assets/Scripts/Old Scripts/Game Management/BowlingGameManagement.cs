@@ -84,8 +84,6 @@ public class BowlingGameManagement : GameManagement
     [Header("Player")]
     [SerializeField] private bool isPlayerLocked = false;
 
-    [HideInInspector] public bool isBowlingGameInstructionDone = false;
-
     #endregion
 
     #region Initialize
@@ -130,7 +128,8 @@ public class BowlingGameManagement : GameManagement
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
-            BowlingGameUXManager.Instance.HandleOnStart();
+            UXManager.Instance.HandleOnBowlingGameStart();
+            CharacterManager.Instance.PointersVisibility(false);
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
                 imgTimerIcon.gameObject.SetActive(true);
@@ -391,15 +390,18 @@ public class BowlingGameManagement : GameManagement
         if (success)
         {
             AssistantBehavior.Instance.Speak(gameSuccessClip);
-            TrophyManager.Instance.IsGame1Accomplished = true;
+            AssistantBehavior.Instance.PlayCelebratingAnimation();
+            TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game1);
+            TrophyManager.Instance.IsGame1Failed = false;
         }
         else
         {
             AssistantBehavior.Instance.Speak(gameFailClip);
+            TrophyManager.Instance.IsGame1Failed = true;
         }
 
-        if (!success) { return; }
-        //UserDataManager.Instance.AddStars(currentPoints);
+        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
+        ElevatorManager.Instance.CloseDoorDetection = true;
     }
 
     #endregion
@@ -432,6 +434,8 @@ public class BowlingGameManagement : GameManagement
         if (snapPlayer)
         {
             CharacterManager.Instance.VRFootIK.GetComponent<VRFootIK>().PlaceLegOnBox();
+            CharacterManager.Instance.PointersVisibility(false);
+            ElevatorManager.Instance.CloseElevatorDoor();
         }
         else
         {
@@ -471,10 +475,8 @@ public class BowlingGameManagement : GameManagement
 
     public void EnableStartButton()
     {
-        if (!isBowlingGameInstructionDone)
-        {
-            pnlStartGame.gameObject.SetActive(true);
-        }
+        pnlStartGame.SetActive(true);
+        CharacterManager.Instance.PointersVisibility(true);
     }
 
     #endregion

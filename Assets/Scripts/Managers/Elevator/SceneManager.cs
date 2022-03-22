@@ -48,6 +48,7 @@ public class SceneManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
+
         OnComplete.Invoke();
     }
 

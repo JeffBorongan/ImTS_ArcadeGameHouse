@@ -36,6 +36,7 @@ public class ElevatorManager : MonoBehaviour
     [SerializeField] private List<Button> elevatorButtons = new List<Button>();
     private MeshRenderer elevatorPart;
     private bool isDoorOpen = false;
+    private bool closeDoorDetection = false;
     private int elementNumber;
 
     #endregion
@@ -43,6 +44,7 @@ public class ElevatorManager : MonoBehaviour
     #region Encapsulations
 
     public GameObject ElevatorPrefab { get => elevatorPrefab; }
+    public bool CloseDoorDetection { get => closeDoorDetection; set => closeDoorDetection = value; }
 
     #endregion
 
@@ -51,6 +53,19 @@ public class ElevatorManager : MonoBehaviour
     private void Start()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene((int)floor.SpaceLobby, LoadSceneMode.Additive);
+    }
+
+    #endregion
+
+    #region Floor Buttons Enabled
+
+    public void EnableFloorButton(int floorNumber, bool interact)
+    {
+        floorNumber--;
+        if (floorNumber < 4 && floorNumber >= 0)
+        {
+            elevatorButtons[floorNumber].gameObject.SetActive(interact);
+        }
     }
 
     #endregion

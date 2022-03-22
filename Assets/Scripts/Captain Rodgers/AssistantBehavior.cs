@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AssistantBehavior : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class AssistantBehavior : MonoBehaviour
 
     [SerializeField] private Animator animator = null;
     [SerializeField] private AudioSource audioSource = null;
+    [SerializeField] private Transform moveAndGreet = null;
+    [SerializeField] private Transform moveAndPointStart = null;
+    [SerializeField] private Transform moveAndPointCustomize = null;
+    [SerializeField] private Transform moveAndPointElevator = null;
     private Transform player = null;
     private float celebratingAnimationLength = 3f;
     private float pointingLeftAnimationLength = 3f;
@@ -46,6 +51,12 @@ public class AssistantBehavior : MonoBehaviour
 
     #region Assistant Actions
 
+    private IEnumerator FunctionWithDelay(float waitTime, UnityAction function)
+    {
+        yield return new WaitForSeconds(waitTime);
+        function.Invoke();
+    }
+
     public void Speak(AudioClip clip)
     {
         transform.DOLookAt(player.position, 0.2f, AxisConstraint.Y, Vector3.up).OnComplete(() =>
@@ -55,25 +66,84 @@ public class AssistantBehavior : MonoBehaviour
         });
     }
 
+    public void MoveAndWelcomeRanger(UnityAction playWelcomeRangerClip)
+    {
+        transform.DOMove(moveAndGreet.position, 2f).OnComplete(() =>
+        {
+            PlayGreetingAnimation();
+            playWelcomeRangerClip.Invoke();
+            StartCoroutine(FunctionWithDelay(13.5f, () => 
+            {
+                transform.DOMove(moveAndPointStart.position, 2.5f);
+                transform.DORotateQuaternion(moveAndPointStart.rotation, 2.5f).OnComplete(() => 
+                {
+                    PlayPointingLeftAnimation();
+                    CharacterManager.Instance.PointersVisibility(true);
+                });
+            }));
+        });
+    }
+
+    public void MoveAndCustomizeSuit(UnityAction playCustomizeSuitClip)
+    {
+        playCustomizeSuitClip.Invoke();
+        transform.DOMove(moveAndPointCustomize.position, 4f);
+        transform.DORotateQuaternion(moveAndPointCustomize.rotation, 4f);
+        StartCoroutine(FunctionWithDelay(4f, () => 
+        { 
+            PlayPointingLeftAnimation();
+            CharacterManager.Instance.PointersVisibility(true);
+        }));
+    }
+
+    public void MoveAndPointElevator(UnityAction playGoToElevatorClip)
+    {
+        playGoToElevatorClip.Invoke();
+        transform.DOMove(moveAndPointElevator.position, 4f);
+        transform.DORotateQuaternion(moveAndPointElevator.rotation, 4f);
+        StartCoroutine(FunctionWithDelay(4f, () => 
+        { 
+            PlayPointingRightAnimation();
+            CharacterManager.Instance.PointersVisibility(true);
+        }));
+    }
+
+    public void MoveAndGiveTrophy(UnityAction unityAction)
+    {
+        transform.DOMove(moveAndGreet.position, 2f).OnComplete(() =>
+        {
+            PlayCelebratingAnimation();
+            StartCoroutine(FunctionWithDelay(3f, () => 
+            {
+                PlayGivingTrophyAnimation();
+                unityAction.Invoke();
+            }));
+        });
+    }
+
+    #endregion
+
+    #region Animations
+
     public void PlayCelebratingAnimation()
     {
         animator.SetBool("isCelebrating", true);
         StartCoroutine(Celebrating(celebratingAnimationLength));
     }
 
-    public void PlayPointingLeftAnimation()
+    private void PlayPointingLeftAnimation()
     {
         animator.SetBool("isPointingLeft", true);
         StartCoroutine(PointingLeft(pointingLeftAnimationLength));
     }
 
-    public void PlayGivingTrophyAnimation()
+    private void PlayGivingTrophyAnimation()
     {
         animator.SetBool("isGivingTrophy", true);
         StartCoroutine(GivingTrophy(givingTrophyAnimationLength));
     }
 
-    public void PlayPointingRightAnimation()
+    private void PlayPointingRightAnimation()
     {
         animator.SetBool("isPointingRight", true);
         StartCoroutine(PointingRight(pointingRightAnimationLength));

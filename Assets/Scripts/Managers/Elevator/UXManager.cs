@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
-public class BowlingGameUXManager : MonoBehaviour
+public class UXManager : MonoBehaviour
 {
-    public static BowlingGameUXManager Instance { private set; get; }
+    #region Singleton
+
+    public static UXManager Instance { private set; get; }
 
     private void Awake()
     {
@@ -20,16 +22,17 @@ public class BowlingGameUXManager : MonoBehaviour
         }
     }
 
-    [Header("Lanes")]
+    #endregion
+
+    #region Parameters
+
+    [Header("Bowling Game")]
     [SerializeField] private Button btnLeftLaneChecked = null;
     [SerializeField] private Button btnLeftLaneUnchecked = null;
     [SerializeField] private Button btnMiddleLaneChecked = null;
     [SerializeField] private Button btnMiddleLaneUnchecked = null;
     [SerializeField] private Button btnRightLaneChecked = null;
     [SerializeField] private Button btnRightLaneUnchecked = null;
-    private List<Side> currentLanesEnabled = new List<Side>();
-
-    [Header("Parameters")]
     [SerializeField] private Slider enemySpawnInterval = null;
     [SerializeField] private TMP_Text txtEnemySpawnInterval = null;
     [SerializeField] private Slider enemySpeed = null;
@@ -37,29 +40,42 @@ public class BowlingGameUXManager : MonoBehaviour
     [SerializeField] private TMP_InputField dispenserOffset = null;
     [SerializeField] private TMP_InputField pointsToEarn = null;
     [SerializeField] private TMP_InputField numberOfFails = null;
-
-    [SerializeField] private Button btnUpdate = null;
-
+    [SerializeField] private Button btnBowlingGameUpdate = null;
+    private List<Side> currentLanesEnabled = new List<Side>();
     private float enemySpawnIntervalValue = 5f;
     private float enemySpeedValue = 1f;
     private int pointsToEarnValue = 100;
     private int numberOfFailsValue = 10;
     private float dispenserOffsetValue = 0.5f;
 
+    [Header("Squat Game")]
+    [SerializeField] private Slider pullUpHeight = null;
+    [SerializeField] private TMP_Text txtPullUpHeight = null;
+    [SerializeField] private Slider pushDownHeight = null;
+    [SerializeField] private TMP_Text txtPushDownHeight = null;
+    [SerializeField] private Button btnSquatGameUpdate = null;
+    private float pullUpHeightValue = 1f;
+    private float pushDownHeightValue = 0.5f;
+
+    #endregion
+
+    #region Startup
+
     private void Start()
     {
         XRSettings.gameViewRenderMode = GameViewRenderMode.OcclusionMesh;
+        BowlingGameStart();
+        SquatGameStart();
+    }
 
-        btnLeftLaneChecked.onClick.AddListener(() => { SetLanes(Side.Left, false); });
-        btnLeftLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Left, true); });
-
-        btnMiddleLaneChecked.onClick.AddListener(() => { SetLanes(Side.Middle, false); });
-        btnMiddleLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Middle, true); });
-
-        btnRightLaneChecked.onClick.AddListener(() => { SetLanes(Side.Right, false); });
-        btnRightLaneUnchecked.onClick.AddListener(() => { SetLanes(Side.Right, true); });
-
-        btnUpdate.onClick.AddListener(HandleOnUpdate);
+    private void BowlingGameStart()
+    {
+        btnLeftLaneChecked.onClick.AddListener(() => { SetBowlingLanes(Side.Left, false); });
+        btnLeftLaneUnchecked.onClick.AddListener(() => { SetBowlingLanes(Side.Left, true); });
+        btnMiddleLaneChecked.onClick.AddListener(() => { SetBowlingLanes(Side.Middle, false); });
+        btnMiddleLaneUnchecked.onClick.AddListener(() => { SetBowlingLanes(Side.Middle, true); });
+        btnRightLaneChecked.onClick.AddListener(() => { SetBowlingLanes(Side.Right, false); });
+        btnRightLaneUnchecked.onClick.AddListener(() => { SetBowlingLanes(Side.Right, true); });
 
         enemySpawnInterval.onValueChanged.AddListener(HandleOnChangeEnemySpawnInterval);
         enemySpeed.onValueChanged.AddListener(HandleOnChangeEnemySpeed);
@@ -67,10 +83,26 @@ public class BowlingGameUXManager : MonoBehaviour
         numberOfFails.onValueChanged.AddListener(HandleOnChangeTextField);
         dispenserOffset.onValueChanged.AddListener(HandleOnChangeTextField);
 
-        SetUIWithDefaultValues();
+        btnBowlingGameUpdate.onClick.AddListener(HandleOnBowlingGameUpdate);
+
+        SetBowlingGameDefaultValues();
     }
 
-    private void SetLanes(Side side, bool add)
+    private void SquatGameStart()
+    {
+        btnSquatGameUpdate.onClick.AddListener(HandleOnSquatGameUpdate);
+
+        pullUpHeight.onValueChanged.AddListener(HandleOnChangePullUpHeight);
+        pushDownHeight.onValueChanged.AddListener(HandleOnChangePushDownHeight);
+
+        SetSquatGameDefaultValues();
+    }
+
+    #endregion
+
+    #region Default Values
+
+    private void SetBowlingLanes(Side side, bool add)
     {
         if (add)
         {
@@ -81,10 +113,10 @@ public class BowlingGameUXManager : MonoBehaviour
             currentLanesEnabled.Remove(side);
         }
 
-        btnUpdate.interactable = true;
+        btnBowlingGameUpdate.interactable = true;
     }
 
-    private void SetUIWithDefaultValues()
+    private void SetBowlingGameDefaultValues()
     {
         enemySpawnIntervalValue = Mathf.Round(enemySpawnIntervalValue * 100f) / 100f;
         enemySpeedValue = Mathf.Round(enemySpeedValue * 100f) / 100f;
@@ -124,26 +156,57 @@ public class BowlingGameUXManager : MonoBehaviour
         }
     }
 
+    private void SetSquatGameDefaultValues()
+    {
+        pullUpHeightValue = Mathf.Round(pullUpHeightValue * 100f) / 100f;
+        pushDownHeightValue = Mathf.Round(pushDownHeightValue * 100f) / 100f;
+
+        pullUpHeight.value = pullUpHeightValue;
+        pushDownHeight.value = pushDownHeightValue;
+    }
+
+    #endregion
+
+    #region Handle Value Changes
+
     private void HandleOnChangeEnemySpawnInterval(float value)
     {
         value = Mathf.Round(value * 100f) / 100f;
         txtEnemySpawnInterval.text = value.ToString();
-        btnUpdate.interactable = true;
+        btnBowlingGameUpdate.interactable = true;
     }
 
     private void HandleOnChangeEnemySpeed(float value)
     {
         value = Mathf.Round(value * 100f) / 100f;
         txtEnemySpeed.text = value.ToString();
-        btnUpdate.interactable = true;
+        btnBowlingGameUpdate.interactable = true;
     }
 
     private void HandleOnChangeTextField(string value)
     {
-        btnUpdate.interactable = true;
+        btnBowlingGameUpdate.interactable = true;
     }
 
-    public void HandleOnStart()
+    private void HandleOnChangePullUpHeight(float value)
+    {
+        value = Mathf.Round(value * 100f) / 100f;
+        txtPullUpHeight.text = value.ToString();
+        btnSquatGameUpdate.interactable = true;
+    }
+
+    private void HandleOnChangePushDownHeight(float value)
+    {
+        value = Mathf.Round(value * 100f) / 100f;
+        txtPushDownHeight.text = value.ToString();
+        btnSquatGameUpdate.interactable = true;
+    }
+
+    #endregion
+
+    #region Handle Game Start
+
+    public void HandleOnBowlingGameStart()
     {
         enemySpawnIntervalValue = enemySpawnInterval.value;
         enemySpeedValue = enemySpeed.value;
@@ -163,7 +226,23 @@ public class BowlingGameUXManager : MonoBehaviour
         BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
     }
 
-    private void HandleOnUpdate()
+    public void HandleOnSquatGameStart()
+    {
+        pullUpHeightValue = pullUpHeight.value;
+        pushDownHeightValue = pushDownHeight.value;
+
+        pullUpHeightValue = Mathf.Round(pullUpHeightValue * 100f) / 100f;
+        pushDownHeightValue = Mathf.Round(pushDownHeightValue * 100f) / 100f;
+
+        SquatGameManager.Instance.sessionData.pullUpHeight = pullUpHeightValue;
+        SquatGameManager.Instance.sessionData.pushDownHeight = pushDownHeightValue;
+    }
+
+    #endregion
+
+    #region Handle Game Update
+
+    private void HandleOnBowlingGameUpdate()
     {
         enemySpawnIntervalValue = enemySpawnInterval.value;
         enemySpeedValue = enemySpeed.value;
@@ -181,10 +260,25 @@ public class BowlingGameUXManager : MonoBehaviour
         BowlingGameManagement.Instance.sessionData.numberOfFails = numberOfFailsValue;
         BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
         BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
-
         BowlingGameManagement.Instance.UpdateDispensers(CharacterManager.Instance.CurrentAnatomy);
         BowlingGameManagement.Instance.UpdateSpawningLanes();
 
-        btnUpdate.interactable = false;
+        btnBowlingGameUpdate.interactable = false;
     }
+
+    private void HandleOnSquatGameUpdate()
+    {
+        pullUpHeightValue = pullUpHeight.value;
+        pushDownHeightValue = pushDownHeight.value;
+
+        pullUpHeightValue = Mathf.Round(pullUpHeightValue * 100f) / 100f;
+        pushDownHeightValue = Mathf.Round(pushDownHeightValue * 100f) / 100f;
+
+        SquatGameManager.Instance.sessionData.pullUpHeight = pullUpHeightValue;
+        SquatGameManager.Instance.sessionData.pushDownHeight = pushDownHeightValue;
+
+        btnSquatGameUpdate.interactable = false;
+    }
+
+    #endregion
 }

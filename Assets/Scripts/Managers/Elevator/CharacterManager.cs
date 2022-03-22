@@ -32,6 +32,8 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
     [SerializeField] private GameObject characterPrefab = null;
     [SerializeField] private GameObject characterSuit = null;
+    [SerializeField] private GameObject leftHandPointer = null;
+    [SerializeField] private GameObject rightHandPointer = null;
 
     #endregion
 
@@ -46,6 +48,16 @@ public class CharacterManager : MonoBehaviour
     public Dictionary<string, Vector3> CurrentAnatomy { get => currentAnatomy; set => currentAnatomy = value; }
     public GameObject CharacterPrefab { get => characterPrefab; }
     public GameObject CharacterSuit { get => characterSuit; }
+
+    #endregion
+
+    #region Pointers Visibility
+
+    public void PointersVisibility(bool visible)
+    {
+        leftHandPointer.SetActive(visible);
+        rightHandPointer.SetActive(visible);
+    }
 
     #endregion
 }

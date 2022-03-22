@@ -65,6 +65,7 @@ public class AnatomyCaptureManager : MonoBehaviour
 
     #region Encapsulations
 
+    public GameObject PnlStart { get => pnlStart; }
     public int LegSelected { get => legSelected; set => legSelected = value; }
 
     #endregion
@@ -77,14 +78,28 @@ public class AnatomyCaptureManager : MonoBehaviour
         vRLeftHandPoint = CharacterManager.Instance.VRLeftHand;
         vRRightHandPoint = CharacterManager.Instance.VRRightHand;
 
-        panels.Add(AnatomyCapturePanel.Start, pnlStart);
+        panels.Add(AnatomyCapturePanel.Start, PnlStart);
         panels.Add(AnatomyCapturePanel.LegSelection, pnlLegSelection);
         panels.Add(AnatomyCapturePanel.Instruction, pnlInstruction);
         panels.Add(AnatomyCapturePanel.BodyMeasurement, pnlBodyMeasurement);
 
-        btnStart.onClick.AddListener(() => Transition(AnatomyCapturePanel.LegSelection));
-        btnLeftLegSelect.onClick.AddListener(() => HandleOnLegSelect(0));
-        btnRightLegSelect.onClick.AddListener(() => HandleOnLegSelect(1));
+        btnStart.onClick.AddListener(() => 
+        {
+            AssistantBehavior.Instance.transform.DOLookAt(vRCameraPoint.position, 1f, AxisConstraint.Y, Vector3.up);
+            Transition(AnatomyCapturePanel.LegSelection);
+        });
+
+        btnLeftLegSelect.onClick.AddListener(() => 
+        { 
+            HandleOnLegSelect(0);
+            CharacterManager.Instance.PointersVisibility(false);
+        });
+
+        btnRightLegSelect.onClick.AddListener(() => 
+        { 
+            HandleOnLegSelect(1);
+            CharacterManager.Instance.PointersVisibility(false);
+        });
     }
 
     #endregion
@@ -121,6 +136,7 @@ public class AnatomyCaptureManager : MonoBehaviour
             progressBar.value = progress / 100;
             yield return new WaitForEndOfFrame();
         }
+
         OnEndAction.Invoke();
     }
 
@@ -151,6 +167,7 @@ public class AnatomyCaptureManager : MonoBehaviour
                 AdjustHeight();
                 OnUpdateAnatomy.Invoke(currentAnatomy);
                 CharacterManager.Instance.CurrentAnatomy = currentAnatomy;
+                VoiceOverManager.Instance.ButtonsInteraction(true);
                 panels[currentPanel].SetActive(false);
                 currentPanel = AnatomyCapturePanel.Start;
             }));
@@ -194,15 +211,6 @@ public class AnatomyCaptureManager : MonoBehaviour
         panels[currentPanel].SetActive(false);
         panels[to].SetActive(true);
         currentPanel = to;
-    }
-
-    #endregion
-
-    #region Enable Start Button
-
-    public void EnableStartButton()
-    {
-        pnlStart.SetActive(true);
     }
 
     #endregion

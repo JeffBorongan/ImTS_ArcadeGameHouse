@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TrophyManager : MonoBehaviour
@@ -22,23 +23,49 @@ public class TrophyManager : MonoBehaviour
 
     #region Parameters
 
-    private bool isGame1Accomplished = false;
-    private bool isGame2Accomplished = false;
-    private bool isGame3Accomplished = false;
-    private bool isGame1TrophyPresented = false;
-    private bool isGame2TrophyPresented = false;
-    private bool isGame3TrophyPresented = false;
+    private bool isGame1Failed = false;
+    private List<int> gameAccomplished = new List<int>();
+    private List<int> gameTrophyPresented = new List<int>();
+
+    public void AddGameAccomplished(int gameNumber)
+    {
+        if (!IsGameAccomplished(gameNumber))
+        {
+            gameAccomplished.Add(gameNumber);
+        }
+    }
+
+    public bool IsGameAccomplished(int gameNumber)
+    {
+        return gameAccomplished.Contains(gameNumber);
+    }
+
+    public void AddGameTrophyPresented(int gameNumber)
+    {
+        if (!IsGameTrophyPresented(gameNumber))
+        {
+            gameTrophyPresented.Add(gameNumber);
+        }
+    }
+
+    public bool IsGameTrophyPresented(int gameNumber)
+    {
+        return gameTrophyPresented.Contains(gameNumber);
+    }
 
     #endregion
 
     #region Encapsulations
 
-    public bool IsGame1Accomplished { get => isGame1Accomplished; set => isGame1Accomplished = value; }
-    public bool IsGame2Accomplished { get => isGame2Accomplished; set => isGame2Accomplished = value; }
-    public bool IsGame3Accomplished { get => isGame3Accomplished; set => isGame3Accomplished = value; }
-    public bool IsGame1TrophyPresented { get => isGame1TrophyPresented; set => isGame1TrophyPresented = value; }
-    public bool IsGame2TrophyPresented { get => isGame2TrophyPresented; set => isGame2TrophyPresented = value; }
-    public bool IsGame3TrophyPresented { get => isGame3TrophyPresented; set => isGame3TrophyPresented = value; }
+    public bool IsGame1Failed { get => isGame1Failed; set => isGame1Failed = value; }
 
     #endregion
+}
+
+public enum GameNumber
+{
+    None,
+    Game1,
+    Game2,
+    Game3,
 }

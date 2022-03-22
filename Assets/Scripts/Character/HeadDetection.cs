@@ -29,6 +29,7 @@ public class HeadDetection : MonoBehaviour
             elevatorTherapistView.SetActive(false);
             bowlingGameTherapistView.SetActive(false);
             lockEmUpTherapistView.SetActive(false);
+            SpaceLobbyManager.Instance.IsInsideSpaceLobby = true;
         }
 
         if (other.CompareTag("InsideBowlingGame"))

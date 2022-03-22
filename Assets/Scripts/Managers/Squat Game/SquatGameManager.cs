@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.AI;
-using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 
-public class SquatGameManagement : GameManagement
+public class SquatGameManager : GameManagement
 {
     #region Singleton
 
-    public static SquatGameManagement Instance { private set; get; }
+    public static SquatGameManager Instance { private set; get; }
 
     private void Awake()
     {
@@ -68,7 +67,7 @@ public class SquatGameManagement : GameManagement
     private int currentEnemyReachedTheDoor = 0;
     private int index = 0;
     private int blockerIndex = 0;
-    [HideInInspector] public bool isSquatGameInstructionDone = false;
+    [SerializeField] private GameObject closeDoorDetection = null;
 
     #endregion
 
@@ -89,7 +88,8 @@ public class SquatGameManagement : GameManagement
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
-            SquatGameUXManager.Instance.HandleOnStart();
+            UXManager.Instance.HandleOnSquatGameStart();
+            CharacterManager.Instance.PointersVisibility(false);
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
                 isSpawning = true;
@@ -289,8 +289,12 @@ public class SquatGameManagement : GameManagement
         if (success)
         {
             AssistantBehavior.Instance.Speak(gameSuccessClip);
-            TrophyManager.Instance.IsGame2Accomplished = true;
+            AssistantBehavior.Instance.PlayCelebratingAnimation();
+            TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
         }
+
+        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
+        ElevatorManager.Instance.CloseDoorDetection = true;
     }
 
     #endregion
@@ -299,9 +303,22 @@ public class SquatGameManagement : GameManagement
 
     public void EnableStartButton()
     {
-        if (!isSquatGameInstructionDone)
+        pnlStartGame.gameObject.SetActive(true);
+        CharacterManager.Instance.PointersVisibility(true);
+    }
+
+    #endregion
+
+    #region Close Door Detection
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other = closeDoorDetection.GetComponent<Collider>();
+        if (other.CompareTag("Head"))
         {
-            pnlStartGame.gameObject.SetActive(true);
+            CharacterManager.Instance.PointersVisibility(false);
+            ElevatorManager.Instance.CloseElevatorDoor();
+            closeDoorDetection.SetActive(false);
         }
     }
 

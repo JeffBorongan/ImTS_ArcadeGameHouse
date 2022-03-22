@@ -3,6 +3,24 @@ using UnityEngine.UI;
 
 public class CustomizationManager : MonoBehaviour
 {
+    #region Singleton
+
+    public static CustomizationManager Instance { private set; get; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    #endregion
+
     #region Parameters
 
     [SerializeField] private GameObject pnlCustomize = null;
@@ -25,6 +43,12 @@ public class CustomizationManager : MonoBehaviour
 
     #endregion
 
+    #region Encapsulations
+
+    public GameObject PnlCustomize { get => pnlCustomize; }
+
+    #endregion
+
     #region Button Setup
 
     private void Start()
@@ -33,7 +57,7 @@ public class CustomizationManager : MonoBehaviour
         {
             pnlCategorySelection.SetActive(true);
             pnlConfirmCustomization.SetActive(true);
-            pnlCustomize.SetActive(false);
+            PnlCustomize.SetActive(false);
         });
 
         btnHelmetCategory.onClick.AddListener(() => 
@@ -79,8 +103,10 @@ public class CustomizationManager : MonoBehaviour
             CharacterManager.Instance.SuitCustomization.SuitParts[enableTorso].SetActive(true);
             CharacterManager.Instance.SuitCustomization.SuitParts[enableArms].SetActive(true);
             CharacterManager.Instance.SuitCustomization.SuitParts[enableBoots].SetActive(true);
+            CharacterManager.Instance.PointersVisibility(false);
+            VoiceOverManager.Instance.ButtonsInteraction(true);
 
-            pnlCustomize.SetActive(true);
+            PnlCustomize.SetActive(false);
             pnlCategorySelection.SetActive(false);
             pnlHelmetCustomization.SetActive(false);
             pnlTorsoCustomization.SetActive(false);

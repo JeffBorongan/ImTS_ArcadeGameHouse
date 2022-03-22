@@ -442,7 +442,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3288450701970777758}
   m_OnClick:
     m_PersistentCalls:
@@ -2805,7 +2805,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Give Instruction
+  m_text: Instruction
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33b5f52eaee362345ac713a5d4464c32, type: 2}
   m_sharedMaterial: {fileID: 8339609880469027725, guid: 33b5f52eaee362345ac713a5d4464c32, type: 2}
@@ -2990,7 +2990,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1690574481045126489}
   m_OnClick:
     m_PersistentCalls:
@@ -4564,7 +4564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5085205425327871569}
   m_Layer: 5
-  m_Name: GoToElevator
+  m_Name: SpaceLobbyToElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6513,7 +6513,7 @@ GameObject:
   - component: {fileID: 49279846689199852}
   - component: {fileID: 6575835867807118058}
   m_Layer: 5
-  m_Name: btnGoToElevator
+  m_Name: btnBowlingGameToElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6804,7 +6804,7 @@ GameObject:
   - component: {fileID: 4030926459566058923}
   - component: {fileID: 4405233016327674086}
   m_Layer: 5
-  m_Name: btnGiveInstruction
+  m_Name: btnGame1Instruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9541,7 +9541,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 8460198857078680375}
   m_OnClick:
     m_PersistentCalls:
@@ -10221,7 +10221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5413366973779977297}
   m_Layer: 5
-  m_Name: GoToElevator
+  m_Name: BowlingGameToElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10292,7 +10292,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5188939206424729321}
-  - component: {fileID: 1195969702802206336}
   m_Layer: 5
   m_Name: LockEmUp
   m_TagString: Untagged
@@ -10321,23 +10320,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1195969702802206336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6177728119658933910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77a71e12e2184bd45a15a5362cb8104b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pullUpHeight: {fileID: 9130403609472774521}
-  txtPullUpHeight: {fileID: 6036744363688923534}
-  pushDownHeight: {fileID: 368656081507587122}
-  txtPushDownHeight: {fileID: 1021018615240776603}
-  btnUpdate: {fileID: 8765213675202181883}
 --- !u!1 &6213953713172703411
 GameObject:
   m_ObjectHideFlags: 0
@@ -10553,7 +10535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6342553093122235097}
   m_Layer: 5
-  m_Name: GoToElevator
+  m_Name: LockEmUpToElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11044,7 +11026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5990593720408467686}
   m_Layer: 5
-  m_Name: GiveInstruction
+  m_Name: Game1Instruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12410,7 +12392,7 @@ GameObject:
   - component: {fileID: 4570678470607448368}
   - component: {fileID: 6896475029516142669}
   m_Layer: 5
-  m_Name: btnGoToElevator
+  m_Name: btnSpaceLobbyToElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12513,7 +12495,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4570678470607448368}
   m_OnClick:
     m_PersistentCalls:
@@ -14377,7 +14359,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 784645032430035461}
-  - component: {fileID: 2639932789205809158}
   m_Layer: 5
   m_Name: BowlingGame
   m_TagString: Untagged
@@ -14406,32 +14387,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2639932789205809158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8535101270283556894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d0fc2e7a654b3408a459e1b167e151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnLeftLaneChecked: {fileID: 855883162668283824}
-  btnLeftLaneUnchecked: {fileID: 855883162777301357}
-  btnMiddleLaneChecked: {fileID: 855883163650625964}
-  btnMiddleLaneUnchecked: {fileID: 855883163875190923}
-  btnRightLaneChecked: {fileID: 855883163959180202}
-  btnRightLaneUnchecked: {fileID: 855883163171551529}
-  enemySpawnInterval: {fileID: 7604798663711544708}
-  txtEnemySpawnInterval: {fileID: 5373180493738612733}
-  enemySpeed: {fileID: 4987136159894083433}
-  txtEnemySpeed: {fileID: 9135405349082756408}
-  dispenserOffset: {fileID: 9165777114073199277}
-  pointsToEarn: {fileID: 6222758654950506730}
-  numberOfFails: {fileID: 7001796169239767484}
-  btnUpdate: {fileID: 1066332271501321046}
 --- !u!1 &8563567006657189961
 GameObject:
   m_ObjectHideFlags: 0
@@ -15579,7 +15534,7 @@ GameObject:
   - component: {fileID: 9082616085923571357}
   - component: {fileID: 3155418706909176199}
   m_Layer: 5
-  m_Name: btnGoToElevator
+  m_Name: btnLockEmUpToElevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
