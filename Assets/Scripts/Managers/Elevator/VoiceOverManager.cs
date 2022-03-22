@@ -212,7 +212,12 @@ public class VoiceOverManager : MonoBehaviour
         {
             ButtonsInteraction(false);
             HandleOnPlay(welcomeGame2Clip);
-            StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () => SquatGameManager.Instance.EnableStartButton()));
+            StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () => 
+            { 
+                SquatGameManager.Instance.EnableStartButton();
+                btnPullUp.interactable = true;
+                btnPushDown.interactable = true;
+            }));
         });
 
 
