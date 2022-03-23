@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class SquatGameManager : GameManagement
 {
@@ -49,8 +50,8 @@ public class SquatGameManager : GameManagement
     private bool isDoorMovable = false;
 
     [Header("Levers")]
-    [SerializeField] private GameObject leftLever;
-    [SerializeField] private GameObject rightLever;
+    [SerializeField] private GameObject leftHandle;
+    [SerializeField] private GameObject rightHandle;
 
     [Header("UI")]
     [SerializeField] private GameObject pnlHUD = null;
@@ -207,54 +208,63 @@ public class SquatGameManager : GameManagement
 
     private void UpdateLeverPulling(bool engageLever, float pullUpHeight, float pushDownHeight)
     {
-        if (engageLever)
+        if (leftHandle.GetComponent<XRGrabInteractable>().isSelected && rightHandle.GetComponent<XRGrabInteractable>().isSelected)
         {
-            if (leftLever.transform.position.y <= pushDownHeight && rightLever.transform.position.y <= pushDownHeight)
+            leftHandle.GetComponent<XRGrabInteractable>().trackPosition = true;
+
+            if (engageLever)
             {
-                if (moveStatus == MoveStatus.Half)
+                if (leftHandle.transform.position.y <= pushDownHeight && rightHandle.transform.position.y <= pushDownHeight)
                 {
-                    isDoorMovable = true;
-                    doors[index].transform.DOMoveY(sessionData.doorHalfCloseDistance, sessionData.doorMoveSpeed);
-                    blockers[blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
-                }
-                if (moveStatus == MoveStatus.Whole)
-                {
-                    isDoorMovable = false;
-                    doors[index].GetComponent<NavMeshObstacle>().enabled = true;
-                    blockers[++blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
-                    lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
-                    lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
-                    doors[index].transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed).OnComplete(() =>
+                    if (moveStatus == MoveStatus.Half)
                     {
-                        if (isSpawning && index == 4)
+                        isDoorMovable = true;
+                        doors[index].transform.DOMoveY(sessionData.doorHalfCloseDistance, sessionData.doorMoveSpeed);
+                        blockers[blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
+                    }
+                    if (moveStatus == MoveStatus.Whole)
+                    {
+                        isDoorMovable = false;
+                        doors[index].GetComponent<NavMeshObstacle>().enabled = true;
+                        blockers[++blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
+                        lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
+                        lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
+                        doors[index].transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed).OnComplete(() =>
                         {
-                            StopGame();
-                            ShowGameResult(true);
-                            OnGameEnd.Invoke();
-                        }
-                        else
-                        {
-                            index++;
-                            blockerIndex++;
-                        }
+                            if (isSpawning && index == 4)
+                            {
+                                StopGame();
+                                ShowGameResult(true);
+                                OnGameEnd.Invoke();
+                            }
+                            else
+                            {
+                                index++;
+                                blockerIndex++;
+                            }
 
-                        proceedToNextSpawn = true;
-                    });
-                    moveStatus = MoveStatus.None;
+                            proceedToNextSpawn = true;
+                        });
+                        moveStatus = MoveStatus.None;
+                    }
+                }
+
+                if (leftHandle.transform.position.y >= pullUpHeight && rightHandle.transform.position.y >= pullUpHeight)
+                {
+                    if (!isDoorMovable)
+                    {
+                        moveStatus = MoveStatus.Half;
+                    }
+                    if (isDoorMovable)
+                    {
+                        moveStatus = MoveStatus.Whole;
+                    }
                 }
             }
-
-            if (leftLever.transform.position.y >= pullUpHeight && rightLever.transform.position.y >= pullUpHeight)
-            {
-                if (!isDoorMovable)
-                {
-                    moveStatus = MoveStatus.Half;
-                }
-                if (isDoorMovable)
-                {
-                    moveStatus = MoveStatus.Whole;
-                }
-            }
+        }
+        else
+        {
+            leftHandle.GetComponent<XRGrabInteractable>().trackPosition = false;
         }
     }
 
