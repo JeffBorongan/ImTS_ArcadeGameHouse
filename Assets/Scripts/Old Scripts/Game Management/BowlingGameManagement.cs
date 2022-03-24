@@ -271,6 +271,10 @@ public class BowlingGameManagement : GameManagement
 
         alien.OnDeath.AddListener(() =>
         {
+            GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.DeadAlien);
+            clone.transform.SetPositionAndRotation(alien.transform.position, alien.transform.rotation);
+            clone.SetActive(true);
+            StartCoroutine(DestroyDeadAlien(clone, 3f));
             lanesStatus[new KeyValuePair<Side, Side>(lane, side)] = false;
             spawnPointsGenerated.Remove(index);
             AddPoint();
@@ -288,6 +292,12 @@ public class BowlingGameManagement : GameManagement
         });
 
         lanesStatus[new KeyValuePair<Side, Side>(lane, side)] = true;
+    }
+
+    private IEnumerator DestroyDeadAlien(GameObject alien, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        alien.SetActive(false);
     }
 
 

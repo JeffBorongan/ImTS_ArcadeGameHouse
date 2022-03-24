@@ -35,5 +35,6 @@ public enum DoorStatus
 public enum TypeOfObject
 {
     BowlingBall,
-    EnemyAlien
+    EnemyAlien,
+    DeadAlien
 }
