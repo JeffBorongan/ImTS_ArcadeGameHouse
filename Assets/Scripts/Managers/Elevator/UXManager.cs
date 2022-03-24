@@ -234,8 +234,8 @@ public class UXManager : MonoBehaviour
         pullUpHeightValue = Mathf.Round(pullUpHeightValue * 100f) / 100f;
         pushDownHeightValue = Mathf.Round(pushDownHeightValue * 100f) / 100f;
 
-        SquatGameManager.Instance.sessionData.pullUpHeight = pullUpHeightValue;
-        SquatGameManager.Instance.sessionData.pushDownHeight = pushDownHeightValue;
+        SquatGameManager.Instance.SessionData.pullUpHeight = pullUpHeightValue;
+        SquatGameManager.Instance.SessionData.pushDownHeight = pushDownHeightValue;
     }
 
     #endregion
@@ -274,8 +274,8 @@ public class UXManager : MonoBehaviour
         pullUpHeightValue = Mathf.Round(pullUpHeightValue * 100f) / 100f;
         pushDownHeightValue = Mathf.Round(pushDownHeightValue * 100f) / 100f;
 
-        SquatGameManager.Instance.sessionData.pullUpHeight = pullUpHeightValue;
-        SquatGameManager.Instance.sessionData.pushDownHeight = pushDownHeightValue;
+        SquatGameManager.Instance.SessionData.pullUpHeight = pullUpHeightValue;
+        SquatGameManager.Instance.SessionData.pushDownHeight = pushDownHeightValue;
 
         btnSquatGameUpdate.interactable = false;
     }

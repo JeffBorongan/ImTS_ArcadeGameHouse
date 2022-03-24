@@ -1,15 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolComand : MonoBehaviour
 {
+    #region Parameters
+
     public TypeOfObject type = TypeOfObject.BowlingBall;
     public GameObject objectToPool = null;
     public int poolCount = 0;
 
+    #endregion
+
+    #region Start
+
     private void Start()
     {
-        ObjectPooling.Instance.AddPool(type, objectToPool, poolCount, transform);
+        ObjectPoolingManager.Instance.AddPool(type, objectToPool, poolCount, transform);
     }
+
+    #endregion
 }

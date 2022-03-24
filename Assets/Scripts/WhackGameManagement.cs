@@ -127,7 +127,7 @@ public class WhackGameManagement : GameManagement
 
     private void SpawnEnemy(Transform spawnPoint, Transform enemyGoal)
     {
-        GameObject clone = ObjectPooling.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
         clone.transform.position = spawnPoint.position;
         clone.transform.rotation = spawnPoint.rotation;
         clone.SetActive(true);

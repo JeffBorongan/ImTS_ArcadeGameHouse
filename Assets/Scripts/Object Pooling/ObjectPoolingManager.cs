@@ -1,16 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class ObjectPooling : MonoBehaviour
+public class ObjectPoolingManager : MonoBehaviour
 {
-    public static ObjectPooling Instance { private set; get; }
+    #region Singleton
+
+    public static ObjectPoolingManager Instance { private set; get; }
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -20,7 +20,15 @@ public class ObjectPooling : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Parameters
+
     private List<Pool> pool = new List<Pool>();
+
+    #endregion
+
+    #region Object Pooling Functions
 
     public void AddPool(TypeOfObject type, GameObject objectToPool, int poolCount, Transform parent)
     {
@@ -43,28 +51,32 @@ public class ObjectPooling : MonoBehaviour
         return selectedObject;
     }
 
-    public bool hasObjectOnPool(TypeOfObject type)
+    public bool HasObjectOnPool(TypeOfObject type)
     {
         Pool poolToGet = pool.Where(p => p.type == type).FirstOrDefault();
         return poolToGet.poolOfObjects.Where(o => !o.activeSelf).FirstOrDefault() != null;
     }
+
+    #endregion
 }
 
 [System.Serializable]
 public class Pool
 {
+    #region Parameters
+
     public TypeOfObject type = TypeOfObject.BowlingBall;
     public List<GameObject> poolOfObjects = new List<GameObject>();
+
+    #endregion
+
+    #region Pool Function
 
     public Pool(TypeOfObject p_type, List<GameObject> p_poolOfObjects)
     {
         type = p_type;
         poolOfObjects = p_poolOfObjects;
     }
-}
 
-public enum TypeOfObject
-{
-    BowlingBall,
-    EnemyAlien
+    #endregion
 }

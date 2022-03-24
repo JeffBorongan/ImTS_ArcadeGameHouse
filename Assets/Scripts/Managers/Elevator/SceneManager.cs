@@ -25,13 +25,13 @@ public class SceneManager : MonoBehaviour
 
     #region Parameters
 
-    private floor currentFloor = floor.SpaceLobby;
+    private Floors currentFloor = Floors.SpaceLobby;
 
     #endregion
 
     #region Scene Functions
 
-    public void LoadFloor(floor level, UnityAction OnComplete)
+    public void LoadFloor(Floors level, UnityAction OnComplete)
     {
         AsyncOperation unloadAsyncOperation = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync((int)currentFloor);
         StartCoroutine(LoadSceneCour(unloadAsyncOperation, () => 

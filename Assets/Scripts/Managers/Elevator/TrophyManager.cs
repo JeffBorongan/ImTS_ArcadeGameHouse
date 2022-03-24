@@ -61,11 +61,3 @@ public class TrophyManager : MonoBehaviour
 
     #endregion
 }
-
-public enum GameNumber
-{
-    None,
-    Game1,
-    Game2,
-    Game3,
-}

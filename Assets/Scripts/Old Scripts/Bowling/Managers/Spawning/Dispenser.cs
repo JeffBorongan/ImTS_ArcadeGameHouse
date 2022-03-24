@@ -14,7 +14,7 @@ public class Dispenser : MonoBehaviour
 
     private void SpawnBowlingBall()
     {
-        GameObject bowlingBallClone = ObjectPooling.Instance.GetFromPool(TypeOfObject.BowlingBall);
+        GameObject bowlingBallClone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.BowlingBall);
         bowlingBallClone.SetActive(true);
         bowlingBallClone.transform.position = transform.position;
         bowlingBallClone.transform.rotation = transform.rotation;
@@ -26,7 +26,7 @@ public class Dispenser : MonoBehaviour
 
     private void HandleOnRelease()
     {
-        if (!ObjectPooling.Instance.hasObjectOnPool(TypeOfObject.BowlingBall)) 
+        if (!ObjectPoolingManager.Instance.HasObjectOnPool(TypeOfObject.BowlingBall)) 
         {
             StartCoroutine(SpawnCheckCour());
         }
@@ -39,7 +39,7 @@ public class Dispenser : MonoBehaviour
 
     IEnumerator SpawnCheckCour()
     {
-        yield return new WaitUntil(() => ObjectPooling.Instance.hasObjectOnPool(TypeOfObject.BowlingBall));
+        yield return new WaitUntil(() => ObjectPoolingManager.Instance.HasObjectOnPool(TypeOfObject.BowlingBall));
         SpawnBowlingBall();
     }
 }

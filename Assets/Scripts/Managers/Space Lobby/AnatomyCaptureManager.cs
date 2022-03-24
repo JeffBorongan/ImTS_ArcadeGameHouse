@@ -215,11 +215,3 @@ public class AnatomyCaptureManager : MonoBehaviour
 
     #endregion
 }
-
-public enum AnatomyCapturePanel
-{
-    Start,
-    LegSelection,
-    Instruction,
-    BodyMeasurement,
-}

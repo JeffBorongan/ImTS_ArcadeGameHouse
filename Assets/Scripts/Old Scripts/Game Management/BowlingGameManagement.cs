@@ -258,7 +258,7 @@ public class BowlingGameManagement : GameManagement
 
     private void SpawnEnemy(Side lane, Side side, Transform point, int index)
     {
-        GameObject clone = ObjectPooling.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
         clone.transform.position = point.position;
         clone.transform.rotation = point.rotation;
         clone.SetActive(true);
@@ -294,7 +294,7 @@ public class BowlingGameManagement : GameManagement
     public void SpawnOneEnemy(Side main, Side secondary, SpawnEnemyAction action, UnityAction OnDeathSpawn, UnityAction OnReachCockpit)
     {
         SpawnPoint newSpawnPoint = enemySpawnPoints.Where(s => s.lane == main && s.side == secondary).FirstOrDefault();
-        GameObject clone = ObjectPooling.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
         clone.transform.position = newSpawnPoint.point.position;
         clone.transform.rotation = newSpawnPoint.point.rotation;
         clone.SetActive(true);

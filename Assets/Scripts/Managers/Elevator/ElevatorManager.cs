@@ -52,7 +52,7 @@ public class ElevatorManager : MonoBehaviour
 
     private void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene((int)floor.SpaceLobby, LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene((int)Floors.SpaceLobby, LoadSceneMode.Additive);
     }
 
     #endregion
@@ -86,7 +86,7 @@ public class ElevatorManager : MonoBehaviour
     {
         CloseElevatorDoorAndLoad(() => 
         {
-            SceneManager.Instance.LoadFloor((floor)floor, () =>
+            SceneManager.Instance.LoadFloor((Floors)floor, () =>
             {
                 StartCoroutine(FunctionWithDelay(3f, () => OpenElevatorDoor()));
             });

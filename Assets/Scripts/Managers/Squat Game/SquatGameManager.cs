@@ -29,29 +29,27 @@ public class SquatGameManager : GameManagement
 
     #region Parameters
 
-    public SquatGameSessionData sessionData = null;
-
-    [Header("Enemy Spawning")]
+    [Header("Enemy")]
     [SerializeField] private List<Transform> enemySpawnPoints = new List<Transform>();
     [SerializeField] private List<Transform> enemyDestinationPoints = new List<Transform>();
+    private AlienMovement alien = null;
     private IEnumerator spawningCour = null;
     private bool isSpawning = false;
     private bool proceedToNextSpawn = false;
 
     [Header("Doors and Lights")]
     [SerializeField] private List<GameObject> doors = new List<GameObject>();
-    [SerializeField] private List<GameObject> blockers = new List<GameObject>();
+    [SerializeField] private List<GameObject> barriers = new List<GameObject>();
     [SerializeField] private List<MeshRenderer> lights = new List<MeshRenderer>();
-    [SerializeField] private Texture2D redLightBaseMap;
-    [SerializeField] private Texture2D redLightEmissionMap;
-    [SerializeField] private Texture2D greenLightBaseMap;
-    [SerializeField] private Texture2D greenLightEmissionMap;
-    private MoveStatus moveStatus = MoveStatus.None;
+    [SerializeField] private Texture2D greenLightBaseMap = null;
+    [SerializeField] private Texture2D greenLightEmissionMap = null;
+    private DoorStatus doorStatus = DoorStatus.None;
     private bool isDoorMovable = false;
+    private int barrierIndex = 0;
 
-    [Header("Levers")]
-    [SerializeField] private GameObject leftHandle;
-    [SerializeField] private GameObject rightHandle;
+    [Header("Handles")]
+    [SerializeField] private GameObject leftHandle = null;
+    [SerializeField] private GameObject rightHandle = null;
 
     [Header("UI")]
     [SerializeField] private GameObject pnlHUD = null;
@@ -59,16 +57,18 @@ public class SquatGameManager : GameManagement
     [SerializeField] private TextMeshProUGUI txtCountdownTimer = null;
     [SerializeField] private TextMeshProUGUI txtEndResult = null;
     [SerializeField] private Color colorSuccessText = Color.blue;
-    [SerializeField] private Color colorFailedText = Color.blue;
     private IEnumerator countdownTimerCour = null;
 
+    [Space, Space, Space]
     [SerializeField] private AudioClip gameSuccessClip = null;
-    private AlienMovement alien = null;
-    private IEnumerator enemyCheckingCour = null;
-    private int currentEnemyReachedTheDoor = 0;
+    private SquatGameSessionData sessionData = null;
     private int index = 0;
-    private int blockerIndex = 0;
-    [SerializeField] private GameObject closeDoorDetection = null;
+
+    #endregion
+
+    #region Encapsulations
+
+    public SquatGameSessionData SessionData { get => sessionData; set => sessionData = value; }
 
     #endregion
 
@@ -81,11 +81,11 @@ public class SquatGameManager : GameManagement
 
     #endregion
 
-    #region Game Start
+    #region Start
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
-        sessionData = (SquatGameSessionData)data;
+        SessionData = (SquatGameSessionData)data;
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
@@ -96,15 +96,6 @@ public class SquatGameManager : GameManagement
                 isSpawning = true;
                 spawningCour = SpawningCour();
                 StartCoroutine(spawningCour);
-
-                enemyCheckingCour = EnemyCheckingCour(() =>
-                {
-                    StopGame();
-                    OnEndGame.Invoke();
-                    OnGameEnd.Invoke();
-                });
-
-                StartCoroutine(enemyCheckingCour);
             });
 
             StartCoroutine(countdownTimerCour);
@@ -112,28 +103,81 @@ public class SquatGameManager : GameManagement
         });
     }
 
-    public override void StopGame()
+    #endregion
+
+    #region Update
+
+    private void Update()
     {
-        isSpawning = false;
-
-        foreach (var door in doors)
+        if (SessionData != null)
         {
-            door.transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed);
+            StartCoroutine(LeverMechanics(isSpawning, SessionData.pullUpHeight, SessionData.pushDownHeight));
         }
-
-        StopCoroutine(enemyCheckingCour);
-        StopCoroutine(spawningCour);
     }
 
     #endregion
 
-    #region Game Update
+    #region Lever Mechanics
 
-    private void Update()
+    private IEnumerator LeverMechanics(bool engageLever, float pullUpHeight, float pushDownHeight)
     {
-        if (sessionData != null)
+        yield return new WaitUntil(() => 
+            leftHandle.GetComponent<XRGrabInteractable>().isSelected && rightHandle.GetComponent<XRGrabInteractable>().isSelected ? 
+            leftHandle.GetComponent<XRGrabInteractable>().trackPosition = true : 
+            leftHandle.GetComponent<XRGrabInteractable>().trackPosition = false
+        );
+
+        if (engageLever)
         {
-            UpdateLeverPulling(isSpawning, sessionData.pullUpHeight, sessionData.pushDownHeight);
+            if (leftHandle.transform.position.y <= pushDownHeight && rightHandle.transform.position.y <= pushDownHeight)
+            {
+                if (doorStatus == DoorStatus.Half)
+                {
+                    isDoorMovable = true;
+                    doors[index].transform.DOMoveY(SessionData.doorHalfCloseDistance, SessionData.doorMoveSpeed);
+                    barriers[barrierIndex].GetComponent<NavMeshObstacle>().enabled = false;
+                }
+
+                if (doorStatus == DoorStatus.Whole)
+                {
+                    isDoorMovable = false;
+                    doors[index].GetComponent<NavMeshObstacle>().enabled = true;
+                    barriers[++barrierIndex].GetComponent<NavMeshObstacle>().enabled = false;
+                    lights[index].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
+                    lights[index].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
+                    doors[index].transform.DOMoveY(SessionData.doorFullCloseDistance, SessionData.doorMoveSpeed).OnComplete(() =>
+                    {
+                        if (isSpawning && index == 4)
+                        {
+                            isSpawning = false;
+                            StopCoroutine(spawningCour);
+                            ShowGameResult();
+                            OnGameEnd.Invoke();
+                        }
+                        else
+                        {
+                            index++;
+                            barrierIndex++;
+                            proceedToNextSpawn = true;
+                        }
+                    });
+
+                    doorStatus = DoorStatus.None;
+                }
+            }
+
+            if (leftHandle.transform.position.y >= pullUpHeight && rightHandle.transform.position.y >= pullUpHeight)
+            {
+                if (!isDoorMovable)
+                {
+                    doorStatus = DoorStatus.Half;
+                }
+
+                if (isDoorMovable)
+                {
+                    doorStatus = DoorStatus.Whole;
+                }
+            }
         }
     }
 
@@ -141,7 +185,7 @@ public class SquatGameManager : GameManagement
 
     #region Enemy Spawning
 
-    IEnumerator SpawningCour()
+    private IEnumerator SpawningCour()
     {
         while (isSpawning)
         {
@@ -153,129 +197,23 @@ public class SquatGameManager : GameManagement
     private void SpawnEnemy(Transform spawnPoint, Transform enemyGoal)
     {
         proceedToNextSpawn = false;
-        GameObject clone = ObjectPooling.Instance.GetFromPool(TypeOfObject.EnemyAlien);
-        clone.transform.position = spawnPoint.position;
-        clone.transform.rotation = spawnPoint.rotation;
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        clone.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
         clone.SetActive(true);
-
         alien = clone.GetComponent<AlienMovement>();
-        alien.SetMovementSpeed(sessionData.enemySpeed);
+        alien.SetMovementSpeed(SessionData.enemySpeed);
         alien.AlienAgent.SetDestination(enemyGoal.position);
-
-        alien.OnDeath.AddListener(() =>
-        {
-            alien.OnDeath.RemoveAllListeners();
-        });
-
-        alien.OnReachDestination.AddListener(() =>
-        {
-            alien.OnReachDestination.RemoveAllListeners();
-        });
-    }
-
-    #endregion
-
-    #region Enemy Status Checking
-
-    IEnumerator EnemyCheckingCour(UnityAction OnEndGame)
-    {
-        yield return new WaitUntil(() => currentEnemyReachedTheDoor >= sessionData.enemyReachedTheDoor);
-        OnEndGame.Invoke();
-    }
-
-    private void AddEnemyReachedTheDoor()
-    {
-        currentEnemyReachedTheDoor++;
-        if (currentEnemyReachedTheDoor == sessionData.enemyReachedTheDoor)
-        {
-            StopGame();
-
-            for (int i = index; i < 5; i++)
-            {
-                lights[i].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMap);
-                lights[i].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMap);
-            }
-
-            ShowGameResult(false);
-
-            OnGameEnd.Invoke();
-        }
-    }
-
-    #endregion
-
-    #region Lever Pulling
-
-    private void UpdateLeverPulling(bool engageLever, float pullUpHeight, float pushDownHeight)
-    {
-        if (leftHandle.GetComponent<XRGrabInteractable>().isSelected && rightHandle.GetComponent<XRGrabInteractable>().isSelected)
-        {
-            leftHandle.GetComponent<XRGrabInteractable>().trackPosition = true;
-
-            if (engageLever)
-            {
-                if (leftHandle.transform.position.y <= pushDownHeight && rightHandle.transform.position.y <= pushDownHeight)
-                {
-                    if (moveStatus == MoveStatus.Half)
-                    {
-                        isDoorMovable = true;
-                        doors[index].transform.DOMoveY(sessionData.doorHalfCloseDistance, sessionData.doorMoveSpeed);
-                        blockers[blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
-                    }
-                    if (moveStatus == MoveStatus.Whole)
-                    {
-                        isDoorMovable = false;
-                        doors[index].GetComponent<NavMeshObstacle>().enabled = true;
-                        blockers[++blockerIndex].GetComponent<NavMeshObstacle>().enabled = false;
-                        lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
-                        lights[index].materials[sessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
-                        doors[index].transform.DOMoveY(sessionData.doorFullCloseDistance, sessionData.doorMoveSpeed).OnComplete(() =>
-                        {
-                            if (isSpawning && index == 4)
-                            {
-                                StopGame();
-                                ShowGameResult(true);
-                                OnGameEnd.Invoke();
-                            }
-                            else
-                            {
-                                index++;
-                                blockerIndex++;
-                            }
-
-                            proceedToNextSpawn = true;
-                        });
-                        moveStatus = MoveStatus.None;
-                    }
-                }
-
-                if (leftHandle.transform.position.y >= pullUpHeight && rightHandle.transform.position.y >= pullUpHeight)
-                {
-                    if (!isDoorMovable)
-                    {
-                        moveStatus = MoveStatus.Half;
-                    }
-                    if (isDoorMovable)
-                    {
-                        moveStatus = MoveStatus.Whole;
-                    }
-                }
-            }
-        }
-        else
-        {
-            leftHandle.GetComponent<XRGrabInteractable>().trackPosition = false;
-        }
     }
 
     #endregion
 
     #region UI
 
-    IEnumerator TimeCour(int timerDuration, TextMeshProUGUI txt, UnityAction OnEndTimer, bool inMinutes = false)
+    private IEnumerator TimeCour(int timerDuration, TextMeshProUGUI txt, UnityAction OnEndTimer, bool inMinutes = false)
     {
         txt.gameObject.SetActive(true);
         int currentTime = timerDuration;
+
         while (currentTime >= 0)
         {
             int minutes = currentTime / 60;
@@ -289,20 +227,15 @@ public class SquatGameManager : GameManagement
         OnEndTimer.Invoke();
     }
 
-    private void ShowGameResult(bool success)
+    private void ShowGameResult()
     {
         pnlHUD.SetActive(false);
         pnlGameResult.SetActive(true);
-        txtEndResult.text = success ? "Success" : "Failed";
-        txtEndResult.color = success ? colorSuccessText : colorFailedText;
-
-        if (success)
-        {
-            AssistantBehavior.Instance.Speak(gameSuccessClip);
-            AssistantBehavior.Instance.PlayCelebratingAnimation();
-            TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
-        }
-
+        txtEndResult.text = "Success";
+        txtEndResult.color = colorSuccessText;
+        AssistantBehavior.Instance.Speak(gameSuccessClip);
+        AssistantBehavior.Instance.PlayCelebratingAnimation();
+        TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
         VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
         ElevatorManager.Instance.CloseDoorDetection = true;
     }
@@ -318,41 +251,18 @@ public class SquatGameManager : GameManagement
     }
 
     #endregion
-
-    #region Close Door Detection
-
-    private void OnTriggerEnter(Collider other)
-    {
-        other = closeDoorDetection.GetComponent<Collider>();
-        if (other.CompareTag("Head"))
-        {
-            CharacterManager.Instance.PointersVisibility(false);
-            ElevatorManager.Instance.CloseElevatorDoor();
-            closeDoorDetection.SetActive(false);
-        }
-    }
-
-    #endregion
 }
 
 public class SquatGameSessionData : SessionData
 {
-    public int enemyReachedTheDoor = 1;
     public float enemySpeed = 1f;
-
-    public float pullUpHeight = 1f;
-    public float pushDownHeight = 0.5f;
 
     public int doorFrameLightMaterialIndex = 1;
     public float doorHalfCloseDistance = 0f;
     public float doorFullCloseDistance = 0.955f;
     public float doorFullOpenDistance = -0.955f;
     public float doorMoveSpeed = 0.5f;
-}
 
-public enum MoveStatus
-{
-    None,
-    Half,
-    Whole,
+    public float pullUpHeight = 1f;
+    public float pushDownHeight = 0.5f;
 }
