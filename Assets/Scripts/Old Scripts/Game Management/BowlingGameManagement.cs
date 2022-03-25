@@ -13,7 +13,7 @@ public class BowlingGameManagement : GameManagement
     #region Singleton
 
     public static BowlingGameManagement Instance { private set; get; }
-  
+
     private void Awake()
     {
         if (Instance == null)
@@ -83,6 +83,10 @@ public class BowlingGameManagement : GameManagement
 
     [Header("Player")]
     [SerializeField] private bool isPlayerLocked = false;
+
+    [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
+
+    public List<GameObject> DisableObjects { get => disableObjects; }
 
     #endregion
 
@@ -399,14 +403,18 @@ public class BowlingGameManagement : GameManagement
 
         if (success)
         {
-            AssistantBehavior.Instance.Speak(gameSuccessClip);
-            AssistantBehavior.Instance.PlayCelebratingAnimation();
+            AssistantBehavior.Instance.Move(true, 3f, () => 
+            {
+                AssistantBehavior.Instance.Speak(gameSuccessClip);
+                AssistantBehavior.Instance.PlayCelebratingAnimation();
+            });
+
             TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game1);
             TrophyManager.Instance.IsGame1Failed = false;
         }
         else
         {
-            AssistantBehavior.Instance.Speak(gameFailClip);
+            AssistantBehavior.Instance.Move(true, 3f, () => AssistantBehavior.Instance.Speak(gameFailClip));
             TrophyManager.Instance.IsGame1Failed = true;
         }
 

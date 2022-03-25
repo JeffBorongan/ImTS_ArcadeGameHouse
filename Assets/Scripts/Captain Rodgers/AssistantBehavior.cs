@@ -31,6 +31,8 @@ public class AssistantBehavior : MonoBehaviour
     [SerializeField] private Transform moveAndPointStart = null;
     [SerializeField] private Transform moveAndPointCustomize = null;
     [SerializeField] private Transform moveAndPointElevator = null;
+    [SerializeField] private Transform moveAndGoToCenter = null;
+    [SerializeField] private Transform moveAndGoToSide = null;
     private Transform player = null;
     private float celebratingAnimationLength = 3f;
     private float pointingLeftAnimationLength = 3f;
@@ -66,6 +68,26 @@ public class AssistantBehavior : MonoBehaviour
         });
     }
 
+    public void Move(bool moveToCenter, float waitTime, UnityAction unityAction)
+    {
+        Transform movePoint = null;
+
+        if (moveToCenter)
+        {
+            movePoint = moveAndGoToCenter;
+        }
+        else
+        {
+            movePoint = moveAndGoToSide;
+        }
+
+        transform.DOMove(movePoint.position, waitTime);
+        transform.DORotateQuaternion(movePoint.rotation, waitTime).OnComplete(() =>
+        {
+            unityAction.Invoke();
+        });
+    }
+
     public void MoveAndWelcomeRanger(UnityAction playWelcomeRangerClip)
     {
         transform.DOMove(moveAndGreet.position, 2f).OnComplete(() =>
@@ -88,24 +110,22 @@ public class AssistantBehavior : MonoBehaviour
     {
         playCustomizeSuitClip.Invoke();
         transform.DOMove(moveAndPointCustomize.position, 4f);
-        transform.DORotateQuaternion(moveAndPointCustomize.rotation, 4f);
-        StartCoroutine(FunctionWithDelay(4f, () => 
-        { 
+        transform.DORotateQuaternion(moveAndPointCustomize.rotation, 4f).OnComplete(() => 
+        {
             PlayPointingLeftAnimation();
             CharacterManager.Instance.PointersVisibility(true);
-        }));
+        });
     }
 
     public void MoveAndPointElevator(UnityAction playGoToElevatorClip)
     {
         playGoToElevatorClip.Invoke();
         transform.DOMove(moveAndPointElevator.position, 4f);
-        transform.DORotateQuaternion(moveAndPointElevator.rotation, 4f);
-        StartCoroutine(FunctionWithDelay(4f, () => 
-        { 
+        transform.DORotateQuaternion(moveAndPointElevator.rotation, 4f).OnComplete(() => 
+        {
             PlayPointingRightAnimation();
             CharacterManager.Instance.PointersVisibility(true);
-        }));
+        });
     }
 
     public void MoveAndGiveTrophy(UnityAction unityAction)
@@ -131,7 +151,7 @@ public class AssistantBehavior : MonoBehaviour
         StartCoroutine(Celebrating(celebratingAnimationLength));
     }
 
-    private void PlayPointingLeftAnimation()
+    public void PlayPointingLeftAnimation()
     {
         animator.SetBool("isPointingLeft", true);
         StartCoroutine(PointingLeft(pointingLeftAnimationLength));

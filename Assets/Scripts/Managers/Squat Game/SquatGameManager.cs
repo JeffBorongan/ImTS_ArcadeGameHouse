@@ -66,6 +66,7 @@ public class SquatGameManager : GameManagement
 
     [Space, Space, Space]
     [SerializeField] private AudioClip gameSuccessClip = null;
+    [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
     private SquatGameSessionData sessionData = null;
     private int index = 0;
 
@@ -74,6 +75,7 @@ public class SquatGameManager : GameManagement
     #region Encapsulations
 
     public SquatGameSessionData SessionData { get => sessionData; set => sessionData = value; }
+    public List<GameObject> DisableObjects { get => disableObjects; }
 
     #endregion
 
@@ -258,8 +260,12 @@ public class SquatGameManager : GameManagement
         pnlGameResult.SetActive(true);
         txtEndResult.text = "Success";
         txtEndResult.color = colorSuccessText;
-        AssistantBehavior.Instance.Speak(gameSuccessClip);
-        AssistantBehavior.Instance.PlayCelebratingAnimation();
+        AssistantBehavior.Instance.Move(true, 3f, () =>
+        {
+            AssistantBehavior.Instance.Speak(gameSuccessClip);
+            AssistantBehavior.Instance.PlayCelebratingAnimation();
+        });
+
         TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
         VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
         ElevatorManager.Instance.CloseDoorDetection = true;

@@ -90,6 +90,7 @@ public class VoiceOverManager : MonoBehaviour
         btnBowlingGame.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
+            AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(bowlingGameClip);
             StartCoroutine(FunctionWithDelay(bowlingGameClip.length, () => 
             {
@@ -104,6 +105,7 @@ public class VoiceOverManager : MonoBehaviour
         btnLockEmUp.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
+            AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(lockEmUpClip);
             StartCoroutine(FunctionWithDelay(lockEmUpClip.length, () =>
             {
@@ -117,6 +119,7 @@ public class VoiceOverManager : MonoBehaviour
         btnSpaceLobby.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
+            AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(spaceLobbyClip);
             StartCoroutine(FunctionWithDelay(spaceLobbyClip.length, () =>
             {
@@ -179,6 +182,12 @@ public class VoiceOverManager : MonoBehaviour
         {
             ButtonsInteraction(false);
             HandleOnPlay(game1InstructionClip);
+            StartCoroutine(FunctionWithDelay(7f, () => 
+            {
+                AssistantBehavior.Instance.PlayPointingLeftAnimation();
+                AssistantBehavior.Instance.Move(false, 5f, () => { });
+            }));
+
             StartCoroutine(FunctionWithDelay(game1InstructionClip.length, () => BowlingGameManagement.Instance.EnableStartButton()));
         });
 
@@ -212,6 +221,12 @@ public class VoiceOverManager : MonoBehaviour
         {
             ButtonsInteraction(false);
             HandleOnPlay(welcomeGame2Clip);
+            StartCoroutine(FunctionWithDelay(7f, () => 
+            {
+                AssistantBehavior.Instance.PlayPointingLeftAnimation();
+                AssistantBehavior.Instance.Move(false, 5f, () => { });
+            }));
+
             StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () => 
             { 
                 SquatGameManager.Instance.EnableStartButton();
@@ -242,6 +257,11 @@ public class VoiceOverManager : MonoBehaviour
 
         btnBowlingGameToElevator.onClick.AddListener(() => 
         {
+            foreach (var item in BowlingGameManagement.Instance.DisableObjects)
+            {
+                item.SetActive(false);
+            }
+
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
@@ -265,6 +285,11 @@ public class VoiceOverManager : MonoBehaviour
 
         btnLockEmUpToElevator.onClick.AddListener(() => 
         {
+            foreach (var item in SquatGameManager.Instance.DisableObjects)
+            {
+                item.SetActive(false);
+            }
+
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
