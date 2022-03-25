@@ -41,8 +41,13 @@ public class SquatGameManager : GameManagement
     [SerializeField] private List<GameObject> doors = new List<GameObject>();
     [SerializeField] private List<GameObject> barriers = new List<GameObject>();
     [SerializeField] private List<MeshRenderer> lights = new List<MeshRenderer>();
+    [SerializeField] private Texture2D redLightBaseMapOn = null;
+    [SerializeField] private Texture2D redLightBaseMapOff = null;
+    [SerializeField] private Texture2D redLightEmissionMapOn = null;
+    [SerializeField] private Texture2D redLightEmissionMapOff = null;
     [SerializeField] private Texture2D greenLightBaseMap = null;
     [SerializeField] private Texture2D greenLightEmissionMap = null;
+    private IEnumerator doorBlinkingCour = null;
     private DoorStatus doorStatus = DoorStatus.None;
     private bool isDoorMovable = false;
     private int barrierIndex = 0;
@@ -143,6 +148,7 @@ public class SquatGameManager : GameManagement
                     isDoorMovable = false;
                     doors[index].GetComponent<NavMeshObstacle>().enabled = true;
                     barriers[++barrierIndex].GetComponent<NavMeshObstacle>().enabled = false;
+                    StopCoroutine(doorBlinkingCour);
                     lights[index].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", greenLightBaseMap);
                     lights[index].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", greenLightEmissionMap);
                     doors[index].transform.DOMoveY(SessionData.doorFullCloseDistance, SessionData.doorMoveSpeed).OnComplete(() =>
@@ -183,6 +189,23 @@ public class SquatGameManager : GameManagement
 
     #endregion
 
+    #region Door Light Blinking
+
+    private IEnumerator DoorBlinking(int number, float waitTime)
+    {
+        while (true)
+        {
+            lights[number].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMapOn);
+            lights[number].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMapOn);
+            yield return new WaitForSeconds(waitTime);
+            lights[number].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_BaseMap", redLightBaseMapOff);
+            lights[number].materials[SessionData.doorFrameLightMaterialIndex].SetTexture("_EmissionMap", redLightEmissionMapOff);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    #endregion
+
     #region Enemy Spawning
 
     private IEnumerator SpawningCour()
@@ -190,6 +213,8 @@ public class SquatGameManager : GameManagement
         while (isSpawning)
         {
             SpawnEnemy(enemySpawnPoints[index], enemyDestinationPoints[index]);
+            doorBlinkingCour = DoorBlinking(index, 1f);
+            StartCoroutine(doorBlinkingCour);
             yield return new WaitUntil(() => proceedToNextSpawn);
         }
     }
