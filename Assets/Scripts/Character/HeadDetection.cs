@@ -8,6 +8,8 @@ public class HeadDetection : MonoBehaviour
     [SerializeField] private GameObject spaceLobbyTherapistView;
     [SerializeField] private GameObject bowlingGameTherapistView;
     [SerializeField] private GameObject lockEmUpTherapistView;
+    [SerializeField] private GameObject inventoryRoomTherapistView;
+    [SerializeField] private GameObject walkeyMoleyTherapistView;
 
     #endregion
 
@@ -21,6 +23,8 @@ public class HeadDetection : MonoBehaviour
             spaceLobbyTherapistView.SetActive(false);
             bowlingGameTherapistView.SetActive(false);
             lockEmUpTherapistView.SetActive(false);
+            inventoryRoomTherapistView.SetActive(false);
+            walkeyMoleyTherapistView.SetActive(false);
         }
 
         if (other.CompareTag("InsideSpaceLobby"))
@@ -29,6 +33,8 @@ public class HeadDetection : MonoBehaviour
             elevatorTherapistView.SetActive(false);
             bowlingGameTherapistView.SetActive(false);
             lockEmUpTherapistView.SetActive(false);
+            inventoryRoomTherapistView.SetActive(false);
+            walkeyMoleyTherapistView.SetActive(false);
             SpaceLobbyManager.Instance.IsInsideSpaceLobby = true;
         }
 
@@ -38,11 +44,35 @@ public class HeadDetection : MonoBehaviour
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);
             lockEmUpTherapistView.SetActive(false);
+            inventoryRoomTherapistView.SetActive(false);
+            walkeyMoleyTherapistView.SetActive(false);
         }
 
         if (other.CompareTag("InsideLockEmUp"))
         {
             lockEmUpTherapistView.SetActive(true);
+            bowlingGameTherapistView.SetActive(false);
+            spaceLobbyTherapistView.SetActive(false);
+            elevatorTherapistView.SetActive(false);
+            inventoryRoomTherapistView.SetActive(false);
+            walkeyMoleyTherapistView.SetActive(false);
+        }
+
+        if (other.CompareTag("InsideInventoryRoom"))
+        {
+            inventoryRoomTherapistView.SetActive(true);
+            lockEmUpTherapistView.SetActive(false);
+            bowlingGameTherapistView.SetActive(false);
+            spaceLobbyTherapistView.SetActive(false);
+            elevatorTherapistView.SetActive(false);
+            walkeyMoleyTherapistView.SetActive(false);
+        }
+
+        if (other.CompareTag("InsideWalkeyMoley"))
+        {
+            walkeyMoleyTherapistView.SetActive(true);
+            inventoryRoomTherapistView.SetActive(false);
+            lockEmUpTherapistView.SetActive(false);
             bowlingGameTherapistView.SetActive(false);
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);

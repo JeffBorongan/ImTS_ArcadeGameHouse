@@ -99,7 +99,7 @@ public class SpawnManager : MonoBehaviour
                 if (!random.Value)
                 {
                     SpawnPoint newSpawnPoint = spawnPoints.Where(s => s.lane == random.Key.Key && s.side == random.Key.Value).FirstOrDefault();
-                    GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+                    GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Alien1);
                     clone.transform.position = newSpawnPoint.point.position;
                     clone.transform.rotation = newSpawnPoint.point.rotation;
                     clone.SetActive(true);
@@ -145,7 +145,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnEnemy(Side main, Side secondary, SpawnEnemyAction action, UnityAction OnDeathSpawn, UnityAction OnReachCockpit)
     {
         SpawnPoint newSpawnPoint = spawnPoints.Where(s => s.lane == main && s.side == secondary).FirstOrDefault();
-        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Alien1);
         clone.transform.position = newSpawnPoint.point.position;
         clone.transform.rotation = newSpawnPoint.point.rotation;
         clone.SetActive(true);

@@ -57,6 +57,15 @@ public class UXManager : MonoBehaviour
     private float pullUpHeightValue = 1f;
     private float pushDownHeightValue = 0.5f;
 
+    [Header("Whack Game")]
+    [SerializeField] private Slider playerSpeed = null;
+    [SerializeField] private TMP_Text txtPlayerSpeed = null;
+    [SerializeField] private TMP_InputField aliensToHit = null;
+    [SerializeField] private TMP_InputField enemyReachedThePlayer = null;
+    private float playerSpeedValue = 1.6f;
+    private int aliensToHitValue = 10;
+    private int enemyReachedThePlayerValue = 5;
+
     #endregion
 
     #region Startup
@@ -66,6 +75,7 @@ public class UXManager : MonoBehaviour
         XRSettings.gameViewRenderMode = GameViewRenderMode.OcclusionMesh;
         BowlingGameStart();
         SquatGameStart();
+        WhackGameStart();
     }
 
     private void BowlingGameStart()
@@ -79,9 +89,9 @@ public class UXManager : MonoBehaviour
 
         enemySpawnInterval.onValueChanged.AddListener(HandleOnChangeEnemySpawnInterval);
         enemySpeed.onValueChanged.AddListener(HandleOnChangeEnemySpeed);
-        pointsToEarn.onValueChanged.AddListener(HandleOnChangeTextField);
-        numberOfFails.onValueChanged.AddListener(HandleOnChangeTextField);
-        dispenserOffset.onValueChanged.AddListener(HandleOnChangeTextField);
+        pointsToEarn.onValueChanged.AddListener(HandleOnChangeBowlingTextField);
+        numberOfFails.onValueChanged.AddListener(HandleOnChangeBowlingTextField);
+        dispenserOffset.onValueChanged.AddListener(HandleOnChangeBowlingTextField);
 
         btnBowlingGameUpdate.onClick.AddListener(HandleOnBowlingGameUpdate);
 
@@ -96,6 +106,15 @@ public class UXManager : MonoBehaviour
         pushDownHeight.onValueChanged.AddListener(HandleOnChangePushDownHeight);
 
         SetSquatGameDefaultValues();
+    }
+
+    private void WhackGameStart()
+    {
+        playerSpeed.onValueChanged.AddListener(HandleOnChangePlayerSpeed);
+        aliensToHit.onValueChanged.AddListener(HandleOnChangeAliensToHitTextField);
+        enemyReachedThePlayer.onValueChanged.AddListener(HandleOnChangeEnemyReachedTextField);
+
+        SetWhackGameDefaultValues();
     }
 
     #endregion
@@ -165,6 +184,14 @@ public class UXManager : MonoBehaviour
         pushDownHeight.value = pushDownHeightValue;
     }
 
+    private void SetWhackGameDefaultValues()
+    {
+        playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
+        playerSpeed.value = playerSpeedValue;
+        aliensToHit.text = aliensToHitValue.ToString();
+        enemyReachedThePlayer.text = enemyReachedThePlayerValue.ToString();
+    }
+
     #endregion
 
     #region Handle Value Changes
@@ -183,7 +210,7 @@ public class UXManager : MonoBehaviour
         btnBowlingGameUpdate.interactable = true;
     }
 
-    private void HandleOnChangeTextField(string value)
+    private void HandleOnChangeBowlingTextField(string value)
     {
         btnBowlingGameUpdate.interactable = true;
     }
@@ -200,6 +227,27 @@ public class UXManager : MonoBehaviour
         value = Mathf.Round(value * 100f) / 100f;
         txtPushDownHeight.text = value.ToString();
         btnSquatGameUpdate.interactable = true;
+    }
+
+    private void HandleOnChangePlayerSpeed(float value)
+    {
+        value = Mathf.Round(value * 100f) / 100f;
+        txtPlayerSpeed.text = value.ToString();
+        playerSpeedValue = playerSpeed.value;
+        playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
+        WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+    }
+
+    private void HandleOnChangeAliensToHitTextField(string value)
+    {
+        aliensToHitValue = int.Parse(aliensToHit.text);
+        WhackGameManager.Instance.SessionData.aliensToHit = aliensToHitValue;
+    }
+
+    private void HandleOnChangeEnemyReachedTextField(string value)
+    {
+        enemyReachedThePlayerValue = int.Parse(enemyReachedThePlayer.text);
+        WhackGameManager.Instance.SessionData.enemyReachedThePlayer = enemyReachedThePlayerValue;
     }
 
     #endregion
@@ -236,6 +284,17 @@ public class UXManager : MonoBehaviour
 
         SquatGameManager.Instance.SessionData.pullUpHeight = pullUpHeightValue;
         SquatGameManager.Instance.SessionData.pushDownHeight = pushDownHeightValue;
+    }
+
+    public void HandleOnWhackGameStart()
+    {
+        playerSpeedValue = playerSpeed.value;
+        aliensToHitValue = int.Parse(aliensToHit.text);
+        enemyReachedThePlayerValue = int.Parse(enemyReachedThePlayer.text);
+        playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
+        WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+        WhackGameManager.Instance.SessionData.aliensToHit = aliensToHitValue;
+        WhackGameManager.Instance.SessionData.enemyReachedThePlayer = enemyReachedThePlayerValue;
     }
 
     #endregion

@@ -224,7 +224,7 @@ public class SquatGameManager : GameManagement
     private void SpawnEnemy(Transform spawnPoint, Transform enemyGoal)
     {
         proceedToNextSpawn = false;
-        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Alien2);
         clone.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
         clone.SetActive(true);
         alien = clone.GetComponent<AlienMovement>();
@@ -264,6 +264,8 @@ public class SquatGameManager : GameManagement
         {
             AssistantBehavior.Instance.Speak(gameSuccessClip);
             AssistantBehavior.Instance.PlayCelebratingAnimation();
+            AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
+            StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
         });
 
         TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
@@ -279,6 +281,16 @@ public class SquatGameManager : GameManagement
     {
         pnlStartGame.gameObject.SetActive(true);
         CharacterManager.Instance.PointersVisibility(true);
+    }
+
+    #endregion
+
+    #region Function with Delay
+
+    private IEnumerator FunctionWithDelay(float waitTime, UnityAction function)
+    {
+        yield return new WaitForSeconds(waitTime);
+        function.Invoke();
     }
 
     #endregion

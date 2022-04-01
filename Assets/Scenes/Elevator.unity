@@ -1237,6 +1237,10 @@ MonoBehaviour:
   pushDownHeight: {fileID: 1621709137}
   txtPushDownHeight: {fileID: 480433442}
   btnSquatGameUpdate: {fileID: 901186240}
+  playerSpeed: {fileID: 1037616605}
+  txtPlayerSpeed: {fileID: 1037616606}
+  aliensToHit: {fileID: 1037616604}
+  enemyReachedThePlayer: {fileID: 1037616603}
 --- !u!1 &651779214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1408,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &736228213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 736228214}
+  m_Layer: 0
+  m_Name: PlayerLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &736228214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736228213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1576820758}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &798369631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,6 +1981,7 @@ MonoBehaviour:
   vRRig: {fileID: 1703835275}
   vRFootIK: {fileID: 1703835278}
   suitCustomization: {fileID: 1703835293}
+  playerLocation: {fileID: 736228214}
   characterPrefab: {fileID: 1576820757}
   characterSuit: {fileID: 1703835273}
   leftHandPointer: {fileID: 1302566745}
@@ -1957,10 +1993,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 328904131}
     m_Modifications:
-    - target: {fileID: 789251046173920217, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
-      propertyPath: m_Name
-      value: BowlingGameUpdate
-      objectReference: {fileID: 0}
     - target: {fileID: 855883162685022346, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2048,18 +2080,6 @@ PrefabInstance:
     - target: {fileID: 855883162685022350, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
       propertyPath: m_Name
       value: TherapistView
-      objectReference: {fileID: 0}
-    - target: {fileID: 4688856238993679579, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
-      propertyPath: m_Name
-      value: btnBowlingGameUpdate
-      objectReference: {fileID: 0}
-    - target: {fileID: 4756300468003726796, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
-      propertyPath: m_Name
-      value: btnSquatGameUpdate
-      objectReference: {fileID: 0}
-    - target: {fileID: 6467771853167837941, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
-      propertyPath: m_Name
-      value: SquatGameUpdate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
@@ -2231,6 +2251,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1037616598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1204784378073398077, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1037616599 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6568211335764749449, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
@@ -2251,6 +2282,60 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1037616601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855813445577579569, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1037616602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2759038681772950508, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037616603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3948739469740052953, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1037616604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6918798009123565380, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1037616605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9178126116272660272, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1037616606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3590040464324119829, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1078118216 stripped
@@ -2309,9 +2394,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnBowlingGame: {fileID: 1037616600}
   btnLockEmUp: {fileID: 1037616599}
+  btnWalkeyMoley: {fileID: 1037616598}
   btnSpaceLobby: {fileID: 1037616597}
   bowlingGameClip: {fileID: 8300000, guid: 27c94eb4ac982734da2fdf87ee897029, type: 3}
   lockEmUpClip: {fileID: 8300000, guid: 134bd601bcc461e40b11662730ef1fdf, type: 3}
+  walkeyMoleyClip: {fileID: 0}
   spaceLobbyClip: {fileID: 8300000, guid: 3cf94346a02a83a46a8ac4f671ec0beb, type: 3}
   btnWelcomeRanger: {fileID: 1037616596}
   btnAreYouReady: {fileID: 1037616595}
@@ -2331,6 +2418,7 @@ MonoBehaviour:
   pullUpClip: {fileID: 8300000, guid: 773b862e58935f24c93c80c5aadc1a29, type: 3}
   pushDownClip: {fileID: 8300000, guid: 1edd8ada80056454c99825fd6c3b711a, type: 3}
   welcomeGame2Clip: {fileID: 8300000, guid: a1b2f20300dd3334daea159a567b7850, type: 3}
+  btnWelcomeGame3: {fileID: 0}
   btnSpaceLobbyToElevator: {fileID: 1037616594}
   btnBowlingGameToElevator: {fileID: 1037616589}
   btnLockEmUpToElevator: {fileID: 1037616585}
@@ -2338,6 +2426,7 @@ MonoBehaviour:
   allButtons:
   - {fileID: 1037616600}
   - {fileID: 1037616599}
+  - {fileID: 1037616598}
   - {fileID: 1037616597}
   - {fileID: 1037616596}
   - {fileID: 1037616595}
@@ -2943,7 +3032,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 736228214}
     m_Modifications:
     - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: elevatorTherapistView
@@ -2961,9 +3050,17 @@ PrefabInstance:
       propertyPath: bowlingGameTherapistView
       value: 
       objectReference: {fileID: 1037616580}
+    - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+      propertyPath: walkeyMoleyTherapistView
+      value: 
+      objectReference: {fileID: 1037616601}
+    - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+      propertyPath: inventoryRoomTherapistView
+      value: 
+      objectReference: {fileID: 1037616602}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2975,7 +3072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2983,15 +3080,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3029,6 +3126,11 @@ Transform:
 --- !u!1 &1576820757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7956196996324451774, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+  m_PrefabInstance: {fileID: 1576820750}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1576820758 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
   m_PrefabInstance: {fileID: 1576820750}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1621709137 stripped
@@ -3776,11 +3878,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809d2b2c24b3824db7056288dfdb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elevatorPrefab: {fileID: 1727998054}
   elevatorDoorLeft: {fileID: 1727998052}
   elevatorDoorRight: {fileID: 77501314}
   elevatorAudioSource: {fileID: 1196978156}
   elevatorDoorClip: {fileID: 8300000, guid: 321bdce83eeffcb44876b56cbf7d2c87, type: 3}
+  disableObjects:
+  - {fileID: 1727998054}
+  - {fileID: 321000067}
   elevatorButtons:
   - {fileID: 508598378}
   - {fileID: 258621134}

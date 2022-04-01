@@ -262,7 +262,7 @@ public class BowlingGameManagement : GameManagement
 
     private void SpawnEnemy(Side lane, Side side, Transform point, int index)
     {
-        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Alien1);
         clone.transform.position = point.position;
         clone.transform.rotation = point.rotation;
         clone.SetActive(true);
@@ -275,7 +275,7 @@ public class BowlingGameManagement : GameManagement
 
         alien.OnDeath.AddListener(() =>
         {
-            GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.DeadAlien);
+            GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.DeadAlien1);
             clone.transform.SetPositionAndRotation(alien.transform.position, alien.transform.rotation);
             clone.SetActive(true);
             StartCoroutine(DestroyDeadAlien(clone, 3f));
@@ -308,7 +308,7 @@ public class BowlingGameManagement : GameManagement
     public void SpawnOneEnemy(Side main, Side secondary, SpawnEnemyAction action, UnityAction OnDeathSpawn, UnityAction OnReachCockpit)
     {
         SpawnPoint newSpawnPoint = enemySpawnPoints.Where(s => s.lane == main && s.side == secondary).FirstOrDefault();
-        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.EnemyAlien);
+        GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Alien1);
         clone.transform.position = newSpawnPoint.point.position;
         clone.transform.rotation = newSpawnPoint.point.rotation;
         clone.SetActive(true);
@@ -407,6 +407,8 @@ public class BowlingGameManagement : GameManagement
             {
                 AssistantBehavior.Instance.Speak(gameSuccessClip);
                 AssistantBehavior.Instance.PlayCelebratingAnimation();
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
+                StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
             });
 
             TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game1);
@@ -495,6 +497,16 @@ public class BowlingGameManagement : GameManagement
     {
         pnlStartGame.SetActive(true);
         CharacterManager.Instance.PointersVisibility(true);
+    }
+
+    #endregion
+
+    #region Function with Delay
+
+    private IEnumerator FunctionWithDelay(float waitTime, UnityAction function)
+    {
+        yield return new WaitForSeconds(waitTime);
+        function.Invoke();
     }
 
     #endregion

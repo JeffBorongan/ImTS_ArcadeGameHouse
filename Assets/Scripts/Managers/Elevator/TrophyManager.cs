@@ -24,6 +24,7 @@ public class TrophyManager : MonoBehaviour
     #region Parameters
 
     private bool isGame1Failed = false;
+    private bool isGame3Failed = false;
     private List<int> gameAccomplished = new List<int>();
     private List<int> gameTrophyPresented = new List<int>();
 
@@ -58,6 +59,7 @@ public class TrophyManager : MonoBehaviour
     #region Encapsulations
 
     public bool IsGame1Failed { get => isGame1Failed; set => isGame1Failed = value; }
+    public bool IsGame3Failed { get => isGame3Failed; set => isGame3Failed = value; }
 
     #endregion
 }

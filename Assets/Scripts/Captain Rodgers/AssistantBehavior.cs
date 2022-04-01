@@ -42,6 +42,12 @@ public class AssistantBehavior : MonoBehaviour
 
     #endregion
 
+    #region Encapsulations
+
+    public Animator Animator { get => animator; }
+
+    #endregion
+
     #region Startup
 
     private void Start()
@@ -147,62 +153,62 @@ public class AssistantBehavior : MonoBehaviour
 
     public void PlayCelebratingAnimation()
     {
-        animator.SetBool("isCelebrating", true);
+        Animator.SetBool("isCelebrating", true);
         StartCoroutine(Celebrating(celebratingAnimationLength));
     }
 
     public void PlayPointingLeftAnimation()
     {
-        animator.SetBool("isPointingLeft", true);
+        Animator.SetBool("isPointingLeft", true);
         StartCoroutine(PointingLeft(pointingLeftAnimationLength));
     }
 
     private void PlayGivingTrophyAnimation()
     {
-        animator.SetBool("isGivingTrophy", true);
+        Animator.SetBool("isGivingTrophy", true);
         StartCoroutine(GivingTrophy(givingTrophyAnimationLength));
     }
 
     private void PlayPointingRightAnimation()
     {
-        animator.SetBool("isPointingRight", true);
+        Animator.SetBool("isPointingRight", true);
         StartCoroutine(PointingRight(pointingRightAnimationLength));
     }
 
     public void PlayGreetingAnimation()
     {
-        animator.SetBool("isGreeting", true);
+        Animator.SetBool("isGreeting", true);
         StartCoroutine(Greeting(greetingAnimationLength));
     }
 
     private IEnumerator Celebrating(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        animator.SetBool("isCelebrating", false);
+        Animator.SetBool("isCelebrating", false);
     }
 
     private IEnumerator PointingLeft(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        animator.SetBool("isPointingLeft", false);
+        Animator.SetBool("isPointingLeft", false);
     }
 
     private IEnumerator GivingTrophy(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        animator.SetBool("isGivingTrophy", false);
+        Animator.SetBool("isGivingTrophy", false);
     }
 
     private IEnumerator PointingRight(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        animator.SetBool("isPointingRight", false);
+        Animator.SetBool("isPointingRight", false);
     }
 
     private IEnumerator Greeting(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        animator.SetBool("isGreeting", false);
+        Animator.SetBool("isGreeting", false);
     }
 
     #endregion

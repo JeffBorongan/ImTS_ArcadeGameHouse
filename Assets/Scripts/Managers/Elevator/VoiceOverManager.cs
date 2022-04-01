@@ -29,10 +29,12 @@ public class VoiceOverManager : MonoBehaviour
     [Header("Elevator")]
     [SerializeField] private Button btnBowlingGame = null;
     [SerializeField] private Button btnLockEmUp = null;
+    [SerializeField] private Button btnWalkeyMoley = null;
     [SerializeField] private Button btnSpaceLobby = null;
 
     [SerializeField] private AudioClip bowlingGameClip = null;
     [SerializeField] private AudioClip lockEmUpClip = null;
+    [SerializeField] private AudioClip walkeyMoleyClip = null;
     [SerializeField] private AudioClip spaceLobbyClip = null;
 
     [Header("Space Lobby")]
@@ -61,6 +63,9 @@ public class VoiceOverManager : MonoBehaviour
     [SerializeField] private AudioClip pullUpClip = null;
     [SerializeField] private AudioClip pushDownClip = null;
     [SerializeField] private AudioClip welcomeGame2Clip = null;
+
+    [Header("Walkey Moley")]
+    [SerializeField] private Button btnWelcomeGame3 = null;
 
     [Header("Go to Elevator")]
     [SerializeField] private Button btnSpaceLobbyToElevator = null;
@@ -99,6 +104,7 @@ public class VoiceOverManager : MonoBehaviour
                 btnWelcomeGame1.interactable = true;
                 btnGame1Instruction.interactable = true;
                 ElevatorManager.Instance.EnableFloorButton(4, true);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -113,7 +119,24 @@ public class VoiceOverManager : MonoBehaviour
                 btnSpaceLobbyToElevator.interactable = true;
                 btnWelcomeGame2.interactable = true;
                 ElevatorManager.Instance.EnableFloorButton(2, true);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
+        });
+
+        btnWalkeyMoley.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            AssistantBehavior.Instance.Move(true, 4f, () => { });
+            //HandleOnPlay(walkeyMoleyClip);
+            //StartCoroutine(FunctionWithDelay(walkeyMoleyClip.length, () =>
+            //{
+                btnWalkeyMoley.interactable = true;
+                btnSpaceLobbyToElevator.interactable = true;
+            //btnWelcomeGame3.interactable = true;
+                ElevatorManager.Instance.PlayerDetection = true;
+                ElevatorManager.Instance.EnableFloorButton(1, true);
+                //AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            //}));
         });
 
         btnSpaceLobby.onClick.AddListener(() => 
@@ -127,6 +150,7 @@ public class VoiceOverManager : MonoBehaviour
                 btnBowlingGameToElevator.interactable = true;
                 btnLockEmUpToElevator.interactable = true;
                 ElevatorManager.Instance.EnableFloorButton(3, true);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -138,21 +162,33 @@ public class VoiceOverManager : MonoBehaviour
         {
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndWelcomeRanger(() => HandleOnPlay(welcomeRangerClip));
-            StartCoroutine(FunctionWithDelay(welcomeRangerClip.length, () => AnatomyCaptureManager.Instance.PnlStart.SetActive(true)));
+            StartCoroutine(FunctionWithDelay(welcomeRangerClip.length, () => 
+            { 
+                AnatomyCaptureManager.Instance.PnlStart.SetActive(true);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
         });
 
         btnAreYouReady.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
             HandleOnPlay(areYouReadyClip);
-            StartCoroutine(FunctionWithDelay(areYouReadyClip.length, () => ButtonsInteraction(true)));
+            StartCoroutine(FunctionWithDelay(areYouReadyClip.length, () => 
+            { 
+                ButtonsInteraction(true);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
         });
 
         btnCustomizeSuit.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndCustomizeSuit(() => HandleOnPlay(customizeSuitClip));
-            StartCoroutine(FunctionWithDelay(customizeSuitClip.length, () => CustomizationManager.Instance.PnlCustomize.SetActive(true)));
+            StartCoroutine(FunctionWithDelay(customizeSuitClip.length, () => 
+            { 
+                CustomizationManager.Instance.PnlCustomize.SetActive(true);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
         });
 
         btnGoodbye.onClick.AddListener(() => 
@@ -161,6 +197,7 @@ public class VoiceOverManager : MonoBehaviour
             HandleOnPlay(goodbyeClip);
             AssistantBehavior.Instance.PlayCelebratingAnimation();
             StartCoroutine(FunctionWithDelay(10f, () => AssistantBehavior.Instance.PlayGreetingAnimation()));
+            StartCoroutine(FunctionWithDelay(goodbyeClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
         });
 
 
@@ -175,6 +212,7 @@ public class VoiceOverManager : MonoBehaviour
             {
                 ButtonsInteraction(true);
                 btnBowlingGameToElevator.interactable = false;
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -188,7 +226,11 @@ public class VoiceOverManager : MonoBehaviour
                 AssistantBehavior.Instance.Move(false, 5f, () => { });
             }));
 
-            StartCoroutine(FunctionWithDelay(game1InstructionClip.length, () => BowlingGameManagement.Instance.EnableStartButton()));
+            StartCoroutine(FunctionWithDelay(game1InstructionClip.length, () => 
+            { 
+                BowlingGameManagement.Instance.EnableStartButton();
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
         });
 
 
@@ -203,6 +245,7 @@ public class VoiceOverManager : MonoBehaviour
             {
                 btnPullUp.interactable = true;
                 btnPushDown.interactable = true;
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -214,6 +257,7 @@ public class VoiceOverManager : MonoBehaviour
             {
                 btnPullUp.interactable = true;
                 btnPushDown.interactable = true;
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -229,9 +273,10 @@ public class VoiceOverManager : MonoBehaviour
 
             StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () => 
             { 
-                SquatGameManager.Instance.EnableStartButton();
                 btnPullUp.interactable = true;
                 btnPushDown.interactable = true;
+                SquatGameManager.Instance.EnableStartButton();
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -248,10 +293,12 @@ public class VoiceOverManager : MonoBehaviour
                 btnSpaceLobbyToElevator.interactable = true;
                 btnBowlingGame.interactable = true;
                 btnLockEmUp.interactable = true;
+                btnWalkeyMoley.interactable = true;
                 ElevatorManager.Instance.EnableFloorButton(1, false);
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -280,6 +327,7 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
@@ -300,6 +348,7 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
     }
@@ -311,6 +360,7 @@ public class VoiceOverManager : MonoBehaviour
     private void HandleOnPlay(AudioClip clip)
     {
         AssistantBehavior.Instance.Speak(clip);
+        AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
     }
 
     public void ButtonsInteraction(bool interact)

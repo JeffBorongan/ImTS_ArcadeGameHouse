@@ -28,23 +28,25 @@ public class ElevatorManager : MonoBehaviour
 
     #region Parameters
 
-    [SerializeField] private GameObject elevatorPrefab = null;
     [SerializeField] private GameObject elevatorDoorLeft = null;
     [SerializeField] private GameObject elevatorDoorRight = null;
     [SerializeField] private AudioSource elevatorAudioSource = null;
     [SerializeField] private AudioClip elevatorDoorClip = null;
+    [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
     [SerializeField] private List<Button> elevatorButtons = new List<Button>();
     private MeshRenderer elevatorPart;
     private bool isDoorOpen = false;
     private bool closeDoorDetection = false;
+    private bool playerDetection = false;
     private int elementNumber;
 
     #endregion
 
     #region Encapsulations
 
-    public GameObject ElevatorPrefab { get => elevatorPrefab; }
+    public List<GameObject> DisableObjects { get => disableObjects; }
     public bool CloseDoorDetection { get => closeDoorDetection; set => closeDoorDetection = value; }
+    public bool PlayerDetection { get => playerDetection; set => playerDetection = value; }
 
     #endregion
 

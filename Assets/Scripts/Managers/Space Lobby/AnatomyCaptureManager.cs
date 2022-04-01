@@ -189,6 +189,8 @@ public class AnatomyCaptureManager : MonoBehaviour
         }
 
         AssistantBehavior.Instance.Speak(tPoseInstructionClip);
+        AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
+        StartCoroutine(FunctionWithDelay(tPoseInstructionClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
         txtMessage.gameObject.SetActive(true);
         txtMessage.text = message;
         txtMessage.DOFade(1f, 0.5f).OnComplete(() =>
@@ -211,6 +213,16 @@ public class AnatomyCaptureManager : MonoBehaviour
         panels[currentPanel].SetActive(false);
         panels[to].SetActive(true);
         currentPanel = to;
+    }
+
+    #endregion
+
+    #region Function with Delay
+
+    private IEnumerator FunctionWithDelay(float waitTime, UnityAction function)
+    {
+        yield return new WaitForSeconds(waitTime);
+        function.Invoke();
     }
 
     #endregion

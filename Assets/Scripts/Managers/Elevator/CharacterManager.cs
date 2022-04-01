@@ -30,6 +30,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private VRFootIK vRFootIK = null;
     [SerializeField] private SuitCustomization suitCustomization = null;
     [SerializeField] private Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
+    [SerializeField] private Transform playerLocation = null;
     [SerializeField] private GameObject characterPrefab = null;
     [SerializeField] private GameObject characterSuit = null;
     [SerializeField] private GameObject leftHandPointer = null;
@@ -46,6 +47,7 @@ public class CharacterManager : MonoBehaviour
     public VRFootIK VRFootIK { get => vRFootIK; }
     public SuitCustomization SuitCustomization { get => suitCustomization; }
     public Dictionary<string, Vector3> CurrentAnatomy { get => currentAnatomy; set => currentAnatomy = value; }
+    public Transform PlayerLocation { get => playerLocation; }
     public GameObject CharacterPrefab { get => characterPrefab; }
     public GameObject CharacterSuit { get => characterSuit; }
 
