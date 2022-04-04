@@ -360,7 +360,7 @@ public class WhackGameManager : GameManagement
         }
 
         CharacterManager.Instance.CharacterPrefab.transform.SetParent(CharacterManager.Instance.PlayerLocation);
-        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
+        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false, false, false);
         ElevatorManager.Instance.CloseDoorDetection = true;
         ElevatorManager.Instance.PlayerDetection = false;
         StartCoroutine(TeleportCour(10f, (int)Floors.InventoryRoom));

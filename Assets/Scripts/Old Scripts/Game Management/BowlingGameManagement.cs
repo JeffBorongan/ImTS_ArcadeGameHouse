@@ -420,7 +420,7 @@ public class BowlingGameManagement : GameManagement
             TrophyManager.Instance.IsGame1Failed = true;
         }
 
-        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
+        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false, false, false);
         ElevatorManager.Instance.CloseDoorDetection = true;
     }
 

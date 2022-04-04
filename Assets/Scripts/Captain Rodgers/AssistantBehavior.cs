@@ -74,7 +74,7 @@ public class AssistantBehavior : MonoBehaviour
         });
     }
 
-    public void Move(bool moveToCenter, float waitTime, UnityAction unityAction)
+    public void Move(bool moveToCenter, float moveDuration, UnityAction unityAction)
     {
         Transform movePoint = null;
 
@@ -87,8 +87,8 @@ public class AssistantBehavior : MonoBehaviour
             movePoint = moveAndGoToSide;
         }
 
-        transform.DOMove(movePoint.position, waitTime);
-        transform.DORotateQuaternion(movePoint.rotation, waitTime).OnComplete(() =>
+        transform.DOMove(movePoint.position, moveDuration);
+        transform.DORotateQuaternion(movePoint.rotation, moveDuration).OnComplete(() =>
         {
             unityAction.Invoke();
         });
@@ -100,7 +100,7 @@ public class AssistantBehavior : MonoBehaviour
         {
             PlayGreetingAnimation();
             playWelcomeRangerClip.Invoke();
-            StartCoroutine(FunctionWithDelay(13.5f, () => 
+            StartCoroutine(FunctionWithDelay(15f, () => 
             {
                 transform.DOMove(moveAndPointStart.position, 2.5f);
                 transform.DORotateQuaternion(moveAndPointStart.rotation, 2.5f).OnComplete(() => 
@@ -139,11 +139,8 @@ public class AssistantBehavior : MonoBehaviour
         transform.DOMove(moveAndGreet.position, 2f).OnComplete(() =>
         {
             PlayCelebratingAnimation();
-            StartCoroutine(FunctionWithDelay(3f, () => 
-            {
-                PlayGivingTrophyAnimation();
-                unityAction.Invoke();
-            }));
+            unityAction.Invoke();
+            StartCoroutine(FunctionWithDelay(4f, () => PlayGivingTrophyAnimation()));
         });
     }
 

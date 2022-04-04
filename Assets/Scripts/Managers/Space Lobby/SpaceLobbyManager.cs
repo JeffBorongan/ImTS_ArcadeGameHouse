@@ -38,6 +38,7 @@ public class SpaceLobbyManager : MonoBehaviour
     [SerializeField] private GameObject game2TrophyLight = null;
     [SerializeField] private GameObject game3TrophyLight = null;
     [SerializeField] private GameObject spaceshipHologram = null;
+    [SerializeField] private AudioClip givingTrophyClip = null;
     private GameNumber gameNumber = GameNumber.None;
     private bool isInsideSpaceLobby = false;
     private bool isTrophyGiven = false;
@@ -130,7 +131,11 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
-                        AssistantBehavior.Instance.MoveAndGiveTrophy(() => isTrophyGiven = true);
+                        AssistantBehavior.Instance.MoveAndGiveTrophy(() => 
+                        { 
+                            isTrophyGiven = true;
+                            AssistantBehavior.Instance.Speak(givingTrophyClip);
+                        });
                     }
                 }
             }
@@ -158,7 +163,11 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
-                        AssistantBehavior.Instance.MoveAndGiveTrophy(() => isTrophyGiven = true);
+                        AssistantBehavior.Instance.MoveAndGiveTrophy(() =>
+                        {
+                            isTrophyGiven = true;
+                            AssistantBehavior.Instance.Speak(givingTrophyClip);
+                        });
                     }
                 }
             }
@@ -186,7 +195,11 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
-                        AssistantBehavior.Instance.MoveAndGiveTrophy(() => isTrophyGiven = true);
+                        AssistantBehavior.Instance.MoveAndGiveTrophy(() =>
+                        {
+                            isTrophyGiven = true;
+                            AssistantBehavior.Instance.Speak(givingTrophyClip);
+                        });
                     }
                 }
             }

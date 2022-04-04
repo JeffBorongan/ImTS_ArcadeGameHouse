@@ -64,16 +64,26 @@ public class VoiceOverManager : MonoBehaviour
     [SerializeField] private AudioClip pushDownClip = null;
     [SerializeField] private AudioClip welcomeGame2Clip = null;
 
+    [Header("Inventory Room")]
+    [SerializeField] private Button btnGoToPlatform = null;
+
+    [SerializeField] private AudioClip goToPlatformClip = null;
+
     [Header("Walkey Moley")]
     [SerializeField] private Button btnWelcomeGame3 = null;
+
+    [SerializeField] private AudioClip welcomeGame3Clip = null;
 
     [Header("Go to Elevator")]
     [SerializeField] private Button btnSpaceLobbyToElevator = null;
     [SerializeField] private Button btnBowlingGameToElevator = null;
     [SerializeField] private Button btnLockEmUpToElevator = null;
+    [SerializeField] private Button btnInventoryRoomToElevator = null;
+    [SerializeField] private Button btnWalkeyMoleyToInventoryRoom = null;
 
     [SerializeField] private AudioClip goToElevatorClip = null;
 
+    [SerializeField] private AudioSource soundSource = null;
     [SerializeField] private List<Button> allButtons = new List<Button>();
 
     #endregion
@@ -132,7 +142,7 @@ public class VoiceOverManager : MonoBehaviour
             //{
                 btnWalkeyMoley.interactable = true;
                 btnSpaceLobbyToElevator.interactable = true;
-            //btnWelcomeGame3.interactable = true;
+                btnGoToPlatform.interactable = true;
                 ElevatorManager.Instance.PlayerDetection = true;
                 ElevatorManager.Instance.EnableFloorButton(1, true);
                 //AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
@@ -219,18 +229,16 @@ public class VoiceOverManager : MonoBehaviour
         btnGame1Instruction.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
-            HandleOnPlay(game1InstructionClip);
-            StartCoroutine(FunctionWithDelay(7f, () => 
-            {
-                AssistantBehavior.Instance.PlayPointingLeftAnimation();
-                AssistantBehavior.Instance.Move(false, 5f, () => { });
-            }));
-
-            StartCoroutine(FunctionWithDelay(game1InstructionClip.length, () => 
+            AssistantBehavior.Instance.Move(false, 5f, () => 
             { 
-                BowlingGameManagement.Instance.EnableStartButton();
-                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
-            }));
+                HandleOnPlay(game1InstructionClip);
+                StartCoroutine(FunctionWithDelay(12f, () => AssistantBehavior.Instance.PlayPointingLeftAnimation()));
+                StartCoroutine(FunctionWithDelay(game1InstructionClip.length, () =>
+                {
+                    BowlingGameManagement.Instance.EnableStartButton();
+                    AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                }));
+            });
         });
 
 
@@ -264,19 +272,49 @@ public class VoiceOverManager : MonoBehaviour
         btnWelcomeGame2.onClick.AddListener(() => 
         {
             ButtonsInteraction(false);
-            HandleOnPlay(welcomeGame2Clip);
-            StartCoroutine(FunctionWithDelay(7f, () => 
+            AssistantBehavior.Instance.Move(false, 5f, () => 
             {
-                AssistantBehavior.Instance.PlayPointingLeftAnimation();
-                AssistantBehavior.Instance.Move(false, 5f, () => { });
-            }));
+                HandleOnPlay(welcomeGame2Clip);
+                StartCoroutine(FunctionWithDelay(10f, () => AssistantBehavior.Instance.PlayPointingLeftAnimation()));
+                StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () =>
+                {
+                    btnPullUp.interactable = true;
+                    btnPushDown.interactable = true;
+                    SquatGameManager.Instance.EnableStartButton();
+                    AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                }));
+            });
+        });
 
-            StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () => 
-            { 
-                btnPullUp.interactable = true;
-                btnPushDown.interactable = true;
-                SquatGameManager.Instance.EnableStartButton();
+
+
+
+
+        btnGoToPlatform.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            HandleOnPlay(goToPlatformClip);
+            StartCoroutine(FunctionWithDelay(goToPlatformClip.length, () =>
+            {
+                ButtonsInteraction(true);
+                btnInventoryRoomToElevator.interactable = false;
+                btnWalkeyMoleyToInventoryRoom.interactable = false;
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
+        });
+
+
+
+
+
+        btnWelcomeGame3.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(welcomeGame3Clip);
+            StartCoroutine(FunctionWithDelay(welcomeGame3Clip.length, () =>
+            {
+                btnWalkeyMoleyToInventoryRoom.interactable = false;
+                WhackGameManager.Instance.EnableStartButton();
             }));
         });
 
@@ -351,11 +389,41 @@ public class VoiceOverManager : MonoBehaviour
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
+
+        btnInventoryRoomToElevator.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
+            StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
+            {
+                if (TrophyManager.Instance.IsGame3Failed)
+                {
+                    btnAreYouReady.interactable = true;
+                    btnSpaceLobbyToElevator.interactable = true;
+                    btnCustomizeSuit.interactable = true;
+                    btnGoodbye.interactable = true;
+                }
+
+                btnInventoryRoomToElevator.interactable = true;
+                btnSpaceLobby.interactable = true;
+                ElevatorManager.Instance.EnableFloorButton(1, false);
+                ElevatorManager.Instance.EnableFloorButton(2, false);
+                ElevatorManager.Instance.EnableFloorButton(3, false);
+                ElevatorManager.Instance.EnableFloorButton(4, false);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
+        });
     }
 
     #endregion
 
     #region Button Interactions
+
+    public void PlayClip(AudioClip clip)
+    {
+        soundSource.clip = clip;
+        soundSource.Play();
+    }
 
     private void HandleOnPlay(AudioClip clip)
     {
@@ -373,7 +441,7 @@ public class VoiceOverManager : MonoBehaviour
         btnWelcomeRanger.interactable = false;
     }
 
-    public void ButtonsInteraction(bool interact, bool welcomeGame1, bool game1Instruction, bool welcomeGame2)
+    public void ButtonsInteraction(bool interact, bool welcomeGame1, bool game1Instruction, bool welcomeGame2, bool goToPlatform, bool welcomeGame3)
     {
         foreach (var button in allButtons)
         {
@@ -384,6 +452,8 @@ public class VoiceOverManager : MonoBehaviour
         btnWelcomeGame1.interactable = welcomeGame1;
         btnGame1Instruction.interactable = game1Instruction;
         btnWelcomeGame2.interactable = welcomeGame2;
+        btnGoToPlatform.interactable = goToPlatform;
+        btnWelcomeGame3.interactable = welcomeGame3;
     }
 
     #endregion

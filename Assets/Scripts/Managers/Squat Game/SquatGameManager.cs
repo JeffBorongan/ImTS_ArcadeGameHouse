@@ -269,7 +269,7 @@ public class SquatGameManager : GameManagement
         });
 
         TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
-        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false);
+        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false, false, false);
         ElevatorManager.Instance.CloseDoorDetection = true;
     }
 

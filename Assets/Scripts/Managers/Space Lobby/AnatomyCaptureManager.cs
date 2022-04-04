@@ -34,6 +34,7 @@ public class AnatomyCaptureManager : MonoBehaviour
 
     [Header("Leg Selection")]
     [SerializeField] private GameObject pnlLegSelection = null;
+    [SerializeField] private AudioClip legSelectionClip = null;
     [SerializeField] private Button btnLeftLegSelect = null;
     [SerializeField] private Button btnRightLegSelect = null;
     private int legSelected = 0;
@@ -56,7 +57,7 @@ public class AnatomyCaptureManager : MonoBehaviour
     private Transform vRCameraPoint = null;
     private Transform vRLeftHandPoint = null;
     private Transform vRRightHandPoint = null;
-    private DictionaryEvent OnUpdateAnatomy = new DictionaryEvent();
+    private DictionaryEvent onUpdateAnatomy = new DictionaryEvent();
 
     private AnatomyCapturePanel currentPanel = AnatomyCapturePanel.Start;
     private Dictionary<AnatomyCapturePanel, GameObject> panels = new Dictionary<AnatomyCapturePanel, GameObject>();
@@ -85,8 +86,9 @@ public class AnatomyCaptureManager : MonoBehaviour
 
         btnStart.onClick.AddListener(() => 
         {
-            AssistantBehavior.Instance.transform.DOLookAt(vRCameraPoint.position, 1f, AxisConstraint.Y, Vector3.up);
             Transition(AnatomyCapturePanel.LegSelection);
+            AssistantBehavior.Instance.Speak(legSelectionClip);
+            AssistantBehavior.Instance.transform.DOLookAt(vRCameraPoint.position, 1f, AxisConstraint.Y, Vector3.up);
         });
 
         btnLeftLegSelect.onClick.AddListener(() => 
@@ -113,7 +115,7 @@ public class AnatomyCaptureManager : MonoBehaviour
         Vector3 leftHandPos = vRLeftHandPoint.position;
         Vector3 rightHandPos = vRRightHandPoint.position;
         float progress = 0f;
-        AssistantBehavior.Instance.Speak(tPoseScanningProgressClip);
+        VoiceOverManager.Instance.PlayClip(tPoseScanningProgressClip);
 
         while (progress < 100f)
         {
@@ -159,13 +161,13 @@ public class AnatomyCaptureManager : MonoBehaviour
             Transition(AnatomyCapturePanel.BodyMeasurement);
             StartCoroutine(BodyMeasurement(() =>
             {
-                AssistantBehavior.Instance.Speak(tPoseScanningCompleteClip);
+                VoiceOverManager.Instance.PlayClip(tPoseScanningCompleteClip);
                 Dictionary<string, Vector3> currentAnatomy = new Dictionary<string, Vector3>();
                 currentAnatomy.Add(AnatomyPart.Head.ToString(), vRCameraPoint.position);
                 currentAnatomy.Add(AnatomyPart.LeftHand.ToString(), vRLeftHandPoint.localPosition);
                 currentAnatomy.Add(AnatomyPart.RightHand.ToString(), vRRightHandPoint.localPosition);
                 AdjustHeight();
-                OnUpdateAnatomy.Invoke(currentAnatomy);
+                onUpdateAnatomy.Invoke(currentAnatomy);
                 CharacterManager.Instance.CurrentAnatomy = currentAnatomy;
                 VoiceOverManager.Instance.ButtonsInteraction(true);
                 panels[currentPanel].SetActive(false);
