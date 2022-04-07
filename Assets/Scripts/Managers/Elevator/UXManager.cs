@@ -58,11 +58,16 @@ public class UXManager : MonoBehaviour
     private float pushDownHeightValue = 0.5f;
 
     [Header("Whack Game")]
-    [SerializeField] private Slider playerSpeed = null;
+    [SerializeField] private Button btnPlayerSpeedIncrease = null;
+    [SerializeField] private Button btnPlayerSpeedDecrease = null;
     [SerializeField] private TMP_Text txtPlayerSpeed = null;
     [SerializeField] private TMP_InputField aliensToHit = null;
     [SerializeField] private TMP_InputField enemyReachedThePlayer = null;
-    private float playerSpeedValue = 1.6f;
+    [SerializeField] private Button btnWhackGameUpdate = null;
+    private float playerSpeedValue = 0.2f;
+    private float playerSpeedLowestValue = 0.2f;
+    private float playerSpeedHighestValue = 8f;
+    private float playerSpeedChange = 0.1f;
     private int aliensToHitValue = 10;
     private int enemyReachedThePlayerValue = 5;
 
@@ -93,26 +98,43 @@ public class UXManager : MonoBehaviour
         numberOfFails.onValueChanged.AddListener(HandleOnChangeBowlingTextField);
         dispenserOffset.onValueChanged.AddListener(HandleOnChangeBowlingTextField);
 
-        btnBowlingGameUpdate.onClick.AddListener(HandleOnBowlingGameUpdate);
+        btnBowlingGameUpdate.onClick.AddListener(() => 
+        {
+            HandleOnBowlingGameStart();
+            BowlingGameManagement.Instance.UpdateDispensers(CharacterManager.Instance.CurrentAnatomy);
+            BowlingGameManagement.Instance.UpdateSpawningLanes();
+            btnBowlingGameUpdate.interactable = false;
+        });
 
         SetBowlingGameDefaultValues();
     }
 
     private void SquatGameStart()
     {
-        btnSquatGameUpdate.onClick.AddListener(HandleOnSquatGameUpdate);
-
         pullUpHeight.onValueChanged.AddListener(HandleOnChangePullUpHeight);
         pushDownHeight.onValueChanged.AddListener(HandleOnChangePushDownHeight);
+
+        btnSquatGameUpdate.onClick.AddListener(() =>
+        {
+            HandleOnSquatGameStart();
+            btnSquatGameUpdate.interactable = false;
+        });
 
         SetSquatGameDefaultValues();
     }
 
     private void WhackGameStart()
     {
-        playerSpeed.onValueChanged.AddListener(HandleOnChangePlayerSpeed);
-        aliensToHit.onValueChanged.AddListener(HandleOnChangeAliensToHitTextField);
-        enemyReachedThePlayer.onValueChanged.AddListener(HandleOnChangeEnemyReachedTextField);
+        btnPlayerSpeedIncrease.onClick.AddListener(() => HandleOnIncreasePlayerSpeed());
+        btnPlayerSpeedDecrease.onClick.AddListener(() => HandleOnDecreasePlayerSpeed());
+        aliensToHit.onValueChanged.AddListener(HandleOnChangeWhackTextField);
+        enemyReachedThePlayer.onValueChanged.AddListener(HandleOnChangeWhackTextField);
+
+        btnWhackGameUpdate.onClick.AddListener(() =>
+        {
+            HandleOnWhackGameStart();
+            btnWhackGameUpdate.interactable = false;
+        });
 
         SetWhackGameDefaultValues();
     }
@@ -187,7 +209,7 @@ public class UXManager : MonoBehaviour
     private void SetWhackGameDefaultValues()
     {
         playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
-        playerSpeed.value = playerSpeedValue;
+        txtPlayerSpeed.text = playerSpeedValue.ToString();
         aliensToHit.text = aliensToHitValue.ToString();
         enemyReachedThePlayer.text = enemyReachedThePlayerValue.ToString();
     }
@@ -229,25 +251,31 @@ public class UXManager : MonoBehaviour
         btnSquatGameUpdate.interactable = true;
     }
 
-    private void HandleOnChangePlayerSpeed(float value)
+    private void HandleOnIncreasePlayerSpeed()
     {
-        value = Mathf.Round(value * 100f) / 100f;
-        txtPlayerSpeed.text = value.ToString();
-        playerSpeedValue = playerSpeed.value;
-        playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
-        WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+        if (playerSpeedValue < playerSpeedHighestValue)
+        {
+            playerSpeedValue += playerSpeedChange;
+            playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
+            txtPlayerSpeed.text = playerSpeedValue.ToString();
+            WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+        }
     }
 
-    private void HandleOnChangeAliensToHitTextField(string value)
+    private void HandleOnDecreasePlayerSpeed()
     {
-        aliensToHitValue = int.Parse(aliensToHit.text);
-        WhackGameManager.Instance.SessionData.aliensToHit = aliensToHitValue;
+        if (playerSpeedValue > playerSpeedLowestValue)
+        {
+            playerSpeedValue -= playerSpeedChange;
+            playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
+            txtPlayerSpeed.text = playerSpeedValue.ToString();
+            WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+        }
     }
 
-    private void HandleOnChangeEnemyReachedTextField(string value)
+    private void HandleOnChangeWhackTextField(string value)
     {
-        enemyReachedThePlayerValue = int.Parse(enemyReachedThePlayer.text);
-        WhackGameManager.Instance.SessionData.enemyReachedThePlayer = enemyReachedThePlayerValue;
+        btnWhackGameUpdate.interactable = true;
     }
 
     #endregion
@@ -288,55 +316,11 @@ public class UXManager : MonoBehaviour
 
     public void HandleOnWhackGameStart()
     {
-        playerSpeedValue = playerSpeed.value;
         aliensToHitValue = int.Parse(aliensToHit.text);
         enemyReachedThePlayerValue = int.Parse(enemyReachedThePlayer.text);
-        playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
         WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
         WhackGameManager.Instance.SessionData.aliensToHit = aliensToHitValue;
         WhackGameManager.Instance.SessionData.enemyReachedThePlayer = enemyReachedThePlayerValue;
-    }
-
-    #endregion
-
-    #region Handle Game Update
-
-    private void HandleOnBowlingGameUpdate()
-    {
-        enemySpawnIntervalValue = enemySpawnInterval.value;
-        enemySpeedValue = enemySpeed.value;
-        pointsToEarnValue = int.Parse(pointsToEarn.text);
-        numberOfFailsValue = int.Parse(numberOfFails.text);
-        dispenserOffsetValue = float.Parse(dispenserOffset.text);
-
-        enemySpawnIntervalValue = Mathf.Round(enemySpawnIntervalValue * 100f) / 100f;
-        enemySpeedValue = Mathf.Round(enemySpeedValue * 100f) / 100f;
-        dispenserOffsetValue = Mathf.Round(dispenserOffsetValue * 100f) / 100f;
-
-        BowlingGameManagement.Instance.sessionData.enemySpawnInterval = enemySpawnIntervalValue;
-        BowlingGameManagement.Instance.sessionData.enemySpeed = enemySpeedValue;
-        BowlingGameManagement.Instance.sessionData.pointsToEarn = pointsToEarnValue;
-        BowlingGameManagement.Instance.sessionData.numberOfFails = numberOfFailsValue;
-        BowlingGameManagement.Instance.sessionData.dispenserOffset = dispenserOffsetValue;
-        BowlingGameManagement.Instance.sessionData.lanes = currentLanesEnabled;
-        BowlingGameManagement.Instance.UpdateDispensers(CharacterManager.Instance.CurrentAnatomy);
-        BowlingGameManagement.Instance.UpdateSpawningLanes();
-
-        btnBowlingGameUpdate.interactable = false;
-    }
-
-    private void HandleOnSquatGameUpdate()
-    {
-        pullUpHeightValue = pullUpHeight.value;
-        pushDownHeightValue = pushDownHeight.value;
-
-        pullUpHeightValue = Mathf.Round(pullUpHeightValue * 100f) / 100f;
-        pushDownHeightValue = Mathf.Round(pushDownHeightValue * 100f) / 100f;
-
-        SquatGameManager.Instance.SessionData.pullUpHeight = pullUpHeightValue;
-        SquatGameManager.Instance.SessionData.pushDownHeight = pushDownHeightValue;
-
-        btnSquatGameUpdate.interactable = false;
     }
 
     #endregion

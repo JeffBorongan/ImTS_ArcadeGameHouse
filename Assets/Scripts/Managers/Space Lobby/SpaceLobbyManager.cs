@@ -25,6 +25,7 @@ public class SpaceLobbyManager : MonoBehaviour
 
     [SerializeField] private Trophy trophy = null;
     [SerializeField] private GameObject closeDoorDetection = null;
+    [SerializeField] private GameObject vFXConfetti = null;
     [SerializeField] private GameObject game1Trophy = null;
     [SerializeField] private GameObject game2Trophy = null;
     [SerializeField] private GameObject game3Trophy = null;
@@ -131,7 +132,7 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
-                        AssistantBehavior.Instance.MoveAndGiveTrophy(() => 
+                        AssistantBehavior.Instance.MoveAndGiveTrophy(vFXConfetti, () => 
                         { 
                             isTrophyGiven = true;
                             AssistantBehavior.Instance.Speak(givingTrophyClip);
@@ -163,7 +164,7 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
-                        AssistantBehavior.Instance.MoveAndGiveTrophy(() =>
+                        AssistantBehavior.Instance.MoveAndGiveTrophy(vFXConfetti, () =>
                         {
                             isTrophyGiven = true;
                             AssistantBehavior.Instance.Speak(givingTrophyClip);
@@ -195,7 +196,7 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
-                        AssistantBehavior.Instance.MoveAndGiveTrophy(() =>
+                        AssistantBehavior.Instance.MoveAndGiveTrophy(vFXConfetti, () =>
                         {
                             isTrophyGiven = true;
                             AssistantBehavior.Instance.Speak(givingTrophyClip);

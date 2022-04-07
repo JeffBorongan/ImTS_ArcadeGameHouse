@@ -41,3 +41,23 @@ public enum TypeOfObject
     Alien4,
     DeadAlien1,
 }
+
+public enum LastButtonSelected
+{
+    None,
+    Any,
+    SpaceLobbyToElevator,
+    BowlingGame,
+    WelcomeGame1,
+    Game1Instruction,
+    BowlingGameToElevator,
+    SpaceLobby,
+    LockEmUp,
+    Game2Controls,
+    LockEmUpToElevator,
+    WalkeyMoley,
+    GoToPlatform,
+    WelcomeGame3,
+    WalkeyMoleyToInventoryRoom,
+    InventoryRoomToElevator,
+}

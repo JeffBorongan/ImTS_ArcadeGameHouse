@@ -134,13 +134,18 @@ public class AssistantBehavior : MonoBehaviour
         });
     }
 
-    public void MoveAndGiveTrophy(UnityAction unityAction)
+    public void MoveAndGiveTrophy(GameObject vFX, UnityAction unityAction)
     {
         transform.DOMove(moveAndGreet.position, 2f).OnComplete(() =>
         {
+            vFX.SetActive(true);
             PlayCelebratingAnimation();
             unityAction.Invoke();
-            StartCoroutine(FunctionWithDelay(4f, () => PlayGivingTrophyAnimation()));
+            StartCoroutine(FunctionWithDelay(4f, () => 
+            {
+                vFX.SetActive(false);
+                PlayGivingTrophyAnimation(); 
+            }));
         });
     }
 

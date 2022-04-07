@@ -85,8 +85,11 @@ public class BowlingGameManagement : GameManagement
     [SerializeField] private bool isPlayerLocked = false;
 
     [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
+    [SerializeField] private GameObject vFXConfetti = null;
+    [SerializeField] private GameObject videoDemo = null;
 
     public List<GameObject> DisableObjects { get => disableObjects; }
+    public GameObject VideoDemo { get => videoDemo;}
 
     #endregion
 
@@ -400,28 +403,40 @@ public class BowlingGameManagement : GameManagement
 
         txtEndPoints.color = success ? txtEndPoints.color : colorFailedText;
         txtEndResult.color = success ? colorSuccessText : colorFailedText;
-
-        if (success)
+        vFXConfetti.SetActive(success);
+        VoiceOverManager.Instance.ButtonsInteraction(false);
+        AssistantBehavior.Instance.Move(true, 3f, () => 
         {
-            AssistantBehavior.Instance.Move(true, 3f, () => 
+            if (success)
             {
                 AssistantBehavior.Instance.Speak(gameSuccessClip);
                 AssistantBehavior.Instance.PlayCelebratingAnimation();
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
-                StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
-            });
-
-            TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game1);
-            TrophyManager.Instance.IsGame1Failed = false;
-        }
-        else
-        {
-            AssistantBehavior.Instance.Move(true, 3f, () => AssistantBehavior.Instance.Speak(gameFailClip));
-            TrophyManager.Instance.IsGame1Failed = true;
-        }
-
-        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false, false, false);
-        ElevatorManager.Instance.CloseDoorDetection = true;
+                StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () =>
+                {
+                    vFXConfetti.SetActive(false);
+                    AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                    TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game1);
+                    TrophyManager.Instance.IsGame1Failed = false;
+                    VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.BowlingGameToElevator;
+                    VoiceOverManager.Instance.InvokeLastButtonSelected();
+                    ElevatorManager.Instance.CloseDoorDetection = true;
+                }));
+            }
+            else
+            {
+                AssistantBehavior.Instance.Speak(gameFailClip);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
+                StartCoroutine(FunctionWithDelay(gameFailClip.length, () =>
+                {
+                    AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                    TrophyManager.Instance.IsGame1Failed = true;
+                    VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.BowlingGameToElevator;
+                    VoiceOverManager.Instance.InvokeLastButtonSelected();
+                    ElevatorManager.Instance.CloseDoorDetection = true;
+                }));
+            }
+        });
     }
 
     #endregion

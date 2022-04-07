@@ -83,8 +83,72 @@ public class VoiceOverManager : MonoBehaviour
 
     [SerializeField] private AudioClip goToElevatorClip = null;
 
+    [Header("Therapist")]
+    [SerializeField] private Toggle btnEncouragement = null;
+    [SerializeField] private Toggle btnWhenDoingWell = null;
+    [SerializeField] private Toggle btnWhenFailed = null;
+
+    [SerializeField] private GameObject pnlEncouragement = null;
+    [SerializeField] private GameObject pnlWhenDoingWell = null;
+    [SerializeField] private GameObject pnlWhenFailed = null;
+
+    [Header("Encouragement")]
+    [SerializeField] private Button btnKeepGoing = null;
+    [SerializeField] private Button btnThatsTheWay = null;
+    [SerializeField] private Button btnJustABitMore = null;
+    [SerializeField] private Button btnGoForIt = null;
+    [SerializeField] private Button btnGoGoGo = null;
+    [SerializeField] private Button btnYouCanWin = null;
+    [SerializeField] private Button btnImCheeringForYou = null;
+
+    [SerializeField] private AudioClip keepGoingClip = null;
+    [SerializeField] private AudioClip thatsTheWayClip = null;
+    [SerializeField] private AudioClip justABitMoreClip = null;
+    [SerializeField] private AudioClip goForItClip = null;
+    [SerializeField] private AudioClip goGoGoClip = null;
+    [SerializeField] private AudioClip youCanWinClip = null;
+    [SerializeField] private AudioClip imCheeringForYouClip = null;
+
+    [Header("When Doing Well")]
+    [SerializeField] private Button btnGoodJob = null;
+    [SerializeField] private Button btnYoureAStar = null;
+    [SerializeField] private Button btnYoureDoingWell = null;
+    [SerializeField] private Button btnAwesome = null;
+    [SerializeField] private Button btnCool = null;
+    [SerializeField] private Button btnWellDone = null;
+    [SerializeField] private Button btnYouDidIt = null;
+
+    [SerializeField] private AudioClip goodJobClip = null;
+    [SerializeField] private AudioClip youreAStarClip = null;
+    [SerializeField] private AudioClip youreDoingWellClip = null;
+    [SerializeField] private AudioClip awesomeClip = null;
+    [SerializeField] private AudioClip coolClip = null;
+    [SerializeField] private AudioClip wellDoneClip = null;
+    [SerializeField] private AudioClip youDidItClip = null;
+
+    [Header("When Failed")]
+    [SerializeField] private Button btnGoodEffort = null;
+    [SerializeField] private Button btnDidYouHaveFunPlayingThatGame = null;
+    [SerializeField] private Button btnYouShowedFancyMovements = null;
+    [SerializeField] private Button btnImProudOfYou = null;
+    [SerializeField] private Button btnYoullGetThoseAliensNextTime = null;
+
+    [SerializeField] private AudioClip goodEffortClip = null;
+    [SerializeField] private AudioClip didYouHaveFunPlayingThatGameClip = null;
+    [SerializeField] private AudioClip youShowedFancyMovementsClip = null;
+    [SerializeField] private AudioClip imProudOfYouClip = null;
+    [SerializeField] private AudioClip youllGetThoseAliensNextTimeClip = null;
+
+    [Space][Space][Space]
     [SerializeField] private AudioSource soundSource = null;
     [SerializeField] private List<Button> allButtons = new List<Button>();
+    private LastButtonSelected lastButtonSelected = LastButtonSelected.None;
+
+    #endregion
+
+    #region Encapsulations
+
+    public LastButtonSelected LastButtonSelected { get => lastButtonSelected; set => lastButtonSelected = value; }
 
     #endregion
 
@@ -104,15 +168,13 @@ public class VoiceOverManager : MonoBehaviour
     {
         btnBowlingGame.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.BowlingGame;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(bowlingGameClip);
             StartCoroutine(FunctionWithDelay(bowlingGameClip.length, () => 
             {
-                btnBowlingGame.interactable = true;
-                btnSpaceLobbyToElevator.interactable = true;
-                btnWelcomeGame1.interactable = true;
-                btnGame1Instruction.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(4, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
@@ -120,14 +182,13 @@ public class VoiceOverManager : MonoBehaviour
 
         btnLockEmUp.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.LockEmUp;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(lockEmUpClip);
             StartCoroutine(FunctionWithDelay(lockEmUpClip.length, () =>
             {
-                btnLockEmUp.interactable = true;
-                btnSpaceLobbyToElevator.interactable = true;
-                btnWelcomeGame2.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(2, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
@@ -135,14 +196,13 @@ public class VoiceOverManager : MonoBehaviour
 
         btnWalkeyMoley.onClick.AddListener(() =>
         {
+            LastButtonSelected = LastButtonSelected.WalkeyMoley;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             //HandleOnPlay(walkeyMoleyClip);
             //StartCoroutine(FunctionWithDelay(walkeyMoleyClip.length, () =>
             //{
-                btnWalkeyMoley.interactable = true;
-                btnSpaceLobbyToElevator.interactable = true;
-                btnGoToPlatform.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.PlayerDetection = true;
                 ElevatorManager.Instance.EnableFloorButton(1, true);
                 //AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
@@ -151,14 +211,13 @@ public class VoiceOverManager : MonoBehaviour
 
         btnSpaceLobby.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.SpaceLobby;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(spaceLobbyClip);
             StartCoroutine(FunctionWithDelay(spaceLobbyClip.length, () =>
             {
-                btnSpaceLobby.interactable = true;
-                btnBowlingGameToElevator.interactable = true;
-                btnLockEmUpToElevator.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(3, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
@@ -170,6 +229,7 @@ public class VoiceOverManager : MonoBehaviour
 
         btnWelcomeRanger.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.Any;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndWelcomeRanger(() => HandleOnPlay(welcomeRangerClip));
             StartCoroutine(FunctionWithDelay(welcomeRangerClip.length, () => 
@@ -181,17 +241,19 @@ public class VoiceOverManager : MonoBehaviour
 
         btnAreYouReady.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.Any;
             ButtonsInteraction(false);
             HandleOnPlay(areYouReadyClip);
             StartCoroutine(FunctionWithDelay(areYouReadyClip.length, () => 
             { 
-                ButtonsInteraction(true);
+                InvokeLastButtonSelected();
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
         btnCustomizeSuit.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.Any;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndCustomizeSuit(() => HandleOnPlay(customizeSuitClip));
             StartCoroutine(FunctionWithDelay(customizeSuitClip.length, () => 
@@ -203,6 +265,7 @@ public class VoiceOverManager : MonoBehaviour
 
         btnGoodbye.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.None;
             ButtonsInteraction(false);
             HandleOnPlay(goodbyeClip);
             AssistantBehavior.Instance.PlayCelebratingAnimation();
@@ -216,26 +279,34 @@ public class VoiceOverManager : MonoBehaviour
 
         btnWelcomeGame1.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.WelcomeGame1;
             ButtonsInteraction(false);
             HandleOnPlay(welcomeGame1Clip);
             StartCoroutine(FunctionWithDelay(welcomeGame1Clip.length, () => 
             {
-                ButtonsInteraction(true);
-                btnBowlingGameToElevator.interactable = false;
+                InvokeLastButtonSelected();
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
         btnGame1Instruction.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.Game1Instruction;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(false, 5f, () => 
             { 
                 HandleOnPlay(game1InstructionClip);
+                BowlingGameManagement.Instance.VideoDemo.SetActive(true);
                 StartCoroutine(FunctionWithDelay(12f, () => AssistantBehavior.Instance.PlayPointingLeftAnimation()));
+                StartCoroutine(FunctionWithDelay(15f, () => BowlingGameManagement.Instance.VideoDemo.SetActive(false)));
                 StartCoroutine(FunctionWithDelay(game1InstructionClip.length, () =>
                 {
+                    InvokeLastButtonSelected();
                     BowlingGameManagement.Instance.EnableStartButton();
+                    ElevatorManager.Instance.EnableFloorButton(1, false);
+                    ElevatorManager.Instance.EnableFloorButton(2, false);
+                    ElevatorManager.Instance.EnableFloorButton(3, false);
+                    ElevatorManager.Instance.EnableFloorButton(4, false);
                     AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
                 }));
             });
@@ -247,40 +318,45 @@ public class VoiceOverManager : MonoBehaviour
 
         btnPullUp.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.Game2Controls;
             ButtonsInteraction(false);
             HandleOnPlay(pullUpClip);
             StartCoroutine(FunctionWithDelay(pullUpClip.length, () =>
             {
-                btnPullUp.interactable = true;
-                btnPushDown.interactable = true;
+                InvokeLastButtonSelected();
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
         btnPushDown.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.Game2Controls;
             ButtonsInteraction(false);
             HandleOnPlay(pushDownClip);
             StartCoroutine(FunctionWithDelay(pushDownClip.length, () =>
             {
-                btnPullUp.interactable = true;
-                btnPushDown.interactable = true;
+                InvokeLastButtonSelected();
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
 
         btnWelcomeGame2.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.None;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(false, 5f, () => 
             {
                 HandleOnPlay(welcomeGame2Clip);
+                SquatGameManager.Instance.VideoDemo.SetActive(true);
                 StartCoroutine(FunctionWithDelay(10f, () => AssistantBehavior.Instance.PlayPointingLeftAnimation()));
+                StartCoroutine(FunctionWithDelay(14f, () => SquatGameManager.Instance.VideoDemo.SetActive(false)));
                 StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () =>
                 {
-                    btnPullUp.interactable = true;
-                    btnPushDown.interactable = true;
                     SquatGameManager.Instance.EnableStartButton();
+                    ElevatorManager.Instance.EnableFloorButton(1, false);
+                    ElevatorManager.Instance.EnableFloorButton(2, false);
+                    ElevatorManager.Instance.EnableFloorButton(3, false);
+                    ElevatorManager.Instance.EnableFloorButton(4, false);
                     AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
                 }));
             });
@@ -292,13 +368,16 @@ public class VoiceOverManager : MonoBehaviour
 
         btnGoToPlatform.onClick.AddListener(() =>
         {
+            LastButtonSelected = LastButtonSelected.GoToPlatform;
             ButtonsInteraction(false);
             HandleOnPlay(goToPlatformClip);
             StartCoroutine(FunctionWithDelay(goToPlatformClip.length, () =>
             {
-                ButtonsInteraction(true);
-                btnInventoryRoomToElevator.interactable = false;
-                btnWalkeyMoleyToInventoryRoom.interactable = false;
+                InvokeLastButtonSelected();
+                ElevatorManager.Instance.EnableFloorButton(1, false);
+                ElevatorManager.Instance.EnableFloorButton(2, false);
+                ElevatorManager.Instance.EnableFloorButton(3, false);
+                ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
@@ -309,11 +388,12 @@ public class VoiceOverManager : MonoBehaviour
 
         btnWelcomeGame3.onClick.AddListener(() =>
         {
+            LastButtonSelected = LastButtonSelected.WelcomeGame3;
             ButtonsInteraction(false);
             PlayClip(welcomeGame3Clip);
             StartCoroutine(FunctionWithDelay(welcomeGame3Clip.length, () =>
             {
-                btnWalkeyMoleyToInventoryRoom.interactable = false;
+                InvokeLastButtonSelected();
                 WhackGameManager.Instance.EnableStartButton();
             }));
         });
@@ -324,14 +404,12 @@ public class VoiceOverManager : MonoBehaviour
 
         btnSpaceLobbyToElevator.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.SpaceLobbyToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
             {
-                btnSpaceLobbyToElevator.interactable = true;
-                btnBowlingGame.interactable = true;
-                btnLockEmUp.interactable = true;
-                btnWalkeyMoley.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(1, false);
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
@@ -342,6 +420,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnBowlingGameToElevator.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.BowlingGameToElevator;
+
             foreach (var item in BowlingGameManagement.Instance.DisableObjects)
             {
                 item.SetActive(false);
@@ -351,16 +431,7 @@ public class VoiceOverManager : MonoBehaviour
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
             {
-                if (TrophyManager.Instance.IsGame1Failed)
-                {
-                    btnAreYouReady.interactable = true;
-                    btnSpaceLobbyToElevator.interactable = true;
-                    btnCustomizeSuit.interactable = true;
-                    btnGoodbye.interactable = true;
-                }
-
-                btnBowlingGameToElevator.interactable = true;
-                btnSpaceLobby.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(1, false);
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
@@ -371,6 +442,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnLockEmUpToElevator.onClick.AddListener(() => 
         {
+            LastButtonSelected = LastButtonSelected.LockEmUpToElevator;
+
             foreach (var item in SquatGameManager.Instance.DisableObjects)
             {
                 item.SetActive(false);
@@ -380,8 +453,7 @@ public class VoiceOverManager : MonoBehaviour
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
             {
-                btnLockEmUpToElevator.interactable = true;
-                btnSpaceLobby.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(1, false);
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
@@ -392,26 +464,200 @@ public class VoiceOverManager : MonoBehaviour
 
         btnInventoryRoomToElevator.onClick.AddListener(() =>
         {
+            LastButtonSelected = LastButtonSelected.InventoryRoomToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
             {
-                if (TrophyManager.Instance.IsGame3Failed)
-                {
-                    btnAreYouReady.interactable = true;
-                    btnSpaceLobbyToElevator.interactable = true;
-                    btnCustomizeSuit.interactable = true;
-                    btnGoodbye.interactable = true;
-                }
-
-                btnInventoryRoomToElevator.interactable = true;
-                btnSpaceLobby.interactable = true;
+                InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(1, false);
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
+        });
+
+        btnWalkeyMoleyToInventoryRoom.onClick.AddListener(() =>
+        {
+            LastButtonSelected = LastButtonSelected.WalkeyMoleyToInventoryRoom;
+            ButtonsInteraction(false);
+            PlayClip(goToElevatorClip);
+            StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
+            {
+                InvokeLastButtonSelected();
+                WhackGameManager.Instance.InitiateTeleport();
+            }));
+        });
+
+
+
+
+
+        btnEncouragement.onValueChanged.AddListener((bool value) => 
+        {
+            btnWhenDoingWell.interactable = !value;
+            btnWhenFailed.interactable = !value;
+            pnlEncouragement.SetActive(value);
+        });
+
+        btnWhenDoingWell.onValueChanged.AddListener((bool value) =>
+        {
+            btnEncouragement.interactable = !value;
+            btnWhenFailed.interactable = !value;
+            pnlWhenDoingWell.SetActive(value);
+        });
+
+        btnWhenFailed.onValueChanged.AddListener((bool value) =>
+        {
+            btnEncouragement.interactable = !value;
+            btnWhenDoingWell.interactable = !value;
+            pnlWhenFailed.SetActive(value);
+        });
+
+
+
+
+
+        btnKeepGoing.onClick.AddListener(() => 
+        {
+            ButtonsInteraction(false);
+            PlayClip(keepGoingClip);
+            StartCoroutine(FunctionWithDelay(keepGoingClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnThatsTheWay.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(thatsTheWayClip);
+            StartCoroutine(FunctionWithDelay(thatsTheWayClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnJustABitMore.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(justABitMoreClip);
+            StartCoroutine(FunctionWithDelay(justABitMoreClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnGoForIt.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(goForItClip);
+            StartCoroutine(FunctionWithDelay(goForItClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnGoGoGo.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(goGoGoClip);
+            StartCoroutine(FunctionWithDelay(goGoGoClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnYouCanWin.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(youCanWinClip);
+            StartCoroutine(FunctionWithDelay(youCanWinClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnImCheeringForYou.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(imCheeringForYouClip);
+            StartCoroutine(FunctionWithDelay(imCheeringForYouClip.length, () => InvokeLastButtonSelected()));
+        });
+
+
+
+
+
+        btnGoodJob.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(goodJobClip);
+            StartCoroutine(FunctionWithDelay(goodJobClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnYoureAStar.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(youreAStarClip);
+            StartCoroutine(FunctionWithDelay(youreAStarClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnYoureDoingWell.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(youreDoingWellClip);
+            StartCoroutine(FunctionWithDelay(youreDoingWellClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnAwesome.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(awesomeClip);
+            StartCoroutine(FunctionWithDelay(awesomeClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnCool.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(coolClip);
+            StartCoroutine(FunctionWithDelay(coolClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnWellDone.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(wellDoneClip);
+            StartCoroutine(FunctionWithDelay(wellDoneClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnYouDidIt.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(youDidItClip);
+            StartCoroutine(FunctionWithDelay(youDidItClip.length, () => InvokeLastButtonSelected()));
+        });
+
+
+
+
+
+        btnGoodEffort.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(goodEffortClip);
+            StartCoroutine(FunctionWithDelay(goodEffortClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnDidYouHaveFunPlayingThatGame.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(didYouHaveFunPlayingThatGameClip);
+            StartCoroutine(FunctionWithDelay(didYouHaveFunPlayingThatGameClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnYouShowedFancyMovements.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(youShowedFancyMovementsClip);
+            StartCoroutine(FunctionWithDelay(youShowedFancyMovementsClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnImProudOfYou.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(imProudOfYouClip);
+            StartCoroutine(FunctionWithDelay(imProudOfYouClip.length, () => InvokeLastButtonSelected()));
+        });
+
+        btnYoullGetThoseAliensNextTime.onClick.AddListener(() =>
+        {
+            ButtonsInteraction(false);
+            PlayClip(youllGetThoseAliensNextTimeClip);
+            StartCoroutine(FunctionWithDelay(youllGetThoseAliensNextTimeClip.length, () => InvokeLastButtonSelected()));
         });
     }
 
@@ -454,6 +700,144 @@ public class VoiceOverManager : MonoBehaviour
         btnWelcomeGame2.interactable = welcomeGame2;
         btnGoToPlatform.interactable = goToPlatform;
         btnWelcomeGame3.interactable = welcomeGame3;
+    }
+
+    public void InvokeLastButtonSelected()
+    {
+        if (LastButtonSelected == LastButtonSelected.Any)
+        {
+            ButtonsInteraction(true);
+        }
+
+        if (LastButtonSelected == LastButtonSelected.SpaceLobbyToElevator)
+        {
+            ButtonsInteraction(true);
+            btnAreYouReady.interactable = false;
+            btnCustomizeSuit.interactable = false;
+            btnGoodbye.interactable = false;
+            btnSpaceLobby.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.BowlingGame)
+        {
+            ButtonsInteraction(true);
+            btnAreYouReady.interactable = false;
+            btnCustomizeSuit.interactable = false;
+            btnGoodbye.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+            btnSpaceLobby.interactable = false;
+            btnBowlingGameToElevator.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.WelcomeGame1)
+        {
+            ButtonsInteraction(true);
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+            btnSpaceLobby.interactable = false;
+            btnBowlingGameToElevator.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.Game1Instruction)
+        {
+            ButtonsInteraction(true, false, false, false, false, false);
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+            btnSpaceLobby.interactable = false;
+            btnBowlingGameToElevator.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.BowlingGameToElevator)
+        {
+            ButtonsInteraction(true, false, false, false, false, false);
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.SpaceLobby)
+        {
+            ButtonsInteraction(true, false, false, false, false, false);
+
+            if (!TrophyManager.Instance.IsGame1Failed)
+            {
+                btnAreYouReady.interactable = false;
+                btnSpaceLobbyToElevator.interactable = false;
+                btnCustomizeSuit.interactable = false;
+                btnGoodbye.interactable = false;
+            }
+
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.LockEmUp)
+        {
+            btnLockEmUp.interactable = true;
+            btnSpaceLobbyToElevator.interactable = true;
+            btnWelcomeGame2.interactable = true;
+            btnPullUp.interactable = false;
+            btnPushDown.interactable = false;
+            btnLockEmUpToElevator.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.Game2Controls)
+        {
+            btnPullUp.interactable = true;
+            btnPushDown.interactable = true;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.LockEmUpToElevator)
+        {
+            ButtonsInteraction(true, false, false, false, false, false);
+            btnLockEmUpToElevator.interactable = true;
+            btnSpaceLobby.interactable = true;
+            btnPullUp.interactable = false;
+            btnPushDown.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.WalkeyMoley)
+        {
+            btnWalkeyMoley.interactable = true;
+            btnSpaceLobbyToElevator.interactable = true;
+            btnGoToPlatform.interactable = true;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.GoToPlatform)
+        {
+            ButtonsInteraction(true);
+            btnInventoryRoomToElevator.interactable = false;
+            btnWalkeyMoleyToInventoryRoom.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.WelcomeGame3)
+        {
+            ButtonsInteraction(true);
+            btnWelcomeGame3.interactable = false;
+            btnWalkeyMoleyToInventoryRoom.interactable = false;
+        }
+
+        if (LastButtonSelected == LastButtonSelected.WalkeyMoleyToInventoryRoom)
+        {
+            ButtonsInteraction(true, false, false, false, false, false);
+        }
+
+        if (LastButtonSelected == LastButtonSelected.InventoryRoomToElevator)
+        {
+            if (TrophyManager.Instance.IsGame3Failed)
+            {
+                btnAreYouReady.interactable = true;
+                btnSpaceLobbyToElevator.interactable = true;
+                btnCustomizeSuit.interactable = true;
+                btnGoodbye.interactable = true;
+            }
+
+            btnInventoryRoomToElevator.interactable = true;
+            btnSpaceLobby.interactable = true;
+        }
     }
 
     #endregion

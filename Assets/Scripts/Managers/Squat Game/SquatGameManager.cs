@@ -57,6 +57,7 @@ public class SquatGameManager : GameManagement
     [SerializeField] private GameObject rightHandle = null;
 
     [Header("UI")]
+    [SerializeField] private GameObject videoDemo = null;
     [SerializeField] private GameObject pnlHUD = null;
     [SerializeField] private GameObject pnlGameResult = null;
     [SerializeField] private TextMeshProUGUI txtCountdownTimer = null;
@@ -65,6 +66,7 @@ public class SquatGameManager : GameManagement
     private IEnumerator countdownTimerCour = null;
 
     [Space, Space, Space]
+    [SerializeField] private GameObject vFXConfetti = null;
     [SerializeField] private AudioClip gameSuccessClip = null;
     [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
     private SquatGameSessionData sessionData = null;
@@ -74,6 +76,7 @@ public class SquatGameManager : GameManagement
 
     #region Encapsulations
 
+    public GameObject VideoDemo { get => videoDemo; }
     public SquatGameSessionData SessionData { get => sessionData; set => sessionData = value; }
     public List<GameObject> DisableObjects { get => disableObjects; }
 
@@ -100,6 +103,8 @@ public class SquatGameManager : GameManagement
             CharacterManager.Instance.PointersVisibility(false);
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.Game2Controls;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
                 isSpawning = true;
                 spawningCour = SpawningCour();
                 StartCoroutine(spawningCour);
@@ -260,17 +265,23 @@ public class SquatGameManager : GameManagement
         pnlGameResult.SetActive(true);
         txtEndResult.text = "Success";
         txtEndResult.color = colorSuccessText;
+        vFXConfetti.SetActive(true);
         AssistantBehavior.Instance.Move(true, 3f, () =>
         {
+            VoiceOverManager.Instance.ButtonsInteraction(false);
             AssistantBehavior.Instance.Speak(gameSuccessClip);
             AssistantBehavior.Instance.PlayCelebratingAnimation();
             AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);
-            StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
+            StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () => 
+            {
+                vFXConfetti.SetActive(false);
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.LockEmUpToElevator;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
+                ElevatorManager.Instance.CloseDoorDetection = true;
+            }));
         });
-
-        TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game2);
-        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false, false, false);
-        ElevatorManager.Instance.CloseDoorDetection = true;
     }
 
     #endregion

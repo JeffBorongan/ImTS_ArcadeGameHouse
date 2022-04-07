@@ -48,6 +48,9 @@ public class WhackGameManager : GameManagement
     [SerializeField] private Color colorFailedText = Color.blue;
     private IEnumerator countdownTimerCour = null;
 
+    [SerializeField] private GameObject vFXConfetti = null;
+    [SerializeField] private AudioClip gameSuccessClip = null;
+    [SerializeField] private AudioClip gameFailClip = null;
     private WhackGameSessionData sessionData = null;
 
     System.Random SpawnPointGenerator = new System.Random(DateTime.Now.Ticks.GetHashCode());
@@ -348,22 +351,37 @@ public class WhackGameManager : GameManagement
         pnlGameResult.SetActive(true);
         txtEndResult.text = success ? "Success" : "Failed";
         txtEndResult.color = success ? colorSuccessText : colorFailedText;
+        vFXConfetti.SetActive(success);
+        VoiceOverManager.Instance.ButtonsInteraction(false);
 
         if (success)
         {
-            TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game3);
-            TrophyManager.Instance.IsGame3Failed = false;
+            VoiceOverManager.Instance.PlayClip(gameSuccessClip);
+            StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () =>
+            {
+                vFXConfetti.SetActive(false);
+                CharacterManager.Instance.CharacterPrefab.transform.SetParent(CharacterManager.Instance.PlayerLocation);
+                TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game3);
+                TrophyManager.Instance.IsGame3Failed = false;
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.WalkeyMoleyToInventoryRoom;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
+                ElevatorManager.Instance.CloseDoorDetection = true;
+                ElevatorManager.Instance.PlayerDetection = false;
+            }));
         }
         else
         {
-            TrophyManager.Instance.IsGame3Failed = true;
+            VoiceOverManager.Instance.PlayClip(gameFailClip);
+            StartCoroutine(FunctionWithDelay(gameFailClip.length, () =>
+            {
+                CharacterManager.Instance.CharacterPrefab.transform.SetParent(CharacterManager.Instance.PlayerLocation);
+                TrophyManager.Instance.IsGame3Failed = true;
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.WalkeyMoleyToInventoryRoom;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
+                ElevatorManager.Instance.CloseDoorDetection = true;
+                ElevatorManager.Instance.PlayerDetection = false;
+            }));
         }
-
-        CharacterManager.Instance.CharacterPrefab.transform.SetParent(CharacterManager.Instance.PlayerLocation);
-        VoiceOverManager.Instance.ButtonsInteraction(true, false, false, false, false, false);
-        ElevatorManager.Instance.CloseDoorDetection = true;
-        ElevatorManager.Instance.PlayerDetection = false;
-        StartCoroutine(TeleportCour(10f, (int)Floors.InventoryRoom));
     }
 
     #endregion
@@ -379,6 +397,11 @@ public class WhackGameManager : GameManagement
     #endregion
 
     #region Teleport
+
+    public void InitiateTeleport()
+    {
+        StartCoroutine(TeleportCour(10f, (int)Floors.InventoryRoom));
+    }
 
     private IEnumerator TeleportCour(float waitTime, int floor)
     {
@@ -414,8 +437,8 @@ public class WhackGameManager : GameManagement
 
 public class WhackGameSessionData : SessionData
 {
-    public float playerSpeed = 10f;
-    public float playerSpeedFactor = 2.237f;
+    public float playerSpeed = 0.2f;
+    public float playerSpeedFactor = 3.6f;
 
     public int enemyReachedThePlayer = 5;
 
