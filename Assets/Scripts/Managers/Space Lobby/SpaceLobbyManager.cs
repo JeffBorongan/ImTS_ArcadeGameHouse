@@ -121,7 +121,6 @@ public class SpaceLobbyManager : MonoBehaviour
             {
                 if (isTrophyGiven)
                 {
-                    VoiceOverManager.Instance.ButtonsInteraction(false);
                     GameNumber = GameNumber.Game1;
                     Game1Trophy.SetActive(true);
                     trophy.gameObject.SetActive(true);
@@ -132,6 +131,7 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
+                        VoiceOverManager.Instance.ButtonsInteraction(false);
                         AssistantBehavior.Instance.MoveAndGiveTrophy(vFXConfetti, () => 
                         { 
                             isTrophyGiven = true;
@@ -153,7 +153,6 @@ public class SpaceLobbyManager : MonoBehaviour
             {
                 if (isTrophyGiven)
                 {
-                    VoiceOverManager.Instance.ButtonsInteraction(false);
                     GameNumber = GameNumber.Game2;
                     Game2Trophy.SetActive(true);
                     trophy.gameObject.SetActive(true);
@@ -164,6 +163,7 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
+                        VoiceOverManager.Instance.ButtonsInteraction(false);
                         AssistantBehavior.Instance.MoveAndGiveTrophy(vFXConfetti, () =>
                         {
                             isTrophyGiven = true;
@@ -185,7 +185,6 @@ public class SpaceLobbyManager : MonoBehaviour
             {
                 if (isTrophyGiven)
                 {
-                    VoiceOverManager.Instance.ButtonsInteraction(false);
                     GameNumber = GameNumber.Game3;
                     Game3Trophy.SetActive(true);
                     trophy.gameObject.SetActive(true);
@@ -196,6 +195,7 @@ public class SpaceLobbyManager : MonoBehaviour
                     if (!isGivingTrophy)
                     {
                         isGivingTrophy = true;
+                        VoiceOverManager.Instance.ButtonsInteraction(false);
                         AssistantBehavior.Instance.MoveAndGiveTrophy(vFXConfetti, () =>
                         {
                             isTrophyGiven = true;

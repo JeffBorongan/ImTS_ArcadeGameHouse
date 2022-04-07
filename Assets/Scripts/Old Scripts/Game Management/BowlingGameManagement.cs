@@ -418,7 +418,7 @@ public class BowlingGameManagement : GameManagement
                     AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
                     TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game1);
                     TrophyManager.Instance.IsGame1Failed = false;
-                    VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.BowlingGameToElevator;
+                    VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.GamesToElevator;
                     VoiceOverManager.Instance.InvokeLastButtonSelected();
                     ElevatorManager.Instance.CloseDoorDetection = true;
                 }));
@@ -431,7 +431,7 @@ public class BowlingGameManagement : GameManagement
                 {
                     AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
                     TrophyManager.Instance.IsGame1Failed = true;
-                    VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.BowlingGameToElevator;
+                    VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.GamesToElevator;
                     VoiceOverManager.Instance.InvokeLastButtonSelected();
                     ElevatorManager.Instance.CloseDoorDetection = true;
                 }));

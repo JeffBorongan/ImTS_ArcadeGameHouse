@@ -19,8 +19,9 @@ public class Trophy : MonoBehaviour
         {
             if (other.CompareTag("Game1TrophyHolder"))
             {
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.Any;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
                 TrophyManager.Instance.AddGameTrophyPresented((int)GameNumber.Game1);
-                VoiceOverManager.Instance.ButtonsInteraction(true);
                 SpaceLobbyManager.Instance.GameNumber = GameNumber.None;
                 SpaceLobbyManager.Instance.Game1TrophyHologram.SetActive(false);
                 SpaceLobbyManager.Instance.Game1Trophy.SetActive(false);
@@ -32,8 +33,9 @@ public class Trophy : MonoBehaviour
         {
             if (other.CompareTag("Game2TrophyHolder"))
             {
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.Any;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
                 TrophyManager.Instance.AddGameTrophyPresented((int)GameNumber.Game2);
-                VoiceOverManager.Instance.ButtonsInteraction(true);
                 SpaceLobbyManager.Instance.GameNumber = GameNumber.None;
                 SpaceLobbyManager.Instance.Game2TrophyHologram.SetActive(false);
                 SpaceLobbyManager.Instance.Game2Trophy.SetActive(false);
@@ -45,8 +47,9 @@ public class Trophy : MonoBehaviour
         {
             if (other.CompareTag("Game3TrophyHolder"))
             {
+                VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.Any;
+                VoiceOverManager.Instance.InvokeLastButtonSelected();
                 TrophyManager.Instance.AddGameTrophyPresented((int)GameNumber.Game3);
-                VoiceOverManager.Instance.ButtonsInteraction(true);
                 SpaceLobbyManager.Instance.GameNumber = GameNumber.None;
                 SpaceLobbyManager.Instance.Game3TrophyHologram.SetActive(false);
                 SpaceLobbyManager.Instance.Game3Trophy.SetActive(false);

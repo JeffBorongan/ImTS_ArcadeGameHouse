@@ -266,9 +266,9 @@ public class SquatGameManager : GameManagement
         txtEndResult.text = "Success";
         txtEndResult.color = colorSuccessText;
         vFXConfetti.SetActive(true);
+        VoiceOverManager.Instance.ButtonsInteraction(false);
         AssistantBehavior.Instance.Move(true, 3f, () =>
         {
-            VoiceOverManager.Instance.ButtonsInteraction(false);
             AssistantBehavior.Instance.Speak(gameSuccessClip);
             AssistantBehavior.Instance.PlayCelebratingAnimation();
             AssistantBehavior.Instance.Animator.SetBool("isBlinking", true);

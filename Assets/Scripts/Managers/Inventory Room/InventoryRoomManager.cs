@@ -42,6 +42,7 @@ public class InventoryRoomManager : MonoBehaviour
     {
         if (other.CompareTag("Head"))
         {
+            CharacterManager.Instance.PointersVisibility(false);
             ElevatorManager.Instance.CloseElevatorDoor();
             StartCoroutine(TeleportCour(5f, (int)Floors.Game3));
         }

@@ -342,7 +342,7 @@ public class VoiceOverManager : MonoBehaviour
 
         btnWelcomeGame2.onClick.AddListener(() => 
         {
-            LastButtonSelected = LastButtonSelected.None;
+            LastButtonSelected = LastButtonSelected.WelcomeGame2;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(false, 5f, () => 
             {
@@ -352,6 +352,7 @@ public class VoiceOverManager : MonoBehaviour
                 StartCoroutine(FunctionWithDelay(14f, () => SquatGameManager.Instance.VideoDemo.SetActive(false)));
                 StartCoroutine(FunctionWithDelay(welcomeGame2Clip.length, () =>
                 {
+                    InvokeLastButtonSelected();
                     SquatGameManager.Instance.EnableStartButton();
                     ElevatorManager.Instance.EnableFloorButton(1, false);
                     ElevatorManager.Instance.EnableFloorButton(2, false);
@@ -420,7 +421,7 @@ public class VoiceOverManager : MonoBehaviour
 
         btnBowlingGameToElevator.onClick.AddListener(() => 
         {
-            LastButtonSelected = LastButtonSelected.BowlingGameToElevator;
+            LastButtonSelected = LastButtonSelected.GamesToElevator;
 
             foreach (var item in BowlingGameManagement.Instance.DisableObjects)
             {
@@ -464,7 +465,7 @@ public class VoiceOverManager : MonoBehaviour
 
         btnInventoryRoomToElevator.onClick.AddListener(() =>
         {
-            LastButtonSelected = LastButtonSelected.InventoryRoomToElevator;
+            LastButtonSelected = LastButtonSelected.GamesToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
@@ -482,12 +483,12 @@ public class VoiceOverManager : MonoBehaviour
         {
             LastButtonSelected = LastButtonSelected.WalkeyMoleyToInventoryRoom;
             ButtonsInteraction(false);
-            PlayClip(goToElevatorClip);
-            StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
-            {
+            //PlayClip(goToElevatorClip);
+            //StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
+            //{
                 InvokeLastButtonSelected();
                 WhackGameManager.Instance.InitiateTeleport();
-            }));
+            //}));
         });
 
 
@@ -749,7 +750,7 @@ public class VoiceOverManager : MonoBehaviour
             btnBowlingGameToElevator.interactable = false;
         }
 
-        if (LastButtonSelected == LastButtonSelected.BowlingGameToElevator)
+        if (LastButtonSelected == LastButtonSelected.GamesToElevator)
         {
             ButtonsInteraction(true, false, false, false, false, false);
             btnBowlingGame.interactable = false;
@@ -761,54 +762,88 @@ public class VoiceOverManager : MonoBehaviour
         {
             ButtonsInteraction(true, false, false, false, false, false);
 
-            if (!TrophyManager.Instance.IsGame1Failed)
+            if (TrophyManager.Instance.IsGame1Failed || TrophyManager.Instance.IsGame1Failed)
+            {
+                btnBowlingGame.interactable = false;
+                btnLockEmUp.interactable = false;
+                btnWalkeyMoley.interactable = false;
+            }
+            else
             {
                 btnAreYouReady.interactable = false;
-                btnSpaceLobbyToElevator.interactable = false;
                 btnCustomizeSuit.interactable = false;
                 btnGoodbye.interactable = false;
+                btnSpaceLobbyToElevator.interactable = false;
+                btnBowlingGame.interactable = false;
+                btnLockEmUp.interactable = false;
+                btnWalkeyMoley.interactable = false;
             }
-
-            btnBowlingGame.interactable = false;
-            btnLockEmUp.interactable = false;
-            btnWalkeyMoley.interactable = false;
         }
 
         if (LastButtonSelected == LastButtonSelected.LockEmUp)
         {
-            btnLockEmUp.interactable = true;
-            btnSpaceLobbyToElevator.interactable = true;
-            btnWelcomeGame2.interactable = true;
+            ButtonsInteraction(true);
+            btnAreYouReady.interactable = false;
+            btnCustomizeSuit.interactable = false;
+            btnGoodbye.interactable = false;
+            btnBowlingGame.interactable = false;
+            btnWalkeyMoley.interactable = false;
+            btnSpaceLobby.interactable = false;
             btnPullUp.interactable = false;
             btnPushDown.interactable = false;
             btnLockEmUpToElevator.interactable = false;
         }
 
+        if (LastButtonSelected == LastButtonSelected.WelcomeGame2)
+        {
+            ButtonsInteraction(true);
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+            btnSpaceLobby.interactable = false;
+            btnPullUp.interactable = false;
+            btnPushDown.interactable = false;
+            btnWelcomeGame2.interactable = false;
+            btnLockEmUpToElevator.interactable = false;
+        }
+
         if (LastButtonSelected == LastButtonSelected.Game2Controls)
         {
-            btnPullUp.interactable = true;
-            btnPushDown.interactable = true;
+            ButtonsInteraction(true);
+            btnWelcomeGame2.interactable = false;
+            btnLockEmUpToElevator.interactable = false;
         }
 
         if (LastButtonSelected == LastButtonSelected.LockEmUpToElevator)
         {
             ButtonsInteraction(true, false, false, false, false, false);
-            btnLockEmUpToElevator.interactable = true;
-            btnSpaceLobby.interactable = true;
             btnPullUp.interactable = false;
             btnPushDown.interactable = false;
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
         }
 
         if (LastButtonSelected == LastButtonSelected.WalkeyMoley)
         {
-            btnWalkeyMoley.interactable = true;
-            btnSpaceLobbyToElevator.interactable = true;
-            btnGoToPlatform.interactable = true;
+            ButtonsInteraction(true);
+            btnAreYouReady.interactable = false;
+            btnCustomizeSuit.interactable = false;
+            btnGoodbye.interactable = false;
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnSpaceLobby.interactable = false;
+            btnInventoryRoomToElevator.interactable = false;
+            btnWalkeyMoleyToInventoryRoom.interactable = false;
         }
 
         if (LastButtonSelected == LastButtonSelected.GoToPlatform)
         {
             ButtonsInteraction(true);
+            btnBowlingGame.interactable = false;
+            btnLockEmUp.interactable = false;
+            btnWalkeyMoley.interactable = false;
+            btnSpaceLobby.interactable = false;
             btnInventoryRoomToElevator.interactable = false;
             btnWalkeyMoleyToInventoryRoom.interactable = false;
         }
@@ -823,20 +858,7 @@ public class VoiceOverManager : MonoBehaviour
         if (LastButtonSelected == LastButtonSelected.WalkeyMoleyToInventoryRoom)
         {
             ButtonsInteraction(true, false, false, false, false, false);
-        }
-
-        if (LastButtonSelected == LastButtonSelected.InventoryRoomToElevator)
-        {
-            if (TrophyManager.Instance.IsGame3Failed)
-            {
-                btnAreYouReady.interactable = true;
-                btnSpaceLobbyToElevator.interactable = true;
-                btnCustomizeSuit.interactable = true;
-                btnGoodbye.interactable = true;
-            }
-
-            btnInventoryRoomToElevator.interactable = true;
-            btnSpaceLobby.interactable = true;
+            btnWalkeyMoleyToInventoryRoom.interactable = true;
         }
     }
 

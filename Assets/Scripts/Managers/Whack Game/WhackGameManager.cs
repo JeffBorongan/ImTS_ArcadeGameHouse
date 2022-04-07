@@ -143,7 +143,7 @@ public class WhackGameManager : GameManagement
     {
         if (isSpawning)
         {
-            playerAttachment.Rotate(-(SessionData.playerSpeed / SessionData.playerSpeedFactor) * Time.deltaTime * Vector3.up);
+            playerAttachment.Rotate(-(SessionData.playerSpeed * SessionData.playerSpeedFactor) * Time.deltaTime * Vector3.up);
         }
     }
 
@@ -415,7 +415,6 @@ public class WhackGameManager : GameManagement
                     item.SetActive(true);
                 }
 
-                CharacterManager.Instance.PointersVisibility(true);
                 CharacterManager.Instance.CharacterPrefab.transform.SetPositionAndRotation(CharacterManager.Instance.PlayerLocation.position, Quaternion.identity);
                 ScreenFadeManager.Instance.FadeOut(() => { });
             });
@@ -438,7 +437,7 @@ public class WhackGameManager : GameManagement
 public class WhackGameSessionData : SessionData
 {
     public float playerSpeed = 0.2f;
-    public float playerSpeedFactor = 3.6f;
+    public float playerSpeedFactor = 1.27324f;
 
     public int enemyReachedThePlayer = 5;
 
