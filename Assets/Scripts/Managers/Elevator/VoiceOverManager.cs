@@ -203,7 +203,6 @@ public class VoiceOverManager : MonoBehaviour
             //StartCoroutine(FunctionWithDelay(walkeyMoleyClip.length, () =>
             //{
                 InvokeLastButtonSelected();
-                ElevatorManager.Instance.PlayerDetection = true;
                 ElevatorManager.Instance.EnableFloorButton(1, true);
                 //AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             //}));
@@ -379,6 +378,7 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(2, false);
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
+                ElevatorManager.Instance.PlayerDetection = true;
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
@@ -762,12 +762,20 @@ public class VoiceOverManager : MonoBehaviour
         {
             ButtonsInteraction(true, false, false, false, false, false);
 
-            if (TrophyManager.Instance.IsGame1Failed || TrophyManager.Instance.IsGame1Failed)
+            if (TrophyManager.Instance.IsGame1Failed)
             {
                 btnBowlingGame.interactable = false;
                 btnLockEmUp.interactable = false;
                 btnWalkeyMoley.interactable = false;
             }
+
+            else if (TrophyManager.Instance.IsGame3Failed)
+            {
+                btnBowlingGame.interactable = false;
+                btnLockEmUp.interactable = false;
+                btnWalkeyMoley.interactable = false;
+            }
+
             else
             {
                 btnAreYouReady.interactable = false;

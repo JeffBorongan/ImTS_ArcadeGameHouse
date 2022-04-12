@@ -27,9 +27,9 @@ public class InventoryRoomManager : MonoBehaviour
 
     #endregion
 
-    #region Start
+    #region Update
 
-    private void Start()
+    private void Update()
     {
         playerDetection.enabled = ElevatorManager.Instance.PlayerDetection;
     }
