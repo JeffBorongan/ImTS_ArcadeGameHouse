@@ -1248,12 +1248,15 @@ MonoBehaviour:
   pushDownHeight: {fileID: 1621709137}
   txtPushDownHeight: {fileID: 480433442}
   btnSquatGameUpdate: {fileID: 901186240}
-  btnPlayerSpeedIncrease: {fileID: 1037616606}
-  btnPlayerSpeedDecrease: {fileID: 1037616633}
+  txtTimeElapsed: {fileID: 1037616636}
+  txtTravelDistance: {fileID: 1037616635}
+  txtTilesPassed: {fileID: 1037616634}
   txtPlayerSpeed: {fileID: 1037616632}
-  aliensToHit: {fileID: 1037616604}
-  enemyReachedThePlayer: {fileID: 1037616603}
-  btnWhackGameUpdate: {fileID: 1037616605}
+  numberOfTiles: {fileID: 1037616604}
+  btnPlayerSpeedDecrease: {fileID: 1037616633}
+  btnPlayerSpeedIncrease: {fileID: 1037616606}
+  btnTileGameUpdate: {fileID: 1037616605}
+  btnTileGameStop: {fileID: 1037616603}
 --- !u!1 &651779214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,13 +2453,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1037616603 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3948739469740052953, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 235455714960783085, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
   m_PrefabInstance: {fileID: 1037616579}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1037616604 stripped
@@ -2769,6 +2772,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1037616634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5395266364905048765, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1037616635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2610101380656350375, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1037616636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7279146392363845308, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+  m_PrefabInstance: {fileID: 1037616579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1078118216 stripped

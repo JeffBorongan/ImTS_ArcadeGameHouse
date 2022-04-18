@@ -40,6 +40,7 @@ public enum TypeOfObject
     Alien3,
     Alien4,
     DeadAlien1,
+    Tiles,
 }
 
 public enum LastButtonSelected
@@ -60,4 +61,13 @@ public enum LastButtonSelected
     GoToPlatform,
     WelcomeGame3,
     WalkeyMoleyToInventoryRoom,
+}
+
+public enum TileColor
+{
+    None = -1,
+    Green,
+    Orange,
+    Pink,
+    Count,
 }

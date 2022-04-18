@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -57,30 +58,41 @@ public class UXManager : MonoBehaviour
     private float pullUpHeightValue = 1f;
     private float pushDownHeightValue = 0.5f;
 
-    [Header("Whack Game")]
-    [SerializeField] private Button btnPlayerSpeedIncrease = null;
-    [SerializeField] private Button btnPlayerSpeedDecrease = null;
+    [Header("Tile Game")]
+    [SerializeField] private TMP_Text txtTimeElapsed = null;
+    [SerializeField] private TMP_Text txtTravelDistance = null;
+    [SerializeField] private TMP_Text txtTilesPassed = null;
     [SerializeField] private TMP_Text txtPlayerSpeed = null;
-    [SerializeField] private TMP_InputField aliensToHit = null;
-    [SerializeField] private TMP_InputField enemyReachedThePlayer = null;
-    [SerializeField] private Button btnWhackGameUpdate = null;
+    [SerializeField] private TMP_InputField numberOfTiles = null;
+    [SerializeField] private Button btnPlayerSpeedDecrease = null;
+    [SerializeField] private Button btnPlayerSpeedIncrease = null;
+    [SerializeField] private Button btnTileGameUpdate = null;
+    [SerializeField] private Button btnTileGameStop = null;
     private float playerSpeedValue = 0.2f;
     private float playerSpeedLowestValue = 0.2f;
     private float playerSpeedHighestValue = 8f;
     private float playerSpeedChange = 0.1f;
-    private int aliensToHitValue = 10;
-    private int enemyReachedThePlayerValue = 5;
+    private int numberOfTilesValue = 10;
+    private bool isTileGameStarted = false;
 
     #endregion
 
-    #region Startup
+    #region Encapsulations
+
+    public TMP_Text TxtTravelDistance { get => txtTravelDistance; set => txtTravelDistance = value; }
+    public Button BtnTileGameStop { get => btnTileGameStop; }
+    public bool IsTileGameStarted { get => isTileGameStarted; set => isTileGameStarted = value; }
+
+    #endregion
+
+    #region Start
 
     private void Start()
     {
         XRSettings.gameViewRenderMode = GameViewRenderMode.OcclusionMesh;
         BowlingGameStart();
         SquatGameStart();
-        WhackGameStart();
+        TileGameStart();
     }
 
     private void BowlingGameStart()
@@ -123,20 +135,37 @@ public class UXManager : MonoBehaviour
         SetSquatGameDefaultValues();
     }
 
-    private void WhackGameStart()
+    private void TileGameStart()
     {
-        btnPlayerSpeedIncrease.onClick.AddListener(() => HandleOnIncreasePlayerSpeed());
-        btnPlayerSpeedDecrease.onClick.AddListener(() => HandleOnDecreasePlayerSpeed());
-        aliensToHit.onValueChanged.AddListener(HandleOnChangeWhackTextField);
-        enemyReachedThePlayer.onValueChanged.AddListener(HandleOnChangeWhackTextField);
+        numberOfTiles.onValueChanged.AddListener(HandleOnChangeTileTextField);
+        btnPlayerSpeedDecrease.onClick.AddListener(() => HandleOnPlayerSpeedDecrease());
+        btnPlayerSpeedIncrease.onClick.AddListener(() => HandleOnPlayerSpeedIncrease());
 
-        btnWhackGameUpdate.onClick.AddListener(() =>
+        btnTileGameUpdate.onClick.AddListener(() =>
         {
-            HandleOnWhackGameStart();
-            btnWhackGameUpdate.interactable = false;
+            HandleOnTileGameStart();
+            btnTileGameUpdate.interactable = false;
         });
 
-        SetWhackGameDefaultValues();
+        btnTileGameStop.onClick.AddListener(() => TileGameManager.Instance.GameStop());
+
+        SetTileGameDefaultValues();
+    }
+
+    #endregion
+
+    #region Update
+
+    private void Update()
+    {
+        StartCoroutine(TileGameInfo());
+    }
+
+    private IEnumerator TileGameInfo()
+    {
+        yield return new WaitUntil(() => IsTileGameStarted);
+        txtTimeElapsed.text = TileGameManager.Instance.TxtTime.text;
+        txtTilesPassed.text = TileGameManager.Instance.TxtTilesPassed.text;
     }
 
     #endregion
@@ -206,12 +235,11 @@ public class UXManager : MonoBehaviour
         pushDownHeight.value = pushDownHeightValue;
     }
 
-    private void SetWhackGameDefaultValues()
+    private void SetTileGameDefaultValues()
     {
+        numberOfTiles.text = numberOfTilesValue.ToString();
         playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
         txtPlayerSpeed.text = playerSpeedValue.ToString();
-        aliensToHit.text = aliensToHitValue.ToString();
-        enemyReachedThePlayer.text = enemyReachedThePlayerValue.ToString();
     }
 
     #endregion
@@ -251,31 +279,31 @@ public class UXManager : MonoBehaviour
         btnSquatGameUpdate.interactable = true;
     }
 
-    private void HandleOnIncreasePlayerSpeed()
-    {
-        if (playerSpeedValue < playerSpeedHighestValue)
-        {
-            playerSpeedValue += playerSpeedChange;
-            playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
-            txtPlayerSpeed.text = playerSpeedValue.ToString();
-            WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
-        }
-    }
-
-    private void HandleOnDecreasePlayerSpeed()
+    private void HandleOnPlayerSpeedDecrease()
     {
         if (playerSpeedValue > playerSpeedLowestValue)
         {
             playerSpeedValue -= playerSpeedChange;
             playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
             txtPlayerSpeed.text = playerSpeedValue.ToString();
-            WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+            TileGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
         }
     }
 
-    private void HandleOnChangeWhackTextField(string value)
+    private void HandleOnPlayerSpeedIncrease()
     {
-        btnWhackGameUpdate.interactable = true;
+        if (playerSpeedValue < playerSpeedHighestValue)
+        {
+            playerSpeedValue += playerSpeedChange;
+            playerSpeedValue = Mathf.Round(playerSpeedValue * 100f) / 100f;
+            txtPlayerSpeed.text = playerSpeedValue.ToString();
+            TileGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
+        }
+    }
+
+    private void HandleOnChangeTileTextField(string value)
+    {
+        btnTileGameUpdate.interactable = true;
     }
 
     #endregion
@@ -314,13 +342,11 @@ public class UXManager : MonoBehaviour
         SquatGameManager.Instance.SessionData.pushDownHeight = pushDownHeightValue;
     }
 
-    public void HandleOnWhackGameStart()
+    public void HandleOnTileGameStart()
     {
-        aliensToHitValue = int.Parse(aliensToHit.text);
-        enemyReachedThePlayerValue = int.Parse(enemyReachedThePlayer.text);
-        WhackGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
-        WhackGameManager.Instance.SessionData.aliensToHit = aliensToHitValue;
-        WhackGameManager.Instance.SessionData.enemyReachedThePlayer = enemyReachedThePlayerValue;
+        numberOfTilesValue = int.Parse(numberOfTiles.text);
+        TileGameManager.Instance.SessionData.numberOfTiles = numberOfTilesValue;
+        TileGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
     }
 
     #endregion

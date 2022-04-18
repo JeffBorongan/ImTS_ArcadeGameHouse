@@ -395,7 +395,7 @@ public class VoiceOverManager : MonoBehaviour
             StartCoroutine(FunctionWithDelay(welcomeGame3Clip.length, () =>
             {
                 InvokeLastButtonSelected();
-                WhackGameManager.Instance.EnableStartButton();
+                TileGameManager.Instance.EnableStartButton();
             }));
         });
 
@@ -487,7 +487,7 @@ public class VoiceOverManager : MonoBehaviour
             //StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
             //{
                 InvokeLastButtonSelected();
-                WhackGameManager.Instance.InitiateTeleport();
+                TileGameManager.Instance.InitiateTeleport();
             //}));
         });
 
