@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &77501314 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2044336842579096303, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &144220056
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +360,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1757437805}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -538,7 +533,6 @@ RectTransform:
   - {fileID: 1187041790}
   - {fileID: 907911385}
   - {fileID: 651779215}
-  - {fileID: 1781132541}
   m_Father: {fileID: 328904131}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -763,7 +757,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1757437805}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1129,7 +1123,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1757437805}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1356,7 +1350,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1757437805}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1452,6 +1446,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1576820758}
+  - {fileID: 1224607260}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1482,10 +1477,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1727998051}
   - {fileID: 1909222087}
   - {fileID: 1254729239}
-  - {fileID: 1224607260}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1599,7 +1592,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1727998053}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1870,7 +1863,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1757437805}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3092,7 +3085,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1757437805}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3149,11 +3142,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187041789}
   m_CullTransparentMesh: 1
---- !u!82 &1196978156 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1196978156, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1208344355 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9165777114073199277, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
@@ -3201,11 +3189,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224607259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 798369632}
-  m_RootOrder: 3
+  m_Father: {fileID: 736228214}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1224607261
 AudioSource:
@@ -3334,7 +3322,7 @@ Transform:
   - {fileID: 2094475918}
   - {fileID: 875696993}
   m_Father: {fileID: 798369632}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302566745 stripped
 GameObject:
@@ -3440,7 +3428,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1727998053}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3851,163 +3839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d62021e350f3a4796c70d6ed30e1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1727998050
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 798369632}
-    m_Modifications:
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-      propertyPath: m_Name
-      value: Elevator
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
---- !u!4 &1727998051 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1727998052 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4176130795047007011, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1727998053 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6678863094361053455, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1727998054 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1757437805 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7282653292423421026, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
-  m_PrefabInstance: {fileID: 1727998050}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1781132540
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1781132541}
-  - component: {fileID: 1781132543}
-  - component: {fileID: 1781132542}
-  m_Layer: 0
-  m_Name: DementiaCrossover
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1781132541
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781132540}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.258}
-  m_LocalScale: {x: 0.00025871166, y: 0.00025871166, z: 0.00025871166}
-  m_Children: []
-  m_Father: {fileID: 321000071}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.856, y: 1.337}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1781132542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781132540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9dbafd63d4bc2464a95da87427e393c6, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1781132543
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781132540}
-  m_CullTransparentMesh: 1
 --- !u!1 &1795055211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4242,7 +4073,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 798369632}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1909222088
 AudioSource:
@@ -4569,12 +4400,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809d2b2c24b3824db7056288dfdb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elevatorDoorLeft: {fileID: 1727998052}
-  elevatorDoorRight: {fileID: 77501314}
-  elevatorAudioSource: {fileID: 1196978156}
+  elevatorDoorLeft: {fileID: 0}
+  elevatorDoorRight: {fileID: 0}
+  elevatorAudioSource: {fileID: 0}
   elevatorDoorClip: {fileID: 8300000, guid: 321bdce83eeffcb44876b56cbf7d2c87, type: 3}
   disableObjects:
-  - {fileID: 1727998054}
+  - {fileID: 0}
   - {fileID: 321000067}
   elevatorButtons:
   - {fileID: 508598378}
