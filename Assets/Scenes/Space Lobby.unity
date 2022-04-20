@@ -548,7 +548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &669530864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.75, y: 1.2}
+  m_AnchoredPosition: {x: -0.8768, y: 1.2}
   m_SizeDelta: {x: 170, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &669530865
@@ -2085,6 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trophy: {fileID: 1484668552}
+  outsideSpaceLobbyOpenButton: {fileID: 669530863}
   closeDoorDetection: {fileID: 1289837667}
   vFXConfetti: {fileID: 1953601823}
   game1Trophy: {fileID: 878197889}

@@ -24,6 +24,7 @@ public class SpaceLobbyManager : MonoBehaviour
     #region Parameters
 
     [SerializeField] private Trophy trophy = null;
+    [SerializeField] private GameObject outsideSpaceLobbyOpenButton = null;
     [SerializeField] private GameObject closeDoorDetection = null;
     [SerializeField] private GameObject vFXConfetti = null;
     [SerializeField] private GameObject game1Trophy = null;
@@ -49,6 +50,7 @@ public class SpaceLobbyManager : MonoBehaviour
 
     #region Encapsulations
 
+    public GameObject OutsideSpaceLobbyOpenButton { get => outsideSpaceLobbyOpenButton; }
     public GameObject Game1Trophy { get => game1Trophy; }
     public GameObject Game2Trophy { get => game2Trophy; }
     public GameObject Game3Trophy { get => game3Trophy; }

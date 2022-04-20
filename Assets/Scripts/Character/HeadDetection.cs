@@ -4,12 +4,14 @@ public class HeadDetection : MonoBehaviour
 {
     #region Parameters
 
-    [SerializeField] private GameObject elevatorTherapistView;
-    [SerializeField] private GameObject spaceLobbyTherapistView;
-    [SerializeField] private GameObject bowlingGameTherapistView;
-    [SerializeField] private GameObject lockEmUpTherapistView;
-    [SerializeField] private GameObject inventoryRoomTherapistView;
-    [SerializeField] private GameObject walkeyMoleyTherapistView;
+    [SerializeField] private GameObject elevatorTherapistView = null;
+    [SerializeField] private GameObject spaceLobbyTherapistView = null;
+    [SerializeField] private GameObject bowlingGameTherapistView = null;
+    [SerializeField] private GameObject lockEmUpTherapistView = null;
+    [SerializeField] private GameObject inventoryRoomTherapistView = null;
+    [SerializeField] private GameObject walkeyMoleyTherapistView = null;
+    [SerializeField] private GameObject outsideElevatorOpenButton = null;
+    [SerializeField] private GameObject outsideElevatorCloseButton = null;
 
     #endregion
 
@@ -25,6 +27,8 @@ public class HeadDetection : MonoBehaviour
             lockEmUpTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+            outsideElevatorOpenButton.SetActive(false);
+            outsideElevatorCloseButton.SetActive(false);
         }
 
         if (other.CompareTag("InsideSpaceLobby"))
@@ -35,6 +39,8 @@ public class HeadDetection : MonoBehaviour
             lockEmUpTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+            outsideElevatorOpenButton.SetActive(false);
+            outsideElevatorCloseButton.SetActive(false);
             SpaceLobbyManager.Instance.IsInsideSpaceLobby = true;
         }
 
@@ -46,6 +52,8 @@ public class HeadDetection : MonoBehaviour
             lockEmUpTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+            outsideElevatorOpenButton.SetActive(true);
+            outsideElevatorCloseButton.SetActive(true);
         }
 
         if (other.CompareTag("InsideLockEmUp"))
@@ -56,6 +64,8 @@ public class HeadDetection : MonoBehaviour
             elevatorTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+            outsideElevatorOpenButton.SetActive(true);
+            outsideElevatorCloseButton.SetActive(true);
         }
 
         if (other.CompareTag("InsideInventoryRoom"))
@@ -66,6 +76,8 @@ public class HeadDetection : MonoBehaviour
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+            outsideElevatorOpenButton.SetActive(true);
+            outsideElevatorCloseButton.SetActive(true);
         }
 
         if (other.CompareTag("InsideWalkeyMoley"))
@@ -76,6 +88,8 @@ public class HeadDetection : MonoBehaviour
             bowlingGameTherapistView.SetActive(false);
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);
+            outsideElevatorOpenButton.SetActive(false);
+            outsideElevatorCloseButton.SetActive(false);
         }
     }
 

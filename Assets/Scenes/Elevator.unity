@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!23 &121231455 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6678863094361053455, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &144220056
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +221,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!82 &161834680 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1196978156, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &211048530
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +370,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1661257618}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -757,7 +767,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1661257618}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1123,7 +1133,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1661257618}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1180,6 +1190,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508598376}
   m_CullTransparentMesh: 1
+--- !u!1 &550090946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &629754825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1365,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1661257618}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1477,6 +1492,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4252339542194971238}
   - {fileID: 1909222087}
   - {fileID: 1254729239}
   m_Father: {fileID: 0}
@@ -1592,7 +1608,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 121231455}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1753,6 +1769,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &878362270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4176130795047007011, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &901186240 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8765213675202181883, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
@@ -1863,7 +1884,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1661257618}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2860,7 +2881,7 @@ MonoBehaviour:
   btnSpaceLobby: {fileID: 1037616597}
   bowlingGameClip: {fileID: 8300000, guid: 27c94eb4ac982734da2fdf87ee897029, type: 3}
   lockEmUpClip: {fileID: 8300000, guid: 134bd601bcc461e40b11662730ef1fdf, type: 3}
-  walkeyMoleyClip: {fileID: 0}
+  walkeyMoleyClip: {fileID: 8300000, guid: fb8d53a53609aaf4492165038a445b1d, type: 3}
   spaceLobbyClip: {fileID: 8300000, guid: 3cf94346a02a83a46a8ac4f671ec0beb, type: 3}
   btnWelcomeRanger: {fileID: 1037616596}
   btnAreYouReady: {fileID: 1037616595}
@@ -2890,6 +2911,7 @@ MonoBehaviour:
   btnInventoryRoomToElevator: {fileID: 2132512787}
   btnWalkeyMoleyToInventoryRoom: {fileID: 1975573953}
   goToElevatorClip: {fileID: 8300000, guid: 32b2a33ea4ba5b84e9ad03ffbae115de, type: 3}
+  walkeyMoleyToInventoryRoomClip: {fileID: 8300000, guid: c1558f9068512854c9cfdaa399b10b3e, type: 3}
   btnEncouragement: {fileID: 1037616609}
   btnWhenDoingWell: {fileID: 1037616608}
   btnWhenFailed: {fileID: 1037616607}
@@ -3085,7 +3107,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1661257618}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3322,7 +3344,7 @@ Transform:
   - {fileID: 2094475918}
   - {fileID: 875696993}
   m_Father: {fileID: 798369632}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302566745 stripped
 GameObject:
@@ -3428,7 +3450,7 @@ MonoBehaviour:
         m_MethodName: GetElevatorPart
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 121231455}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3712,9 +3734,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1037616601}
     - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+      propertyPath: outsideElevatorOpenButton
+      value: 
+      objectReference: {fileID: 1349551660}
+    - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: inventoryRoomTherapistView
       value: 
       objectReference: {fileID: 1037616602}
+    - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+      propertyPath: outsideElevatorCloseButton
+      value: 
+      objectReference: {fileID: 860103480}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3801,6 +3831,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1643009564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2044336842579096303, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1661257618 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7282653292423421026, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1703835273 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149028694885, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
@@ -4073,7 +4113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 798369632}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1909222088
 AudioSource:
@@ -4400,12 +4440,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809d2b2c24b3824db7056288dfdb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elevatorDoorLeft: {fileID: 0}
-  elevatorDoorRight: {fileID: 0}
-  elevatorAudioSource: {fileID: 0}
+  elevatorDoorLeft: {fileID: 878362270}
+  elevatorDoorRight: {fileID: 1643009564}
+  elevatorAudioSource: {fileID: 161834680}
   elevatorDoorClip: {fileID: 8300000, guid: 321bdce83eeffcb44876b56cbf7d2c87, type: 3}
   disableObjects:
-  - {fileID: 0}
+  - {fileID: 550090946}
   - {fileID: 321000067}
   elevatorButtons:
   - {fileID: 508598378}
@@ -4505,3 +4545,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &4252339542194971237
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 798369632}
+    m_Modifications:
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_Name
+      value: Elevator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+--- !u!4 &4252339542194971238 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}

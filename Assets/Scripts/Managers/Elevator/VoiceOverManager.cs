@@ -82,6 +82,7 @@ public class VoiceOverManager : MonoBehaviour
     [SerializeField] private Button btnWalkeyMoleyToInventoryRoom = null;
 
     [SerializeField] private AudioClip goToElevatorClip = null;
+    [SerializeField] private AudioClip walkeyMoleyToInventoryRoomClip = null;
 
     [Header("Therapist")]
     [SerializeField] private Toggle btnEncouragement = null;
@@ -177,6 +178,7 @@ public class VoiceOverManager : MonoBehaviour
                 InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(4, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             }));
         });
 
@@ -191,6 +193,7 @@ public class VoiceOverManager : MonoBehaviour
                 InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(2, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             }));
         });
 
@@ -199,13 +202,14 @@ public class VoiceOverManager : MonoBehaviour
             LastButtonSelected = LastButtonSelected.WalkeyMoley;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
-            //HandleOnPlay(walkeyMoleyClip);
-            //StartCoroutine(FunctionWithDelay(walkeyMoleyClip.length, () =>
-            //{
+            HandleOnPlay(walkeyMoleyClip);
+            StartCoroutine(FunctionWithDelay(walkeyMoleyClip.length, () =>
+            {
                 InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(1, true);
-                //AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
-            //}));
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
+            }));
         });
 
         btnSpaceLobby.onClick.AddListener(() => 
@@ -416,6 +420,7 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(true);
             }));
         });
 
@@ -483,12 +488,12 @@ public class VoiceOverManager : MonoBehaviour
         {
             LastButtonSelected = LastButtonSelected.WalkeyMoleyToInventoryRoom;
             ButtonsInteraction(false);
-            //PlayClip(goToElevatorClip);
-            //StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
-            //{
+            PlayClip(walkeyMoleyToInventoryRoomClip);
+            StartCoroutine(FunctionWithDelay(walkeyMoleyToInventoryRoomClip.length, () =>
+            {
                 InvokeLastButtonSelected();
                 TileGameManager.Instance.InitiateTeleport();
-            //}));
+            }));
         });
 
 
