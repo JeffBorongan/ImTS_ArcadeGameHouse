@@ -3,7 +3,22 @@ guid: b97b46c5e08d5334090600db10cee6f7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_low
+    second: {fileID: 2100000, guid: e2885d05fac11ca4397f9649a2beb8ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TurbineTail_low
+    second: {fileID: 2100000, guid: f5ec69ee0d6a8fa41a643c23002319b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Turbine_low
+    second: {fileID: 2100000, guid: ecf99f3ef4c51094b9e370fae85a8c46, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
