@@ -37,6 +37,7 @@ public class TileGameManager : GameManagement
     [SerializeField] private List<Texture2D> tileNormalMaps = new List<Texture2D>();
     [SerializeField] private List<Texture2D> tileEmissionMaps = new List<Texture2D>();
     private List<GameObject> spawnedTiles = new List<GameObject>();
+    private List<GameObject> spawnedSpaceships = new List<GameObject>();
     private List<TileColor> tileColorList = new List<TileColor>();
     private TileColor tileColor = TileColor.None;
     private IEnumerator pointCheckingCour = null;
@@ -44,6 +45,7 @@ public class TileGameManager : GameManagement
     private float travelDistance = 0f;
     private int degreeMovement = 359;
     private int tilesPassed = 0;
+    private int spaceshipCount = 0;
 
     [Header("Player")]
     [SerializeField] private Transform playerAttachment = null;
@@ -85,6 +87,7 @@ public class TileGameManager : GameManagement
     public List<Texture2D> FloorEmissionMaps { get => floorEmissionMaps; }
     public TextMeshProUGUI TxtTime { get => txtTime; }
     public TextMeshProUGUI TxtTilesPassed { get => txtTilesPassed; }
+    public int SpaceshipCount { get => spaceshipCount; set => spaceshipCount = value; }
     public GameObject VFXGreen { get => vFXGreen; }
     public GameObject VFXOrange { get => vFXOrange; }
     public GameObject VFXPink { get => vFXPink; }
@@ -149,6 +152,11 @@ public class TileGameManager : GameManagement
             item.SetActive(false);
         }
 
+        foreach (var item in spawnedSpaceships)
+        {
+            item.SetActive(false);
+        }
+
         isMoving = false;
         StopCoroutine(gameTimerCour);
         StopCoroutine(pointCheckingCour);
@@ -192,9 +200,16 @@ public class TileGameManager : GameManagement
         {
             while (isMoving)
             {
+                string separator = ":";
                 int minutes = currentTime / 60;
                 int seconds = currentTime - (minutes * 60);
-                txt.text = minutes + ":" + seconds;
+
+                if (seconds < 10)
+                {
+                    separator = ":0";
+                }
+
+                txt.text = minutes + separator + seconds;
                 yield return new WaitForSeconds(1f);
                 currentTime++;
             }
@@ -234,10 +249,11 @@ public class TileGameManager : GameManagement
 
         for (int index = 1; index <= numberOfTiles; index++)
         {
-            bool checker = true;
+            bool tileRepeat = true;
             int colorNumber;
+            int spaceshipVisibility = 0;
 
-            while (checker)
+            while (tileRepeat)
             {
                 colorNumber = Random.Range(0, (int)TileColor.Count);
 
@@ -247,22 +263,33 @@ public class TileGameManager : GameManagement
                     {
                         if ((int)color == colorNumber)
                         {
-                            checker = false;
+                            tileRepeat = false;
                             tileColor = color;
+                            spaceshipVisibility = Random.Range(1, 10);
                         }
                     }
                 }
             }
 
-            GameObject clone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Tiles);
-            clone.GetComponent<Tile>().TileMeshRenderer.material.SetTexture("_BaseMap", tileBaseMaps[(int)tileColor]);
-            clone.GetComponent<Tile>().TileMeshRenderer.material.SetTexture("_BumpMap", tileNormalMaps[(int)tileColor]);
-            clone.GetComponent<Tile>().TileMeshRenderer.material.SetTexture("_EmissionMap", tileEmissionMaps[(int)tileColor]);
-            clone.GetComponent<Tile>().TileColor = tileColor;
-            clone.transform.SetParent(tileSpawnPoint);
-            clone.transform.eulerAngles = new Vector3(0, index * -degreesPerTile, 0);
-            clone.SetActive(true);
-            spawnedTiles.Add(clone);
+            GameObject tile = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Tiles);
+            tile.GetComponent<Tile>().TileMeshRenderer.material.SetTexture("_BaseMap", tileBaseMaps[(int)tileColor]);
+            tile.GetComponent<Tile>().TileMeshRenderer.material.SetTexture("_BumpMap", tileNormalMaps[(int)tileColor]);
+            tile.GetComponent<Tile>().TileMeshRenderer.material.SetTexture("_EmissionMap", tileEmissionMaps[(int)tileColor]);
+            tile.GetComponent<Tile>().TileColor = tileColor;
+            tile.transform.SetParent(tileSpawnPoint);
+            tile.transform.eulerAngles = new Vector3(0, index * -degreesPerTile, 0);
+            tile.SetActive(true);
+            spawnedTiles.Add(tile);
+
+            if (spaceshipVisibility >= 6)
+            {
+                GameObject spaceship = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Spaceship);
+                spaceship.transform.SetParent(tileSpawnPoint);
+                spaceship.transform.eulerAngles = new Vector3(0, index * -degreesPerTile, 0);
+                spaceship.SetActive(true);
+                spawnedSpaceships.Add(spaceship);
+                tile.GetComponent<Tile>().HasSpaceship = true;
+            }
         }
     }
 

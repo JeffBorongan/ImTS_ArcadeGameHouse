@@ -343,11 +343,19 @@ public class BowlingGameManagement : GameManagement
     {
         txt.gameObject.SetActive(true);
         int currentTime = timerDuration;
+
         while (currentTime >= 0)
         {
+            string separator = ":";
             int minutes = currentTime / 60;
             int seconds = currentTime - (minutes * 60);
-            txt.text = inMinutes ? minutes + ":" + seconds :  currentTime.ToString();
+
+            if (seconds < 10)
+            {
+                separator = ":0";
+            }
+
+            txt.text = inMinutes ? minutes + separator + seconds :  currentTime.ToString();
             yield return new WaitForSeconds(1f);
             currentTime--;
         }

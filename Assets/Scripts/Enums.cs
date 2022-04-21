@@ -41,6 +41,7 @@ public enum TypeOfObject
     Alien4,
     DeadAlien1,
     Tiles,
+    Spaceship,
 }
 
 public enum LastButtonSelected

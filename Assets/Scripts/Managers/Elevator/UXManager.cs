@@ -62,6 +62,7 @@ public class UXManager : MonoBehaviour
     [SerializeField] private TMP_Text txtTimeElapsed = null;
     [SerializeField] private TMP_Text txtTravelDistance = null;
     [SerializeField] private TMP_Text txtTilesPassed = null;
+    [SerializeField] private TMP_Text txtSpaceshipCount = null;
     [SerializeField] private TMP_Text txtPlayerSpeed = null;
     [SerializeField] private TMP_InputField numberOfTiles = null;
     [SerializeField] private Button btnPlayerSpeedDecrease = null;
@@ -74,6 +75,11 @@ public class UXManager : MonoBehaviour
     private float playerSpeedChange = 0.1f;
     private int numberOfTilesValue = 10;
     private bool isTileGameStarted = false;
+
+    [Space, Space, Space]
+    [SerializeField] private TextMeshProUGUI txtSessionTime = null;
+    private IEnumerator sessionTimerCour = null;
+    private bool isSessionStarted = false;
 
     #endregion
 
@@ -89,6 +95,9 @@ public class UXManager : MonoBehaviour
 
     private void Start()
     {
+        isSessionStarted = true;
+        sessionTimerCour = TimeCour(0, txtSessionTime);
+        StartCoroutine(sessionTimerCour);
         XRSettings.gameViewRenderMode = GameViewRenderMode.OcclusionMesh;
         BowlingGameStart();
         SquatGameStart();
@@ -166,6 +175,38 @@ public class UXManager : MonoBehaviour
         yield return new WaitUntil(() => IsTileGameStarted);
         txtTimeElapsed.text = TileGameManager.Instance.TxtTime.text;
         txtTilesPassed.text = TileGameManager.Instance.TxtTilesPassed.text;
+        txtSpaceshipCount.text = TileGameManager.Instance.SpaceshipCount.ToString();
+    }
+
+    #endregion
+
+    #region Session Timer
+
+    private IEnumerator TimeCour(int timerDuration, TextMeshProUGUI txt)
+    {
+        int currentTime = timerDuration;
+
+        while (isSessionStarted)
+        {
+            string separator = ":";
+            int minutes = currentTime / 60;
+            int seconds = currentTime - (minutes * 60);
+
+            if (seconds < 10)
+            {
+                separator = ":0";
+            }
+
+            txt.text = minutes + separator + seconds;
+            yield return new WaitForSeconds(1f);
+            currentTime++;
+        }
+    }
+
+    public void StopSessionTimer()
+    {
+        isSessionStarted = false;
+        StopCoroutine(sessionTimerCour);
     }
 
     #endregion

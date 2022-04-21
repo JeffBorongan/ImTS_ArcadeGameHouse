@@ -173,12 +173,12 @@ public class VoiceOverManager : MonoBehaviour
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(bowlingGameClip);
+            SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             StartCoroutine(FunctionWithDelay(bowlingGameClip.length, () => 
             {
                 InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(4, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
-                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             }));
         });
 
@@ -188,12 +188,12 @@ public class VoiceOverManager : MonoBehaviour
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(lockEmUpClip);
+            SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             StartCoroutine(FunctionWithDelay(lockEmUpClip.length, () =>
             {
                 InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(2, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
-                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             }));
         });
 
@@ -203,12 +203,12 @@ public class VoiceOverManager : MonoBehaviour
             ButtonsInteraction(false);
             AssistantBehavior.Instance.Move(true, 4f, () => { });
             HandleOnPlay(walkeyMoleyClip);
+            SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             StartCoroutine(FunctionWithDelay(walkeyMoleyClip.length, () =>
             {
                 InvokeLastButtonSelected();
                 ElevatorManager.Instance.EnableFloorButton(1, true);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
-                SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(false);
             }));
         });
 
@@ -273,7 +273,11 @@ public class VoiceOverManager : MonoBehaviour
             HandleOnPlay(goodbyeClip);
             AssistantBehavior.Instance.PlayCelebratingAnimation();
             StartCoroutine(FunctionWithDelay(10f, () => AssistantBehavior.Instance.PlayGreetingAnimation()));
-            StartCoroutine(FunctionWithDelay(goodbyeClip.length, () => AssistantBehavior.Instance.Animator.SetBool("isBlinking", false)));
+            StartCoroutine(FunctionWithDelay(goodbyeClip.length, () => 
+            { 
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+                UXManager.Instance.StopSessionTimer();
+            }));
         });
 
 
