@@ -283,8 +283,10 @@ public class TileGameManager : GameManagement
 
             if (spaceshipVisibility >= 6)
             {
+                int placement = Random.Range(-1, 1);
                 GameObject spaceship = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.Spaceship);
                 spaceship.transform.SetParent(tileSpawnPoint);
+                spaceship.transform.position += new Vector3(0, 0, placement * 1.5f);
                 spaceship.transform.eulerAngles = new Vector3(0, index * -degreesPerTile, 0);
                 spaceship.SetActive(true);
                 spawnedSpaceships.Add(spaceship);
