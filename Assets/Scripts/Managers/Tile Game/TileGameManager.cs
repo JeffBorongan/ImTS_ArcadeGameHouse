@@ -170,7 +170,7 @@ public class TileGameManager : GameManagement
     {
         if (isMoving)
         {
-            playerAttachment.Rotate(-SessionData.playerSpeed * SessionData.playerSpeedFactor * Time.deltaTime * Vector3.up);
+            playerAttachment.Rotate(-SessionData.playerSpeed * SessionData.speedFactor * Time.deltaTime * Vector3.up);
 
             if (playerAttachment.transform.eulerAngles.y <= degreeMovement)
             {
@@ -230,7 +230,7 @@ public class TileGameManager : GameManagement
 
     #endregion
 
-    #region Tile Spawning
+    #region Tile and Spaceship Spawning
 
     private void SpawnTiles()
     {
@@ -290,7 +290,6 @@ public class TileGameManager : GameManagement
                 spaceship.transform.eulerAngles = new Vector3(0, index * -degreesPerTile, 0);
                 spaceship.SetActive(true);
                 spawnedSpaceships.Add(spaceship);
-                tile.GetComponent<Tile>().HasSpaceship = true;
             }
         }
     }
@@ -437,7 +436,8 @@ public class TileGameManager : GameManagement
 public class WhackGameSessionData : SessionData
 {
     public float playerSpeed = 0.2f;
-    public float playerSpeedFactor = 1.27324f;
+    public float spaceshipSpeed = 2.5f;
+    public float speedFactor = 1.27324f;
     public float roomCircumference = 77.28f;
     public int numberOfTiles = 10;
     public int distancePerTile = 5;

@@ -8,7 +8,6 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private MeshRenderer tileMeshRenderer = null;
     private TileColor tileColor = TileColor.None;
-    private bool hasSpaceship = false;
 
     #endregion
 
@@ -16,7 +15,6 @@ public class Tile : MonoBehaviour
 
     public MeshRenderer TileMeshRenderer { get => tileMeshRenderer;}
     public TileColor TileColor { get => tileColor; set => tileColor = value; }
-    public bool HasSpaceship { get => hasSpaceship; set => hasSpaceship = value; }
 
     #endregion
 
@@ -52,11 +50,6 @@ public class Tile : MonoBehaviour
             {
                 TileGameManager.Instance.VFXPink.SetActive(true);
                 StartCoroutine(FunctionWithDelay(1f, () => TileGameManager.Instance.VFXPink.SetActive(false)));
-            }
-
-            if (HasSpaceship)
-            {
-                TileGameManager.Instance.SpaceshipCount++;
             }
 
             TileGameManager.Instance.FloorMeshRenderer.material.SetTexture("_BaseMap", TileGameManager.Instance.FloorBaseMaps[(int)TileColor + 1]);
