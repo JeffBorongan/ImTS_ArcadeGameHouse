@@ -4251,6 +4251,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -40
       objectReference: {fileID: 0}
+    - target: {fileID: 3453041801648655916, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3634464301296897936, guid: 1a63f1afa59e1e348ae73288d0cfff5b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7539,17 +7543,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ElevatorManager, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1617583311}
+        m_TargetAssemblyTypeName: PlayerMovementManager, Assembly-CSharp
+        m_MethodName: SetRotateAfter
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1349551663
 MonoBehaviour:

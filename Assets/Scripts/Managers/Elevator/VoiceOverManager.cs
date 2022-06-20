@@ -413,6 +413,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnSpaceLobbyToElevator.onClick.AddListener(() => 
         {
+            PlayerMovementManager.Instance.ShowRotateButton();
+
             LastButtonSelected = LastButtonSelected.SpaceLobbyToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));

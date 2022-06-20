@@ -28,10 +28,15 @@ public class ElevatorManager : MonoBehaviour
 
     #region Parameters
 
+    [Header("References")]
     [SerializeField] private GameObject elevatorDoorLeft = null;
     [SerializeField] private GameObject elevatorDoorRight = null;
+
+    [Header("Audio")]
     [SerializeField] private AudioSource elevatorAudioSource = null;
     [SerializeField] private AudioClip elevatorDoorClip = null;
+
+    [Space(10)]
     [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
     [SerializeField] private List<Button> elevatorButtons = new List<Button>();
     private MeshRenderer elevatorPart;
@@ -114,6 +119,8 @@ public class ElevatorManager : MonoBehaviour
         {
             StartCoroutine(FunctionWithDelay(2f, () => DisableEmissive()));
         }
+
+        PlayerMovementManager.Instance.ShowTeleportButton();
     }
 
     public void CloseElevatorDoor()
