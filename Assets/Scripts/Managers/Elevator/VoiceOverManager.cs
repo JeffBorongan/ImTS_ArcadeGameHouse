@@ -432,6 +432,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnBowlingGameToElevator.onClick.AddListener(() => 
         {
+            PlayerMovementManager.Instance.ShowRotateButton();
+
             LastButtonSelected = LastButtonSelected.GamesToElevator;
 
             foreach (var item in BowlingGameManagement.Instance.DisableObjects)
@@ -454,6 +456,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnLockEmUpToElevator.onClick.AddListener(() => 
         {
+            PlayerMovementManager.Instance.ShowRotateButton();
+
             LastButtonSelected = LastButtonSelected.LockEmUpToElevator;
 
             foreach (var item in SquatGameManager.Instance.DisableObjects)
@@ -476,6 +480,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnInventoryRoomToElevator.onClick.AddListener(() =>
         {
+            PlayerMovementManager.Instance.ShowRotateButton();
+
             LastButtonSelected = LastButtonSelected.GamesToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
@@ -854,6 +860,9 @@ public class VoiceOverManager : MonoBehaviour
             btnSpaceLobby.interactable = false;
             btnInventoryRoomToElevator.interactable = false;
             btnWalkeyMoleyToInventoryRoom.interactable = false;
+
+            // Teleportation
+            PlayerMovementManager.Instance._isGoingToGame3 = true;
         }
 
         if (LastButtonSelected == LastButtonSelected.GoToPlatform)

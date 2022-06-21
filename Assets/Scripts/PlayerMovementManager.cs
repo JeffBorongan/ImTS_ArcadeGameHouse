@@ -30,12 +30,16 @@ public class PlayerMovementManager : MonoBehaviour
 
     [SerializeField] private GameObject _playerTeleportPnl = null;
     [SerializeField] private GameObject _playerRotatePnl = null;
-    [SerializeField] private List<Button> _therapistButtons;
 
     private UnityAction _transitionAction;
     private UnityAction _onComplete;
 
     private bool _rotateAfter = false;
+
+    private bool _isInsideElevator = false;
+    private bool _isLookingBehind = false;
+
+    [HideInInspector] public bool _isGoingToGame3 = false;
 
     #endregion
 
@@ -46,25 +50,18 @@ public class PlayerMovementManager : MonoBehaviour
         StartCoroutine(Transition(true));
 
         _playerRotatePnl.SetActive(false);
-        SetButtonInteractables(true);
     }
 
     public void ShowRotateButton()
     {
         _playerRotatePnl.SetActive(true);
-        SetButtonInteractables(false);
     }
     public void CopyRotation()
     {
-        if (_playerLocation.localEulerAngles.y == 180)
-            _playerLocation.localEulerAngles = new Vector3(0, 0, 0);
+        if (_isLookingBehind)
+            _playerLocation.localEulerAngles = Vector3.zero;
         else
             _playerLocation.localEulerAngles = new Vector3(0, 180, 0);
-    }
-
-    public void SetRotateAfter(bool rotateAfter)
-    {
-        _rotateAfter = rotateAfter;
     }
     #endregion
 
@@ -75,29 +72,30 @@ public class PlayerMovementManager : MonoBehaviour
         StartCoroutine(Transition(false));
 
         _playerTeleportPnl.SetActive(false);
-        SetButtonInteractables(true);
     }
 
     public void ShowTeleportButton()
     {
         _playerTeleportPnl.SetActive(true);
-        SetButtonInteractables(false);
+
+        if (!_isInsideElevator)
+            _rotateAfter = true;
     }
 
     private void CopyPosition()
     {
-        if (_playerLocation.localPosition.z == 1.5f)
-            _playerLocation.localPosition = new Vector3(0, 0, 0);
+        if (!_isInsideElevator)
+            _playerLocation.localPosition = Vector3.zero;
         else
             _playerLocation.localPosition = new Vector3(0, 0, 1.5f);
+
+        if (_isGoingToGame3)
+        {
+            _playerLocation.localPosition = new Vector3(0, 0, 2.5f);
+            _isGoingToGame3 = false;
+        }
     }
     #endregion
-
-    private void SetButtonInteractables(bool value)
-    {
-        foreach (Button button in _therapistButtons)
-            button.interactable = value;
-    }
 
     private IEnumerator Transition(bool isRotation)
     {
@@ -118,5 +116,8 @@ public class PlayerMovementManager : MonoBehaviour
         ScreenFadeManager.Instance.FadeIn(_transitionAction);
         yield return new WaitForSeconds(0.5f);
         ScreenFadeManager.Instance.FadeOut(_onComplete);
+
+        _isInsideElevator = _playerLocation.localPosition.z < 1.5f;
+        _isLookingBehind = _playerLocation.localEulerAngles.y == 180;
     }
 }
