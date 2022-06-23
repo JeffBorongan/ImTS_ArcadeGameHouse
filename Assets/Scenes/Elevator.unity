@@ -1828,7 +1828,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664865251}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1837,7 +1837,7 @@ Transform:
   - {fileID: 675272995}
   m_Father: {fileID: 134225883}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &664865253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,7 +1854,7 @@ MonoBehaviour:
   trackX: 1
   xOffset: 0
   trackY: 1
-  yOffset: -0.2
+  yOffset: 0
   trackZ: 1
   zOffset: 0
 --- !u!1 &675272994
@@ -6555,7 +6555,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 1000
-  field of view: 58.7
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -7625,9 +7625,6 @@ MonoBehaviour:
   _playerLocation: {fileID: 736228214}
   _playerTeleportPnl: {fileID: 1431911621}
   _playerRotatePnl: {fileID: 6325941472706413104}
-  _therapistButtons:
-  - {fileID: 0}
-  - {fileID: 0}
   _isGoingToGame3: 0
 --- !u!114 &1621709137 stripped
 MonoBehaviour:
