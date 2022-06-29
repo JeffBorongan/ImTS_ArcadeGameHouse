@@ -689,6 +689,8 @@ public static class SteamVR_Utils
 
 			target.transform.localPosition = oldPosition;
 			target.transform.localRotation = oldRotation;
+
+			Debug.LogWarning("bobo eto ung dahilan");
 		}
 		else
 		{

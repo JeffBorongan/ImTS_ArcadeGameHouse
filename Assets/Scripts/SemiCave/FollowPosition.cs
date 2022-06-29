@@ -14,10 +14,16 @@ public class FollowPosition : MonoBehaviour
     [SerializeField] private bool trackZ;
     [SerializeField] private float zOffset;
 
+    [SerializeField] private List<Camera> cameras;
+    [SerializeField] private float fov;
+
     float x, y, z;
 
     void Update()
     {
+        foreach (Camera cam in cameras)
+            cam.fieldOfView = fov;
+
         if (trackX) x = trackedObject.transform.localPosition.x;
         else x = transform.localPosition.x;
         if (trackY) y = trackedObject.transform.localPosition.y;
