@@ -5,7 +5,8 @@ using UnityEngine;
 public class bowl_movement : MonoBehaviour
 {
     public Transform bowl_status;
-    Vector3 reset_position;
+    public GameObject new_bowl;
+    public Vector3 reset_position;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +19,16 @@ public class bowl_movement : MonoBehaviour
     {
         Vector3 bowl_position = bowl_status.position;
 
-        if(bowl_position.y <= 0.16f)
-            StartCoroutine("resetBowl");
+        if(bowl_position.y <= 0.16f){
+            Debug.Log(bowl_position);
+            StartCoroutine(resetBowl());
+        }
     }
 
     IEnumerator resetBowl(){
 
         yield return new WaitForSeconds(3);
-        
-        bowl_status.position = reset_position;
-
+        Instantiate(new_bowl, new_bowl.transform.position, new_bowl.transform.rotation);
+        Destroy(this.gameObject);
     }
 }
