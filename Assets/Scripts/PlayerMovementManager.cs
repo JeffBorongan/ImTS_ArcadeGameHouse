@@ -26,6 +26,8 @@ public class PlayerMovementManager : MonoBehaviour
 
     #region Parameters
 
+    [SerializeField] private bool _initializer;
+
     [SerializeField] private Transform _playerLocation;
 
     [SerializeField] private GameObject _playerTeleportPnl = null;
@@ -35,6 +37,7 @@ public class PlayerMovementManager : MonoBehaviour
     private UnityAction _onComplete;
 
     private bool _rotateAfter = false;
+    private bool _teleportAfter = false;
 
     private bool _isInsideElevator = false;
     private bool _isLookingBehind = false;
@@ -43,13 +46,20 @@ public class PlayerMovementManager : MonoBehaviour
 
     #endregion
 
+    private void Start()
+    {
+        if (_initializer)
+            _teleportAfter = true;
+    }
+
     #region Rotation
     public void Rotate()
     {
         StopCoroutine(Transition(true));
         StartCoroutine(Transition(true));
 
-        _playerRotatePnl.SetActive(false);
+        if(!_initializer)
+            _playerRotatePnl.SetActive(false);
     }
 
     public void ShowRotateButton()
@@ -78,7 +88,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         _playerTeleportPnl.SetActive(true);
 
-        if (!_isInsideElevator)
+        if (!_isInsideElevator && !_initializer)
             _rotateAfter = true;
     }
 
@@ -94,6 +104,11 @@ public class PlayerMovementManager : MonoBehaviour
             _playerLocation.localPosition = new Vector3(0, 0, 2.5f);
             _isGoingToGame3 = false;
         }
+    }
+
+    public void TeleportAfter()
+    {
+        _teleportAfter = true;
     }
     #endregion
 
@@ -111,6 +126,13 @@ public class PlayerMovementManager : MonoBehaviour
         {
             _onComplete += ShowRotateButton;
             _rotateAfter = false;
+        }
+
+        _onComplete -= ShowTeleportButton;
+        if (_teleportAfter)
+        {
+            _onComplete += ShowTeleportButton;
+            _teleportAfter = false;
         }
 
         ScreenFadeManager.Instance.FadeIn(_transitionAction);
