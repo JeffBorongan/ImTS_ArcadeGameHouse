@@ -1854,14 +1854,14 @@ MonoBehaviour:
   trackX: 1
   xOffset: 0
   trackY: 1
-  yOffset: -0.6
+  yOffset: -0.1
   trackZ: 1
   zOffset: 0
   cameras:
   - {fileID: 1063295630}
   - {fileID: 1099390351}
   - {fileID: 675272998}
-  fov: 58.7
+  fov: 69
 --- !u!1 &675272994
 GameObject:
   m_ObjectHideFlags: 0
@@ -7631,6 +7631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8f356936b5f744e951f2d85057771a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initializer: 0
   _playerLocation: {fileID: 736228214}
   _playerTeleportPnl: {fileID: 1431911621}
   _playerRotatePnl: {fileID: 6325941472706413104}
