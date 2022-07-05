@@ -121,6 +121,9 @@ public class SquatGameManager : GameManagement
 
     private void Update()
     {
+        leftHandle.transform.position = new Vector3(leftHandle.transform.position.x, leftHandle.transform.position.y, 2);
+
+
         if (SessionData != null)
         {
             StartCoroutine(LeverMechanics(isSpawning, SessionData.pullUpHeight, SessionData.pushDownHeight));
