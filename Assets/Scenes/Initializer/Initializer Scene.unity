@@ -1266,17 +1266,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackedObject: {fileID: 423079907}
-  trackX: 0
+  trackX: 1
   xOffset: 0
-  trackY: 0
-  yOffset: 0
-  trackZ: 0
+  trackY: 1
+  yOffset: -0.1
+  trackZ: 1
   zOffset: 0
   cameras:
   - {fileID: 1145234998}
   - {fileID: 1847665716}
   - {fileID: 1735942190}
-  fov: 67
+  fov: 69
 --- !u!1 &176821679
 GameObject:
   m_ObjectHideFlags: 0
@@ -7699,7 +7699,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!1 &1491657407
 GameObject:
