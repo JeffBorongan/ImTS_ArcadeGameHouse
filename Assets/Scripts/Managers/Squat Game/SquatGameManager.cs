@@ -122,7 +122,7 @@ public class SquatGameManager : GameManagement
     private void Update()
     {
         //leftHandle.transform.position = new Vector3(leftHandle.transform.position.x, leftHandle.transform.position.y, 2);
-
+        rightHandle.transform.position = new Vector3(rightHandle.transform.position.x, leftHandle.transform.position.y, rightHandle.transform.position.z);
 
         if (SessionData != null)
         {
@@ -146,6 +146,7 @@ public class SquatGameManager : GameManagement
         {
             if (leftHandle.transform.position.y <= pushDownHeight && rightHandle.transform.position.y <= pushDownHeight)
             {
+
                 if (doorStatus == DoorStatus.Half)
                 {
                     isDoorMovable = true;

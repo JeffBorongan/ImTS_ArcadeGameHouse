@@ -15,7 +15,7 @@ public class BallDetector : MonoBehaviour
         if (ball != null && !ball.isSelected)
         {
             Debug.Log("ball Collided");
-            Destroy(other.gameObject, 5f);
+            Destroy(other.gameObject, 10f);
             StartCoroutine(SpawnAfterXSeconds(5f));
         }
 
