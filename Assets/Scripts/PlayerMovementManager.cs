@@ -64,14 +64,22 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void ShowRotateButton()
     {
+        Debug.Log("Show Rotate Button");
         _playerRotatePnl.SetActive(true);
     }
+
     public void CopyRotation()
     {
         if (_isLookingBehind)
+        {
             _playerLocation.localEulerAngles = Vector3.zero;
+            Debug.Log("looking behind, so I will look at front");
+        }
         else
+        {
             _playerLocation.localEulerAngles = new Vector3(0, 180, 0);
+            Debug.Log("looking at front, so I will look behind");
+        }
     }
     #endregion
 
@@ -86,6 +94,8 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void ShowTeleportButton()
     {
+        Debug.Log("Show Teleport Button");
+
         _playerTeleportPnl.SetActive(true);
 
         if (!_isInsideElevator && !_initializer)
@@ -95,9 +105,15 @@ public class PlayerMovementManager : MonoBehaviour
     private void CopyPosition()
     {
         if (!_isInsideElevator)
-            _playerLocation.localPosition = Vector3.zero;
+        {
+            _playerLocation.localPosition = new Vector3(0, -0.5f, 0);
+            Debug.Log("not inside elevator, going in");
+        }
         else
-            _playerLocation.localPosition = new Vector3(0, 0, 1.5f);
+        {
+            _playerLocation.localPosition = new Vector3(0, -0.5f, 1.5f);
+            Debug.Log("inside elevator, going out");
+        }
 
         if (_isGoingToGame3)
         {
