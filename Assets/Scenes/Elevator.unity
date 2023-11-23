@@ -1335,7 +1335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &651779215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1578,7 +1578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &860103481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1854,7 +1854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &907911385
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3046,7 +3046,9 @@ MonoBehaviour:
   goodbyeClip: {fileID: 8300000, guid: 78d10a6c4e8588640b4963a26f8d797b, type: 3}
   btnWelcomeGame1: {fileID: 1037616591}
   btnGame1Instruction: {fileID: 1037616590}
-  welcomeGame1Clip: {fileID: 8300000, guid: 49856dd49390e4f41b522463d1a4f86b, type: 3}
+  welcomeGame1LeftClip: {fileID: 8300000, guid: 709cbf9c17b73784095eda30e29aef18, type: 3}
+  welcomeGame1RightClip: {fileID: 8300000, guid: 69b4db5b424504f49bcc3594ef91d3e4, type: 3}
+  welcomeGame1Clip: {fileID: 0}
   game1InstructionClip: {fileID: 8300000, guid: 5b17657761051f84e9e3598ae72a4200, type: 3}
   btnPullUp: {fileID: 1037616588}
   btnPushDown: {fileID: 1037616587}
@@ -4374,7 +4376,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 08c5dbbbbaf7b45428a30ff75dac2500, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.015
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4700,9 +4702,6 @@ MonoBehaviour:
   - {fileID: 421120208}
   - {fileID: 1187041791}
   - {fileID: 1349551662}
-  - {fileID: 860103482}
-  - {fileID: 907911386}
-  - {fileID: 651779216}
 --- !u!4 &2090711806
 Transform:
   m_ObjectHideFlags: 0
@@ -4799,6 +4798,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 798369632}
     m_Modifications:
+    - target: {fileID: 1196978156, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4846,6 +4849,10 @@ PrefabInstance:
     - target: {fileID: 590356980832865593, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
       propertyPath: m_Name
       value: Elevator
+      objectReference: {fileID: 0}
+    - target: {fileID: 9084273807116844471, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}

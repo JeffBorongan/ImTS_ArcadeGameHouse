@@ -52,6 +52,8 @@ public class VoiceOverManager : MonoBehaviour
     [SerializeField] private Button btnWelcomeGame1 = null;
     [SerializeField] private Button btnGame1Instruction = null;
 
+    [SerializeField] private AudioClip welcomeGame1LeftClip = null;
+    [SerializeField] private AudioClip welcomeGame1RightClip = null;
     [SerializeField] private AudioClip welcomeGame1Clip = null;
     [SerializeField] private AudioClip game1InstructionClip = null;
 
@@ -283,9 +285,11 @@ public class VoiceOverManager : MonoBehaviour
 
 
 
-
         btnWelcomeGame1.onClick.AddListener(() => 
         {
+            //handling left & right foot
+            welcomeGame1Clip = AnatomyCaptureManager.Instance.LegSelected == 0 ? welcomeGame1LeftClip : welcomeGame1RightClip;
+
             LastButtonSelected = LastButtonSelected.WelcomeGame1;
             ButtonsInteraction(false);
             HandleOnPlay(welcomeGame1Clip);
