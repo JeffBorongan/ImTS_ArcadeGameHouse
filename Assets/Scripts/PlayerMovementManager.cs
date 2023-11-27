@@ -72,13 +72,13 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (_isLookingBehind)
         {
+            // looking behind, so I will look at front
             _playerLocation.localEulerAngles = Vector3.zero;
-            Debug.Log("looking behind, so I will look at front");
         }
         else
         {
+            // looking at front, so I will look behind
             _playerLocation.localEulerAngles = new Vector3(0, 180, 0);
-            Debug.Log("looking at front, so I will look behind");
         }
     }
     #endregion
