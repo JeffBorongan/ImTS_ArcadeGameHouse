@@ -156,6 +156,9 @@ public class AnatomyCaptureManager : MonoBehaviour
     {
         LegSelected = leg;
         Transition(AnatomyCapturePanel.Instruction);
+
+        VoiceOverManager.Instance.HandleGame1AudioClip(leg);
+
         ShowMessage(captureHeightMessage, imgCaptureHeight, 5f, () =>
         {
             Transition(AnatomyCapturePanel.BodyMeasurement);

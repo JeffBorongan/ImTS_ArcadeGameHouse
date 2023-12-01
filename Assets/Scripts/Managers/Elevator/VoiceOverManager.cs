@@ -285,20 +285,7 @@ public class VoiceOverManager : MonoBehaviour
 
 
 
-        btnWelcomeGame1.onClick.AddListener(() => 
-        {
-            //handling left & right foot
-            welcomeGame1Clip = AnatomyCaptureManager.Instance.LegSelected == 0 ? welcomeGame1LeftClip : welcomeGame1RightClip;
-
-            LastButtonSelected = LastButtonSelected.WelcomeGame1;
-            ButtonsInteraction(false);
-            HandleOnPlay(welcomeGame1Clip);
-            StartCoroutine(FunctionWithDelay(welcomeGame1Clip.length, () => 
-            {
-                InvokeLastButtonSelected();
-                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
-            }));
-        });
+        
 
         btnGame1Instruction.onClick.AddListener(() => 
         {
@@ -883,5 +870,24 @@ public class VoiceOverManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Helper Functions
+    public void HandleGame1AudioClip(int legSelected)
+    {
+        welcomeGame1Clip = legSelected == 0 ? welcomeGame1LeftClip : welcomeGame1RightClip;
+
+        btnWelcomeGame1.onClick.AddListener(() =>
+        {
+            LastButtonSelected = LastButtonSelected.WelcomeGame1;
+            ButtonsInteraction(false);
+            HandleOnPlay(welcomeGame1Clip);
+            StartCoroutine(FunctionWithDelay(welcomeGame1Clip.length, () =>
+            {
+                InvokeLastButtonSelected();
+                AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+            }));
+        });
+    }
     #endregion
 }
