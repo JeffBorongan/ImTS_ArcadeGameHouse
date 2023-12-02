@@ -73,8 +73,14 @@ public class VoiceOverManager : MonoBehaviour
 
     [Header("Walkey Moley")]
     [SerializeField] private Button btnWelcomeGame3 = null;
+    [SerializeField] private Button btnSpaceShipCount = null;
+    [SerializeField] private Button btnWhatColor = null;
+
+    [SerializeField] private GameObject game3ExtraButtons = null;
 
     [SerializeField] private AudioClip welcomeGame3Clip = null;
+    [SerializeField] private AudioClip howManySpaceShipClip = null;
+    [SerializeField] private AudioClip whatColorClip = null;
 
     [Header("Go to Elevator")]
     [SerializeField] private Button btnSpaceLobbyToElevator = null;
@@ -395,6 +401,31 @@ public class VoiceOverManager : MonoBehaviour
             {
                 InvokeLastButtonSelected();
                 TileGameManager.Instance.EnableStartButton();
+                ToggleGame3ExtraButtons(true);
+            }));
+        });
+
+        btnWhatColor.onClick.AddListener(() =>
+        {
+            btnSpaceShipCount.interactable = false;
+
+            PlayClip(whatColorClip);
+
+            StartCoroutine(FunctionWithDelay(whatColorClip.length, () =>
+            {
+                btnSpaceShipCount.interactable = true;
+            }));
+        });
+
+        btnSpaceShipCount.onClick.AddListener(() =>
+        {
+            btnWhatColor.interactable = false;
+
+            PlayClip(howManySpaceShipClip);
+
+            StartCoroutine(FunctionWithDelay(howManySpaceShipClip.length, () =>
+            {
+                btnWhatColor.interactable = true;
             }));
         });
 
@@ -888,6 +919,11 @@ public class VoiceOverManager : MonoBehaviour
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
             }));
         });
+    }
+
+    public void ToggleGame3ExtraButtons(bool value)
+    {
+        game3ExtraButtons.SetActive(value);
     }
     #endregion
 }

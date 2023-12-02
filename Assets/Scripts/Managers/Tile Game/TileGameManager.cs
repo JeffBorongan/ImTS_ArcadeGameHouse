@@ -326,21 +326,27 @@ public class TileGameManager : GameManagement
     {
         pnlHUD.SetActive(false);
         pnlGameResult.SetActive(true);
+
         txtEndTilesPassed.text = txtTilesPassed.text;
         txtEndTime.text = txtTime.text;
         txtEndResult.text = success ? "Success" : "Failed";
         txtEndTilesPassed.color = success ? txtEndTilesPassed.color : colorFailedText;
         txtEndResult.color = success ? colorSuccessText : colorFailedText;
+
         vFXConfetti.SetActive(success);
         VFXGreen.SetActive(false);
         VFXOrange.SetActive(false);
         VFXPink.SetActive(false);
+
         FloorMeshRenderer.material.SetTexture("_BaseMap", FloorBaseMaps[0]);
         FloorMeshRenderer.material.SetTexture("_BumpMap", FloorNormalMaps[0]);
         FloorMeshRenderer.material.SetTexture("_EmissionMap", FloorEmissionMaps[0]);
+
         UXManager.Instance.BtnTileGameStop.interactable = false;
         UXManager.Instance.IsTileGameStarted = false;
+
         VoiceOverManager.Instance.ButtonsInteraction(false);
+        VoiceOverManager.Instance.ToggleGame3ExtraButtons(false);
 
         if (success)
         {
@@ -348,11 +354,15 @@ public class TileGameManager : GameManagement
             StartCoroutine(FunctionWithDelay(gameSuccessClip.length, () =>
             {
                 vFXConfetti.SetActive(false);
+
                 CharacterManager.Instance.CharacterPrefab.transform.SetParent(CharacterManager.Instance.PlayerLocation);
+
                 TrophyManager.Instance.AddGameAccomplished((int)GameNumber.Game3);
                 TrophyManager.Instance.IsGame3Failed = false;
+
                 VoiceOverManager.Instance.LastButtonSelected = LastButtonSelected.WalkeyMoleyToInventoryRoom;
                 VoiceOverManager.Instance.InvokeLastButtonSelected();
+
                 ElevatorManager.Instance.CloseDoorDetection = true;
                 ElevatorManager.Instance.PlayerDetection = false;
             }));
