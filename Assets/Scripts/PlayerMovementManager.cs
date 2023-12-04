@@ -33,6 +33,10 @@ public class PlayerMovementManager : MonoBehaviour
     [SerializeField] private GameObject _playerTeleportPnl = null;
     [SerializeField] private GameObject _playerRotatePnl = null;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _teleportVoiceOver = null;
+    [SerializeField] private AudioClip _rotateVoiceOver = null;
+
     private UnityAction _transitionAction;
     private UnityAction _onComplete;
 
@@ -64,7 +68,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void ShowRotateButton()
     {
-        Debug.Log("Show Rotate Button");
+        VoiceOverManager.Instance.PlayClip(_rotateVoiceOver);
         _playerRotatePnl.SetActive(true);
     }
 
@@ -94,7 +98,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void ShowTeleportButton()
     {
-        Debug.Log("Show Teleport Button");
+        VoiceOverManager.Instance.PlayClip(_teleportVoiceOver);
 
         _playerTeleportPnl.SetActive(true);
 
