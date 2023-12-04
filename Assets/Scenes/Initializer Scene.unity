@@ -1244,7 +1244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123576510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1145234995}
@@ -1270,14 +1270,14 @@ MonoBehaviour:
   trackX: 1
   xOffset: 0
   trackY: 1
-  yOffset: 0.4
+  yOffset: -0.3
   trackZ: 1
   zOffset: 0
   cameras:
   - {fileID: 1145234998}
   - {fileID: 1847665716}
   - {fileID: 1735942190}
-  fov: 57.6
+  fov: 70
 --- !u!1 &176821679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,7 +2355,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329448222}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 645af58ed1999b84aac50db2d711848c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2532,7 +2532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330834337}
   m_LocalRotation: {x: -0.7193398, y: -0, z: -0, w: 0.69465846}
-  m_LocalPosition: {x: 1.004, y: 0.75699997, z: 2.0560002}
+  m_LocalPosition: {x: 0.736, y: 0.75699997, z: 2.0560002}
   m_LocalScale: {x: 0.33246446, y: 0.43243667, z: 0.33246455}
   m_Children:
   - {fileID: 323736298}
@@ -4712,7 +4712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7956196996324451762, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5191,7 +5191,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939717137}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -5206,7 +5206,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939717137}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 645af58ed1999b84aac50db2d711848c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5220,7 +5220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939717137}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0009999, y: 0.779, z: 2.317}
+  m_LocalPosition: {x: 0.733, y: 0.779, z: 2.317}
   m_LocalScale: {x: 0.8462595, y: 0.8462595, z: 0.8462595}
   m_Children:
   - {fileID: 112465572}
@@ -5337,7 +5337,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
+  m_ThrowVelocityScale: 2
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
@@ -5415,7 +5415,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5629,7 +5629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065253790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0009999, y: 0.75799996, z: 1.4710002}
+  m_LocalPosition: {x: 0.733, y: 0.75799996, z: 1.4710002}
   m_LocalScale: {x: 0.8462595, y: 0.8462595, z: 0.8462595}
   m_Children:
   - {fileID: 7223740758824569143}
@@ -5644,7 +5644,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065253790}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -5659,7 +5659,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065253790}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 645af58ed1999b84aac50db2d711848c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5775,7 +5775,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
+  m_ThrowVelocityScale: 2
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
@@ -6071,6 +6071,8 @@ MonoBehaviour:
   _playerLocation: {fileID: 478217431}
   _playerTeleportPnl: {fileID: 114778945}
   _playerRotatePnl: {fileID: 1875548885}
+  _teleportVoiceOver: {fileID: 0}
+  _rotateVoiceOver: {fileID: 0}
   _isGoingToGame3: 0
 --- !u!4 &1117308993
 Transform:
@@ -6110,7 +6112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132365623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.513, z: -1.293}
+  m_LocalPosition: {x: 0, y: 0.686, z: 0.116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 949367202}
@@ -6218,7 +6220,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 57.6
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6359,7 +6361,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215570165}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -6374,7 +6376,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215570165}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 645af58ed1999b84aac50db2d711848c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6388,7 +6390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215570165}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0009999, y: 0.779, z: 2.0230002}
+  m_LocalPosition: {x: 0.733, y: 0.779, z: 2.0230002}
   m_LocalScale: {x: 0.8462595, y: 0.8462595, z: 0.8462595}
   m_Children:
   - {fileID: 381707463}
@@ -6505,7 +6507,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
+  m_ThrowVelocityScale: 2
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
@@ -8560,7 +8562,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720995960}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -8575,7 +8577,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720995960}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 645af58ed1999b84aac50db2d711848c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -8589,7 +8591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720995960}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0009999, y: 0.75799996, z: 1.7449999}
+  m_LocalPosition: {x: 0.733, y: 0.75799996, z: 1.7449999}
   m_LocalScale: {x: 0.8462595, y: 0.8462595, z: 0.8462595}
   m_Children:
   - {fileID: 1945502900}
@@ -8706,7 +8708,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
+  m_ThrowVelocityScale: 2
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
@@ -8987,7 +8989,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 57.6
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -2
@@ -9048,7 +9050,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3c0f9323d1114af46b0ae9e70b78ed89, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -9092,7 +9094,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -9961,7 +9963,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 57.6
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -2

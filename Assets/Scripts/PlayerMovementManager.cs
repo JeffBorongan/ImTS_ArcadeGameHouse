@@ -110,12 +110,12 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (!_isInsideElevator)
         {
-            _playerLocation.localPosition = new Vector3(0, -0.5f, 0);
+            _playerLocation.localPosition = new Vector3(0, 0, 0);
             Debug.Log("not inside elevator, going in");
         }
         else
         {
-            _playerLocation.localPosition = new Vector3(0, -0.5f, 1.5f);
+            _playerLocation.localPosition = new Vector3(0, 0, 1.5f);
             Debug.Log("inside elevator, going out");
         }
 
