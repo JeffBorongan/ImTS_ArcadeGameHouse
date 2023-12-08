@@ -69,7 +69,7 @@ public class UXManager : MonoBehaviour
     [SerializeField] private Button btnPlayerSpeedIncrease = null;
     [SerializeField] private Button btnTileGameUpdate = null;
     [SerializeField] private Button btnTileGameStop = null;
-    private float playerSpeedValue = 0.2f;
+    private float playerSpeedValue = 1f;
     private float playerSpeedLowestValue = 0.2f;
     private float playerSpeedHighestValue = 8f;
     private float playerSpeedChange = 0.1f;

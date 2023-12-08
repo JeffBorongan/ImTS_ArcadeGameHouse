@@ -435,8 +435,6 @@ public class VoiceOverManager : MonoBehaviour
 
         btnSpaceLobbyToElevator.onClick.AddListener(() =>
         {
-            PlayerMovementManager.Instance.ShowRotateButton();
-
             LastButtonSelected = LastButtonSelected.SpaceLobbyToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
@@ -449,6 +447,8 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
                 SpaceLobbyManager.Instance.OutsideSpaceLobbyOpenButton.SetActive(true);
+
+                PlayerMovementManager.Instance.ShowRotateButton();
             }));
         });
 

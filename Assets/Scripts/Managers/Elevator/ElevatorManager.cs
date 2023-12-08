@@ -113,14 +113,13 @@ public class ElevatorManager : MonoBehaviour
             OpenDoor(() => 
             {
                 DisableEmissive();
+                PlayerMovementManager.Instance.ShowTeleportButton();
             });  
         } 
         else
         {
             StartCoroutine(FunctionWithDelay(2f, () => DisableEmissive()));
         }
-
-        PlayerMovementManager.Instance.ShowTeleportButton();
     }
 
     public void CloseElevatorDoor()
