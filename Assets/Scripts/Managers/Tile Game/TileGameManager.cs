@@ -113,7 +113,7 @@ public class TileGameManager : GameManagement
         {
             UXManager.Instance.HandleOnTileGameStart();
             CharacterManager.Instance.PointersVisibility(false);
-            countdownTimerCour = TimeCour(false, 3, txtCountdownTimer, () =>
+            countdownTimerCour = TimeCour(false, 7, txtCountdownTimer, () =>
             {
                 CharacterManager.Instance.CharacterPrefab.transform.SetParent(playerLocation);
                 uIPnl.transform.SetParent(playerLocation);
@@ -445,7 +445,7 @@ public class TileGameManager : GameManagement
 
 public class WhackGameSessionData : SessionData
 {
-    public float playerSpeed = 0.2f;
+    public float playerSpeed = 0.8f;
     public float spaceshipSpeed = 2.5f;
     public float speedFactor = 1.27324f;
     public float roomCircumference = 77.28f;
