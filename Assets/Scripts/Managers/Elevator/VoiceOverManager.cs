@@ -454,8 +454,6 @@ public class VoiceOverManager : MonoBehaviour
 
         btnBowlingGameToElevator.onClick.AddListener(() =>
         {
-            PlayerMovementManager.Instance.ShowRotateButton();
-
             LastButtonSelected = LastButtonSelected.GamesToElevator;
 
             foreach (var item in BowlingGameManagement.Instance.DisableObjects)
@@ -473,13 +471,13 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+
+                PlayerMovementManager.Instance.ShowRotateButton();
             }));
         });
 
         btnLockEmUpToElevator.onClick.AddListener(() =>
         {
-            PlayerMovementManager.Instance.ShowRotateButton();
-
             LastButtonSelected = LastButtonSelected.LockEmUpToElevator;
 
             foreach (var item in SquatGameManager.Instance.DisableObjects)
@@ -497,14 +495,15 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+
+                PlayerMovementManager.Instance.ShowRotateButton();
             }));
         });
 
         btnInventoryRoomToElevator.onClick.AddListener(() =>
         {
-            PlayerMovementManager.Instance.ShowRotateButton();
-
             LastButtonSelected = LastButtonSelected.GamesToElevator;
+            
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
             StartCoroutine(FunctionWithDelay(goToElevatorClip.length, () =>
@@ -515,6 +514,8 @@ public class VoiceOverManager : MonoBehaviour
                 ElevatorManager.Instance.EnableFloorButton(3, false);
                 ElevatorManager.Instance.EnableFloorButton(4, false);
                 AssistantBehavior.Instance.Animator.SetBool("isBlinking", false);
+
+                PlayerMovementManager.Instance.ShowRotateButton();
             }));
         });
 
