@@ -80,6 +80,7 @@ public class BowlingGameManagement : GameManagement
     [SerializeField] private float dispenserOffset = 0.5f;
     [SerializeField] private Transform leftBallDispenser = null;
     [SerializeField] private Transform rightBallDispenser = null;
+    [SerializeField] private List<Dispenser> dispensers;
 
     [Header("Player")]
     [SerializeField] private bool isPlayerLocked = false;
@@ -139,6 +140,12 @@ public class BowlingGameManagement : GameManagement
             CharacterManager.Instance.PointersVisibility(false);
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
             {
+                // enable spawners
+                foreach (Dispenser dispenser in dispensers)
+                {
+                    dispenser.SpawnBowlingBall();
+                }
+
                 imgTimerIcon.gameObject.SetActive(true);
                 SetGate(true);
                 StartSpawingEnemy();

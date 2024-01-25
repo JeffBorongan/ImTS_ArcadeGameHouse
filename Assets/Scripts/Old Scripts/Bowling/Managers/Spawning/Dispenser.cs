@@ -7,12 +7,7 @@ public class Dispenser : MonoBehaviour
     public GameObject bowlingBallPrefab;
     private BowlingBall currentBall;
 
-    private void Start()
-    {
-        SpawnBowlingBall();
-    }
-
-    private void SpawnBowlingBall()
+    public void SpawnBowlingBall()
     {
         GameObject bowlingBallClone = ObjectPoolingManager.Instance.GetFromPool(TypeOfObject.BowlingBall);
         bowlingBallClone.SetActive(true);
