@@ -21,6 +21,10 @@ public class HeadDetection : MonoBehaviour
     {
         if (other.CompareTag("InsideElevator"))
         {
+            UsabilityHelper.Instance.StopUsabilityTimer(UsabilityTimer.Bowling);
+            UsabilityHelper.Instance.StopUsabilityTimer(UsabilityTimer.Lock);
+            UsabilityHelper.Instance.StopUsabilityTimer(UsabilityTimer.Walkey);
+
             elevatorTherapistView.SetActive(true);
             spaceLobbyTherapistView.SetActive(false);
             bowlingGameTherapistView.SetActive(false);
@@ -46,6 +50,9 @@ public class HeadDetection : MonoBehaviour
 
         if (other.CompareTag("InsideBowlingGame"))
         {
+            UsabilityHelper.Instance.StopUsabilityTimer(UsabilityTimer.Elevator);
+            UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Bowling);
+
             bowlingGameTherapistView.SetActive(true);
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);
@@ -58,6 +65,8 @@ public class HeadDetection : MonoBehaviour
 
         if (other.CompareTag("InsideLockEmUp"))
         {
+            UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Lock);
+
             lockEmUpTherapistView.SetActive(true);
             bowlingGameTherapistView.SetActive(false);
             spaceLobbyTherapistView.SetActive(false);
@@ -70,6 +79,8 @@ public class HeadDetection : MonoBehaviour
 
         if (other.CompareTag("InsideInventoryRoom"))
         {
+            UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Walkey);
+
             inventoryRoomTherapistView.SetActive(true);
             lockEmUpTherapistView.SetActive(false);
             bowlingGameTherapistView.SetActive(false);

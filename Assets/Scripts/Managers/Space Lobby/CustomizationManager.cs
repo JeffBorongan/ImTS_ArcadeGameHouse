@@ -94,6 +94,8 @@ public class CustomizationManager : MonoBehaviour
 
         btnConfirm.onClick.AddListener(() =>
         {
+            UsabilityHelper.Instance.StopUsabilityTimer(UsabilityTimer.Avatar);
+
             for (int index = 0; index < CharacterManager.Instance.SuitCustomization.SuitParts.Count; index++)
             {
                 CharacterManager.Instance.SuitCustomization.SuitParts[index].SetActive(false);

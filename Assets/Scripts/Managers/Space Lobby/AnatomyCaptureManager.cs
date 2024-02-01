@@ -175,6 +175,8 @@ public class AnatomyCaptureManager : MonoBehaviour
                 VoiceOverManager.Instance.ButtonsInteraction(true);
                 panels[currentPanel].SetActive(false);
                 currentPanel = AnatomyCapturePanel.Start;
+
+                UsabilityHelper.Instance.StopUsabilityTimer(UsabilityTimer.Lobby);
             }));
         });
     }

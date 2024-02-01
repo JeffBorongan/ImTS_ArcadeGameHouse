@@ -338,6 +338,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3551632693445459812, guid: ae853c5f3238d284baeb3892d2a23c5d, type: 3}
   m_PrefabInstance: {fileID: 37522672}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &37522674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8682814553400673838, guid: ae853c5f3238d284baeb3892d2a23c5d, type: 3}
+  m_PrefabInstance: {fileID: 37522672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8824a2c2125f9ec44979768102949768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &45478888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1067,6 +1078,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3551632693445459812, guid: ae853c5f3238d284baeb3892d2a23c5d, type: 3}
   m_PrefabInstance: {fileID: 173229926}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &173229928 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8682814553400673838, guid: ae853c5f3238d284baeb3892d2a23c5d, type: 3}
+  m_PrefabInstance: {fileID: 173229926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8824a2c2125f9ec44979768102949768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &200070005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1765746469168571005, guid: 0d1e69c2b6f688741a648d21189b3ff6, type: 3}
@@ -3704,7 +3726,9 @@ MonoBehaviour:
   dispenserOffset: 0.5
   leftBallDispenser: {fileID: 173229927}
   rightBallDispenser: {fileID: 37522673}
-  dispensers: []
+  dispensers:
+  - {fileID: 173229928}
+  - {fileID: 37522674}
   isPlayerLocked: 0
   disableObjects:
   - {fileID: 856686635}

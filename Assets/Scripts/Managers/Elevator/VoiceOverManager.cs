@@ -240,6 +240,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnWelcomeRanger.onClick.AddListener(() => 
         {
+            UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Lobby);
+
             LastButtonSelected = LastButtonSelected.Any;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndWelcomeRanger(() => HandleOnPlay(welcomeRangerClip));
@@ -264,6 +266,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnCustomizeSuit.onClick.AddListener(() => 
         {
+            UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Avatar);
+
             LastButtonSelected = LastButtonSelected.Any;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndCustomizeSuit(() => HandleOnPlay(customizeSuitClip));
@@ -276,6 +280,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnGoodbye.onClick.AddListener(() => 
         {
+            UsabilityHelper.Instance.ShowDurations();
+
             LastButtonSelected = LastButtonSelected.None;
             ButtonsInteraction(false);
             HandleOnPlay(goodbyeClip);
@@ -435,6 +441,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnSpaceLobbyToElevator.onClick.AddListener(() => 
         {
+            UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Elevator);
+
             LastButtonSelected = LastButtonSelected.SpaceLobbyToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));
