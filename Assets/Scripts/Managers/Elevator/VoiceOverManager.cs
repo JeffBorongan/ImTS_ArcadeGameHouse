@@ -83,6 +83,8 @@ public class VoiceOverManager : MonoBehaviour
     [SerializeField] private AudioClip whatColorClip = null;
 
     [Header("Go to Elevator")]
+    [SerializeField] private GameObject elevatorHeadDetection = null;
+
     [SerializeField] private Button btnSpaceLobbyToElevator = null;
     [SerializeField] private Button btnBowlingGameToElevator = null;
     [SerializeField] private Button btnLockEmUpToElevator = null;
@@ -442,6 +444,7 @@ public class VoiceOverManager : MonoBehaviour
         btnSpaceLobbyToElevator.onClick.AddListener(() => 
         {
             UsabilityHelper.Instance.StartUsabilityTimer(UsabilityTimer.Elevator);
+            elevatorHeadDetection.SetActive(true);
 
             LastButtonSelected = LastButtonSelected.SpaceLobbyToElevator;
             ButtonsInteraction(false);
@@ -460,6 +463,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnBowlingGameToElevator.onClick.AddListener(() => 
         {
+            elevatorHeadDetection.SetActive(true);
+
             LastButtonSelected = LastButtonSelected.GamesToElevator;
 
             foreach (var item in BowlingGameManagement.Instance.DisableObjects)
@@ -482,6 +487,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnLockEmUpToElevator.onClick.AddListener(() => 
         {
+            elevatorHeadDetection.SetActive(true);
+
             LastButtonSelected = LastButtonSelected.LockEmUpToElevator;
 
             foreach (var item in SquatGameManager.Instance.DisableObjects)
@@ -504,6 +511,8 @@ public class VoiceOverManager : MonoBehaviour
 
         btnInventoryRoomToElevator.onClick.AddListener(() =>
         {
+            elevatorHeadDetection.SetActive(true);
+
             LastButtonSelected = LastButtonSelected.GamesToElevator;
             ButtonsInteraction(false);
             AssistantBehavior.Instance.MoveAndPointElevator(() => HandleOnPlay(goToElevatorClip));

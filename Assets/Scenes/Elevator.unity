@@ -6455,6 +6455,7 @@ MonoBehaviour:
   welcomeGame3Clip: {fileID: 8300000, guid: f58b82c0e96a0a74b9a18da039ce9c57, type: 3}
   howManySpaceShipClip: {fileID: 8300000, guid: 3c886cb5605213a40852d3def70ce399, type: 3}
   whatColorClip: {fileID: 8300000, guid: cbe4aafb5372660479c52d7364a4219b, type: 3}
+  elevatorHeadDetection: {fileID: 1640148255}
   btnSpaceLobbyToElevator: {fileID: 1037616594}
   btnBowlingGameToElevator: {fileID: 1037616589}
   btnLockEmUpToElevator: {fileID: 1037616585}
@@ -8252,6 +8253,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 736228214}
     m_Modifications:
+    - target: {fileID: 1949046214, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1949046218, guid: 6c8d14be7db1ffb4ba3ccc7d10b6edff, type: 3}
       propertyPath: elevatorTherapistView
       value: 
@@ -8405,6 +8410,11 @@ RectTransform:
   m_AnchoredPosition: {x: 199.34265, y: -287.5}
   m_SizeDelta: {x: 398.6853, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1640148255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1780425523, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1643009564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2044336842579096303, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}

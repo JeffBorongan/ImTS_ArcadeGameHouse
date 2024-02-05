@@ -104,5 +104,16 @@ public class HeadDetection : MonoBehaviour
         }
     }
 
-    #endregion
+	private void OnTriggerExit(Collider other)
+	{
+        Debug.Log("Disabled Head detection");
+        //gameObject.SetActive(false);
+	}
+
+	#endregion
+
+	private void OnEnable()
+	{
+        Debug.Log("Head Detection Enabled");
+	}
 }
