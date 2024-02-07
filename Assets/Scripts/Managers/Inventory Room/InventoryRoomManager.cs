@@ -44,7 +44,7 @@ public class InventoryRoomManager : MonoBehaviour
         {
             CharacterManager.Instance.PointersVisibility(false);
             ElevatorManager.Instance.CloseElevatorDoor();
-            StartCoroutine(TeleportCour(5f, (int)Floors.Game3));
+            StartCoroutine(TeleportCour(1f, (int)Floors.Game3));
         }
     }
 
