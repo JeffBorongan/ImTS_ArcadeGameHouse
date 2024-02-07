@@ -31,6 +31,7 @@ public class HeadDetection : MonoBehaviour
             lockEmUpTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+
             outsideElevatorOpenButton.SetActive(false);
             outsideElevatorCloseButton.SetActive(false);
         }
@@ -43,8 +44,10 @@ public class HeadDetection : MonoBehaviour
             lockEmUpTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+
             outsideElevatorOpenButton.SetActive(false);
             outsideElevatorCloseButton.SetActive(false);
+
             SpaceLobbyManager.Instance.IsInsideSpaceLobby = true;
         }
 
@@ -59,6 +62,7 @@ public class HeadDetection : MonoBehaviour
             lockEmUpTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+
             outsideElevatorOpenButton.SetActive(true);
             outsideElevatorCloseButton.SetActive(true);
         }
@@ -87,6 +91,7 @@ public class HeadDetection : MonoBehaviour
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+
             outsideElevatorOpenButton.SetActive(true);
             outsideElevatorCloseButton.SetActive(true);
         }
@@ -99,21 +104,11 @@ public class HeadDetection : MonoBehaviour
             bowlingGameTherapistView.SetActive(false);
             spaceLobbyTherapistView.SetActive(false);
             elevatorTherapistView.SetActive(false);
+
             outsideElevatorOpenButton.SetActive(false);
             outsideElevatorCloseButton.SetActive(false);
         }
     }
 
-	private void OnTriggerExit(Collider other)
-	{
-        Debug.Log("Disabled Head detection");
-        //gameObject.SetActive(false);
-	}
-
-	#endregion
-
-	private void OnEnable()
-	{
-        Debug.Log("Head Detection Enabled");
-	}
+    #endregion
 }

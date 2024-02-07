@@ -28,10 +28,16 @@ public class ElevatorManager : MonoBehaviour
 
     #region Parameters
 
+    [Header("References")]
     [SerializeField] private GameObject elevatorDoorLeft = null;
     [SerializeField] private GameObject elevatorDoorRight = null;
+    [SerializeField] private GameObject elevatorHeadDetection = null;
+
+    [Header("Audio")]
     [SerializeField] private AudioSource elevatorAudioSource = null;
     [SerializeField] private AudioClip elevatorDoorClip = null;
+
+    [Space]
     [SerializeField] private List<GameObject> disableObjects = new List<GameObject>();
     [SerializeField] private List<Button> elevatorButtons = new List<Button>();
     private MeshRenderer elevatorPart;
@@ -104,6 +110,8 @@ public class ElevatorManager : MonoBehaviour
 
         if (!isDoorOpen)
         {
+            elevatorHeadDetection.SetActive(true);
+
             isDoorOpen = true;
             OpenDoor(() => 
             {
@@ -125,6 +133,8 @@ public class ElevatorManager : MonoBehaviour
 
         if (isDoorOpen)
         {
+            elevatorHeadDetection.SetActive(false);
+
             CloseDoor(() => 
             {
                 DisableEmissive();

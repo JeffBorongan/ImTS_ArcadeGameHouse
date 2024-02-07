@@ -129,6 +129,15 @@ public class SquatGameManager : GameManagement
 
     #endregion
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Head"))
+        {
+            CharacterManager.Instance.PointersVisibility(false);
+            ElevatorManager.Instance.CloseElevatorDoor();
+        }
+    }
+
     #region Lever Mechanics
 
     private IEnumerator LeverMechanics(bool engageLever, float pullUpHeight, float pushDownHeight)
