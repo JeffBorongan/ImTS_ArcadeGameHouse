@@ -30,8 +30,12 @@ public class PlayerMovementManager : MonoBehaviour
 
     [SerializeField] private Transform _playerLocation;
 
+    [Header("Panels")]
     [SerializeField] private GameObject _playerTeleportPnl = null;
     [SerializeField] private GameObject _playerRotatePnl = null;
+
+    [Header("Buttons")]
+    [SerializeField] private Button _btnOpenElevator;
 
     [Header("Audio")]
     [SerializeField] private AudioClip _teleportVoiceOver = null;
@@ -62,14 +66,20 @@ public class PlayerMovementManager : MonoBehaviour
         StopCoroutine(Transition(true));
         StartCoroutine(Transition(true));
 
-        if(!_initializer)
+        if (!_initializer)
+        {
             _playerRotatePnl.SetActive(false);
+
+            _btnOpenElevator.interactable = true;
+        }
     }
 
     public void ShowRotateButton()
     {
         VoiceOverManager.Instance.PlayClip(_rotateVoiceOver);
         _playerRotatePnl.SetActive(true);
+
+        _btnOpenElevator.interactable = false;
     }
 
     public void CopyRotation()

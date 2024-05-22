@@ -805,6 +805,26 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &-1122435739974674942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd8198e1e0ca1f4e84beb816199fc55, type: 3}
+  m_Name: HTCViveTrackerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 1
+  nameUi: HTC Vive Tracker Profile
+  version: 0.0.1
+  featureIdInternal: com.massive.openxr.feature.input.htcvivetracker
+  openxrExtensionStrings: XR_HTCX_vive_tracker_interaction
+  company: MASSIVE
+  priority: 0
+  required: 0
 --- !u!114 &-902781395057162075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,7 +1569,7 @@ MonoBehaviour:
   - {fileID: -4288424687298514528}
   - {fileID: -6080361754824978003}
   - {fileID: 4046172814461375273}
-  - {fileID: 1502275208762373256}
+  - {fileID: 5695302396725929262}
   - {fileID: 8214310954499867518}
   - {fileID: -715099368552819410}
   - {fileID: -6867241202680205384}
@@ -1611,7 +1631,7 @@ MonoBehaviour:
   - {fileID: 7273895261138505305}
   - {fileID: -8588880173601527736}
   - {fileID: 468880467597051932}
-  - {fileID: 944585385462131444}
+  - {fileID: -1122435739974674942}
   - {fileID: 8847175075941910201}
   - {fileID: 3809278287817387482}
   - {fileID: -8044058278057136701}
@@ -1659,6 +1679,26 @@ MonoBehaviour:
   featureIdInternal: com.unity.openxr.feature.oculusquest
   openxrExtensionStrings: XR_OCULUS_android_initialize_loader
   company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &5695302396725929262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd8198e1e0ca1f4e84beb816199fc55, type: 3}
+  m_Name: HTCViveTrackerProfile WSA
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: HTC Vive Tracker Profile
+  version: 0.0.1
+  featureIdInternal: com.massive.openxr.feature.input.htcvivetracker
+  openxrExtensionStrings: XR_HTCX_vive_tracker_interaction
+  company: MASSIVE
   priority: 0
   required: 0
 --- !u!114 &5905047580047884195
