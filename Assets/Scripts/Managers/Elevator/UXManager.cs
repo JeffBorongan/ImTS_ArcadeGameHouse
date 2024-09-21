@@ -58,6 +58,10 @@ public class UXManager : MonoBehaviour
     private float pullUpHeightValue = 1f;
     private float pushDownHeightValue = 0.5f;
 
+    [Space]
+    [SerializeField] private Button btnHandleMoveUp = null;
+    [SerializeField] private Button btnHandleMoveDown = null;
+
     [Header("Tile Game")]
     [SerializeField] private TMP_Text txtTimeElapsed = null;
     [SerializeField] private TMP_Text txtTravelDistance = null;
@@ -390,5 +394,20 @@ public class UXManager : MonoBehaviour
         TileGameManager.Instance.SessionData.playerSpeed = playerSpeedValue;
     }
 
+    #endregion
+
+    #region Handle Squat Lever Height
+    public void HandleSquatLeverHeight()
+    {
+        Debug.Log("Handle Squat Lever Height");
+
+        if (btnHandleMoveUp == null && btnHandleMoveDown == null)
+        {
+            return;
+        }
+
+        btnHandleMoveUp.onClick.AddListener(() => SquatGameManager.Instance.btnAdjustLever(true));
+        btnHandleMoveDown.onClick.AddListener(() => SquatGameManager.Instance.btnAdjustLever(false));
+    }
     #endregion
 }

@@ -55,6 +55,8 @@ public class SquatGameManager : GameManagement
     [Header("Handles")]
     [SerializeField] private GameObject leftHandle = null;
     [SerializeField] private GameObject rightHandle = null;
+    [SerializeField] private float handleMovementIncrement = 0.05f;
+    private bool bothHeld = false;
 
     [Header("UI")]
     [SerializeField] private GameObject videoDemo = null;
@@ -92,6 +94,11 @@ public class SquatGameManager : GameManagement
     #endregion
 
     #region Start
+
+    private void Start()
+    {
+        UXManager.Instance.HandleSquatLeverHeight();
+    }
 
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
@@ -134,8 +141,24 @@ public class SquatGameManager : GameManagement
 
     #region Lever Mechanics
 
+    public void btnAdjustLever(bool goingUp)
+    {
+        if (bothHeld)
+        { 
+            return; 
+        }
+
+        Debug.Log($"Adjust Lever: {goingUp}");
+
+        float handleMover = goingUp ? handleMovementIncrement : handleMovementIncrement * -1;
+
+        leftHandle.transform.position += new Vector3(0, handleMover, 0);
+    }
+
     private IEnumerator LeverMechanics(bool engageLever, float pullUpHeight, float pushDownHeight)
     {
+        //bothHeld = leftHandle.GetComponent<XRGrabInteractable>().isSelected && rightHandle.GetComponent<XRGrabInteractable>().isSelected;
+
         yield return new WaitUntil(() => 
             leftHandle.GetComponent<XRGrabInteractable>().isSelected && rightHandle.GetComponent<XRGrabInteractable>().isSelected ? 
             leftHandle.GetComponent<XRGrabInteractable>().trackPosition = true : 

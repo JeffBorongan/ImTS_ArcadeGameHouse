@@ -2177,6 +2177,7 @@ MonoBehaviour:
   greenLightEmissionMap: {fileID: 2800000, guid: 6a4d4bd42c854a347afb453906115ad9, type: 3}
   leftHandle: {fileID: 87281191}
   rightHandle: {fileID: 1076658892}
+  handleMovementIncrement: 0.05
   videoDemo: {fileID: 222776140}
   pnlHUD: {fileID: 1184359897}
   pnlGameResult: {fileID: 1184359896}
@@ -2645,6 +2646,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5227584169844002955, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.234
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227584169844002955, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227584169844002955, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 2
       objectReference: {fileID: 0}
@@ -2708,9 +2717,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5227584170835745906, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227584170835745910, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.24300002
+      objectReference: {fileID: 0}
     - target: {fileID: 5227584170835745910, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.45
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 5227584170835745910, guid: 840fe59a7f64af441868bcba215cc98e, type: 3}
       propertyPath: m_ConnectedAnchor.z
