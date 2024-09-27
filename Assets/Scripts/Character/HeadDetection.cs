@@ -10,6 +10,7 @@ public class HeadDetection : MonoBehaviour
     [SerializeField] private GameObject lockEmUpTherapistView = null;
     [SerializeField] private GameObject inventoryRoomTherapistView = null;
     [SerializeField] private GameObject walkeyMoleyTherapistView = null;
+
     [SerializeField] private GameObject outsideElevatorOpenButton = null;
     [SerializeField] private GameObject outsideElevatorCloseButton = null;
 
@@ -77,6 +78,7 @@ public class HeadDetection : MonoBehaviour
             elevatorTherapistView.SetActive(false);
             inventoryRoomTherapistView.SetActive(false);
             walkeyMoleyTherapistView.SetActive(false);
+
             outsideElevatorOpenButton.SetActive(true);
             outsideElevatorCloseButton.SetActive(true);
         }
