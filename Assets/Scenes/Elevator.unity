@@ -11066,6 +11066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elevatorDoorLeft: {fileID: 878362270}
   elevatorDoorRight: {fileID: 1643009564}
+  elevatorHeadDetection: {fileID: 4252339542194971239}
   elevatorAudioSource: {fileID: 161834680}
   elevatorDoorClip: {fileID: 8300000, guid: 321bdce83eeffcb44876b56cbf7d2c87, type: 3}
   disableObjects:
@@ -11180,6 +11181,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1780425523, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11233,6 +11238,11 @@ PrefabInstance:
 --- !u!4 &4252339542194971238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 590356980832865592, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
+  m_PrefabInstance: {fileID: 4252339542194971237}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4252339542194971239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1780425523, guid: 7d916a216729689488a88f06b2a4ba93, type: 3}
   m_PrefabInstance: {fileID: 4252339542194971237}
   m_PrefabAsset: {fileID: 0}
 --- !u!222 &6325941472016760672

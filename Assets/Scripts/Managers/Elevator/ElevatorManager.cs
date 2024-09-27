@@ -31,6 +31,7 @@ public class ElevatorManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject elevatorDoorLeft = null;
     [SerializeField] private GameObject elevatorDoorRight = null;
+    [SerializeField] private GameObject elevatorHeadDetection = null;
 
     [Header("Audio")]
     [SerializeField] private AudioSource elevatorAudioSource = null;
@@ -60,6 +61,7 @@ public class ElevatorManager : MonoBehaviour
     private void Start()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene((int)Floors.SpaceLobby, LoadSceneMode.Additive);
+        elevatorHeadDetection.SetActive(false);
     }
 
     #endregion
@@ -109,6 +111,8 @@ public class ElevatorManager : MonoBehaviour
 
         if (!isDoorOpen)
         {
+            elevatorHeadDetection.SetActive(true);
+
             isDoorOpen = true;
             OpenDoor(() => 
             {
@@ -131,6 +135,8 @@ public class ElevatorManager : MonoBehaviour
 
         if (isDoorOpen)
         {
+            elevatorHeadDetection.SetActive(false);
+
             CloseDoor(() => 
             {
                 DisableEmissive();
