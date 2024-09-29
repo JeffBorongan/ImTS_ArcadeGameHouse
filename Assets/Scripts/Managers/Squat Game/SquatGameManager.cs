@@ -88,6 +88,7 @@ public class SquatGameManager : GameManagement
 
     public override void InitializeGame()
     {
+        UXManager.Instance.HandleSquatLeverHeight();
         StartGame(new SquatGameSessionData(), () => { });
     }
 
@@ -95,17 +96,16 @@ public class SquatGameManager : GameManagement
 
     #region Start
 
-    private void Start()
-    {
-        UXManager.Instance.HandleSquatLeverHeight();
-    }
-
     public override void StartGame(SessionData data, UnityAction OnEndGame)
     {
+        Debug.Log("Start Game Called");
+
         SessionData = (SquatGameSessionData)data;
         btnStartGame.onClick.RemoveAllListeners();
         btnStartGame.onClick.AddListener(() =>
         {
+            Debug.Log("Button Clicked");
+
             UXManager.Instance.HandleOnSquatGameStart();
             CharacterManager.Instance.PointersVisibility(false);
             countdownTimerCour = TimeCour(3, txtCountdownTimer, () =>
@@ -119,6 +119,8 @@ public class SquatGameManager : GameManagement
 
             StartCoroutine(countdownTimerCour);
             pnlStartGame.gameObject.SetActive(false);
+
+            Debug.Log("Button Clicked After");
         });
     }
 
